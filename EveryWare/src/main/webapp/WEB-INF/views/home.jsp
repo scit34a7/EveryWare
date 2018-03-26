@@ -14,7 +14,17 @@
 	Hello world!  
 </h1>
 
-<P>  The time on the server is ${serverTime}. </P>
+<!-- 로그인 -->
+<div>
+	<form action="login" method="post">
+		id<input type="text" id="user_id">	<br>
+		pw<input type="password" id="user_pw">	<br>
+		<input type="submit" value="로그인">
+	</form>
+</div>
+<!-- /로그인 -->
+
+
 
 <p><a href="meet/meetingList">회의실 화면</a></p>
 </body>
