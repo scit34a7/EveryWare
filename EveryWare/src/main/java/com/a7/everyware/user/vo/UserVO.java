@@ -5,7 +5,7 @@ public class UserVO {
 	String user_id;		//유저 아이디
 	String user_pw;		//유저 비밀번호
 	String user_name;	//유저 이름
-	int dept_id;		//유저 부서(부서 아이디)
+	int dept_id;		//유저 부서(부서 아이디)1
 	int position_id;	//유저 직위(직위 아이디)
 	String user_address;//유저 주소
 	String user_phone;	//유저 연락처

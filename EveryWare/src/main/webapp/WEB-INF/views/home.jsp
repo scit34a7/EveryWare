@@ -13,8 +13,8 @@
 <h1>
 	Hello world!  
 </h1>
-ccc
-<!-- 로그인 -->
+
+<!-- 로그인1 -->
 <div>
 	<c:choose>
 		<c:when test="${login_user}">

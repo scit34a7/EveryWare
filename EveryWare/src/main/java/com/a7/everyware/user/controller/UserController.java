@@ -25,7 +25,7 @@ public class UserController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	
-	//로그인 (user/login)
+	//로그인1 (user/login)
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String login(UserVO user, HttpSession session) {
 		logger.debug("user/login para : {}", user);
