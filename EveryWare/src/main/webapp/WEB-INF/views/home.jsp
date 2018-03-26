@@ -16,7 +16,13 @@
 
 <!-- 로그인 -->
 <div>
-	<form action="login" method="post">
+	<c:choose>
+		<c:when test="${login_user}">
+		
+		</c:when>
+	
+	</c:choose>
+	<form action="user/login" method="post">
 		id<input type="text" id="user_id">	<br>
 		pw<input type="password" id="user_pw">	<br>
 		<input type="submit" value="로그인">
