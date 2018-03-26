@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 유저정보 처리 SQL -->
+<mapper namespace="com.a7.everyware.user.dao.UserMapper">
+	<!-- 유저 정보 select -->
+	<select id="selectMember" parameterType="String" resultType="UserVO">
+		select * from user_tb where user_id = #{user_id}
+	</select>
+</mapper>
