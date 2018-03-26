@@ -1,6 +1,8 @@
 package com.a7.everyware.meeting.controller;
 
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -30,6 +32,13 @@ public class MeetingController {
 		return "meeting/joinRoom";
 	}
 /////////////////////////////////////////////////////////////////////////////////////////////////
+	@RequestMapping(value = "test1", method = RequestMethod.GET)
+	public String test1(HttpSession session, String enter) {
+		System.out.println(enter);
+		session.setAttribute("enter", enter);
+		return "meeting/testroom";
+	}
+	
 	@RequestMapping(value = "test2", method = RequestMethod.GET)
 	public String test2() {
 		return "meeting/test2";

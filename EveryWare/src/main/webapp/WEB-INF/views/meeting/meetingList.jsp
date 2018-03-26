@@ -12,9 +12,20 @@
 </head>
 <body>
 <h1>[ 회의실 테스트 ]</h1>
-<input type="button" value="회의실 개설">
-<input type="button" value="회의실 입장">
+<input type="button" onclick="location.href='createRoom'" value="회의실 개설">
+<input type="button" onclick="location.href='joinRoom'"value="회의실 입장">
 
+<form method="get" action="test1">
+    <input type="hidden" id="enter" name="enter" value="create" />
+    <input type="submit" value="create room"/>
+</form>
+
+<form method="get" action="test1">
+    <input type="hidden" id="enter" name="enter" value="join" />
+    <input type="submit" value="join room"/>
+</form>
+
+<p><a href="test1">TEST1</a></p>
 <p><a href="test2">TEST2</a></p>
 </body>
 </html>
