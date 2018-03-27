@@ -13,7 +13,7 @@
 <body>
 <h1>메인화면</h1>
 <p><a href="../meet/meetingList">회의실 화면</a></p>
-<p><a href="../board/board">게시판</a></p>
+<p><a href="../board/boardList">게시판</a></p>
 
 ${sessionScope.userId}(${userName})
 ${sessionScope.userDepartment}(${userPosition})
