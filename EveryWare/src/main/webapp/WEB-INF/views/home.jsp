@@ -94,8 +94,6 @@
 			</form>
 		</div>
 	</div>
-
-	<div><p>this is the test for chi's git User</p></div>
 	
 </body>
 </html>
