@@ -6,7 +6,7 @@
 <!-- 유저정보 처리 SQL -->
 <mapper namespace="com.a7.everyware.user.dao.UserMapper">
 	<!-- 유저 정보 select -->
-	<select id="selectMember" parameterType="String" resultType="UserVO">
+	<select id="findUser" parameterType="String" resultType="UserVO">
 		select * from user_tb where user_id = #{user_id}
 	</select>
 </mapper>
