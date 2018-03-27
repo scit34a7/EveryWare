@@ -59,17 +59,6 @@ public class BoardController {
 	}
 	
 	
-	//글 첨부파일 저장 처리
-	@RequestMapping (value="write", method=RequestMethod.POST)
-	public String writeFile(
-		BoardVO BoardVO, 
-		MultipartFile upload,
-		HttpSession session, 
-		Model model) {
-		
-		
-		
-		return "redirect:boardList";
-	}
+
 	
 }
