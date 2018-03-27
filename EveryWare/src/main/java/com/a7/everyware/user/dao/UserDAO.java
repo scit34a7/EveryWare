@@ -12,9 +12,9 @@ public class UserDAO {
 	@Autowired
 	SqlSession sqlSession;
 	
-	public UserVO findUser(String id) {
+	public UserVO findUser(String user_id) {
 		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
-		return mapper.findUser(id);
+		return mapper.findUser(user_id);
 	}
 
 }
