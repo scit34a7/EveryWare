@@ -9,6 +9,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>회의실 목록</title>
+
+<script>
+var w;
+function test1() {
+	w = window.open('createRoom', 'newwin', 'width=600, height=600, location=no, menubar=no, resizable=no, status= no, toolbar=no');
+}
+</script>
 </head>
 <body>
 <h1>[ 회의실 테스트 ]</h1>
@@ -27,5 +34,7 @@
 
 <p><a href="test1">TEST1</a></p>
 <p><a href="test2">TEST2</a></p>
+
+<p><a href="javascript:test1()">개설</a></p>
 </body>
 </html>

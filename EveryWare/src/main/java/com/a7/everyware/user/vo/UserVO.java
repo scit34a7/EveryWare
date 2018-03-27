@@ -3,10 +3,10 @@ package com.a7.everyware.user.vo;
 public class UserVO {
 	
 	String user_id;			//유저 아이디
-	String user_pw;			//유저 비빌번호ㅓ
+	String user_pw;			//유저 비빌번호
 	String user_name;		//유저 이름
-	String dept_name;		//부서 이름(db구조랑 다름)
-	String position_name;	//직위 이름(db구조랑 다름)
+	String dept_name;		//부서 이름(DB구조랑 다름)
+	String position_name;	//직위 이름(DB구조랑 다름)
 	String user_address;	//유저 주소
 	String user_phone;		//유저 전화번호
 	String authority;		//유저 권한

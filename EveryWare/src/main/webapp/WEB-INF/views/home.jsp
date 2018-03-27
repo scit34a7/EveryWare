@@ -94,8 +94,5 @@
 			</form>
 		</div>
 	</div>
-
-
-<p><a href="meet/meetingList">회의실 화면</a></p>
 </body>
 </html>

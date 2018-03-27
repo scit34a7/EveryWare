@@ -1,15 +1,15 @@
 package com.a7.everyware.meeting.vo;
 
 /**
- * Meeting Log Table¿¡ ´ëÇÑ VO
- * È¸ÀÇ À½¼ºÀ» ÅØ½ºÆ®·Î ³²±â´Â Å×ÀÌºí
+ * Meeting Log Tableì— ëŒ€í•œ VO
+ * íšŒì˜ ìŒì„±ì„ í…ìŠ¤íŠ¸ë¡œ ë‚¨ê¸°ëŠ” í…Œì´ë¸”
  */
 public class MeetingLogVO {
-	private int log_id;			// ·Î±× ¾ÆÀÌµğ
-	private String user_id;		// À¯Àú ¾ÆÀÌµğ
-	private String log_content;	// ·Î±× ³»¿ë
-	private String log_time;	// ·Î±× ½Ã°£
-	private int meet_id;		// È¸ÀÇ ¹øÈ£
+	private int log_id;			// ë¡œê·¸ ì•„ì´ë””
+	private String user_id;		// ìœ ì € ì•„ì´ë””
+	private String log_content;	// ë¡œê·¸ ë‚´ìš©
+	private String log_time;	// ë¡œê·¸ ì‹œê°„
+	private int meet_id;		// íšŒì˜ ë²ˆí˜¸
 	
 	public MeetingLogVO() {}
 	

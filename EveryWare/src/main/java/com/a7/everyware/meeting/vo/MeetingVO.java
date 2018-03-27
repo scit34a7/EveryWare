@@ -1,17 +1,17 @@
 package com.a7.everyware.meeting.vo;
 
 /**
- * Meeting info Table¿¡ ´ëÇÑ VO
- * È­»óÈ¸ÀÇ½Ç¿¡ ´ëÇÑ Á¤º¸¸¦ °¡Áø Å×ÀÌºí
+ * Meeting info Tableì— ëŒ€í•œ VO
+ * í™”ìƒíšŒì˜ì‹¤ì— ëŒ€í•œ ì •ë³´ë¥¼ ê°€ì§„ í…Œì´ë¸”
  */
 public class MeetingVO {
-	private int meet_id;			// È¸ÀÇ ¹öÈ£
-	private String user_id;			// À¯Àú ¾ÆÀÌµğ
-	private String meet_date;		// È¸ÀÇ ½Ã°£
-	private String meet_etposition;	// ÀÔÀå ±ÇÇÑ
-	private String meet_maxpeople;	// ÃÖ´ë ÀÔÀå ÀÎ¿ø
-	private String meet_dept;		// ÀÔÀå °¡´É ºÎ¼­
-	private String meet_title;		// È¸ÀÇ Á¦¸ñ
+	private int meet_id;			// íšŒì˜ ë²ˆí˜¸
+	private String user_id;			// ìœ ì € ì•„ì´ë””
+	private String meet_date;		// íšŒì˜ ì‹œê°„
+	private String meet_etposition;	// ì…ì¥ ê¶Œí•œ
+	private String meet_maxpeople;	// ìµœëŒ€ ì…ì¥ ì¸ì›
+	private String meet_dept;		// ì…ì¥ ê°€ëŠ¥ ë¶€ì„œ
+	private String meet_title;		// íšŒì˜ ì œëª©
 	
 	public MeetingVO() {}
 	

@@ -26,7 +26,7 @@ public class UserController {
 
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	
-	//@ResponseBody
+	@ResponseBody
 	@RequestMapping(value="loginUser", method=RequestMethod.POST)
 	public String loginUser(HttpSession session, Model model, String id, String password) {
 		String msg = null;
@@ -37,11 +37,12 @@ public class UserController {
 		
 		UserVO vo = userDAO.findUser(id);
 
-		//아이디가 존재하지 않는 경우
 		if (vo != null) {
 			if (password.equals(vo.getUser_pw())) {
 				session.setAttribute("userId", vo.getUser_id());
 				session.setAttribute("userName", vo.getUser_name());
+				session.setAttribute("userDepartment", vo.getDept_name());
+				session.setAttribute("userPosition", vo.getPosition_name());
 				return "1";
 			}
 		}
