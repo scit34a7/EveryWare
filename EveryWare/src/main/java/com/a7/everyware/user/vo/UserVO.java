@@ -2,14 +2,14 @@ package com.a7.everyware.user.vo;
 
 public class UserVO {
 	
-	String user_id;			//À¯Àú ¾ÆÀÌµğ
-	String user_pw;			//À¯Àú ºñ¹Ğ¹øÈ£
-	String user_name;		//À¯Àú ÀÌ¸§
-	String dept_name;		//À¯Àú ºÎ¼­
-	String position_name;	//À¯Àú Á÷À§
-	String user_address;	//À¯Àú ÁÖ¼Ò
-	String user_phone;		//À¯Àú ¿¬¶ôÃ³
-	String authority;		//À¯Àú ±ÇÇÑ
+	String user_id;			//ìœ ì € ì•„ì´ë””
+	String user_pw;			//ìœ ì € ë¹„ë¹Œë²ˆí˜¸ã…“
+	String user_name;		//ìœ ì € ì´ë¦„
+	String dept_name;		//ë¶€ì„œ ì´ë¦„(dbêµ¬ì¡°ë‘ ë‹¤ë¦„)
+	String position_name;	//ì§ìœ„ ì´ë¦„(dbêµ¬ì¡°ë‘ ë‹¤ë¦„)
+	String user_address;	//ìœ ì € ì£¼ì†Œ
+	String user_phone;		//ìœ ì € ì „í™”ë²ˆí˜¸
+	String authority;		//ìœ ì € ê¶Œí•œ
 	
 	public UserVO() {
 		super();
