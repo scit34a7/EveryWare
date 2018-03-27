@@ -5,17 +5,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
+
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<h1>메인화면</h1>
-<p><a href="../meet/meetingList">회의실 화면</a></p>
-<p><a href="../board/board">게시판</a></p>
-
-${sessionScope.userId}(${userName})
-${sessionScope.userDepartment}(${userPosition})
+Board.jsp
 </body>
 </html>
