@@ -8,7 +8,7 @@ public class BoardVO {
 	String board_content;		//게시판 내용
 	String user_id;				//글쓴이
 	String board_date;			//글쓴 날짜
-	boolean board_attached;		//첨부파일 여부
+	String board_attached;		//첨부파일 여부
 	int boardfolder_id;			//폴더구분 아이디
 	int board_hits;				//조회수
 	
@@ -20,7 +20,7 @@ public class BoardVO {
 
 
 	public BoardVO(int board_id, String board_title, String board_content, String user_id, String board_date,
-			boolean board_attached, int boardfolder_id, int board_hits) {
+			String board_attached, int boardfolder_id, int board_hits) {
 		super();
 		this.board_id = board_id;
 		this.board_title = board_title;
@@ -83,12 +83,12 @@ public class BoardVO {
 	}
 
 
-	public boolean isBoard_attached() {
+	public String getBoard_attached() {
 		return board_attached;
 	}
 
 
-	public void setBoard_attached(boolean board_attached) {
+	public void setBoard_attached(String board_attached) {
 		this.board_attached = board_attached;
 	}
 

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 게시판 처리 SQL -->
+<mapper namespace="com.a7.everyware.board.dao.BoardMapper">
+
+	<!-- 게시글 저장 -->
+	<insert id="insertBoard" parameterType="BoardVO">
+		insert into board_tb (
+			board_id
+			, board_title
+			, board_content
+			, user_id
+			, board_attached
+			, boardfolder_id
+			
+		)
+		values (
+			board_tb_seq.nextval
+			, #{board_title}
+			, #{board_content}
+			, #{user_id}
+			<if test="board_attached = true">
+			, 'T'
+			</if>
+			<if test="board_attached = true">
+			, 'F'
+			</if>
+			, #{boardfolder_id}
+			
+		)
+	</insert>
+	
+	<!-- 게시판 첨부파일 저장 -->
+	<insert id="insertBoardAttached" parameterType="BoardAttachedVO">
+		insert into boardAttached_tb (
+			bAttached_id
+			, board_id
+			, bAttached_saved
+			, bAttached_original	
+		)
+		values (
+			boardAttached_tb_seq.nextval
+			, #{board_id}
+			, #{bAttached_saved}
+			, #{bAttached_original}
+			
+		)
+	</insert>
+	
+	
+	<!-- 게시글 읽기  -->
+	<select id="searchBoard" parameterType="int" resultType="BoardVO">
+		select 
+			board_id
+			, user_id
+			, board_title
+			, board_content
+			, to_char(board_date, 'YYYY-MM-DD HH24:MI:SS') board_date
+			, board_hits
+			, board_attached
+		from 
+			board_tb 
+		where 
+			board_id = #{board_id}
+	</select>
+	
+	
+</mapper>
