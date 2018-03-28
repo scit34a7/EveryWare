@@ -1,5 +1,7 @@
 package com.a7.everyware.board.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -9,10 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.a7.everyware.board.dao.BoardDAO;
+import com.a7.everyware.board.util.PageNavigator;
 import com.a7.everyware.board.vo.BoardVO;
+
 
 
 
@@ -55,7 +60,35 @@ public class BoardController {
 		
 		BoardDAO.insertBoard(BoardVO);
 		
-		return "redirect:./boardList";
+		return "redirect:boardList";
+	}
+	
+	
+	/**
+	 * 글 목록
+	 * @param page 현재 페이지. 없으면 1로 처리
+	 * @param searchText 검색어. 없으면 ""로 처리
+	 */
+	@RequestMapping (value="list", method=RequestMethod.GET)
+	public String list(
+			@RequestParam(value="page", defaultValue="1") int page,
+			@RequestParam(value="searchText", defaultValue="") String searchText,
+			Model model) {
+		logger.debug("page: {}, searchText: {}", page, searchText);
+		
+		int total = BoardDAO.getTotal(searchText);			//전체 글 개수
+		
+		//페이지 계산을 위한 객체 생성
+		PageNavigator navi = new PageNavigator(countPerPage, pagePerGroup, page, total); 
+		
+		//검색어와 시작 위치, 페이지당 글 수를 전달하여 목록 읽기
+		ArrayList<BoardVO> boardlist = BoardDAO.listBoard(searchText, navi.getStartRecord(), navi.getCountPerPage());	
+		
+		//페이지 정보 객체와 글 목록, 검색어를 모델에 저장
+		model.addAttribute("boardlist", boardlist);
+		model.addAttribute("navi", navi);
+		model.addAttribute("searchText", searchText);
+		return "board/boardList";
 	}
 	
 	

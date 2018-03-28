@@ -50,6 +50,18 @@ public class BoardDAO {
 	
 	
 	/**
+	 * 검색 결과 레코드 수
+	 * @param searchText 검색어
+	 * @return 글개수
+	 */
+	public int getTotal(String searchText) {
+		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+		int total = mapper.getTotal(searchText);
+		return total;
+	}
+	
+	
+	/**
 	 * 한 페이지의 게시글 목록 읽기
 	 * @param searchText 검색어
 	 * @param startRecord 전체 결과중 읽을 시작 위치 (첫행은 0)
