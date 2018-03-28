@@ -69,8 +69,8 @@ public class BoardController {
 	 * @param page 현재 페이지. 없으면 1로 처리
 	 * @param searchText 검색어. 없으면 ""로 처리
 	 */
-	@RequestMapping (value="list", method=RequestMethod.GET)
-	public String list(
+	@RequestMapping (value="boardList", method=RequestMethod.GET)
+	public String boardList(
 			@RequestParam(value="page", defaultValue="1") int page,
 			@RequestParam(value="searchText", defaultValue="") String searchText,
 			Model model) {
