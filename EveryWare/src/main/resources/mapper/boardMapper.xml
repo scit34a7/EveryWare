@@ -76,7 +76,7 @@
 			board_tb 
 		<if test="_parameter != null">
 		where 
-			title like '%' || #{searchText} || '%'
+			board_title like '%' || #{searchText} || '%'
 		</if>
 	</select>
 	
