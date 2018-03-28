@@ -14,19 +14,19 @@
 <script>
 //글쓰기폼 확인
 function formCheck() {
-	var title = document.getElementById('title');
-	var content = document.getElementById('content');
+	var board_title = document.getElementById('board_title');
+	var board_content = document.getElementById('board_content');
 	
-	if (title.value.length < 5) {
+	if (board_title.value.length < 2) {
 		alert("제목을 입력하세요.");
-		title.focus();
-		title.select();
+		board_title.focus();
+		board_title.select();
 		return false;
 	}
-	if (content.value.length < 5) {
+	if (board_content.value.length < 2) {
 		alert("내용을 입력하세요.");
-		title.focus();
-		title.select();
+		board_content.focus();
+		board_content.select();
 		return false;
 	}
 	return true;
@@ -44,13 +44,13 @@ function formCheck() {
 <tr>
 	<th>제목</th>
 	<td>
-		<input type="text" name="title" id="title" style="width:400px;">
+		<input type="text" name="board_title" id="board_title" style="width:400px;">
 	</td>
 </tr>
 <tr>
 	<th>내용</th> 
 	<td>
-		<textarea name="content" id="content" style="width:400px;height:200px;resize:none;"></textarea>
+		<textarea name="board_content" id="board_content" style="width:400px;height:200px;resize:none;"></textarea>
 	</td>
 </tr>
 <tr>
