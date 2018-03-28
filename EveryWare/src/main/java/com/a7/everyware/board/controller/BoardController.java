@@ -55,7 +55,7 @@ public class BoardController {
 		
 		BoardDAO.insertBoard(BoardVO);
 		
-		return "redirect:board/boardList";
+		return "redirect:./boardList";
 	}
 	
 	
