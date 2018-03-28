@@ -52,13 +52,13 @@ function pagingFormSubmit(currentPage) {
 <!-- 반복 시작 -->
 <c:forEach var="board" items="${boardlist}">
 <tr>
-	<td class="center">${board.boardnum}</td>
+	<td class="center">${board.board_id}</td>
 	<td>
-		<a href="read?boardnum=${board.boardnum}">${board.title}</a>
+		<a href="read?board_id=${board.board_id}">${board_title}</a>
 	</td>
-	<td class="center">${board.id}</td>
-	<td class="center">${board.hits}</td>
-	<td>${board.inputdate}</td>
+	<td class="center">${board_id}</td>
+	<td class="center">${board_hits}</td>
+	<td>${board_date}</td>
 </tr>
 
 </c:forEach>        
@@ -86,7 +86,7 @@ function pagingFormSubmit(currentPage) {
 
 
 <!-- 검색폼 -->
-<form id="pagingForm" method="get" action="list">
+<form id="pagingForm" method="get" action="boardList">
 	<input type="hidden" name="page" id="page" />
 	제목 : <input type="text"  name="searchText" value="${searchText}" />
 	<input type="button" onclick="pagingFormSubmit(1)" value="검색">
