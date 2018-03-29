@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 회의실 관련 SQL -->
+<mapper namespace="com.a7.everyware.meeting.dao.MeetingMapper">
+
+	<!-- 개설된 회의실 개설  -->
+	<insert id="createRoom" parameterType="MeetingVO">
+	insert into meet_tb (
+		meet_id
+		, user_id
+		, meet_date
+		, meet_etposition
+		, meet_maxpeople
+		, meet_dept
+		, meet_title
+		
+	)
+	values (
+		meet_id_seq.nextval
+		, #{user_id}
+		, #{meet_date}
+		, #{meet_etposition}
+		, #{meet_maxpeople}
+		, #{meet_dept}
+		, #{meet_title}
+	)
+	</insert>	
+	
+	<!-- 개설된 회의실 목록  -->
+	<select id="searchAllList" resultType="MeetingVO">
+		select * from meet_tb 
+	</select>
+	
+	<select id="findRoom" parameterType="String" resultType="MeetingVO">
+		select * from meet_tb where user_id = #{user_id}
+	</select>
+</mapper>

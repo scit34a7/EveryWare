@@ -14,7 +14,7 @@
 회의 제목
 <p><input type="text" id="title" name="title"></p>
 회의 시간
-<p><input type="text" id="time" name="time"></p>
+<p>시 / 분</p>
 입장 가능 직급
 <p>
 	<select id="position" name="position">
@@ -31,10 +31,13 @@
 		<option value="1">1</option>
 		<option value="2">2</option>
 		<option value="3">3</option>
+		<option value="3">4</option>
+		<option value="3">5</option>
 	</select>
 </p>
 
-<input type="button" value="개설">
+<input type="button" onclick="location.href='meetingRoom3'" value="개설">
 <input type="button" value="취소">
+<hr>
 </body>
 </html>

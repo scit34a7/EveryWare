@@ -9,13 +9,13 @@ public class MeetingVO {
 	private String user_id;			// 유저 아이디
 	private String meet_date;		// 회의 시간
 	private String meet_etposition;	// 입장 권한
-	private String meet_maxpeople;	// 최대 입장 인원
+	private int meet_maxpeople;	// 최대 입장 인원
 	private String meet_dept;		// 입장 가능 부서
 	private String meet_title;		// 회의 제목
 	
 	public MeetingVO() {}
 	
-	public MeetingVO(int meet_id, String user_id, String meet_date, String meet_etposition, String meet_maxpeople,
+	public MeetingVO(int meet_id, String user_id, String meet_date, String meet_etposition, int meet_maxpeople,
 			String meet_dept, String meet_title) {
 		this.meet_id = meet_id;
 		this.user_id = user_id;
@@ -58,11 +58,11 @@ public class MeetingVO {
 		this.meet_etposition = meet_etposition;
 	}
 	
-	public String getMeet_maxpeople() {
+	public int getMeet_maxpeople() {
 		return meet_maxpeople;
 	}
 	
-	public void setMeet_maxpeople(String meet_maxpeople) {
+	public void setMeet_maxpeople(int meet_maxpeople) {
 		this.meet_maxpeople = meet_maxpeople;
 	}
 	

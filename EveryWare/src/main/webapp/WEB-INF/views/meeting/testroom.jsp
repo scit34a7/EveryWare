@@ -9,8 +9,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Test Chat Room</title>
-	<script src="https://rtcmulticonnection.herokuapp.com/dist/RTCMultiConnection.min.js"></script>
-	<script src="https://rtcmulticonnection.herokuapp.com/socket.io/socket.io.js"></script>
 	<script src="../resources/js/jquery-3.2.1.min.js"></script>
 <style>
 body {
@@ -51,7 +49,24 @@ html, body{
     <div id='box-left'>
     WebcamChat Section<br>
     <input type="button" id="setup-new-broadcast" class="setup" value="screen share"><br>
+    <button id="share-screen">Share Screen</button>
+    </div>
+    
+    <script src="https://rtcmulticonnection.herokuapp.com/dist/RTCMultiConnection.min.js"></script>
+	<script src="https://rtcmulticonnection.herokuapp.com/socket.io/socket.io.js"></script>
+    <script src="https://cdn.webrtc-experiment.com/getMediaElement.js"></script>
+    <script src="https://cdn.webrtc-experiment.com:443/getScreenId.js"></script>
+    
     <script>
+    document.getElementById('share-screen').onclick = function() {
+        this.disabled = true;
+        connection.addStream({
+            screen: true,
+            oneway: true
+        });
+    };
+    
+    
     var connection = new RTCMultiConnection();
 
     connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
@@ -71,7 +86,7 @@ html, body{
     	document.getElementById('box-left').appendChild(event.mediaElement);
     };
 
-    var predefinedRoomId = 'YOUR_Name';
+    var predefinedRoomId = '${room_id}';
 
     // 나중에 구별
 	if ('create' == '${enter}') {
@@ -84,7 +99,6 @@ html, body{
     
     
     </script>
-    </div>
     
     <div id='box-center'>
     Board Section<br>
@@ -92,7 +106,6 @@ html, body{
     <input type="button" value="start">
     <input type="button" value="end">    
     <input type="button" value="exit"><br>
-    
     </div>
     
     <div id='box-right'>

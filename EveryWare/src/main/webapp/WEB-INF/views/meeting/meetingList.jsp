@@ -10,6 +10,38 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>회의실 목록</title>
 
+<style>
+* {
+	padding:0;
+	margin:0
+}
+
+html, body{
+	height:100%;
+}
+
+.left-box {
+  background: red;
+  float: left;
+  width: 70%;
+  height: 100%;
+}
+.right-box {
+  background: blue;
+  float: right;
+  width: 30%;
+  height: 100%;
+}
+
+.right-box img
+{
+  max-width:100%; 
+  max-height:100%;
+  margin:auto;
+  display:block;
+}
+</style>
+
 <script>
 var w;
 function test1() {
@@ -18,23 +50,36 @@ function test1() {
 </script>
 </head>
 <body>
-<h1>[ 회의실 테스트 ]</h1>
-<input type="button" onclick="location.href='createRoom'" value="회의실 개설">
-<input type="button" onclick="location.href='joinRoom'"value="회의실 입장">
+<div class='left-box' align="center">
+<h1>[ 회의 목록 ]</h1>
 
-<form method="get" action="test1">
-    <input type="hidden" id="enter" name="enter" value="create" />
-    <input type="submit" value="create room"/>
-</form>
+<div>
+<table border="1">
 
-<form method="get" action="test1">
-    <input type="hidden" id="enter" name="enter" value="join" />
-    <input type="submit" value="join room"/>
-</form>
+<c:if test="${meetingList != null}">
+	<c:forEach var="i" items="${meetingList}">
+	<tr>
+		<td>${i.meet_title}</td>
+		<td>${i.meet_dept}</td>
+		<td>${i.meet_etposition}</td>
+		<td>${i.meet_maxpeople}</td>
+		<td><input type="button" onclick="location.href='meetingRoom3#${i.user_id}'" value="입장"></td> <!-- 나중에 방 고유 id 추가할 것 -->
+	</tr>
+	</c:forEach>
+</c:if>
+</table>
+</div>
 
-<p><a href="test1">TEST1</a></p>
-<p><a href="test2">TEST2</a></p>
-
-<p><a href="javascript:test1()">개설</a></p>
+</div>
+<div class='right-box' align="center">
+<img alt="사원 이미지" src="../resources/meeting/image/bonobono.jpg"><br>
+사번: ${sessionScope.userId}<br>
+이름: ${userName}<br>
+부서: ${userDepartment}<br>
+직위: ${userPosition}<br>
+<hr>
+<input type="button" onclick="location.href='javascript:test1()'" value="회의실 개설"><br>
+<input type="button" value="나가기"><br>
+</div>
 </body>
 </html>
