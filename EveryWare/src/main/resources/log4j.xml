@@ -12,7 +12,7 @@
 	
 	<!-- Application Loggers -->
 	<logger name="com.a7.everyware">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->

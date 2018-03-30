@@ -4,23 +4,32 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.a7.everyware.board.controller.BoardController;
 import com.a7.everyware.board.vo.BoardAttachedVO;
 import com.a7.everyware.board.vo.BoardVO;
+
 
 
 //게시판DAO
 @Repository
 public class BoardDAO {
 
+	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
+	
 	@Autowired
 	SqlSession sqlSession;
 	
 	
 	//게시글 저장
 	public int insertBoard(BoardVO board) {
+		
+		logger.info("boardDAO insert para : {}", board);
+		
 		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
 		
 		int result = 0;
@@ -46,6 +55,21 @@ public class BoardDAO {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	
+	/**
+	 * 글 번호로 해당 게시글 읽기
+	 * @param board_id 검색할 글번호
+	 * @return 검색된 게시글 정보. 없으면 null.
+	 */
+	public BoardVO get(int board_id) {
+		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+		//해당 번호의 글정보 읽기
+		BoardVO board = mapper.searchBoard(board_id);
+		//조회수 1증가
+		mapper.addHits(board_id);
+		return board;
 	}
 	
 	
@@ -78,4 +102,27 @@ public class BoardDAO {
 		return boardlist;
 	}
 	
+	
+	/**
+	 * 글 번호로 해당 게시글 삭제
+	 * @param 삭제할 글 번호와 로그인아이디가 포함된 정보
+	 * @return 삭제된 글 개수
+	 */
+	public int deleteBoard(BoardVO board) {
+		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+		int result = mapper.deleteBoard(board);
+		return result;
+	}
+
+	
+	/**
+	 * 게시글 수정
+	 * @param board 수정할 글 정보
+	 * @return 수정된 글 개수
+	 */
+	public int modifyBoard(BoardVO board) {
+		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+		int result = mapper.modifyBoard(board);
+		return result;
+	}
 }

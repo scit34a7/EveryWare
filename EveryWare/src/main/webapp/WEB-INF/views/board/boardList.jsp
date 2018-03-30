@@ -54,11 +54,11 @@ function pagingFormSubmit(currentPage) {
 <tr>
 	<td class="center">${board.board_id}</td>
 	<td>
-		<a href="read?board_id=${board.board_id}">${board_title}</a>
+		<a href="read?board_id=${board.board_id}">${board.board_title}</a>
 	</td>
-	<td class="center">${board_id}</td>
-	<td class="center">${board_hits}</td>
-	<td>${board_date}</td>
+	<td class="center">${board.user_id}</td>
+	<td class="center">${board.board_hits}</td>
+	<td>${board.board_date}</td>
 </tr>
 
 </c:forEach>        

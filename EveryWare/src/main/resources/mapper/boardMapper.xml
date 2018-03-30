@@ -18,16 +18,11 @@
 			
 		)
 		values (
-			board_tb_seq.nextval
+			board_id_seq.nextval
 			, #{board_title}
 			, #{board_content}
 			, #{user_id}
-			<if test="board_attached = true">
-			, 'T'
-			</if>
-			<if test="board_attached = true">
-			, 'F'
-			</if>
+			, #{board_attached}
 			, #{boardfolder_id}
 			
 		)
@@ -42,7 +37,7 @@
 			, bAttached_original	
 		)
 		values (
-			boardAttached_tb_seq.nextval
+			boardAttached_id_seq.nextval
 			, #{board_id}
 			, #{bAttached_saved}
 			, #{bAttached_original}
@@ -67,6 +62,15 @@
 			board_id = #{board_id}
 	</select>
 	
+	<!-- 조회수 1 증가 -->
+	<update id="addHits" parameterType="int">
+		update
+			board_tb
+		set
+			board_hits = board_hits + 1
+		where
+			board_id = #{board_id}
+	</update>
 	
 	<!-- 전체 글 개수 (검색 필터링 후) -->
 	<select id="getTotal" parameterType="string" resultType="int">
@@ -97,5 +101,32 @@
 		</if>
 		order by board_id desc
 	</select>
+	
+	
+	<!-- 글 삭제 -->
+	<delete id="deleteBoard" parameterType="BoardVO">
+		delete
+		from
+			board_tb
+		where
+			board_id = #{board_id}
+			and user_id = #{user_id}
+	</delete>
+
+	<!-- 글 수정 -->
+	<update id="modifyBoard" parameterType="BoardVO">
+		update
+			board_tb
+		set
+			board_title = #{board_title}
+			, board_content = #{board_content}
+			<!-- <if test="bAttached_original != null and bAttached_saved != null"> -->
+			, board_attached = #{board_attached}
+			<!-- </if> -->
+		where
+			board_id = #{board_id}
+			and user_id = #{user_id}
+	</update>
+	
 	
 </mapper>
