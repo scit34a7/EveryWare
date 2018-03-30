@@ -21,30 +21,30 @@ function deleteCheck(board_id){
 
 //리플 쓰기 폼 체크
 function replyFormCheck() {
-	var retext = document.getElementById('retext');
-	if (retext.value.length < 5) {
+	var bReply_content = document.getElementById('bReply_content');
+	if (bReply_content.value.length < 1) {
 		alert('리플 내용을 입력하세요.');
-		retext.focus();
-		retext.select();
+		bReply_content.focus();
+		bReply_content.select();
 		return false;
 	}
 	return true;			
 }
 
 //리플 수정
-function replyEditForm(replynum, board_id, retext) {
+function replyEditForm(bReply_id, board_id, bReply_content) {
 	//해당 리플번호를 붙여 생성한 <div>태그에 접근
-	var div = document.getElementById("div"+replynum);
+	var div = document.getElementById("div"+bReply_id);
 	
-	var str = '<form name="editForm' + replynum + '" action="replyEdit" method="post">';
-	str += '<input type="hidden" name="replynum" value="'+replynum+'">';
-	str += '<input type="hidden" name="boardnum" value="'+boardnum+'">';
+	var str = '<form name="editForm' + bReply_id + '" action="replyEdit" method="post">';
+	str += '<input type="hidden" name="bReply_id" value="'+bReply_id+'">';
+	str += '<input type="hidden" name="board_id" value="'+board_id+'">';
 	str += '&nbsp;';
-	str += '<input type="text" name="text" value="' + retext + '" style="width:530px;">';
+	str += '<input type="text" name="bReply_content" value="' + bReply_content + '" style="width:530px;">';
 	str += '&nbsp;';
-	str += '<a href="javascript:replyEdit(document.editForm' + replynum + ')">[저장]</a>';
+	str += '<a href="javascript:replyEdit(document.editForm' + bReply_id + ')">[저장]</a>';
 	str += '&nbsp;';
-	str += '<a href="javascript:replyEditCancle(document.getElementById(\'div' + replynum + '\'))">[취소]</a>';
+	str += '<a href="javascript:replyEditCancle(document.getElementById(\'div' + bReply_id + '\'))">[취소]</a>';
 	str += '</form>';
 	div.innerHTML = str;
 }
@@ -62,9 +62,9 @@ function replyEdit(form) {
 }
 
 //리플 삭제
-function replyDelete(replynum, boardnum) {
+function replyDelete(bReply_id, board_id) {
 	if (confirm('리플을 삭제하시겠습니까?')) {
-		location.href='replyDelete?replynum=' + replynum + '&boardnum=' + boardnum;
+		location.href='replyDelete?bReply_id=' + bReply_id + '&board_id=' + board_id;
 	}
 }
 </script>
@@ -123,7 +123,52 @@ function replyDelete(replynum, boardnum) {
 <!-- 목록보기-->
 <a href="boardList">목록보기</a>
 </div>
-
+<br>
 <!-- 리플 내용 -->
+<!-- 리플 작성 폼 시작 -->
+<form id="replyform" action="replyWrite" method="post" onSubmit="return replyFormCheck();">
+리플내용
+	<input type="hidden" name="board_id" value="${board.board_id}" />
+	<input type="text" name="bReply_content" id="bReply_content" style="width:500px;" />
+	<input type="submit" value="저장" />
+</form>
+<!-- /리플 작성 폼 끝 -->
+<br>
+
+<!-- 리플 목록 출력 시작 -->
+<table class="reply">
+<c:forEach var="reply" items="${replylist}">
+	<tr>
+		<td class="replyid">
+			<b>${reply.user_id}</b>
+		</td>
+		<td class="replytext">
+			${reply.bReply_content}
+		</td>
+		<td class="replydate">
+			${reply.bReply_date}
+		</td>
+		<td class="replybutton">
+			<c:if test="${userId == reply.user_id}">
+				[<a href="javascript:replyEditForm(${reply.bReply_id}, ${reply.board_id}, '${reply.bReply_content}')">수정</a>]
+			</c:if>
+		</td>
+		<td class="replybutton">
+			<c:if test="${userId == reply.user_id}">
+				[<a href="javascript:replyDelete(${reply.bReply_id}, ${reply.board_id })">삭제</a>]
+			</c:if>
+		</td>
+	</tr>	
+	<tr>
+		<!-- 리플 수정 폼이 나타날 위치 -->
+		<td class="white" colspan="4"><div id="div${reply.bReply_id}"></div></td>
+	</tr>
+		 
+</c:forEach>
+</table>
+<!-- /리플 목록 출력 끝 -->
+<br><br><br>
+</div>
+
 </body>
 </html>

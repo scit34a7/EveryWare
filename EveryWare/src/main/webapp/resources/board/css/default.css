@@ -82,6 +82,7 @@ td.replyid {
 	border-style: none;
 	background-color: #cccccc;
 	font-weight: bold;
+	text-align: center;
 }
 td.replytext {
 	width: 400px;
@@ -89,13 +90,14 @@ td.replytext {
 	background-color: #eeeeee;
 }
 td.replydate {
-	width: 75px;
+	width: 80px;
 	border-style: none;
 	background-color: #eeeeee;
 	font-size: 10pt;
+	text-align: center;
 }
 td.replybutton {
-	width: 70px;
+	width: 60px;
 	border-style: none;
 	background-color: #eeeeee;
 	font-size: 10pt;

@@ -11,8 +11,8 @@ import org.springframework.stereotype.Repository;
 
 import com.a7.everyware.board.controller.BoardController;
 import com.a7.everyware.board.vo.BoardAttachedVO;
+import com.a7.everyware.board.vo.BoardReplyVO;
 import com.a7.everyware.board.vo.BoardVO;
-
 
 
 //게시판DAO
@@ -125,4 +125,56 @@ public class BoardDAO {
 		int result = mapper.modifyBoard(board);
 		return result;
 	}
+	
+	
+	/**
+	 * 리플 저장
+	 * @param reply 저장할 리플 정보
+	 */
+	public int insertBoardReply(BoardReplyVO reply) {
+		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+		
+		int result = 0;
+		try {
+			result = mapper.insertBoardReply(reply);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	/**
+	 * 한 게시글의 리플 목록 읽기
+	 * @param boardnum 본문 글번호
+	 * @return 리플목록
+	 */
+	public ArrayList<BoardReplyVO> listBoardReply(int boardnum) {
+		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+		ArrayList<BoardReplyVO> replylist = mapper.listBoardReply(boardnum);
+		return replylist;
+	}
+
+	/**
+	 * 리플 번호로 해당 리플 삭제
+	 * @param reply 삭제할 리플 번호와 로그인아이디가 포함된 정보
+	 * @return 삭제된 리플 개수
+	 */
+	public int deleteBoardReply(BoardReplyVO reply) {
+		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+		int result = mapper.deleteBoardReply(reply);
+		return result;
+	}
+
+	/**
+	 * 리플 수정
+	 * @param reply 수정할 리플 정보
+	 * @return 수정된 리플 개수
+	 */
+	public int modifyBoardReply(BoardReplyVO reply) {
+		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+		int result = mapper.modifyBoardReply(reply);
+		return result;
+	}
+	
 }

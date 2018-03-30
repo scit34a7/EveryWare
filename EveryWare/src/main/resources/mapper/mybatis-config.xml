@@ -7,6 +7,7 @@
 		<typeAlias type="com.a7.everyware.user.vo.UserVO" alias="UserVO" />
 		<typeAlias type="com.a7.everyware.board.vo.BoardVO" alias="BoardVO" />
 		<typeAlias type="com.a7.everyware.board.vo.BoardAttachedVO" alias="BoardAttachedVO" />
+		<typeAlias type="com.a7.everyware.board.vo.BoardReplyVO" alias="BoardReplyVO" />
 	</typeAliases>
 	
 	<mappers>

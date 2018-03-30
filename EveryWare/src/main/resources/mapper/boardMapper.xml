@@ -128,5 +128,56 @@
 			and user_id = #{user_id}
 	</update>
 	
+	<!-- 리플 저장 -->
+	<insert id="insertBoardReply" parameterType="BoardReplyVO">
+		insert into boardReply_tb (
+			bReply_id
+			, board_id
+			, bReply_content
+			, user_id
+		)
+		values (
+			breply_id_seq.nextval
+			, #{board_id}
+			, #{bReply_content}
+			, #{user_id}
+		)
+	</insert>
+	
+	<!-- 리플 삭제 -->
+	<delete id="deleteBoardReply" parameterType="BoardReplyVO">
+		delete
+		from
+			boardReply_tb
+		where
+			bReply_id = #{bReply_id}
+			and user_id = #{user_id}
+	</delete>
+	
+	<!-- 현재 글의 리플 목록 -->
+	<select id="listBoardReply" parameterType="int" resultType="BoardReplyVO">
+		select 
+			bReply_id
+			, board_id
+			, user_id
+			, bReply_content
+			, to_char(bReply_date, 'YYYY-MM-DD') bReply_date
+		from 
+			boardReply_tb 
+		where
+			board_id = #{board_id}
+		order by bReply_id desc
+	</select>
+
+	<!-- 리플 수정 -->
+	<update id="modifyBoardReply" parameterType="BoardReplyVO">
+		update
+			boardReply_tb
+		set
+			bReply_content = #{bReply_content}
+		where
+			bReply_id = #{bReply_id}
+			and user_id = #{user_id}
+	</update>
 	
 </mapper>

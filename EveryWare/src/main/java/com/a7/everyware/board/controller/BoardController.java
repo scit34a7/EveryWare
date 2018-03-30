@@ -16,8 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.a7.everyware.board.dao.BoardDAO;
 import com.a7.everyware.board.util.PageNavigator;
+import com.a7.everyware.board.vo.BoardReplyVO;
 import com.a7.everyware.board.vo.BoardVO;
-
 
 
 //게시판 컨트롤러
@@ -59,7 +59,7 @@ public class BoardController {
 		String id = (String) session.getAttribute("userId");
 		
 		boardVO.setUser_id(id);
-		//보드 폴더 아이디 1 : 공지사항.. 나중에 폴더 처리 해야됨
+		//보드 폴더 아이디 1 : 공지사항.. 나중에 폴더 처리 해야됨-------------
 		boardVO.setBoardfolder_id(1);
 		logger.debug("{}", boardVO);
 		
@@ -113,11 +113,11 @@ public class BoardController {
 		}
 		
 		//해당 글에 달린 리플목록 읽기
-		//ArrayList<ReplyVO> replylist = boardDAO.listReply(board_id);
+		ArrayList<BoardReplyVO> replylist = boardDAO.listBoardReply(board_id);
 		
 		//본문글정보와 리플목록을 모델에 저장
 		model.addAttribute("board", boardVO);
-		//model.addAttribute("replylist", replylist);
+		model.addAttribute("replylist", replylist);
 		
 		return "board/boardRead";
 	}
@@ -204,6 +204,63 @@ public class BoardController {
 		boardDAO.modifyBoard(board);
 		//원래의 글읽기 화면으로 이동 
 		return "redirect:read?board_id=" + board.getBoard_id();
+	}
+	
+	
+	/**
+	 * 리플 저장 처리
+	 * @param reply 사용자가 입력한 글 내용
+	 */
+	@RequestMapping (value="replyWrite", method=RequestMethod.POST)
+	public String replyWrite(
+			BoardReplyVO reply, 
+			HttpSession session, 
+			Model model) {
+		
+		//세션에서 로그인한 사용자의 아이디를 읽어서 Reply객체의 작성자 정보에 세팅
+		String id = (String) session.getAttribute("userId");
+		reply.setUser_id(id);
+		logger.debug("{}", id);
+		//리플 정보를 DB에 저장
+		boardDAO.insertBoardReply(reply);
+		logger.debug("{}", reply);
+		
+		//읽던 게시글로 되돌아 감
+		return "redirect:read?board_id=" + reply.getBoard_id();
+	}
+	
+	/**
+	 * 리플 삭제
+	 * @param reply 삭제할 리플 번호와 본문 글번호가 전달
+	 */
+	@RequestMapping (value="replyDelete", method=RequestMethod.GET)
+	public String deleteReply(BoardReplyVO reply, HttpSession session) {
+		String id = (String) session.getAttribute("userId");
+		
+		//삭제할 글 번호와 본인 글인지 확인할 로그인아이디
+		reply.setUser_id(id);
+		
+		boardDAO.deleteBoardReply(reply);
+		return "redirect:read?board_id=" + reply.getBoard_id();
+	}
+	
+	/**
+	 * 리플 수정 처리
+	 * @param reply 수정할 리플 정보
+	 */
+	@RequestMapping (value="replyEdit", method=RequestMethod.POST)
+	public String replyEdit(
+			BoardReplyVO reply, 
+			HttpSession session) {
+		
+		//삭제할 리플 정보와 본인 글인지 확인할 로그인아이디
+		String id = (String) session.getAttribute("userId");
+		reply.setUser_id(id);
+		
+		//리플  수정 처리
+		boardDAO.modifyBoardReply(reply);
+		//원래의 글읽기 화면으로 이동 
+		return "redirect:read?board_id=" + reply.getBoard_id();
 	}
 	
 }
