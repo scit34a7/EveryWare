@@ -172,9 +172,15 @@ public class BoardController {
 			MultipartFile upload,
 			HttpSession session) {
 		
+		board.setBoard_attached("F");
+		
 		//수정할 글이 로그인한 본인 글인지 확인
 		String id = (String) session.getAttribute("userId");
 		BoardVO oldBoard = boardDAO.get(board.getBoard_id());
+
+		//보드 폴더 아이디 1 : 공지사항.. 나중에 폴더 처리 해야됨-------------
+		board.setBoardfolder_id(1);
+
 		if (oldBoard == null || !oldBoard.getUser_id().equals(id)) {
 			return "redirect:boardList";
 		}

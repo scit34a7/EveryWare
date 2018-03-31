@@ -43,7 +43,7 @@ public class BoardDAO {
 	}
 	
 	
-	//게시글 첨부 저장
+	//게시글 첨부 저장: 이거 어떻게 해야 할지 모르겠다...
 	public int insertBoardAttached(BoardAttachedVO boardAttached) {
 		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
 		

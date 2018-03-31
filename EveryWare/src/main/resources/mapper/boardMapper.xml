@@ -120,9 +120,7 @@
 		set
 			board_title = #{board_title}
 			, board_content = #{board_content}
-			<!-- <if test="bAttached_original != null and bAttached_saved != null"> -->
 			, board_attached = #{board_attached}
-			<!-- </if> -->
 		where
 			board_id = #{board_id}
 			and user_id = #{user_id}
