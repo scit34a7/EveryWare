@@ -5,6 +5,26 @@
 
 <!-- 유저정보 처리 SQL -->
 <mapper namespace="com.a7.everyware.user.dao.UserMapper">
+	
+	
+	<!-- 이름으로 회원 정보 검색 -->
+	<select id="searchUser" parameterType="string" resultType="UserVO">
+		select * from user_tb where user_name = #{user_name}
+	</select>
+	
+	
+	<!-- 회원 정보 수정 -->
+	<update id="modifyUser" parameterType="UserVO">
+		update user_tb
+		set
+			user_pw = #{user_pw}
+			, user_address = #{user_address}
+			, user_phone = #{user_phone}
+		where
+			user_id = #{user_id}
+	</update>
+	
+	
 	<!-- 유저 정보 select -->
 	<select id="findUser" parameterType="String" resultType="UserVO">
 		select
@@ -21,8 +41,42 @@
 			, dept_tb d
 			, position_tb p
 		where
-			u.user_id = ${user_id}
+			u.user_id = #{user_id}
 			and u.dept_id = d.dept_id
-			and u.position = p.position_id
+			and u.position_id = p.position_id
 	</select>
+	
+	
+<!-- 	
+	회원 정보 저장
+	<insert id="insertUser" parameterType="UserVO">
+		insert into user_tb (
+			user_id
+			, user_pw
+			, user_name
+			, dept_id
+			, position_id
+			, user_address
+			, user_phone
+			, authority
+		)
+		values (
+			#{user_id}
+			, #{user_pw}
+			, #{user_name}
+			, #{dept_id}
+			, #{position_id}
+			, #{user_address}
+			, #{user_phone}
+			, #{authority}
+		)
+	</insert>
+	
+	id체크
+	<select id="checkId" parameterType="string" resultType="UserVO">
+		select * from user_tb where user_id = #{user_id}
+	</select>
+	 -->
+	
+	
 </mapper>
