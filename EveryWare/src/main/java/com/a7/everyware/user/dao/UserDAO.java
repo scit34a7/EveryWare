@@ -1,9 +1,13 @@
 package com.a7.everyware.user.dao;
 
+import java.util.ArrayList;
+
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.a7.everyware.board.dao.BoardMapper;
 import com.a7.everyware.user.vo.UserVO;
 
 
@@ -22,7 +26,7 @@ public class UserDAO {
 	}
 	
 	
-	//회원정보 수정 처리
+	//사원정보 수정 처리
 	public int modifyUser(UserVO user) {
 		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
 		
@@ -37,14 +41,27 @@ public class UserDAO {
 	}
 	
 	
-	//이름 검색
-	public UserVO searchUser(String user_name) {
+
+	//사원 주소록(검색)
+	public ArrayList<UserVO> userList(String searchText, int startRecord, int countPerPage) {
 		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
-		UserVO user = mapper.searchUser(user_name);
-		return user;
+		
+		//전체 검색 결과 중 읽을 시작위치와 개수
+		RowBounds rb = new RowBounds(startRecord, countPerPage);
+		
+		ArrayList<UserVO> userList = mapper.userList(searchText, rb);
+		
+		return userList;
+	}
+
+	
+	//사원 수
+	public int getTotal(String searchText) {
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		int total = mapper.getTotal(searchText);
+		return total;
 	}
 	
-
 	
 /*	
 	//유저 등록(사원 정보 등록 보류)
