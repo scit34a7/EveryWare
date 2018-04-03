@@ -16,14 +16,9 @@
 <script type="text/javascript">
 
 
-	function openCreateApprovalLine(){
+	function openSelectApprovaler(num){
 		
-		window.open("openCreateApprovalLine", "openCreateApprovalLineWin", "top=200, left=600, width=600, height=400")
-	}
-	
-	function openLoadApprovalLine(){
-		
-		window.open("openLoadApprovalLine", "openCreateApprovalLineWin", "top=200, left=600, width=600, height=400")
+		window.open("openSelectApprovaler?num=" + num, "openSelectApprovalerWin", "top=200, left=700, width=400, height=400")
 	}
 	
 	
@@ -50,34 +45,33 @@
 결재라인 등록
 
 
+
+<select>
+	<option>
+</select>
+
 <br><br><br>
 <!-- 결재라인 저장-->
-
-<input type="button" value="결재선 만들기" onclick="openCreateApprovalLine()">
-
-<!-- 결재라인 불러오기 -->
-<input type="button" value="결재선 불러오기" onclick="openLoadApprovalLine()">
-
 <form method="post" action="insertApprovalLine" onsubmit="inputApprovalLine()">
 	
-	결재자 1
+	결재자 1<input type="button" value="찾기" onclick="openSelectApprovaler('1')">
 	<input type="text" readonly="readonly" id="approvalerName1">
 	<input type="text" id="eApprovalLine_person1" name="eApprovalLine_person1">
 	
 	<br>
 	
-	결재자 2
+	결재자 2<input type="button" value="찾기" onclick="openSelectApprovaler('2')">
 	<input type="text" readonly="readonly" id="approvalerName2">
 	<input type="text" id="eApprovalLine_person2" name="eApprovalLine_person2">
 	
 	<br>
 	
-	결재자 3
+	결재자 3<input type="button" value="찾기" onclick="openSelectApprovaler('3')">
 	<input type="text" readonly="readonly" id="approvalerName3">
 	<input type="text" id="eApprovalLine_person3" name="eApprovalLine_person3">
 	
 	<input type="hidden" id="eApprovalLine_name" name="eApprovalLine_name">
-	<input type="submit" value="결재선 확정">
+	<input type="submit" value="결재선 저장">
 	
 	
 </form>

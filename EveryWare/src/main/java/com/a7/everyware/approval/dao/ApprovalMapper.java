@@ -10,5 +10,6 @@ public interface ApprovalMapper {
 	
 	public ArrayList<UserVO> findUser();
 	public void insertApprovalLine(ApprovalLineVO al);
+	public ArrayList<ApprovalLineVO> findApprovalLine(String user_id);
 	
 }

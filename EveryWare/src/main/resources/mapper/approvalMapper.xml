@@ -42,5 +42,15 @@
 			)
 	</insert>
 	
+	<!-- 결재선 불러오기 -->
+	<select id="findApprovalLine" parameterType="String" resultType="ApprovalLineVO">
+		select
+			*
+		from
+			approvalLine_tb
+		where
+			user_id = #{user_id}
+	</select>
+	
 	
 </mapper>

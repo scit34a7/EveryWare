@@ -67,6 +67,27 @@ public class ApprovalController {
 	}
 
 	
+	
+	//결재선만들기 페이지 열기
+	@RequestMapping (value="openCreateApprovalLine", method=RequestMethod.GET)
+	public String openCreateApprovalLine() {
+		logger.debug("go openCreateApprovalLine");
+		
+		
+		return "approval/createApprovalLine";
+	}
+	
+	//결재선 불러오기 페이지 열기
+	@RequestMapping (value="openLoadApprovalLine", method=RequestMethod.GET)
+	public String openLoadApprovalLine() {
+		logger.debug("go openLoadApprovalLine");
+		
+		
+		
+		return "approval/loadApprovalLine";
+	}
+	
+	
 	//결재선 저장
 	@RequestMapping (value="insertApprovalLine", method=RequestMethod.POST)
 	public String insertApprovalLine(ApprovalLineVO approvalLine, HttpSession session) {
