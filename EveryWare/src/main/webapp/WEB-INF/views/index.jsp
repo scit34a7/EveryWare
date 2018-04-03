@@ -41,7 +41,7 @@
 	</head>
 	<body>
 		<!-- WRAPPER -->
-		<div id="wrapper">
+		<div id="wrapper" class ="basic test">
 			<!-- NAVBAR -->
 			<nav class="navbar navbar-default navbar-fixed-top">
 				<div class="brand">
