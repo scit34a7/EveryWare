@@ -21,7 +21,7 @@
 		<option value="과장">과장 이상</option>
 		<option value="사원">사원 이상</option>
 		<option value="제한없음">제한없음</option>
-	</select>
+	</select> 
 </p>
 입장 가능 부서
 <p>체크박스?</p>

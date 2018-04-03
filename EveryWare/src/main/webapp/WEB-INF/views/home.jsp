@@ -7,7 +7,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Home</title>
+	<title>Everyware</title>
+	
+	<link href="resources/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+	<!-- Custom Theme files -->
+	<link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+	<!-- Custom Theme files -->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+	<meta name="keywords" content="Square login form web template, Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
+	<!--Google Fonts-->
+	<link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+	<!--Google Fonts-->
 	
 	<script src="resources/js/jquery-3.2.1.min.js"></script>
 	
@@ -51,7 +63,7 @@
 			datatype: 'text',
 			success: function(isCorrect) {
 				if (isCorrect == 1) {
-					location.href = "user/mainForm";
+					location.href = "index";
 				} else {
 					$('.login-box #id').css('margin-bottom', '20px');
 					$('.login-box #password').css('margin-bottom', '0px');
@@ -68,31 +80,39 @@
 		});
 	}
 	</script>
-	
 </head>
-<body align="center">
-	<div class="container">
-		<div class="top">
-			<h1 id="title" class="hidden"><span id="logo">EVERYWARE (임시 로그인 화면)</span></h1>
-		</div>
-		<div class="login-box">
-			<form>
-			<div class="box-header">
-				<h2>로그인</h2>
+
+<body>
+<div class="login-form">
+			<div class="top-login">
+				<span><img src="resources/image/group.png" alt=""/></span>
 			</div>
-			<br/>
-			<input type="text" id="id" name="id" placeholder="아이디">
-			<br/>
-			<span id="id_err"></span>
-			<input type="password" id="password" name="password" placeholder="비밀번호">
-			<br/>
-			<span id="pwd_err"></span>
-			<br/>
-			<span id="login_err"></span>
-			<br/>
-			<button type="button" id="loginBt">로그인</button>
-			</form>
-		</div>
-	</div>
+			<h1>Login</h1>
+			<div class="login-top">
+			<form>
+				<div class="login-ic">
+					<i ></i>
+					<input type="text"  id="id" name="id" value="User name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User name';}"/>
+					<div class="clear"> </div>
+				</div>
+				<div class="login-ic">
+					<i class="icon"></i>
+					<input type="password"  id="password" name="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}"/>
+					<div class="clear"> </div>
+				</div>
+			
+				<div class="log-bwn">
+					<input type="button" id="loginBt"  value="Login" >
+				</div>
+				
+					<span id="id_err"></span><br/>
+					<span id="pwd_err"></span>
+					<br/>
+					<span id="login_err"></span>
+					<br/>
+				</form>
+			</div>
+			<p class="copy">© 2018 Square Login Form. All rights reserved | Design by  <a href="http://w3layouts.com/" target="_blank">W3layouts</a></p>
+</div>	
 </body>
 </html>

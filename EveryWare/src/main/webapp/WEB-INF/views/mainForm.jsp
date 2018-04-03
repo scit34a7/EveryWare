@@ -22,6 +22,7 @@ function test1() {
 <p><a href="../meet/meetingList">회의실 화면</a></p>
 <input type="button" onclick="location.href='javascript:test1()'" value="회의실"><br>
 
+<p><a href="../meet/annyangTest">음성 테스트</a>
 
 ${sessionScope.userId}(${userName})
 ${sessionScope.userDepartment}(${userPosition})

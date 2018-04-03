@@ -108,4 +108,9 @@ public class MeetingController {
 	public String sharing() {
 		return "meeting/Audio-Video-Screen";
 	}
+	
+	@RequestMapping(value = "annyangTest", method = RequestMethod.GET)
+	public String annyangTest() {
+		return "meeting/annyangTest";
+	}
 }

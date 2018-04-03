@@ -15,7 +15,7 @@
 
     <link rel="stylesheet" href="https://cdn.webrtc-experiment.com/style.css">
 
-    <title>Audio+Video+Screen Sharing using RTCMultiConnection</title>
+    <title>MERGE</title>
 
     <meta name="description" content="Audio+Video+Screen Sharing using RTCMultiConnection" />
     <meta name="keywords" content="WebRTC,RTCMultiConnection,Demos,Experiments,Samples,Examples" />
@@ -55,24 +55,13 @@
             }
         }
     </style>
+    
+    <script src="../resources/js/jquery-3.2.1.min.js"></script>
+	<script src="../resources/meeting/voice/annyang.js"></script>
+	<script src="../resources/meeting/voice/speechtotext.js"></script>
 </head>
 
 <body>
-    <article>
-
-        <header style="text-align: center;">
-            <h1>Audio+Video+Screen Sharing using RTCMultiConnection</h1>
-            <p>
-                <a href="https://rtcmulticonnection.herokuapp.com/">HOME</a>
-                <span> &copy; </span>
-                <a href="http://www.MuazKhan.com/" target="_blank">Muaz Khan</a> .
-                <a href="http://twitter.com/WebRTCWeb" target="_blank" title="Twitter profile for WebRTC Experiments">@WebRTCWeb</a> .
-                <a href="https://github.com/muaz-khan?tab=repositories" target="_blank" title="Github Profile">Github</a> .
-                <a href="https://github.com/muaz-khan/RTCMultiConnection/issues?state=open" target="_blank">Latest issues</a> .
-                <a href="https://github.com/muaz-khan/RTCMultiConnection/commits/master" target="_blank">What's New?</a>
-            </p>
-        </header>
-
         <div class="github-stargazers"></div>
 
         <section class="experiment">
@@ -80,7 +69,6 @@
                 <input type="text" id="room-id" value="${roomid}" autocorrect=off autocapitalize=off size=20>
                 <button id="open-room">Open Room</button>
                 <button id="join-room">Join Room</button>
-                <button id="open-or-join-room">Auto Open Or Join Room</button>
                 
                 <hr>
                     <button id="share-screen" disabled>Share Screen</button>
@@ -92,20 +80,13 @@
             <div id="videos-container"></div>
         </section>
 
-        <blockquote>
-            You can share audio+video as well as screen.
-        </blockquote>
-
-		<script src="https://rtcmulticonnection.herokuapp.com/dist/RTCMultiConnection.min.js"></script>
+		<script src="../resources/meeting/RTCMultiConnection.js"></script>
 		<script src="https://rtcmulticonnection.herokuapp.com/socket.io/socket.io.js"></script>
         <script src="https://cdn.webrtc-experiment.com/getMediaElement.js"></script>
         <script src="https://cdn.webrtc-experiment.com:443/getScreenId.js"></script>
 
         <script>
-            // ......................................................
-            // .......................UI Code........................
-            // ......................................................
-            
+            // UI Code
             document.getElementById('share-screen').onclick = function() {
                 this.disabled = true;
                 connection.addStream({
@@ -126,19 +107,7 @@
                 connection.join('180001');
             };
 
-            document.getElementById('open-or-join-room').onclick = function() {
-                disableInputButtons();
-                connection.openOrJoin(document.getElementById('room-id').value, function(isRoomExists, roomid) {
-                    if(!isRoomExists) {
-                        showRoomURL(roomid);
-                    }
-                });
-            };
-
-            // ......................................................
-            // ..................RTCMultiConnection Code.............
-            // ......................................................
-
+            // RTCMultiConnection Code
             var connection = new RTCMultiConnection();
             
             // Using getScreenId.js to capture screen from any domain
@@ -209,16 +178,13 @@
             };
 
             function disableInputButtons() {
-                document.getElementById('open-or-join-room').disabled = true;
                 document.getElementById('open-room').disabled = true;
                 document.getElementById('join-room').disabled = true;
                 document.getElementById('room-id').disabled = true;
                 document.getElementById('share-screen').disabled = false;
             }
 
-            // ......................................................
-            // ......................Handling Room-ID................
-            // ......................................................
+            // Handling Room-ID
 
             function showRoomURL(roomid) {
                 var roomHashURL = '#' + roomid;
@@ -289,42 +255,11 @@
                 disableInputButtons();
             }
         </script>
-
-        <section class="experiment own-widgets latest-commits">
-            <h2 class="header" id="updates" style="color: red;padding-bottom: .1em;"><a href="https://github.com/muaz-khan/RTCMultiConnection/commits/master">Latest Updates</a></h2>
-            <div id="github-commits"></div>
-        </section>
-
-        <section class="experiment own-widgets">
-            <h2 class="header" id="updates" style="color: red;padding-bottom: .1em;"><a href="https://github.com/muaz-khan/RTCMultiConnection/issues">Latest Issues</a></h2>
-            <div id="github-issues"></div>
-        </section>
-
-        <section class="experiment">
-            <h2 class="header" id="feedback">Feedback</h2>
-            <div>
-                <textarea id="message" style="height: 8em; margin: .2em; width: 98%; border: 1px solid rgb(189, 189, 189); outline: none; resize: vertical;" placeholder="Have any message? Suggestions or something went wrong?"></textarea>
-            </div>
-            <button id="send-message" style="font-size: 1em;">Send Message</button><small style="margin-left:1em;">Enter your email too; if you want "direct" reply!</small>
-        </section>
-
-        <a href="https://github.com/muaz-khan/RTCMultiConnection" class="fork-left"></a>
-
-        <script>
-            window.useThisGithubPath = 'muaz-khan/RTCMultiConnection';
-        </script>
-        <script src="https://cdn.webrtc-experiment.com/commits.js" async></script>
-
-    </article>
-
-    <footer>
-        <p>
-            <a href="https://www.webrtc-experiment.com">WebRTC Experiments</a> Â© <a href="https://plus.google.com/+MuazKhan" rel="author" target="_blank">Muaz Khan</a>
-            <a href="mailto:muazkh@gmail.com" target="_blank">muazkh@gmail.com</a>
-            <a href="https://github.com/muaz-khan" target="_blank">Github</a>
-        </p>
-    </footer>
-
+        
+        <hr>
+        <div>
+        <textarea id="change" rows="20" cols="60"></textarea>
+        </div>
 </body>
 
 </html>
