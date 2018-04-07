@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>메일:EveryWare</title>
+		<title>Inbox | Klorofil Pro - Bootstrap Admin Dashboard Template</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -32,244 +32,254 @@
 		<div id="wrapper">
 			<!-- NAVBAR -->
 			<nav class="navbar navbar-default navbar-fixed-top">
-			<div class="brand">
-				<a href="index"> <img src="resources/assets/img/logo-white.png"
-					alt="Klorofil Pro Logo" class="img-responsive logo">
-				</a>
-			</div>
-			<div class="container-fluid">
-				<div id="tour-fullwidth" class="navbar-btn">
-					<button type="button" class="btn-toggle-fullwidth">
-						<i class="ti-arrow-circle-left"></i>
-					</button>
+				<div class="brand">
+					<a href="index">
+						<img src="resources/assets/img/logo-white.png" alt="Klorofil Pro Logo" class="img-responsive logo">
+					</a>
 				</div>
-				<form class="navbar-form navbar-left search-form">
-					<input type="text" value="" class="form-control"
-						placeholder="직원검색">
-					<button type="button" class="btn btn-default">
-						<i class="fa fa-search"></i>
-					</button>
-				</form>
-				<div id="navbar-menu">
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#" class="btn-toggle-rightsidebar"> <i
-								class="ti-layout-sidebar-right"></i>
-						</a></li>
-						<li class="dropdown"><a href="#"
-							class="dropdown-toggle icon-menu" data-toggle="dropdown"> <i
-								class="ti-bell"></i> <span class="badge bg-danger">5</span>
-						</a>
-							<ul class="dropdown-menu notifications">
-								<li>알림이 있습니다.</li>
-								<li><a href="#" class="notification-item"> <i
-										class="fa fa-hdd-o custom-bg-red"></i>
-										<p>
-											<span class="text">(예)14프로젝트 회의에 초대되었습니다.</span> <span
-												class="timestamp">(예)11 minutes ago</span>
-										</p>
-								</a></li>
-								<li><a href="#" class="notification-item"> <i
-										class="fa fa-tasks custom-bg-yellow"></i>
-										<p>
-											<span class="text">[양식]알림이 있습니다.회의/결제</span> <span
-												class="timestamp">[양식]현재 - 보낸시간</span>
-										</p>
-								</a></li>
-								<li><a href="#" class="notification-item"> <i
-										class="fa fa-book custom-bg-green2"></i>
-										<p>
-											<span class="text">[양식]알림이 있습니다.회의/결제</span> <span
-												class="timestamp">[양식]현재 - 보낸시간</span>
-										</p>
-								</a></li>
-								<li><a href="#" class="notification-item"> <i
-										class="fa fa-bullhorn custom-bg-purple"></i>
-										<p>
-											<span class="text">[양식]알림이 있습니다.회의/결제</span> <span
-												class="timestamp">[양식]현재 - 보낸시간</span>
-										</p>
-								</a></li>
-								<li><a href="#" class="notification-item"> <i
-										class="fa fa-check custom-bg-green"></i>
-										<p>
-											<span class="text">[양식]알림이 있습니다.회의/결제</span> <span
-												class="timestamp">[양식]단위는 일수/ 시간수/ 분수</span>
-										</p>
-								</a></li>
-								<li><a href="#" class="more">전체 알람 보러 가기</a></li>
-							</ul></li>
-						<li class="dropdown"><a href="#" id="tour-help"
-							class="dropdown-toggle" data-toggle="dropdown"><i
-								class="ti-help"></i> <span class="hide">Help</span></a>
-							<ul class="dropdown-menu">
-								<li><a href="#"><i class="ti-direction"></i> Basic Use</a></li>
-								<li><a href="#"><i class="ti-server"></i> Working With
-										Data</a></li>
-								<li><a href="#"><i class="ti-lock"></i> Security</a></li>
-								<li><a href="#"><i class="ti-light-bulb"></i>
-										Troubleshooting</a></li>
-							</ul></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown"> <img
-								src="resources/assets/img/user.png" alt="Avatar"> <span>박자바</span>
-						</a>
-							<ul class="dropdown-menu logged-user-menu">
-								<li><a href="#"><i class="ti-user"></i> <span>개인정보</span></a></li>
-								<li><a href="appviews-inbox"><i class="ti-email"></i> <span>Message</span></a></li>
-								<li><a href="#"><i class="ti-settings"></i> <span>Settings</span></a></li>
-								<li><a href="page-lockscreen"><i class="ti-power-off"></i>
-										<span>로그아웃</span></a></li>
-							</ul></li>
-					</ul>
+				<div class="container-fluid">
+					<div id="tour-fullwidth" class="navbar-btn">
+						<button type="button" class="btn-toggle-fullwidth"><i class="ti-arrow-circle-left"></i></button>
+					</div>
+					<form class="navbar-form navbar-left search-form">
+						<input type="text" value="" class="form-control" placeholder="Search dashboard...">
+						<button type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
+					</form>
+					<div id="navbar-menu">
+						<ul class="nav navbar-nav navbar-right">
+							<li>
+								<a href="#" class="btn-toggle-rightsidebar">
+									<i class="ti-layout-sidebar-right"></i>
+								</a>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
+									<i class="ti-bell"></i>
+									<span class="badge bg-danger">5</span>
+								</a>
+								<ul class="dropdown-menu notifications">
+									<li>You have 5 new notifications</li>
+									<li>
+										<a href="#" class="notification-item">
+											<i class="fa fa-hdd-o custom-bg-red"></i>
+											<p>
+												<span class="text">System space is almost full</span>
+												<span class="timestamp">11 minutes ago</span>
+											</p>
+										</a>
+									</li>
+									<li>
+										<a href="#" class="notification-item">
+											<i class="fa fa-tasks custom-bg-yellow"></i>
+											<p>
+												<span class="text">You have 9 unfinished tasks</span>
+												<span class="timestamp">20 minutes ago</span>
+											</p>
+										</a>
+									</li>
+									<li>
+										<a href="#" class="notification-item">
+											<i class="fa fa-book custom-bg-green2"></i>
+											<p>
+												<span class="text">Monthly report is available</span>
+												<span class="timestamp">1 hour ago</span>
+											</p>
+										</a>
+									</li>
+									<li>
+										<a href="#" class="notification-item">
+											<i class="fa fa-bullhorn custom-bg-purple"></i>
+											<p>
+												<span class="text">Weekly meeting in 1 hour</span>
+												<span class="timestamp">2 hours ago</span>
+											</p>
+										</a>
+									</li>
+									<li>
+										<a href="#" class="notification-item">
+											<i class="fa fa-check custom-bg-green"></i>
+											<p>
+												<span class="text">Your request has been approved</span>
+												<span class="timestamp">3 days ago</span>
+											</p>
+										</a>
+									</li>
+									<li><a href="#" class="more">See all notifications</a></li>
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a href="#" id="tour-help" class="dropdown-toggle" data-toggle="dropdown"><i class="ti-help"></i> <span class="hide">Help</span></a>
+								<ul class="dropdown-menu">
+									<li><a href="#"><i class="ti-direction"></i> Basic Use</a></li>
+									<li><a href="#"><i class="ti-server"></i> Working With Data</a></li>
+									<li><a href="#"><i class="ti-lock"></i> Security</a></li>
+									<li><a href="#"><i class="ti-light-bulb"></i> Troubleshooting</a></li>
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<img src="resources/assets/img/user.png" alt="Avatar">
+									<span>Samuel</span>
+								</a>
+								<ul class="dropdown-menu logged-user-menu">
+									<li><a href="#"><i class="ti-user"></i> <span>My Profile</span></a></li>
+									<li><a href="appviews-inbox"><i class="ti-email"></i> <span>Message</span></a></li>
+									<li><a href="#"><i class="ti-settings"></i> <span>Settings</span></a></li>
+									<li><a href="page-lockscreen"><i class="ti-power-off"></i> <span>Logout</span></a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
 				</div>
-			</div>
-		</nav>
+			</nav>
+			<!-- END NAVBAR -->
 			<!-- LEFT SIDEBAR -->
 			<div id="sidebar-nav" class="sidebar">
 				<nav>
-				<ul class="nav" id="sidebar-nav-menu">
-					<li class="menu-group">Main</li>
-					<li class="panel"><a href="index" data-toggle="collapse"
-						data-parent="#sidebar-nav-menu" class="active"><i
-							class="ti-dashboard"></i> <span class="title">MainHome</span> <i
-							class="icon-submenu ti-angle-left"></i></a> <!-- <div id="dashboards" class="collapse in">
+					<ul class="nav" id="sidebar-nav-menu">
+						<li class="menu-group">Main</li>
+						<li class="panel">
+							<a href="#dashboards" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed"><i class="ti-dashboard"></i> <span class="title">Dashboards</span> <i class="icon-submenu ti-angle-left"></i></a>
+							<div id="dashboards" class="collapse ">
 								<ul class="submenu">
-									<li><a href="index" class="active">Dashboard v1 <span class="label label-info">UPDATED</span></a></li>
+									<li><a href="index">Dashboard v1 <span class="label label-info">UPDATED</span></a></li>
 									<li><a href="dashboard2">Dashboard v2</a></li>
 									<li><a href="dashboard3">Dashboard v3</a></li>
 									<li><a href="dashboard4">Dashboard v4 <span class="label label-success">NEW</span></a></li>
 								</ul>
-							</div> --></li>
-					<li class="panel"><a href="#subLayouts" data-toggle="collapse"
-						data-parent="#sidebar-nav-menu" class="collapsed"><i
-							class="ti-layout"></i> <span class="title">e메일</span> <i
-							class="icon-submenu ti-angle-left"></i></a>
-						<div id="subLayouts" class="collapse">
-							<ul class="submenu">
-								<li><a href="appviews-inbox">받은메일함 <span
-										class="label label-success">NEW</span></a></li>
-								<li><a href="layout-minified">Minified</a></li>
-								<li><a href="layout-fullwidth">Fullwidth</a></li>
-								<li><a href="layout-default">Default</a></li>
-								<li><a href="layout-grid">Grid</a></li>
-							</ul>
-						</div></li>
-					<li class="panel"><a href="#forms" data-toggle="collapse"
-						data-parent="#sidebar-nav-menu" class="collapsed"><i
-							class="ti-receipt"></i> <span class="title">스케줄 관리</span> <i
-							class="icon-submenu ti-angle-left"></i></a>
-						<div id="forms" class="collapse ">
-							<ul class="submenu">
-								<li><a href="forms-inputs">Inputs</a></li>
-								<li><a href="forms-multiselect">Multiselect</a></li>
-								<li><a href="forms-input-pickers">Input Pickers</a></li>
-								<li><a href="forms-input-sliders">Input Sliders</a></li>
-								<li><a href="forms-select2">Select2</a></li>
-								<li><a href="forms-xeditable">In-place Editing</a></li>
-								<li><a href="forms-dragdropupload">Drag and Drop Upload</a></li>
-								<li><a href="forms-layouts">Form Layouts</a></li>
-								<li><a href="forms-validation">Form Validation</a></li>
-								<li><a href="forms-texteditor">Text Editor</a></li>
-							</ul>
-						</div></li>
-					<li class="panel"><a href="#appViews" data-toggle="collapse"
-						data-parent="#sidebar-nav-menu" class="collapsed"><i
-							class="ti-layout-tab-window"></i> <span class="title">개인정보관리</span>
-							<i class="icon-submenu ti-angle-left"></i></a>
-						<div id="appViews" class="collapse ">
-							<ul class="submenu">
-								<li><a href="appviews-project-detail">Project Details</a></li>
-								<li><a href="appviews-projects">Projects</a></li>
-								<li><a href="appviews-inbox">Inbox <span class="badge">8</span></a></li>
-								<li><a href="appviews-file-manager">File Manager</a></li>
-							</ul>
-						</div></li>
-
-					<li class="panel"><a href="#uiElements" data-toggle="collapse"
-						data-parent="#sidebar-nav-menu" class="collapsed"><i
-							class="ti-panel"></i> <span class="title">프로젝트관리</span> <i
-							class="icon-submenu ti-angle-left"></i></a>
-						<div id="uiElements" class="collapse ">
-							<ul class="submenu">
-								<li><a href="ui-sweetalert">Sweet Alert</a></li>
-								<li><a href="ui-treeview">Tree View</a></li>
-								<li><a href="ui-wizard">Wizard</a></li>
-								<li><a href="ui-dragdrop-panel">Drag &amp; Drop Panel</a></li>
-								<li><a href="ui-nestable">Nestable</a></li>
-								<li><a href="ui-gauge">Gauge <span
-										class="label label-success">NEW</span></a></li>
-								<li><a href="ui-panels">Panels</a></li>
-								<li><a href="ui-progressbars">Progress Bars</a></li>
-								<li><a href="ui-tabs">Tabs</a></li>
-								<li><a href="ui-buttons">Buttons <span
-										class="label label-info">UPDATED</span></a></li>
-								<li><a href="ui-bootstrap">Bootstrap UI</a></li>
-								<li><a href="ui-social-buttons">Social Buttons</a></li>
-								<li><a href="ui-icons">Icons</a></li>
-							</ul>
-						</div></li>
-					<li class="panel"><a href="#charts" data-toggle="collapse"
-						data-parent="#sidebar-nav-menu" class="collapsed"><i
-							class="ti-pie-chart"></i> <span class="title">업무지원</span> <i
-							class="icon-submenu ti-angle-left"></i></a>
-						<div id="charts" class="collapse ">
-							<ul class="submenu">
-								<li><a href="charts-chartjs">Chart.js</a></li>
-								<li><a href="charts-chartist">Chartist</a></li>
-								<li><a href="charts-flot">Flot Chart</a></li>
-								<li><a href="charts-sparkline">Sparkline Chart</a></li>
-							</ul>
-						</div></li>
-					<li><a href="widgets"><i class="ti-widget"></i> <span
-							class="title">전자결재</span></a></li>
-					<li><a href="notifications"><i class="ti-bell"></i> <span
-							class="title">화상회의</span> <span class="badge">15</span></a></li>
-
-					+
-					<li class="panel"><a href="#subPages" data-toggle="collapse"
-						data-parent="#sidebar-nav-menu" class="collapsed"><i
-							class="ti-files"></i> <span class="title">자원예약</span> <i
-							class="icon-submenu ti-angle-left"></i></a>
-						<div id="subPages" class="collapse ">
-							<ul class="submenu">
-								<li><a href="page-profile">Profile</a></li>
-								<li><a href="page-login">Login</a></li>
-								<li><a href="page-register">Register</a></li>
-								<li><a href="page-lockscreen">Lockscreen</a></li>
-								<li><a href="page-forgot-password">Forgot Password</a></li>
-								<li><a href="page-404">Page 404</a></li>
-								<li><a href="page-500">Page 500</a></li>
-								<li><a href="page-blank">Blank Page</a></li>
-							</ul>
-						</div></li>
-					<li><a href="typography"><i class="ti-paragraph"></i> <span
-							class="title">게시판</span></a></li>
-					<li class="panel"><a href="#" data-toggle="collapse"
-						data-target="#submenuDemo" data-parent="#sidebar-nav-menu"
-						class="collapsed"><i class="ti-menu"></i> <span class="title">Multilevel
-								Menu</span><i class="icon-submenu ti-angle-left"></i></a>
-						<div id="submenuDemo" class="collapse">
-							<ul class="submenu">
-								<li class="panel"><a href="#" data-toggle="collapse"
-									data-target="#submenuDemoLv2" class="collapsed">Submenu 1 <i
-										class="icon-submenu ti-angle-left"></i></a>
-									<div id="submenuDemoLv2" class="collapse">
-										<ul class="submenu">
-											<li><a href="#">Another menu level</a></li>
-											<li><a href="#" class="active">Another menu level</a></li>
-											<li><a href="#">Another menu level</a></li>
-										</ul>
-									</div></li>
-								<li><a href="javascript:test1()">회의실</a></li>
-								<li><a href="meet/annyangTest"">음성 테스트</a></li>
-							</ul>
-						</div></li>
-				</ul>
-				<button type="button" class="btn-toggle-minified"
-					title="Toggle Minified Menu">
-					<i class="ti-arrows-horizontal"></i>
-				</button>
-			</nav>
+							</div>
+						</li>
+						<li class="panel">
+							<a href="#subLayouts" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed"><i class="ti-layout"></i> <span class="title">Layouts</span> <i class="icon-submenu ti-angle-left"></i></a>
+							<div id="subLayouts" class="collapse ">
+								<ul class="submenu">
+									<li><a href="layout-topnav">Top Navigation <span class="label label-success">NEW</span></a></li>
+									<li><a href="layout-minified">Minified</a></li>
+									<li><a href="layout-fullwidth">Fullwidth</a></li>
+									<li><a href="layout-default">Default</a></li>
+									<li><a href="layout-grid">Grid</a></li>
+								</ul>
+							</div>
+						</li>
+						<li class="panel">
+							<a href="#forms" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed"><i class="ti-receipt"></i> <span class="title">Forms</span> <i class="icon-submenu ti-angle-left"></i></a>
+							<div id="forms" class="collapse ">
+								<ul class="submenu">
+									<li><a href="forms-inputs">Inputs</a></li>
+									<li><a href="forms-multiselect">Multiselect</a></li>
+									<li><a href="forms-input-pickers">Input Pickers</a></li>
+									<li><a href="forms-input-sliders">Input Sliders</a></li>
+									<li><a href="forms-select2">Select2</a></li>
+									<li><a href="forms-xeditable">In-place Editing</a></li>
+									<li><a href="forms-dragdropupload">Drag and Drop Upload</a></li>
+									<li><a href="forms-layouts">Form Layouts</a></li>
+									<li><a href="forms-validation">Form Validation</a></li>
+									<li><a href="forms-texteditor">Text Editor</a></li>
+								</ul>
+							</div>
+						</li>
+						<li class="panel">
+							<a href="#appViews" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="active"><i class="ti-layout-tab-window"></i> <span class="title">App Views</span> <i class="icon-submenu ti-angle-left"></i></a>
+							<div id="appViews" class="collapse in">
+								<ul class="submenu">
+									<li><a href="appviews-project-detail">Project Details</a></li>
+									<li><a href="appviews-projects">Projects</a></li>
+									<li><a href="appviews-inbox" class="active">Inbox <span class="badge">8</span></a></li>
+									<li><a href="appviews-file-manager">File Manager</a></li>
+								</ul>
+							</div>
+						</li>
+						<li class="panel">
+							<a href="#tables" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed"><i class="ti-layout-grid2"></i> <span class="title">Tables</span> <i class="icon-submenu ti-angle-left"></i></a>
+							<div id="tables" class="collapse ">
+								<ul class="submenu">
+									<li><a href="tables-static">Static Tables</a></li>
+									<li><a href="tables-dynamic">Dynamic Tables</a></li>
+								</ul>
+							</div>
+						</li>
+						<li class="menu-group">Components</li>
+						<li class="panel">
+							<a href="#uiElements" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed"><i class="ti-panel"></i> <span class="title">UI Elements</span> <i class="icon-submenu ti-angle-left"></i></a>
+							<div id="uiElements" class="collapse ">
+								<ul class="submenu">
+									<li><a href="ui-sweetalert">Sweet Alert</a></li>
+									<li><a href="ui-treeview">Tree View</a></li>
+									<li><a href="ui-wizard">Wizard</a></li>
+									<li><a href="ui-dragdrop-panel">Drag &amp; Drop Panel</a></li>
+									<li><a href="ui-nestable">Nestable</a></li>
+									<li><a href="ui-gauge">Gauge <span class="label label-success">NEW</span></a></li>
+									<li><a href="ui-panels">Panels</a></li>
+									<li><a href="ui-progressbars">Progress Bars</a></li>
+									<li><a href="ui-tabs">Tabs</a></li>
+									<li><a href="ui-buttons">Buttons <span class="label label-info">UPDATED</span></a></li>
+									<li><a href="ui-bootstrap">Bootstrap UI</a></li>
+									<li><a href="ui-social-buttons">Social Buttons</a></li>
+									<li><a href="ui-icons">Icons</a></li>
+								</ul>
+							</div>
+						</li>
+						<li class="panel">
+							<a href="#charts" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed"><i class="ti-pie-chart"></i> <span class="title">Charts</span> <i class="icon-submenu ti-angle-left"></i></a>
+							<div id="charts" class="collapse ">
+								<ul class="submenu">
+									<li><a href="charts-chartjs">Chart.js</a></li>
+									<li><a href="charts-chartist">Chartist</a></li>
+									<li><a href="charts-flot">Flot Chart</a></li>
+									<li><a href="charts-sparkline">Sparkline Chart</a></li>
+								</ul>
+							</div>
+						</li>
+						<li><a href="widgets"><i class="ti-widget"></i> <span class="title">Widgets</span></a></li>
+						<li><a href="notifications"><i class="ti-bell"></i> <span class="title">Notifications</span> <span class="badge">15</span></a></li>
+						<li class="panel">
+							<a href="#maps" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed"><i class="ti-map"></i> <span class="title">Maps</span> <i class="icon-submenu ti-angle-left"></i></a>
+							<div id="maps" class="collapse ">
+								<ul class="submenu">
+									<li><a href="maps-jqvmap">JQVMap</a></li>
+									<li><a href="maps-mapael">Mapael</a></li>
+								</ul>
+							</div>
+						</li>
+						<li class="menu-group">Extras</li>
+						<li class="panel">
+							<a href="#subPages" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed"><i class="ti-files"></i> <span class="title">Pages</span> <i class="icon-submenu ti-angle-left"></i></a>
+							<div id="subPages" class="collapse ">
+								<ul class="submenu">
+									<li><a href="page-profile">Profile</a></li>
+									<li><a href="page-login">Login</a></li>
+									<li><a href="page-register">Register</a></li>
+									<li><a href="page-lockscreen">Lockscreen</a></li>
+									<li><a href="page-forgot-password">Forgot Password</a></li>
+									<li><a href="page-404">Page 404</a></li>
+									<li><a href="page-500">Page 500</a></li>
+									<li><a href="page-blank">Blank Page</a></li>
+								</ul>
+							</div>
+						</li>
+						<li><a href="typography"><i class="ti-paragraph"></i> <span class="title">Typography</span></a></li>
+						<li class="panel">
+							<a href="#" data-toggle="collapse" data-target="#submenuDemo" data-parent="#sidebar-nav-menu" class="collapsed"><i class="ti-menu"></i> <span class="title">Multilevel Menu</span><i class="icon-submenu ti-angle-left"></i></a>
+							<div id="submenuDemo" class="collapse">
+								<ul class="submenu">
+									<li class="panel">
+										<a href="#" data-toggle="collapse" data-target="#submenuDemoLv2" class="collapsed">Submenu 1 <i class="icon-submenu ti-angle-left"></i></a>
+										<div id="submenuDemoLv2" class="collapse">
+											<ul class="submenu">
+												<li><a href="#">Another menu level</a></li>
+												<li><a href="#" class="active">Another menu level</a></li>
+												<li><a href="#">Another menu level</a></li>
+											</ul>
+										</div>
+									</li>
+									<li><a href="#">Submenu 2</a></li>
+									<li><a href="#">Submenu 3</a></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+					<button type="button" class="btn-toggle-minified" title="Toggle Minified Menu"><i class="ti-arrows-horizontal"></i></button>
+				</nav>
 			</div>
 			<!-- END LEFT SIDEBAR -->
 			<!-- MAIN -->
@@ -278,9 +288,9 @@
 				<div class="main-content">
 					<div class="content-heading clearfix">
 						<div class="heading-left">
-							<h1 class="page-title">e메일</h1>
+							<h1 class="page-title">Inbox</h1>
 							<p class="page-subtitle">You have
-								<strong>118 unread messages</strong>
+								<strong>8 unread messages</strong>
 							</p>
 						</div>
 						<ul class="breadcrumb">
@@ -297,16 +307,20 @@
 										<div class="content-menu-left">
 											<button type="button" class="btn-close-content-menu"><i class="fa fa-close"></i></button>
 											<nav>
-												<span>Mail Service</span>
+												<span>FOLDERS <a href="#"><i class="fa fa-plus-circle"></i></a></span>
 												<ul class="nav-content-menu">
-													<li><a href="./appviews-inbox-inbox"><i class="fa fa-inbox"></i> 받은편지함</a></li>
-													<li><a href="./appviews-inbox-write"><i class="fa fa-mail-forward"></i> 보낸편지함</a></li>
-													<li><a href="#"><i class="fa fa-folder"></i> 임시보관함</a></li>
-													<li><a href="#"><i class="fa fa-flag"></i> 중요편지함</a></li>
-													<li><a href="#"><i class="fa fa-folder"></i> 내게쓴편지함</a></li>
-													<li><a href="#"><i class="fa fa-trash"></i> 휴지통</a></li>
-													<li><a href="#"><i class="fa fa-trash"></i> [임시]메일쓰기</a></li>
-													<li><a href="./appviews-inbox-read"><i class="fa fa-trash"></i> [임시]메일읽기</a></li>
+													<li><a href="#"><i class="fa fa-inbox"></i> Inbox</a></li>
+													<li><a href="#"><i class="fa fa-mail-forward"></i> Sent</a></li>
+													<li><a href="#"><i class="fa fa-folder"></i> Drafts</a></li>
+													<li><a href="#"><i class="fa fa-flag"></i> Flagged</a></li>
+													<li><a href="#"><i class="fa fa-trash"></i> Trash</a></li>
+												</ul>
+												<span>LABELS <a href="#"><i class="fa fa-plus-circle"></i></a></span>
+												<ul class="list-unstyled nav-content-menu">
+													<li><a href="#">Home</a></li>
+													<li><a href="#">Personal</a></li>
+													<li><a href="#">Work</a></li>
+													<li><a href="#">Friends</a></li>
 												</ul>
 											</nav>
 										</div>
@@ -449,7 +463,7 @@
 														<li><a href="#"><i class="fa fa-mail-reply"></i> Reply</a></li>
 														<li><a href="#"><i class="fa fa-mail-forward"></i> Forward</a></li>
 														<li><a href="#"><i class="fa fa-book"></i> Add Jessie to contact</a></li>
-														<li><a href="#"><i class="fa fa-trash"></i> Dele	te this message</a></li>
+														<li><a href="#"><i class="fa fa-trash"></i> Delete this message</a></li>
 														<li><a href="#"><i class="fa fa-warning"></i> Report spam</a></li>
 														<li><a href="#"><i class="fa fa-check-square"></i> Mark as unread</a></li>
 													</ul>
@@ -457,14 +471,13 @@
 											</div>
 										</div>
 										<div class="content">
-											<span>Dear 쯰형,</span>
+											<span>Dear team,</span>
 											<br/>
 											<br/>
-											<p>메일 예시(1)</p>
-											<p>메일 예시(1)</p>
-											<p>메일 예시(1)</p>
-											<p>메일 예시(1)</p>
-											
+											<p>Seamlessly mesh open-source channels with progressive processes. Uniquely simplify B2B value before visionary technologies. Synergistically drive inexpensive convergence through principle-centered leadership skills. Rapidiously communicate customer directed total linkage.</p>
+											<p>Progressively fabricate mission-critical systems via enabled methods of empowerment. Quickly facilitate interactive bandwidth without economically sound technologies. Appropriately disseminate cooperative synergy vis-a-vis sustainable action items. Conveniently deliver cooperative vortals via client-centric "outside the box" thinking. Enthusiastically strategize premium expertise through an expanded array of processes. Monotonectally provide access to optimal solutions via alternative benefits.</p>
+											<p>Enthusiastically syndicate equity invested technology whereas functionalized quality vectors. Continually embrace error-free experiences rather than frictionless methods of empowerment. Competently supply cooperative best practices for global e-commerce. Credibly orchestrate performance based best practices and frictionless solutions. Completely productize orthogonal benefits after resource maximizing alignments. Objectively fabricate cost.</p>
+											<p>Seamlessly mesh open-source channels with progressive processes. Uniquely simplify B2B value before visionary technologies. Synergistically drive inexpensive convergence through principle-centered leadership skills. Rapidiously communicate customer directed total linkage.</p>
 											<br> Regards,
 											<br> Jessie Monica
 											<hr class="content-separator">

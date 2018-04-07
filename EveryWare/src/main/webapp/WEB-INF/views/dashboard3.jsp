@@ -1257,7 +1257,7 @@
 											</tr>
 											<tr>
 												<td>Firefox</td>
-												<td>Android</td>
+												<td>Android</td>		
 												<td>436</td>
 												<td>88.02%</td>
 												<td>46.19%</td>

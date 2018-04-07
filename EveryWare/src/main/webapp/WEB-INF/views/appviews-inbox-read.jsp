@@ -225,7 +225,7 @@
 					<li><a href="notifications"><i class="ti-bell"></i> <span
 							class="title">화상회의</span> <span class="badge">15</span></a></li>
 
-					+
+					
 					<li class="panel"><a href="#subPages" data-toggle="collapse"
 						data-parent="#sidebar-nav-menu" class="collapsed"><i
 							class="ti-files"></i> <span class="title">자원예약</span> <i
@@ -291,9 +291,9 @@
 					</div>
 					<div class="container-fluid">
 						<div class="row">
-							<div class="col-lg-5">
+							<div class="col-lg-2">
 								<div class="content-menu clearfix">
-									<div class="col-md-5 left">
+									<div class="col-md-12 left">
 										<div class="content-menu-left">
 											<button type="button" class="btn-close-content-menu"><i class="fa fa-close"></i></button>
 											<nav>
@@ -305,119 +305,13 @@
 													<li><a href="#"><i class="fa fa-flag"></i> 중요편지함</a></li>
 													<li><a href="#"><i class="fa fa-folder"></i> 내게쓴편지함</a></li>
 													<li><a href="#"><i class="fa fa-trash"></i> 휴지통</a></li>
-													<li><a href="#"><i class="fa fa-trash"></i> [임시]메일쓰기</a></li>
-													<li><a href="./appviews-inbox-read"><i class="fa fa-trash"></i> [임시]메일읽기</a></li>
 												</ul>
 											</nav>
 										</div>
 									</div>
-									<div class="col-md-7 right">
-										<div class="content-menu-right">
-											<div class="content-menu-header clearfix">
-												<button type="button" class="btn-open-content-menu"><i class="fa fa-bars"></i></button>
-												<h2 class="heading">Messages</h2>
-												<button type="button" class="btn-icon"><i class="fa fa-refresh"></i></button>
-											</div>
-											<div id="list-message-scrollable">
-												<ul class="inbox-list-message">
-													<li>
-														<a href="#">
-															<img src="resources/assets/img/user1.png" class="user-image" alt="">
-															<div class="text">
-																<span class="sender">Robby</span>
-																<span class="timestamp">13:45</span>
-																<h3 class="title">Weekly Meeting</h3>
-																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
-															</div>
-														</a>
-													</li>
-													<li class="unread">
-														<a href="#">
-															<img src="resources/assets/img/user2.png" class="user-image" alt="">
-															<div class="text">
-																<span class="sender">Robby</span>
-																<span class="timestamp">13:45</span>
-																<h3 class="title">Weekly Meeting</h3>
-																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
-																<span class="attachment"><i class="fa fa-paperclip"></i></span>
-															</div>
-														</a>
-													</li>
-													<li class="active">
-														<a href="#">
-															<img src="resources/assets/img/user3.png" class="user-image" alt="">
-															<div class="text">
-																<span class="sender">Jessie Monica</span>
-																<span class="timestamp">13:45</span>
-																<h3 class="title">Weekly Meeting</h3>
-																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
-																<span class="attachment"><i class="fa fa-paperclip"></i></span>
-															</div>
-														</a>
-													</li>
-													<li>
-														<a href="#">
-															<img src="resources/assets/img/user1.png" class="user-image" alt="">
-															<div class="text">
-																<span class="sender">Robby</span>
-																<span class="timestamp">13:45</span>
-																<h3 class="title">Weekly Meeting</h3>
-																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
-															</div>
-														</a>
-													</li>
-													<li class="unread">
-														<a href="#">
-															<img src="resources/assets/img/user2.png" class="user-image" alt="">
-															<div class="text">
-																<span class="sender">Robby</span>
-																<span class="timestamp">13:45</span>
-																<h3 class="title">Weekly Meeting</h3>
-																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
-															</div>
-														</a>
-													</li>
-													<li>
-														<a href="#">
-															<img src="resources/assets/img/user1.png" class="user-image" alt="">
-															<div class="text">
-																<span class="sender">Robby</span>
-																<span class="timestamp">13:45</span>
-																<h3 class="title">Weekly Meeting</h3>
-																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
-															</div>
-														</a>
-													</li>
-													<li class="unread">
-														<a href="#">
-															<img src="resources/assets/img/user2.png" class="user-image" alt="">
-															<div class="text">
-																<span class="sender">Robby</span>
-																<span class="timestamp">13:45</span>
-																<h3 class="title">Weekly Meeting</h3>
-																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
-																<span class="attachment"><i class="fa fa-paperclip"></i></span>
-															</div>
-														</a>
-													</li>
-													<li>
-														<a href="#">
-															<img src="resources/assets/img/user1.png" class="user-image" alt="">
-															<div class="text">
-																<span class="sender">Robby</span>
-																<span class="timestamp">13:45</span>
-																<h3 class="title">Weekly Meeting</h3>
-																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
-															</div>
-														</a>
-													</li>
-												</ul>
-											</div>
-										</div>
-									</div>
 								</div>
 							</div>
-							<div class="col-lg-7">
+							<div class="col-lg-9">
 								<div class="content-right clearfix">
 									<div class="content-panel view-message">
 										<button type="button" class="btn-close-content-right"><i class="fa fa-close"></i></button>

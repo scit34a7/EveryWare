@@ -1,0 +1,151 @@
+package com.a7.everyware.mail.controller;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Properties;
+
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.MimeUtility;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.a7.everyware.mail.util.FileService;
+import com.a7.everyware.mail.util.MailUtil;
+import com.a7.everyware.meeting.vo.MeetingVO;
+
+import com.oreilly.servlet.MultipartRequest;
+
+@Controller
+@RequestMapping(value ="mail")
+public class MailSendController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(MailSendController.class); 
+	
+	@RequestMapping(value ="sendMail" , method = RequestMethod.GET)
+	public String goTosendMail(Model model){
+		
+		//'메일 글쓰기로 이동 '
+		return "appviews-inbox-write";
+	}
+	
+	@RequestMapping(value = "sendMail", method = RequestMethod.POST)
+	public String sendMail(Model model, HttpServletRequest req, HttpServletResponse res, MultipartFile attach)
+			throws IOException{
+		
+
+		
+		//TODO: from & importance check;
+		String from = req.getParameter("");
+		String to = req.getParameter("mailRecipients");
+		String cc = req.getParameter("mailRecipients_refer");
+		String subject = req.getParameter("mailSubject");
+		String body = req.getParameter("mailContent_summer");
+		String importance = req.getParameter("mailImportance");
+
+		String host = "localhost";
+	
+		String fileName = attach.getOriginalFilename();
+		String savedfile = fileName;
+
+		Properties properties = System.getProperties();
+
+		// Setup mail server
+		properties.setProperty("mail.smtp.host", host);
+
+		// Get the default Session object.
+		Session session = Session.getDefaultInstance(properties);
+
+		// 첨부파일 확인하고, 있으면 스프링 경로에 임시저장
+		String AttachedfilePath = req.getSession().getServletContext().getRealPath("/resources/tmp");
+		if (attach.getOriginalFilename() != null && !attach.getOriginalFilename().equals("")) {
+
+			savedfile = FileService.saveFile(attach, AttachedfilePath);
+
+		}
+
+		// Define message
+		try {
+
+			Message message = new MimeMessage(session);
+
+			message.setHeader("Content-Transfer-Encoding", "base64");
+
+			message.setFrom(new InternetAddress(from));
+
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+			message.setSubject(req.getParameter("subject"));
+
+			BodyPart messageBodyPart = new MimeBodyPart();
+
+			// Fill the message and encoding for permitting the hanguel
+			messageBodyPart.setContent(req.getParameter("body"), "text/plain;charset=KSC5601");
+
+			Multipart multipart = new MimeMultipart();
+			multipart.addBodyPart(messageBodyPart);
+
+			// Part two is attachment
+			messageBodyPart = new MimeBodyPart();
+
+			// 현재 경로를 읽지 못합니다.임시저장 후에 다시 불러와야하는 프로세스를 거쳐야합니다.
+			String savedfileName = req.getSession().getServletContext().getRealPath("/resources/tmp/" + savedfile);
+
+			if (fileName != null) {
+
+				try {
+					fileName = MimeUtility.encodeText(fileName, "KSC5601", "B");
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				DataSource source = new FileDataSource(savedfileName);
+				messageBodyPart.setDataHandler(new DataHandler(source));
+				messageBodyPart.setFileName(fileName);
+				multipart.addBodyPart(messageBodyPart);
+			}
+
+			// Put parts in message
+			message.setContent(multipart);
+
+			// Send the message
+			Transport.send(message);
+
+		} catch (AddressException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// Create the message part
+
+		model.addAttribute("Msg", "Mail is sended well");
+		return "home";
+	}
+		
+}

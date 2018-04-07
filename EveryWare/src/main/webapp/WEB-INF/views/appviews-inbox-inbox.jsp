@@ -291,9 +291,9 @@
 					</div>
 					<div class="container-fluid">
 						<div class="row">
-							<div class="col-lg-5">
+							<div class="col-lg-2">
 								<div class="content-menu clearfix">
-									<div class="col-md-5 left">
+									<div class="col-md-12 left">
 										<div class="content-menu-left">
 											<button type="button" class="btn-close-content-menu"><i class="fa fa-close"></i></button>
 											<nav>
@@ -305,205 +305,138 @@
 													<li><a href="#"><i class="fa fa-flag"></i> 중요편지함</a></li>
 													<li><a href="#"><i class="fa fa-folder"></i> 내게쓴편지함</a></li>
 													<li><a href="#"><i class="fa fa-trash"></i> 휴지통</a></li>
-													<li><a href="#"><i class="fa fa-trash"></i> [임시]메일쓰기</a></li>
-													<li><a href="./appviews-inbox-read"><i class="fa fa-trash"></i> [임시]메일읽기</a></li>
 												</ul>
+												
 											</nav>
-										</div>
-									</div>
-									<div class="col-md-7 right">
-										<div class="content-menu-right">
-											<div class="content-menu-header clearfix">
-												<button type="button" class="btn-open-content-menu"><i class="fa fa-bars"></i></button>
-												<h2 class="heading">Messages</h2>
-												<button type="button" class="btn-icon"><i class="fa fa-refresh"></i></button>
-											</div>
-											<div id="list-message-scrollable">
-												<ul class="inbox-list-message">
-													<li>
-														<a href="#">
-															<img src="resources/assets/img/user1.png" class="user-image" alt="">
-															<div class="text">
-																<span class="sender">Robby</span>
-																<span class="timestamp">13:45</span>
-																<h3 class="title">Weekly Meeting</h3>
-																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
-															</div>
-														</a>
-													</li>
-													<li class="unread">
-														<a href="#">
-															<img src="resources/assets/img/user2.png" class="user-image" alt="">
-															<div class="text">
-																<span class="sender">Robby</span>
-																<span class="timestamp">13:45</span>
-																<h3 class="title">Weekly Meeting</h3>
-																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
-																<span class="attachment"><i class="fa fa-paperclip"></i></span>
-															</div>
-														</a>
-													</li>
-													<li class="active">
-														<a href="#">
-															<img src="resources/assets/img/user3.png" class="user-image" alt="">
-															<div class="text">
-																<span class="sender">Jessie Monica</span>
-																<span class="timestamp">13:45</span>
-																<h3 class="title">Weekly Meeting</h3>
-																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
-																<span class="attachment"><i class="fa fa-paperclip"></i></span>
-															</div>
-														</a>
-													</li>
-													<li>
-														<a href="#">
-															<img src="resources/assets/img/user1.png" class="user-image" alt="">
-															<div class="text">
-																<span class="sender">Robby</span>
-																<span class="timestamp">13:45</span>
-																<h3 class="title">Weekly Meeting</h3>
-																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
-															</div>
-														</a>
-													</li>
-													<li class="unread">
-														<a href="#">
-															<img src="resources/assets/img/user2.png" class="user-image" alt="">
-															<div class="text">
-																<span class="sender">Robby</span>
-																<span class="timestamp">13:45</span>
-																<h3 class="title">Weekly Meeting</h3>
-																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
-															</div>
-														</a>
-													</li>
-													<li>
-														<a href="#">
-															<img src="resources/assets/img/user1.png" class="user-image" alt="">
-															<div class="text">
-																<span class="sender">Robby</span>
-																<span class="timestamp">13:45</span>
-																<h3 class="title">Weekly Meeting</h3>
-																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
-															</div>
-														</a>
-													</li>
-													<li class="unread">
-														<a href="#">
-															<img src="resources/assets/img/user2.png" class="user-image" alt="">
-															<div class="text">
-																<span class="sender">Robby</span>
-																<span class="timestamp">13:45</span>
-																<h3 class="title">Weekly Meeting</h3>
-																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
-																<span class="attachment"><i class="fa fa-paperclip"></i></span>
-															</div>
-														</a>
-													</li>
-													<li>
-														<a href="#">
-															<img src="resources/assets/img/user1.png" class="user-image" alt="">
-															<div class="text">
-																<span class="sender">Robby</span>
-																<span class="timestamp">13:45</span>
-																<h3 class="title">Weekly Meeting</h3>
-																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
-															</div>
-														</a>
-													</li>
-												</ul>
-											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-7">
+							<div class="col-lg-9">
 								<div class="content-right clearfix">
 									<div class="content-panel view-message">
-										<button type="button" class="btn-close-content-right"><i class="fa fa-close"></i></button>
-										<div class="header">
-											<div class="top clearfix">
-												<h3 class="title">Weekly Meeting</h3>
-												<span class="timestamp">Jan, 2</span>
-											</div>
-											<div class="bottom clearfix">
-												<div class="contact-info">
-													<img src="resources/assets/img/user3.png" class="user-image" alt="Sender">
-													<span class="sender">Jessie Monica
-														<span class="email">(jessie@yourdomain.com)</span>
-														<br>
-													</span>
-													<span class="text-muted">to:</span>
-													<span class="receiver" data-toggle="tooltip" data-title="samuel@yourdomain">me</span>,
-													<span class="receiver" data-toggle="tooltip" data-title="robby@yourdomain">Robby</span>
+										<div class="content-menu-right">
+											<div class="header">
+												<div class="content-menu-header clearfix">
+													<button type="button" class="btn-open-content-menu"><i class="fa fa-bars"></i></button>
+													<h2 class="heading">Messages</h2>
+													<button type="button" class="btn-icon"><i class="fa fa-refresh"></i></button>
 												</div>
-												<div class="btn-group">
-													<button type="button" class="btn btn-primary btn-replyx"><i class="fa fa-mail-reply"></i>
-														<span>Reply</span>
-													</button>
-													<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-														<span class="caret"></span>
-														<span class="sr-only">Toggle Dropdown</span>
-													</button>
-													<ul class="dropdown-menu pull-right" role="menu">
-														<li><a href="#"><i class="fa fa-mail-reply"></i> Reply</a></li>
-														<li><a href="#"><i class="fa fa-mail-forward"></i> Forward</a></li>
-														<li><a href="#"><i class="fa fa-book"></i> Add Jessie to contact</a></li>
-														<li><a href="#"><i class="fa fa-trash"></i> Dele	te this message</a></li>
-														<li><a href="#"><i class="fa fa-warning"></i> Report spam</a></li>
-														<li><a href="#"><i class="fa fa-check-square"></i> Mark as unread</a></li>
-													</ul>
+
+												<div class="content-menu-header clearfix">
+													<table style = "border-spacing:10px; padding:10px;">
+														<tr>
+															<td>
+																<div class="fancy-checkbox custom-bgcolor-green">
+																	<label>
+																		<input type="checkbox" checked>
+																		<span></span>
+																	</label>
+																</div>		
+															</td>
+															<td>
+																<button type="button" class="btn btn-primary btn-toastr" data-context="info" data-message="This is general theme info" data-position="top-right">삭제</button>
+															</td>
+															<td>
+																<button class="btn btn-default" id="btn-sw-question">답장</button>
+															</td>
+															<td style="margin-left: 10px;">
+																<button class="btn btn-default" id="btn-sw-question">전달</button>
+															</td>		
+														</tr>
+													</table>
 												</div>
-											</div>
-										</div>
-										<div class="content">
-											<span>Dear 쯰형,</span>
-											<br/>
-											<br/>
-											<p>메일 예시(1)</p>
-											<p>메일 예시(1)</p>
-											<p>메일 예시(1)</p>
-											<p>메일 예시(1)</p>
+											</div> <!--  end of header -->
 											
-											<br> Regards,
-											<br> Jessie Monica
-											<hr class="content-separator">
-											<div class="attachment-list">
-												<h4> 3 Attachments</h4>
-												<ul class="list-inline">
-													<li>
-														<a href="#">
-															<span class="file-type">
-																<img src="resources/assets/img/pages/inbox/attachment-img.jpg" alt="Thumbnail">
-																<span class="text">
-																	<span class="filename">login-background.jpg</span>
-																	<br>
-																	<span class="filesize">127 KB</span>
-																</span>
-															</span>
-														</a>
+											<!-- in content, button line and list line -->
+											<div class="content">
+											
+											<div id="list-message-scrollable">
+												<ul class="inbox-list-message">
+													<li class = "unread">
+														<table>
+															<tr>
+																<td>
+																	<div class="fancy-checkbox custom-bgcolor-green">
+																		<label>
+																			<input type="checkbox" checked>
+																			<span></span>
+																		</label>
+																	</div>		
+																</td>
+																<td width="100%">
+																	<a href="#">
+																		<img src="resources/assets/img/user1.png" class="user-image" alt="">
+																		<div class="text">
+																			<span class="sender">Robby</span>
+																			<span class="timestamp">13:45</span>
+																			<h3 class="title">Weekly Meeting</h3>
+																			<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
+																			<span class="attachment"><i class="fa fa-paperclip"></i></span>
+																		</div>
+																	</a>		
+																</td>
+															</tr>
+														</table>
 													</li>
-													<li>
-														<a href="#">
-															<span class="file-type"><i class="fa fa-file-word-o"></i>
-																<span class="text">
-																	<span class="filename">Proposal_Final.docx</span>
-																	<br>
-																	<span class="filesize">4.2 MB</span>
-																</span>
-															</span>
-														</a>
+													
+													<li class="unread">
+													
+														<table>
+															<tr>
+																<td>
+																	<div class="fancy-checkbox custom-bgcolor-green">
+																		<label>
+																			<input type="checkbox" checked>
+																			<span></span>
+																		</label>
+																	</div>
+																</td>
+																<td width="100%">
+																	<a href="#">
+																		<img src="resources/assets/img/user2.png" class="user-image" alt="">
+																		<div class="text">
+																			<span class="sender">Robby</span>
+																			<span class="timestamp">13:45</span>
+																			<h3 class="title">Weekly Meeting</h3>
+																			<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
+																			<span class="attachment"><i class="fa fa-paperclip"></i></span>
+																		</div>
+																	</a>	
+																</td>
+															</tr>
+														</table>
+													</li>
+													<li class="active">
+													
+													<table>
+														<tr>
+															<td>
+																<div class="fancy-checkbox custom-bgcolor-green">
+																		<label>
+																			<input type="checkbox" checked>
+																			<span></span>
+																		</label>
+																</div>
+															</td>
+															<td width="100%">
+																<a href="#">
+																	<img src="resources/assets/img/user3.png" class="user-image" alt="">
+																	<div class="text">
+																		<span class="sender">Jessie Monica</span>
+																		<span class="timestamp">13:45</span>
+																		<h3 class="title">Weekly Meeting</h3>
+																		<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
+																		<span class="attachment"><i class="fa fa-paperclip"></i></span>
+																	</div>
+																</a>
+															</td>
+														</tr>
+													</table>
 													</li>
 												</ul>
-											</div>
-										</div>
-										<div class="footer">
-											<div class="reply-message">
-												<img src="resources/assets/img/user-medium.png" class="user-image" alt="User Image">
-												<div id="reply-message" class="reply-box">
-													Click here to <a href="#">reply</a>, <a href="#">reply to all</a> or <a href="#">forward</a>
 												</div>
-											</div>
+											</div>		
 										</div>
 									</div>
 								</div>

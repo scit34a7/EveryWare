@@ -35,6 +35,22 @@ public class HomeController {
 		return "appviews-inbox";
 	}
 	
+	@RequestMapping(value = "appviews-inbox-inbox", method = RequestMethod.GET)
+	public String appviews_inbox_inbox() {
+		return "appviews-inbox-inbox";
+	}
+	
+	@RequestMapping(value = "appviews-inbox-write", method = RequestMethod.GET)
+	public String appviews_inbox_write() {
+		return "appviews-inbox-write";
+	}
+	
+	@RequestMapping(value = "appviews-inbox-read", method = RequestMethod.GET)
+	public String appviews_inbox_read() {
+		return "appviews-inbox-read";
+	}
+	
+	
 	@RequestMapping(value = "appviews-project-detail", method = RequestMethod.GET)
 	public String appviews_project_detail() {
 		return "appviews-project-detail";

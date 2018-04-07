@@ -176,9 +176,9 @@
 						data-parent="#sidebar-nav-menu" class="collapsed"><i
 							class="ti-layout"></i> <span class="title">e메일</span> <i
 							class="icon-submenu ti-angle-left"></i></a>
-						<div id="subLayouts" class="collapse ">
+						<div id="subLayouts" class="collapse">
 							<ul class="submenu">
-								<li><a href="layout-topnav">받은메일함 <span
+								<li><a href="appviews-inbox">받은메일함 <span
 										class="label label-success">NEW</span></a></li>
 								<li><a href="layout-minified">Minified</a></li>
 								<li><a href="layout-fullwidth">Fullwidth</a></li>
@@ -466,10 +466,10 @@
 						<!-- END CHAT SUPPORT -->
 					</div>
 					<div class="row sortable-grid">
-						<div class="col-md-6">
+						<div class="col-md-6 sortable-item">
 							<div class="panel">
 									<div class="panel-heading">
-										<h2 class="panel-title">프로젝트 간트차트</h2>
+										<h2 class="panel-title">Div for Gantt Chart</h2>
 									</div>
 									<div class="panel-body">
 										<canvas id="horizontalbar-chart" height="150"></canvas>
@@ -542,7 +542,6 @@
 							<!-- END SHARES GOAL -->
 						</div>
 					</div>
-					
 					
 					
 					<!-- MINI BAR CHARTS -->
@@ -1216,106 +1215,10 @@
 			});
 			// age bar chart
 			Chart.defaults.global.defaultFontSize = 11;
-			var ctxAgeBarChart = document.getElementById("age-chart")
-					.getContext("2d");
-			var ageBarChart = new Chart(ctxAgeBarChart, {
-				type : 'horizontalBar',
-				data : {
-					labels : [ '18-22', '23-27', '28-32', '33-37', '38-42',
-							'> 42' ],
-					datasets : [ {
-						data : [ 400, 800, 500, 450, 300, 250 ],
-						backgroundColor : 'rgba(245,165,35,0.5)',
-					} ]
-				},
-				options : {
-					responsive : true,
-					legend : {
-						display : false
-					},
-					scales : {
-						xAxes : [ {
-							display : false,
-							ticks : {
-								min : 0,
-								max : 1000,
-							}
-						} ],
-						yAxes : [ {
-							gridLines : {
-								display : false,
-								drawBorder : false
-							}
-						} ]
-					}
-				}
-			});
+			
 			// gauge chart
-			var activityGauge = new JustGage({
-				id : "gauge",
-				value : getRandomInt(0, 100),
-				valueFontColor : '#5E6773',
-				valueFontFamily : 'Roboto, sans-serif',
-				valueMinFontSize : 28,
-				symbol : '%',
-				min : 0,
-				max : 100,
-				minTxt : '0%',
-				maxTxt : '100%',
-				label : 'resource allocated',
-				labelFontColor : '#A0AEBA',
-				labelMinFontSize : 12,
-				counter : true,
-				pointer : true,
-				pointerOptions : {
-					color : '#5E6773'
-				}
-			});
-			setInterval(function() {
-				activityGauge.refresh(getRandomInt(0, 100));
-			}, 2000);
+			
 			// sales chart
-			var ctxSalesLineChart = document.getElementById("sales-chart")
-					.getContext("2d");
-			var lineChart = new Chart(ctxSalesLineChart,
-					{
-						type : 'line',
-						data : {
-							labels : [ 'Mon', 'Tue', 'Wed', 'Thu', 'Fri',
-									'Sat', 'Sun' ],
-							datasets : [ {
-								data : [ 400, 450, 370, 299, 205, 142, 120 ],
-								fill : false,
-								borderWidth : 2,
-								pointRadius : 5,
-								pointHoverRadius : 7,
-								borderColor : '#AB7DF6',
-								backgroundColor : '#fff',
-							} ]
-						},
-						options : {
-							responsive : true,
-							legend : {
-								display : false
-							},
-							layout : {
-								padding : {
-									left : 8,
-									right : 8,
-									top : 8,
-									bottom : 8
-								}
-							},
-							scales : {
-								xAxes : [ {
-									display : false
-								} ],
-								yAxes : [ {
-									display : false
-								} ]
-							}
-						}
-					});
 			
 			// general config and options
 			Chart.defaults.global.defaultFontColor = '#a0aeba';
