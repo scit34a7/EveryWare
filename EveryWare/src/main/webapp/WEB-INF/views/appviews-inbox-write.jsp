@@ -355,7 +355,7 @@
 														<div class="fancy-checkbox custom-bgcolor-green">
 															<label>
 																&nbsp;&nbsp;
-																<input type="checkbox" name = "mailImportance">
+															<input type="checkbox" name = "mailImportance">
 																<span>중요도</span>
 															</label>
 														</div>
