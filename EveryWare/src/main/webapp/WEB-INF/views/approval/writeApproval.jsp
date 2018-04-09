@@ -38,13 +38,21 @@ function openLineSet(){
 <!-- 메인 -->
 <div>
 
-	<form>
+	<form action="insertApproval" method="post"
+		enctype="multipart/form-data">
+		
 	
-		결제 제목 : <input type="text" id="eApproval_title">
+		결재 제목 : <input type="text" id="eApproval_title" name="eApproval_title">
 		<br>
-		결제 내용 : <input type="text" id="eApproval_content">
+		결재 내용 : <input type="text" id="eApproval_content" name="eApproval_content">
 		<br>
 		<input type="button" value="결재선 지정" onclick="openLineSet()">
+		<br>
+		<input type="date" name="eApproval_fDate">
+		<br>
+		<input type="file" name="upload" value="첨부하기">
+		
+		
 		<table border="1">
 			<tr>
 				<td rowspan="2">
@@ -62,10 +70,13 @@ function openLineSet(){
 				<td>4</td>
 			</tr>
 		</table>
-		<input type="text" id="approvaler1" readonly="readonly">
-		<input type="text" id="approvaler1" readonly="readonly">
-		<input type="text" id="approvaler1" readonly="readonly">
+		<input type="text" id="eApprovalLine_person1" readonly="readonly">
+		<input type="text" id="eApprovalLine_person2" readonly="readonly">
+		<input type="text" id="eApprovalLine_person3" readonly="readonly">
+		<input type="text" id="eApprovalLine_id" name="eApprovalLine_id" readonly="readonly">
 	
+		<br>
+		<input type="submit" value="작성">
 	</form>
 
 

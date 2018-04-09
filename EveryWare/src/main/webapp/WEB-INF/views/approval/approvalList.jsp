@@ -13,14 +13,9 @@
 
 <link rel="stylesheet" type="text/css" href="../resources/board/css/default.css" />
 
-<!-- 페이지 이동 스크립트  -->
+
 <script>
-function pagingFormSubmit(currentPage) {
-	var form = document.getElementById('pagingForm');
-	var page = document.getElementById('page');
-	page.value = currentPage;
-	form.submit();
-}
+
 </script>
 	
 </head>
@@ -31,7 +26,7 @@ function pagingFormSubmit(currentPage) {
 <div>
 	<ul>
 		<li><a href="writeApproval">결재 작성</a></li>
-		<li>결재승인</li>
+		<li><a href="myApproval">결재승인</a></li>
 		<li>결재 설정</li>
 		<li>결재 보관함</li>
 	</ul>

@@ -44,13 +44,194 @@
 	
 	<!-- 결재선 불러오기 -->
 	<select id="findApprovalLine" parameterType="String" resultType="ApprovalLineVO">
+		  select
+			l.eApprovalLine_id
+            ,l.user_id
+            ,l.eApprovalLine_name
+            ,(select
+				u.user_name || ' / ' || d.dept_name || ' / ' || p.position_name
+            from
+				user_tb u
+				, dept_tb d
+				, position_tb p
+			where
+				u.dept_id = d.dept_id
+				and u.position_id = p.position_id
+                and u.user_id = l.eApprovalLine_person1
+                ) as eApprovalLine_person1
+                ,(select
+				u.user_name || ' / ' || d.dept_name || ' / ' || p.position_name
+            from
+				user_tb u
+				, dept_tb d
+				, position_tb p
+			where
+				u.dept_id = d.dept_id
+				and u.position_id = p.position_id
+                and u.user_id = l.eApprovalLine_person2
+                ) as eApprovalLine_person2
+                ,(select
+				u.user_name || ' / ' || d.dept_name || ' / ' || p.position_name
+            from
+				user_tb u
+				, dept_tb d
+				, position_tb p
+			where
+				u.dept_id = d.dept_id
+				and u.position_id = p.position_id
+                and u.user_id = l.eApprovalLine_person3
+                ) as eApprovalLine_person3
+		from
+			approvalLine_tb l
+		where
+			l.user_id = #{user_id}
+	</select>
+	
+	<!-- id로 유저 검색 -->
+	<select id="findUserById" parameterType="String" resultType="UserVO">
 		select
 			*
 		from
-			approvalLine_tb
+			user_tb
 		where
 			user_id = #{user_id}
 	</select>
 	
+	<!-- 결재선 아이디로 결재선 불러오기 -->
+	<select id="findApprovalLineById" parameterType="int" resultType="ApprovalLineVO">
+		select
+			l.eApprovalLine_id
+            ,l.user_id
+            ,l.eApprovalLine_name
+            ,(select
+				u.user_name || ' / ' || d.dept_name || ' / ' || p.position_name
+            from
+				user_tb u
+				, dept_tb d
+				, position_tb p
+			where
+				u.dept_id = d.dept_id
+				and u.position_id = p.position_id
+                and u.user_id = l.eApprovalLine_person1
+                ) as eApprovalLine_person1
+                ,(select
+				u.user_name || ' / ' || d.dept_name || ' / ' || p.position_name
+            from
+				user_tb u
+				, dept_tb d
+				, position_tb p
+			where
+				u.dept_id = d.dept_id
+				and u.position_id = p.position_id
+                and u.user_id = l.eApprovalLine_person2
+                ) as eApprovalLine_person2
+                ,(select
+				u.user_name || ' / ' || d.dept_name || ' / ' || p.position_name
+            from
+				user_tb u
+				, dept_tb d
+				, position_tb p
+			where
+				u.dept_id = d.dept_id
+				and u.position_id = p.position_id
+                and u.user_id = l.eApprovalLine_person3
+                ) as eApprovalLine_person3
+		from
+			approvalLine_tb l
+		where
+			l.eApprovalLine_id = #{eApprovalLine_id}
+	</select>
+	
+	
+	<select id="findApprovalLineById2" parameterType="int" resultType="ApprovalLineVO">
+		select
+			*
+		from
+			approvalLine_tb 
+		where
+			eApprovalLine_id = #{eApprovalLine_id}
+	</select>
+	
+	
+	
+	
+	<!-- 전자결재 문서 등록 -->
+	<insert id="insertApproval" parameterType="ApprovalVO">
+		insert into
+			electronicApproval_tb
+				(
+				eApproval_id
+				,user_id
+				,eApproval_title
+				,eApproval_content
+				,eApproval_sDate
+				,eApproval_fDate
+				,eApprovalLine_id
+				<if test="eApproval_saved != null">
+					,eApproval_saved
+					,eApproval_original
+				</if>
+				)
+			values
+				(
+				eApproval_id_seq.nextval
+				,#{user_id}
+				,#{eApproval_title}
+				,#{eApproval_content}
+				,sysdate
+				,#{eApproval_fDate}
+				,#{eApprovalLine_id}
+				<if test="eApproval_saved != null">
+					,#{eApproval_saved}
+					,#{eApproval_original}
+				</if>
+				)
+	</insert>
+	
+	
+	<!-- 내가 결재 해야할 결재문서 불러오기 -->
+	<select id="findApprovalToMe" parameterType="String" resultType="ApprovalVO">
+		select
+		    *
+		from 
+		    electronicApproval_tb p
+		where
+		    #{user_id} in  (
+                        (select 
+                            eApprovalLine_person1
+			                from approvalLine_tb 
+                            where p.eApprovalLine_id = eApprovalLine_id)
+                        ,(select 
+                            eApprovalLine_person2
+			                from approvalLine_tb 
+                            where p.eApprovalLine_id = eApprovalLine_id)
+                        ,(select 
+                            eApprovalLine_person3
+			                from approvalLine_tb 
+                            where p.eApprovalLine_id = eApprovalLine_id)
+                        )
+	</select>	
+	
+	<!-- 내가 올린 결재문서 불로오기 -->
+	<select id="findApprovalFromMe" parameterType="String" resultType="ApprovalVO">
+		select
+			*
+		from
+			 electronicApproval_tb p
+		where
+			user_id = #{user_id}
+	</select>
+	
+	<!-- eApproval_id로 history 가져오기 -->
+	<select id="findApprovalHistory" parameterType="int" resultType="ApprovalHistoryVO">
+		select
+			*
+		from
+			approvalHistory_tb
+		where
+			user_id = #{user_id}
+		order by
+			eHistory_date desc
+	</select>
 	
 </mapper>

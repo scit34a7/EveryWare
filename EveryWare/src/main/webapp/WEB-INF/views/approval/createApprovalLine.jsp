@@ -12,6 +12,9 @@
 <title>결재라인 지정</title>
 
 
+<%-- Jquery --%>
+	<script src="../resources/js/jquery-3.2.1.min.js" ></script>
+
 
 <script type="text/javascript">
 
@@ -22,14 +25,45 @@
 	}
 	
 	
-	function inputApprovalLine(){
-		var name = '';
-		name = prompt('결재선의 이름을 입력해주세요.');
 	
-		document.getElementById('eApprovalLine_name').value = name;
+	
+	
+	
+	$(document).ready(function() {
+	
 		
+	
 		
-	}
+		//이벤트 처리
+		$('#submitBt').on('click', function(){
+			
+			var name = '';
+			name = prompt('결재선의 이름을 입력해주세요.');
+		
+			document.getElementById('eApprovalLine_name').value = name;
+			
+			
+			$.ajax({
+				url: 'insertApprovalLine_aj'
+				,type: 'POST'
+				,data: $('#submitForm').serialize()
+				,dataType: 'text'	//!중요 dataType는 소문자로 쳐야한다.
+				,success: function(ob){
+					
+					alert('성공');
+					
+					self.close();
+					
+				}	
+				,error: function(e){	
+						alert(JSON.stringify(e));
+				}
+			});//ajax
+			
+		});	//이벤트 처리
+	});// doc reaedy
+	
+	
 
 </script>
 
@@ -52,7 +86,7 @@
 
 <br><br><br>
 <!-- 결재라인 저장-->
-<form method="post" action="insertApprovalLine" onsubmit="inputApprovalLine()">
+<form method="post" id="submitForm">
 	
 	결재자 1<input type="button" value="찾기" onclick="openSelectApprovaler('1')">
 	<input type="text" readonly="readonly" id="approvalerName1">
@@ -71,7 +105,7 @@
 	<input type="text" id="eApprovalLine_person3" name="eApprovalLine_person3">
 	
 	<input type="hidden" id="eApprovalLine_name" name="eApprovalLine_name">
-	<input type="submit" value="결재선 저장">
+	<input type="button" id="submitBt" value="결재선 저장">
 	
 	
 </form>

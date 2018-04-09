@@ -11,7 +11,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>결재라인 지정</title>
 
-
+<%-- Jquery --%>
+	<script src="../resources/js/jquery-3.2.1.min.js" ></script>
 
 <script type="text/javascript">
 
@@ -27,14 +28,33 @@
 	}
 	
 	
-	function inputApprovalLine(){
-		var name = '';
-		name = prompt('결재선의 이름을 입력해주세요.');
 	
-		document.getElementById('eApprovalLine_name').value = name;
+$(document).ready(function() {
+	
 		
+	
 		
-	}
+		//이벤트 처리
+		$('#setBt').on('click', function(){
+			
+			alert('1');
+			
+			var id = $('#eApprovalLine_id').val();
+			var person1 = $('#approvalerName1').val();
+			var person2 = $('#approvalerName2').val();
+			var person3 = $('#approvalerName3').val();
+			
+			opener.document.getElementById('eApprovalLine_person1').value = person1;
+			opener.document.getElementById('eApprovalLine_person2').value = person2;
+			opener.document.getElementById('eApprovalLine_person3').value = person3;
+			opener.document.getElementById('eApprovalLine_id').value = id;
+			
+			self.close();
+			
+		});	//이벤트 처리
+	});// doc reaedy
+	
+	
 
 </script>
 
@@ -58,26 +78,33 @@
 <!-- 결재라인 불러오기 -->
 <input type="button" value="결재선 불러오기" onclick="openLoadApprovalLine()">
 
-<form method="post" action="insertApprovalLine" onsubmit="inputApprovalLine()">
+<!-- 결재선 확정 -->
+<form id="submitForm">
 	
+	결재선 번호
+	<input type="text" id="eApprovalLine_name" name="eApprovalLine_name">
+	<br>
+	
+	결재선 이름
+	<input type="text" id="eApprovalLine_id" name="eApprovalLine_id">
+	
+	<br>
 	결재자 1
 	<input type="text" readonly="readonly" id="approvalerName1">
-	<input type="text" id="eApprovalLine_person1" name="eApprovalLine_person1">
 	
 	<br>
 	
 	결재자 2
 	<input type="text" readonly="readonly" id="approvalerName2">
-	<input type="text" id="eApprovalLine_person2" name="eApprovalLine_person2">
+
 	
 	<br>
 	
 	결재자 3
 	<input type="text" readonly="readonly" id="approvalerName3">
-	<input type="text" id="eApprovalLine_person3" name="eApprovalLine_person3">
 	
-	<input type="hidden" id="eApprovalLine_name" name="eApprovalLine_name">
-	<input type="submit" value="결재선 확정">
+	
+	<input type="button"  id="setBt" value="결재선 확정">
 	
 	
 </form>
