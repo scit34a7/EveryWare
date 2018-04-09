@@ -15,12 +15,11 @@
 <script>
 //가입폼 확인
 function formCheck() {
-	var pw = document.getElementById('password');
-	var pw2 = document.getElementById('password2');
-	var name = document.getElementById('name');
-	
+	var pw = document.getElementById('user_pw');
+	var pw2 = document.getElementById('user_pw2');
+
 	if (pw.value.length < 3 || pw.value.length > 10) {
-		alert("비밀번호는 3~10자로 입력하세요.");
+		alert("비밀번호는 4~10자로 입력하세요.");
 		pw.focus();
 		pw.select();
 		return false;
@@ -31,12 +30,7 @@ function formCheck() {
 		pw.select();
 		return false;
 	}
-	if (name.value == '') {
-		alert("이름을 입력하세요.");
-		name.focus();
-		name.select();
-		return false;
-	}
+
 	return true;
 }
 </script>

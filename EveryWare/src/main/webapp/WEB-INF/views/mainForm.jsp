@@ -13,7 +13,11 @@
 <body>
 <h1>메인화면</h1>
 <p><a href="../meet/meetingList">회의실 화면</a></p>
-<p><a href="../board/boardList">게시판</a></p>
+
+<p><a href="../board/boardList?boardFolder_id=1">게시판</a></p>
+
+<p><a href="../support/supportList">업무지원</a></p>
+
 <p><a href="../user/update">개인정보수정</a></p>
 <p><a href="../user/userList">주소록(검색)</a></p>
 <p><a href="../user/logout">로그아웃</a></p>
