@@ -2,6 +2,8 @@ package com.a7.everyware.board.dao;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.RowBounds;
+
 import com.a7.everyware.board.vo.BoardAttachedVO;
 import com.a7.everyware.board.vo.BoardReplyVO;
 import com.a7.everyware.board.vo.BoardVO;
@@ -26,7 +28,7 @@ public interface BoardMapper {
 	public int getTotal(String searchText);
 	
 	//검색 후의 현재 페이지 목록
-	//public ArrayList<BoardVO> listBoard(String searchText, RowBounds rb);
+	public ArrayList<BoardVO> listBoard(String searchText, RowBounds rb);
 	
 	//글번호와 아이디로 해당 게시글 삭제
 	public int deleteBoard(BoardVO board);

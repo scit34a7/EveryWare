@@ -20,9 +20,14 @@ function test1() {
 <body>
 <h1>메인화면</h1>
 <p><a href="../meet/meetingList">회의실 화면</a></p>
+
 <input type="button" onclick="location.href='javascript:test1()'" value="회의실"><br>
 
 <p><a href="../meet/annyangTest">음성 테스트</a>
+
+
+<p><a href="../board/boardList">게시판</a></p>
+<p><a href="../approval/approvalList">전자결제</a></p>
 
 ${sessionScope.userId}(${userName})
 ${sessionScope.userDepartment}(${userPosition})

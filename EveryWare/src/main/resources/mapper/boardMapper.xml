@@ -19,7 +19,6 @@
 		)
 		values (
 			board_tb_seq.nextval
-			, #{board_id}
 			, #{board_title}
 			, #{board_content}
 			, #{user_id}
@@ -36,28 +35,17 @@
 	
 	<!-- 게시판 첨부파일 저장 -->
 	<insert id="insertBoardAttached" parameterType="BoardAttachedVO">
-		insert into board_tb (
-			board_id
-			, board_title
-			, board_content
-			, user_id
-			, board_attached
-			, boardfolder_id
-			
+		insert into boardAttached_tb (
+			bAttached_id
+			, board_id
+			, bAttached_saved
+			, bAttached_original	
 		)
 		values (
-			board_tb_seq.nextval
+			boardAttached_tb_seq.nextval
 			, #{board_id}
-			, #{board_title}
-			, #{board_content}
-			, #{user_id}
-			<if test="board_attached = true">
-			, 'T'
-			</if>
-			<if test="board_attached = true">
-			, 'F'
-			</if>
-			, #{boardfolder_id}
+			, #{bAttached_saved}
+			, #{bAttached_original}
 			
 		)
 	</insert>
