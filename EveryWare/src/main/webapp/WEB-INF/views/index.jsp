@@ -252,7 +252,7 @@
 								<li><a href="charts-sparkline">Sparkline Chart</a></li>
 							</ul>
 						</div></li>
-					<li><a href="widgets"><i class="ti-widget"></i> <span
+					<li><a href="approval/approvalList"><i class="ti-widget"></i> <span
 							class="title">전자결재</span></a></li>
 					<li><a href="meet/meetingList"><i class="ti-bell"></i> <span
 							class="title">화상회의</span> <span class="badge">15</span></a></li>
