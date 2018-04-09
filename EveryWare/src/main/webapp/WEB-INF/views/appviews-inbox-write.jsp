@@ -383,7 +383,7 @@
 									
 										<div class="container-fluid">
 										<div class="summernote" name ="mailContent_summer">
-											
+											Test
 										</div>
 										<div class="margin-bottom-30"></div>
 										</div>
