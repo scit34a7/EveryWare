@@ -79,6 +79,43 @@ public class MeetingController {
 		}
 	}
 	
+	@RequestMapping(value = "create", method = RequestMethod.GET)
+	public String create(HttpSession session, Model model, String title, String content, int people, String[] position, String[] department, String time) {
+		if (meetingDAO.findRoom((String) session.getAttribute("userId")) == null) {
+			System.out.println("title: " + title);
+			System.out.println("content: " + content);
+			System.out.println("people: " + people);
+			System.out.println("position: " + position[0]);
+			System.out.println("department: " + department[0]);
+			System.out.println("time: " + time);
+			
+			String temp = "";
+			MeetingVO vo = new MeetingVO();
+			vo.setUser_id((String) session.getAttribute("userId"));
+			vo.setMeet_title(title);
+			
+			for (int i = 0; i < department.length; i++) {
+				temp += "," + department[i];
+			}
+			vo.setMeet_dept(temp);
+
+			temp="";
+			for (int i = 0; i < position.length; i++) {
+				temp += "," + position[i];
+			}
+			vo.setMeet_etposition(temp);
+			vo.setMeet_date("18/03/29");
+//			vo.setMeet_date(time);
+			vo.setMeet_maxpeople(people);
+
+			meetingDAO.createRoom(vo);
+			model.addAttribute("roomid", (String) session.getAttribute("userId"));
+			System.out.println(vo.toString());
+			return "meeting/meetingRoom3";
+		} else {
+			return "meeting/meetingRoom3";
+		}
+	}
 /////////////////////////////////////////////////////////////////////////////////////////////////
 	@RequestMapping(value = "test1", method = RequestMethod.GET)
 	public String test1(Model model, String enter, String id) {

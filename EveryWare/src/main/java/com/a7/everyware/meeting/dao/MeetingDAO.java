@@ -22,6 +22,7 @@ public class MeetingDAO {
 	
 	public void createRoom(MeetingVO meetVO) {
 		MeetingMapper mapper = sqlSession.getMapper(MeetingMapper.class);
+		System.out.println(meetVO.toString());
 		mapper.createRoom(meetVO);
 	}
 

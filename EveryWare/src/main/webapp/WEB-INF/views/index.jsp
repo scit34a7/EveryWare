@@ -254,10 +254,9 @@
 						</div></li>
 					<li><a href="widgets"><i class="ti-widget"></i> <span
 							class="title">전자결재</span></a></li>
-					<li><a href="notifications"><i class="ti-bell"></i> <span
+					<li><a href="meet/meetingList"><i class="ti-bell"></i> <span
 							class="title">화상회의</span> <span class="badge">15</span></a></li>
 
-					+
 					<li class="panel"><a href="#subPages" data-toggle="collapse"
 						data-parent="#sidebar-nav-menu" class="collapsed"><i
 							class="ti-files"></i> <span class="title">자원예약</span> <i
@@ -293,7 +292,7 @@
 										</ul>
 									</div></li>
 								<li><a href="javascript:test1()">회의실</a></li>
-								<li><a href="meet/annyangTest"">음성 테스트</a></li>
+								<li><a href="meet/annyangTest">음성 테스트</a></li>
 							</ul>
 						</div></li>
 				</ul>
