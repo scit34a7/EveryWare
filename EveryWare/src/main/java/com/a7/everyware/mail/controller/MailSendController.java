@@ -54,26 +54,34 @@ public class MailSendController {
 	}
 	
 	@RequestMapping(value = "sendMail", method = RequestMethod.POST)
-	public String sendMail(Model model, HttpServletRequest req, HttpServletResponse res, MultipartFile attach)
-			throws IOException{
-		
-
-		
+	public String sendMail(Model model, HttpServletRequest req, HttpServletResponse res, MultipartFile mailAttach){
+				
 		//TODO: from & importance check;
-		String from = req.getParameter("");
+		String from = "180001@everyware.tk";
+		
 		String to = req.getParameter("mailRecipients");
 		String cc = req.getParameter("mailRecipients_refer");
 		String subject = req.getParameter("mailSubject");
 		String body = req.getParameter("mailContent_summer");
 		String importance = req.getParameter("mailImportance");
-
-		String host = "localhost";
-	
-		String fileName = attach.getOriginalFilename();
+		String fileName = mailAttach.getOriginalFilename();
 		String savedfile = fileName;
 
-		Properties properties = System.getProperties();
+		
 
+		
+		System.out.println("=========================form check=============================");
+		System.out.println("Mail to :"+to);		
+		System.out.println("Mail subject :"+subject);
+		System.out.println("Mail body :"+body);
+		System.out.println("Mail fileName :"+fileName);
+		System.out.println("================================================================");
+		
+		
+		
+		
+		String host = "localhost";
+		Properties properties = System.getProperties();
 		// Setup mail server
 		properties.setProperty("mail.smtp.host", host);
 
@@ -82,9 +90,9 @@ public class MailSendController {
 
 		// 첨부파일 확인하고, 있으면 스프링 경로에 임시저장
 		String AttachedfilePath = req.getSession().getServletContext().getRealPath("/resources/tmp");
-		if (attach.getOriginalFilename() != null && !attach.getOriginalFilename().equals("")) {
+		if (mailAttach.getOriginalFilename() != null && !mailAttach.getOriginalFilename().equals("")) {
 
-			savedfile = FileService.saveFile(attach, AttachedfilePath);
+			savedfile = FileService.saveFile(mailAttach, AttachedfilePath);
 
 		}
 
@@ -100,12 +108,15 @@ public class MailSendController {
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
 			message.setSubject(req.getParameter("subject"));
-
+			
+			
 			BodyPart messageBodyPart = new MimeBodyPart();
 
 			// Fill the message and encoding for permitting the hanguel
-			messageBodyPart.setContent(req.getParameter("body"), "text/plain;charset=KSC5601");
+			messageBodyPart.setContent("test1", "text/plain;charset=KSC5601");
 
+			//req.getParameter("mailContent_summer")
+			
 			Multipart multipart = new MimeMultipart();
 			multipart.addBodyPart(messageBodyPart);
 
@@ -132,8 +143,21 @@ public class MailSendController {
 			// Put parts in message
 			message.setContent(multipart);
 
-			// Send the message
-			Transport.send(message);
+			Transport transport = session.getTransport("smtp");
+			
+			if(host.equals("localhost")){
+				transport.send(message, message.getAllRecipients());
+			}else{
+				transport.connect(host, "","");
+				transport.sendMessage(message, message.getAllRecipients());
+			}
+			transport.close();
+			
+			if(fileName != null){
+				File f = new File(savedfileName);
+				f.delete();
+			}
+			
 
 		} catch (AddressException e) {
 			// TODO Auto-generated catch block
@@ -145,7 +169,7 @@ public class MailSendController {
 		// Create the message part
 
 		model.addAttribute("Msg", "Mail is sended well");
-		return "home";
+		return "appviews-inbox-inbox";
 	}
 		
 }

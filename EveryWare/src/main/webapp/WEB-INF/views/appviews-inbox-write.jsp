@@ -315,7 +315,7 @@
 							</div>
 						</div>
 						<div class="col-lg-9">
-							<form action ="./sendMail" method = "post" enctype ="multipart/form-data">
+							<form action ="./mail/sendMail" id = "sendForm" method = "post" enctype ="multipart/form-data">
 							<div class="content-right clearfix">
 								
 								<div class="content-panel view-message">
@@ -408,11 +408,10 @@
 									<div class="footer">
 										<div class="reply-message">
 												Footer in the Mails<hr>
-												
-												
+								
 										<button type="submit" class="btn btn-primary btn-replyx" id = "formSubmiter">보내기</button>
-										<button type="submit" class="btn btn-primary btn-replyx">미리보기</button>
-										<button type="submit" class="btn btn-primary btn-replyx">임시저장</button>			
+										<button type="button" class="btn btn-primary btn-replyx">미리보기</button>
+										<button type="button" class="btn btn-primary btn-replyx">임시저장</button>			
 										</div>
 									</div>
 									
@@ -591,7 +590,7 @@
 		
 			// 이메일 보내기 버튼에 이벤트 부여하기 
 			document.getElementById('formSubmiter').onclick = function(){
-				document.getElementById('').submit();	
+				document.getElementById('sendForm').submit();	
 				return false;
 			};
 		
