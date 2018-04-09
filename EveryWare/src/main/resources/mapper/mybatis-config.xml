@@ -9,6 +9,7 @@
 		<typeAlias type="com.a7.everyware.board.vo.BoardAttachedVO" alias="BoardAttachedVO" />
 		<typeAlias type="com.a7.everyware.approval.vo.ApprovalVO" alias="ApprovalVO" />
 		<typeAlias type="com.a7.everyware.approval.vo.ApprovalLineVO" alias="ApprovalLineVO" />
+		<typeAlias type="com.a7.everyware.approval.vo.ApprovalHistoryVO" alias="ApprovalHistoryVO" />
 	</typeAliases>
 	
 	<mappers>

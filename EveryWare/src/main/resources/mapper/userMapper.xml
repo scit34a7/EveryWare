@@ -21,8 +21,8 @@
 			, dept_tb d
 			, position_tb p
 		where
-			u.user_id = ${user_id}
+			u.user_id = #{user_id}
 			and u.dept_id = d.dept_id
-			and u.position = p.position_id
+			and u.position_id = p.position_id
 	</select>
 </mapper>
