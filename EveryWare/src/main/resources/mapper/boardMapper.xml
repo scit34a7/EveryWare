@@ -14,7 +14,7 @@
 			, board_content
 			, user_id
 			, board_attached
-			, boardfolder_id
+			, boardFolder_id
 			
 		)
 		values (
@@ -23,10 +23,11 @@
 			, #{board_content}
 			, #{user_id}
 			, #{board_attached}
-			, #{boardfolder_id}
+			, #{boardFolder_id}
 			
 		)
 	</insert>
+	
 	
 	<!-- 게시판 첨부파일 저장 -->
 	<insert id="insertBoardAttached" parameterType="BoardAttachedVO">
@@ -37,7 +38,7 @@
 			, bAttached_original	
 		)
 		values (
-			boardAttached_id_seq.nextval
+			bAttached_id_seq.nextval
 			, #{board_id}
 			, #{bAttached_saved}
 			, #{bAttached_original}
@@ -46,8 +47,24 @@
 	</insert>
 	
 	
+	<!-- boardID가져오기(첨부시) -->
+	<select id="findBoardId" parameterType="BoardVO" resultType="BoardVO">
+		select
+			*
+		from
+			board_tb
+		where
+			board_title = #{board_title}
+			and board_content = #{board_content}
+			and user_id = #{user_id}
+			and board_attached = #{board_attached}
+			and boardFolder_id = #{boardFolder_id}
+	</select>
+	
+
+	
 	<!-- 게시글 읽기  -->
-	<select id="searchBoard" parameterType="int" resultType="BoardVO">
+	<select id="get" parameterType="int" resultType="BoardVO">
 		select 
 			board_id
 			, user_id
@@ -55,12 +72,32 @@
 			, board_content
 			, to_char(board_date, 'YYYY-MM-DD HH24:MI:SS') board_date
 			, board_hits
+			, boardFolder_id
 			, board_attached
 		from 
 			board_tb 
 		where 
 			board_id = #{board_id}
+		
 	</select>
+	
+	
+	<!-- 첨부 게시글 읽기  -->
+	<select id="searchBoardAttached" parameterType="int" resultType="BoardAttachedVO">
+		select 
+			*
+		from 
+			boardAttached_tb 
+		where 
+			bAttached_id = #{bAttached_id}
+	</select>
+	
+	
+	<!-- BoardAttached 가져오기  boardid로-->
+	<select id="getBoardAttached" parameterType="int" resultType="BoardAttachedVO">
+	select * from boardattached_tb where board_id = #{board_id}
+	</select>
+	
 	
 	<!-- 조회수 1 증가 -->
 	<update id="addHits" parameterType="int">
@@ -72,16 +109,19 @@
 			board_id = #{board_id}
 	</update>
 	
+	
 	<!-- 전체 글 개수 (검색 필터링 후) -->
-	<select id="getTotal" parameterType="string" resultType="int">
+	<select id="getTotal" resultType="int">
 		select 
 			count(*)
 		from 
 			board_tb 
-		<if test="_parameter != null">
 		where 
+		<if test="_parameter != null">
 			board_title like '%' || #{searchText} || '%'
+			and
 		</if>
+			boardFolder_id = #{boardFolder_id}
 	</select>
 	
 	
@@ -94,11 +134,14 @@
 			, to_char(board_date, 'YYYY-MM-DD') board_date
 			, board_hits
 		from 
-			board_tb 
-		<if test="_parameter != null">
+			board_tb
+	
 		where 
+			<if test="_parameter != null">
 			board_title like '%' || #{searchText} || '%'
-		</if>
+			and </if>
+			boardFolder_id = #{boardFolder_id}
+	
 		order by board_id desc
 	</select>
 	
@@ -111,7 +154,22 @@
 		where
 			board_id = #{board_id}
 			and user_id = #{user_id}
+			
 	</delete>
+	
+	
+	<!-- 첨부삭제 -->
+	<delete id="deleteBoardAttached" parameterType="BoardAttachedVO">
+	delete
+	from
+		boardAttached_tb
+	where
+		board_id = #{board_id}
+		and bAttached_id = #{bAttached_id}
+		
+	
+	</delete>
+
 
 	<!-- 글 수정 -->
 	<update id="modifyBoard" parameterType="BoardVO">
@@ -125,6 +183,7 @@
 			board_id = #{board_id}
 			and user_id = #{user_id}
 	</update>
+	
 	
 	<!-- 리플 저장 -->
 	<insert id="insertBoardReply" parameterType="BoardReplyVO">
@@ -142,6 +201,7 @@
 		)
 	</insert>
 	
+	
 	<!-- 리플 삭제 -->
 	<delete id="deleteBoardReply" parameterType="BoardReplyVO">
 		delete
@@ -151,6 +211,7 @@
 			bReply_id = #{bReply_id}
 			and user_id = #{user_id}
 	</delete>
+	
 	
 	<!-- 현재 글의 리플 목록 -->
 	<select id="listBoardReply" parameterType="int" resultType="BoardReplyVO">
@@ -166,6 +227,7 @@
 			board_id = #{board_id}
 		order by bReply_id desc
 	</select>
+
 
 	<!-- 리플 수정 -->
 	<update id="modifyBoardReply" parameterType="BoardReplyVO">

@@ -9,7 +9,7 @@ public class BoardVO {
 	String user_id;				//글쓴이
 	String board_date;			//글쓴 날짜
 	String board_attached;		//첨부파일 여부
-	int boardfolder_id;			//폴더구분 아이디
+	int boardFolder_id;			//폴더구분 아이디
 	int board_hits;				//조회수
 	
 	
@@ -20,7 +20,7 @@ public class BoardVO {
 
 
 	public BoardVO(int board_id, String board_title, String board_content, String user_id, String board_date,
-			String board_attached, int boardfolder_id, int board_hits) {
+			String board_attached, int boardFolder_id, int board_hits) {
 		super();
 		this.board_id = board_id;
 		this.board_title = board_title;
@@ -28,7 +28,7 @@ public class BoardVO {
 		this.user_id = user_id;
 		this.board_date = board_date;
 		this.board_attached = board_attached;
-		this.boardfolder_id = boardfolder_id;
+		this.boardFolder_id = boardFolder_id;
 		this.board_hits = board_hits;
 	}
 
@@ -93,13 +93,13 @@ public class BoardVO {
 	}
 
 
-	public int getBoardfolder_id() {
-		return boardfolder_id;
+	public int getBoardFolder_id() {
+		return boardFolder_id;
 	}
 
 
-	public void setBoardfolder_id(int boardfolder_id) {
-		this.boardfolder_id = boardfolder_id;
+	public void setBoardFolder_id(int boardFolder_id) {
+		this.boardFolder_id = boardFolder_id;
 	}
 
 
@@ -117,8 +117,10 @@ public class BoardVO {
 	public String toString() {
 		return "BoardVO [board_id=" + board_id + ", board_title=" + board_title + ", board_content=" + board_content
 				+ ", user_id=" + user_id + ", board_date=" + board_date + ", board_attached=" + board_attached
-				+ ", boardfolder_id=" + boardfolder_id + ", board_hits=" + board_hits + "]";
+				+ ", boardFolder_id=" + boardFolder_id + ", board_hits=" + board_hits + "]";
 	}
 
+
+	
 	
 }

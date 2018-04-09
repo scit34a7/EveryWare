@@ -27,7 +27,22 @@ function pagingFormSubmit(currentPage) {
 
 <body>
 <div class="centerdiv">
-<h2>[ 게시판 ]</h2>
+
+<c:choose>
+
+	<c:when test="${boardFolder_id==1}">
+	<h2>[ 공지사항 ]</h2>
+	</c:when>
+	
+	<c:when test="${boardFolder_id==2}">
+	<h2>[ 부서게시판 ]</h2>
+	</c:when>
+	
+	<c:when test="${boardFolder_id==3}">
+	<h2>[ 커뮤니티 ]</h2>
+	</c:when>
+
+</c:choose>
 
 <br>
 <table>
@@ -35,9 +50,12 @@ function pagingFormSubmit(currentPage) {
 	<td class="white">
 		전체 : ${navi.totalRecordsCount}
 	</td>
+	<a href="../board/boardList?boardFolder_id=1">공지사항</a>&nbsp;&nbsp;
+	<a href="../board/boardList?boardFolder_id=2">부서게시판</a>&nbsp;&nbsp;
+	<a href="../board/boardList?boardFolder_id=3">커뮤니티</a>
 	<td class="white" colspan="3"></td>
 	<td class="white">
-		<input type="button" value="글쓰기" onClick="location.href='write';">
+		<input type="button" value="글쓰기" onClick="location.href='write?boardFolder_id=${boardFolder_id}';">
 	</td>
 	
 </tr>

@@ -11,7 +11,23 @@
 <title>게시판 글쓰기</title>
 <link rel="stylesheet" type="text/css" href="../resources/board/css/default.css" />
 
+<!-- jQuery -->
+<script src="../resources/js/jquery-3.2.1.min.js"></script>
+
 <script>
+
+$(document).ready(function(){
+	
+	//이벤트 처리
+	$('#plusAttachedBt').on('click', function(){
+		var output = $('#attachedOutput').html();
+		output += '<br>' + '<input type="file" name="upload" size="30">';
+		$('#attachedOutput').html(output);
+	});
+});
+
+
+
 //글쓰기폼 확인
 function formCheck() {
 	var board_title = document.getElementById('board_title');
@@ -31,6 +47,7 @@ function formCheck() {
 	}
 	return true;
 }
+
 </script>	
 </head>
 <body>
@@ -41,6 +58,18 @@ function formCheck() {
 	enctype="multipart/form-data" onsubmit="return formCheck();">
 	
 <table>
+
+<tr>
+	<th>게시판 선택</th> 
+		<td>
+			<select name="boardFolder_id">
+				<option value="1">공지사항</option>
+				<option value="2">부서게시판</option>
+				<option value="3">커뮤니티</option>
+			</select>
+		</td>
+</tr>
+
 <tr>
 	<th>제목</th>
 	<td>
@@ -53,12 +82,18 @@ function formCheck() {
 		<textarea name="board_content" id="board_content" style="width:400px;height:200px;resize:none;"></textarea>
 	</td>
 </tr>
-<tr>
+
+ <tr>
 	<th>파일첨부</th> 
 	<td>
-		<input type="file" name="upload" size="30">
-	</td>
+		<span id="attachedOutput">
+			<input type="file" name="upload" size="30">
+			
+		</span>
+		<input type="button" id="plusAttachedBt" value="파일추가">
+	</td>	
 </tr>
+
 <tr>
 	<td colspan="2" class="white center">
 		<input type="submit" value="저장" />

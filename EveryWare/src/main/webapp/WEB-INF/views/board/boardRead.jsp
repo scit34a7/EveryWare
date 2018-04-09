@@ -67,13 +67,29 @@ function replyDelete(bReply_id, board_id) {
 		location.href='replyDelete?bReply_id=' + bReply_id + '&board_id=' + board_id;
 	}
 }
+
+
 </script>
 	
 </head>
 <body>
 <div class="centerdiv">
 
-<h2>[ 게시판 글읽기 ]</h2>
+<c:choose>
+
+	<c:when test="${board.boardFolder_id==1}">
+	<h2>[ 공지사항 ]</h2>
+	</c:when>
+	
+	<c:when test="${board.boardFolder_id==2}">
+	<h2>[ 부서게시판 ]</h2>
+	</c:when>
+	
+	<c:when test="${board.boardFolder_id==3}">
+	<h2>[ 커뮤니티 ]</h2>
+	</c:when>
+
+</c:choose>
 
 <table>
 <tr>
@@ -98,16 +114,21 @@ function replyDelete(bReply_id, board_id) {
 </tr>
 <tr>
   
-<%-- <th>파일첨부 </th> 
+  
+   <th>파일첨부 </th> 
 <td>
 <!-- 첨부된 파일이 있는 경우, 해당 파일을 다운로드 할 수 있는 링크 제공 -->
-
-<c:if test="${board.originalfile != null}">
-	<a href="download?boardnum=${board.boardnum}">
-		${board.originalfile}
+<c:if test="${board.board_attached == 'T'}">
+ 	<c:forEach var="attachedList" items="${boardAttachedList}"> 
+	<a href="download?bAttached_id=${attachedList.bAttached_id}">
+	
+		${attachedList.bAttached_original} <br>
 	</a>
+	</c:forEach>
+
 </c:if>
-</td>  --%>
+</td> 
+
 </tr>
 </table>
 
@@ -121,7 +142,7 @@ function replyDelete(bReply_id, board_id) {
 </c:if>
 
 <!-- 목록보기-->
-<a href="boardList">목록보기</a>
+<a href="boardList?boardFolder_id=1">목록보기</a>
 </div>
 <br>
 <!-- 리플 내용 -->
