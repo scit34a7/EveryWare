@@ -3,7 +3,7 @@ package com.a7.everyware.board.vo;
 //게시판 리플
 public class BoardReplyVO {
 
-	int breply_id;				//리플 아이디
+	int bReply_id;				//리플 아이디
 	int board_id;				//게시글 번호
 	String bReply_content;		//내용
 	String bReply_date;			//작성일
@@ -16,9 +16,9 @@ public class BoardReplyVO {
 	}
 
 
-	public BoardReplyVO(int breply_id, int board_id, String bReply_content, String bReply_date, String user_id) {
+	public BoardReplyVO(int bReply_id, int board_id, String bReply_content, String bReply_date, String user_id) {
 		super();
-		this.breply_id = breply_id;
+		this.bReply_id = bReply_id;
 		this.board_id = board_id;
 		this.bReply_content = bReply_content;
 		this.bReply_date = bReply_date;
@@ -26,13 +26,13 @@ public class BoardReplyVO {
 	}
 
 
-	public int getBreply_id() {
-		return breply_id;
+	public int getbReply_id() {
+		return bReply_id;
 	}
 
 
-	public void setBreply_id(int breply_id) {
-		this.breply_id = breply_id;
+	public void setbReply_id(int bReply_id) {
+		this.bReply_id = bReply_id;
 	}
 
 
@@ -78,9 +78,8 @@ public class BoardReplyVO {
 
 	@Override
 	public String toString() {
-		return "BoardReplyVO [breply_id=" + breply_id + ", board_id=" + board_id + ", bReply_content=" + bReply_content
+		return "BoardReplyVO [bReply_id=" + bReply_id + ", board_id=" + board_id + ", bReply_content=" + bReply_content
 				+ ", bReply_date=" + bReply_date + ", user_id=" + user_id + "]";
 	}
-	
-	
+
 }

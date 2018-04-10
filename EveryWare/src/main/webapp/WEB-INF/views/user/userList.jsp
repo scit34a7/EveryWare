@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>게시판</title>
+<title>주소록</title>
 
 <link rel="stylesheet" type="text/css" href="../resources/board/css/default.css" />
 
@@ -27,56 +27,32 @@ function pagingFormSubmit(currentPage) {
 
 <body>
 <div class="centerdiv">
-
-<c:choose>
-
-	<c:when test="${boardFolder_id==1}">
-	<h2>[ 공지사항 ]</h2>
-	</c:when>
-	
-	<c:when test="${boardFolder_id==2}">
-	<h2>[ 부서게시판 ]</h2>
-	</c:when>
-	
-	<c:when test="${boardFolder_id==3}">
-	<h2>[ 커뮤니티 ]</h2>
-	</c:when>
-
-</c:choose>
+<h2>[ 사원 주소록 ]</h2>
 
 <br>
 <table>
 <tr>
 	<td class="white">
-		전체 : ${navi.totalRecordsCount}
-	</td>
-	<a href="../board/boardList?boardFolder_id=1">공지사항</a>&nbsp;&nbsp;
-	<a href="../board/boardList?boardFolder_id=2">부서게시판</a>&nbsp;&nbsp;
-	<a href="../board/boardList?boardFolder_id=3">커뮤니티</a>
-	<td class="white" colspan="3"></td>
-	<td class="white">
-		<input type="button" value="글쓰기" onClick="location.href='write?boardFolder_id=${boardFolder_id}';">
+		사원 수 : ${navi.totalRecordsCount}
 	</td>
 	
 </tr>
 <tr>
-	<th>번호</th>
-	<th style="width:220px">제목</th>
-	<th>작성자</th>
-	<th>조회수</th>
-	<th>등록일</th>
+	<th>사번</th>
+	<th>이름</th>
+	<th>부서</th>
+	<th>직위</th>
+	<th>연락처</th>
 </tr>
 
 <!-- 반복 시작 -->
-<c:forEach var="board" items="${boardlist}">
+<c:forEach var="user" items="${userList}">
 <tr>
-	<td class="center">${board.board_id}</td>
-	<td>
-		<a href="read?board_id=${board.board_id}">${board.board_title}</a>
-	</td>
-	<td class="center">${board.user_id}</td>
-	<td class="center">${board.board_hits}</td>
-	<td>${board.board_date}</td>
+	<td class="center">${user.user_id}</td>
+	<td class="center">${user.user_name}</td>
+	<td class="center">${user.dept_name}</td>
+	<td class="center">${user.position_name}</td>
+	<td class="center">${user.user_phone}</td>
 </tr>
 
 </c:forEach>        
@@ -104,9 +80,9 @@ function pagingFormSubmit(currentPage) {
 
 
 <!-- 검색폼 -->
-<form id="pagingForm" method="get" action="boardList">
+<form id="pagingForm" method="get" action="userList">
 	<input type="hidden" name="page" id="page" />
-	제목 : <input type="text"  name="searchText" value="${searchText}" />
+	이름 : <input type="text"  name="searchText" value="${searchText}" />
 	<input type="button" onclick="pagingFormSubmit(1)" value="검색">
 </form>
 <!-- /검색폼 --> 

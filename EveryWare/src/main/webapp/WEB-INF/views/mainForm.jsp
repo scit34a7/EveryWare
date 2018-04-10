@@ -25,9 +25,16 @@ function test1() {
 
 <p><a href="../meet/annyangTest">음성 테스트</a>
 
+<p><a href="../approval/approvalList">전자결재</a></p>
 
-<p><a href="../board/boardList">게시판</a></p>
-<p><a href="../approval/approvalList">전자결제</a></p>
+<p><a href="../board/boardList?boardFolder_id=1">게시판</a></p>
+
+<p><a href="../support/supportList">업무지원</a></p>
+
+<p><a href="../user/update">개인정보수정</a></p>
+<p><a href="../user/userList">주소록(검색)</a></p>
+<p><a href="../user/logout">로그아웃</a></p>
+
 
 ${sessionScope.userId}(${userName})
 ${sessionScope.userDepartment}(${userPosition})
