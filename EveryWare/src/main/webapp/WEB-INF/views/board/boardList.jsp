@@ -9,11 +9,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>게시판</title>
+<title>Board</title>
 
 <link rel="stylesheet" type="text/css" href="../resources/board/css/default.css" />
 
-<!-- 페이지 이동 스크립트       -->
+<!-- 페이지 이동 스크립트 -->
 <script>
 function pagingFormSubmit(currentPage) {
 	var form = document.getElementById('pagingForm');
