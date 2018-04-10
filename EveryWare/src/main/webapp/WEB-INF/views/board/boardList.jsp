@@ -13,7 +13,7 @@
 
 <link rel="stylesheet" type="text/css" href="../resources/board/css/default.css" />
 
-<!-- 페이지 이동 스크립트  -->
+<!-- 페이지 이동 스크립트       -->
 <script>
 function pagingFormSubmit(currentPage) {
 	var form = document.getElementById('pagingForm');
