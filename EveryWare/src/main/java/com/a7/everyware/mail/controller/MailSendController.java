@@ -10,21 +10,11 @@ import java.util.Properties;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
-import javax.mail.BodyPart;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-import javax.mail.internet.MimeUtility;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.mail.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.activation.*;
+import javax.mail.internet.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.a7.everyware.mail.util.FileService;
 import com.a7.everyware.mail.util.MailUtil;
-import com.a7.everyware.meeting.vo.MeetingVO;
+
 
 import com.oreilly.servlet.MultipartRequest;
 
@@ -57,7 +47,7 @@ public class MailSendController {
 	public String sendMail(Model model, HttpServletRequest req, HttpServletResponse res, MultipartFile mailAttach){
 				
 		//TODO: from & importance check;
-		String from = "180001@everyware.tk";
+		String from = "jack@everyware.tk";
 		
 		String to = req.getParameter("mailRecipients");
 		String cc = req.getParameter("mailRecipients_refer");
@@ -76,8 +66,6 @@ public class MailSendController {
 		System.out.println("Mail body :"+body);
 		System.out.println("Mail fileName :"+fileName);
 		System.out.println("================================================================");
-		
-		
 		
 		
 		String host = "localhost";
@@ -102,14 +90,15 @@ public class MailSendController {
 			Message message = new MimeMessage(session);
 
 			message.setHeader("Content-Transfer-Encoding", "base64");
-
+			
 			message.setFrom(new InternetAddress(from));
-
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-
+			System.out.println(message.getFrom().toString());
+			
+			message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
+			System.out.println(message.getAllRecipients().toString());
+			
 			message.setSubject(req.getParameter("subject"));
-			
-			
+		
 			BodyPart messageBodyPart = new MimeBodyPart();
 
 			// Fill the message and encoding for permitting the hanguel
@@ -121,13 +110,15 @@ public class MailSendController {
 			multipart.addBodyPart(messageBodyPart);
 
 			// Part two is attachment
-			messageBodyPart = new MimeBodyPart();
+			
 
 			// 현재 경로를 읽지 못합니다.임시저장 후에 다시 불러와야하는 프로세스를 거쳐야합니다.
 			String savedfileName = req.getSession().getServletContext().getRealPath("/resources/tmp/" + savedfile);
 
-			if (fileName != null) {
-
+			if (fileName != null && fileName != "") {
+				
+				messageBodyPart = new MimeBodyPart();
+				
 				try {
 					fileName = MimeUtility.encodeText(fileName, "KSC5601", "B");
 				} catch (UnsupportedEncodingException e) {
@@ -143,7 +134,9 @@ public class MailSendController {
 			// Put parts in message
 			message.setContent(multipart);
 
-			Transport transport = session.getTransport("smtp");
+			Transport.send(message);
+			
+			/*			Transport transport = session.getTransport("smtp");
 			
 			if(host.equals("localhost")){
 				transport.send(message, message.getAllRecipients());
@@ -157,7 +150,7 @@ public class MailSendController {
 				File f = new File(savedfileName);
 				f.delete();
 			}
-			
+*/			
 
 		} catch (AddressException e) {
 			// TODO Auto-generated catch block
