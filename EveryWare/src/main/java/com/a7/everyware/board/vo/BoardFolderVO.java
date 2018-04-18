@@ -3,8 +3,8 @@ package com.a7.everyware.board.vo;
 //게시판 폴더구분
 public class BoardFolderVO {
 
-	int boardfolder_id;				//폴더구분 아이디
-	String boardfolder_name;		//폴더구분 이름
+	int boardFolder_id;				//폴더구분 아이디
+	String boardFolder_name;		//폴더구분 이름
 	
 	
 	public BoardFolderVO() {
@@ -13,37 +13,37 @@ public class BoardFolderVO {
 	}
 
 
-	public BoardFolderVO(int boardfolder_id, String boardfolder_name) {
+	public BoardFolderVO(int boardFolder_id, String boardFolder_name) {
 		super();
-		this.boardfolder_id = boardfolder_id;
-		this.boardfolder_name = boardfolder_name;
+		this.boardFolder_id = boardFolder_id;
+		this.boardFolder_name = boardFolder_name;
 	}
 
 
-	public int getBoardfolder_id() {
-		return boardfolder_id;
+	public int getBoardFolder_id() {
+		return boardFolder_id;
 	}
 
 
-	public void setBoardfolder_id(int boardfolder_id) {
-		this.boardfolder_id = boardfolder_id;
+	public void setBoardFolder_id(int boardFolder_id) {
+		this.boardFolder_id = boardFolder_id;
 	}
 
 
-	public String getBoardfolder_name() {
-		return boardfolder_name;
+	public String getBoardFolder_name() {
+		return boardFolder_name;
 	}
 
 
-	public void setBoardfolder_name(String boardfolder_name) {
-		this.boardfolder_name = boardfolder_name;
+	public void setBoardFolder_name(String boardFolder_name) {
+		this.boardFolder_name = boardFolder_name;
 	}
 
 
 	@Override
 	public String toString() {
-		return "BoardFolderVO [boardfolder_id=" + boardfolder_id + ", boardfolder_name=" + boardfolder_name + "]";
+		return "BoardFolderVO [boardFolder_id=" + boardFolder_id + ", boardFolder_name=" + boardFolder_name + "]";
 	}
-	
+
 
 }

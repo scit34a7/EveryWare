@@ -9,9 +9,11 @@
 		<typeAlias type="com.a7.everyware.meeting.vo.MeetingLogVO" alias="MeetingLogVO" />
 		<typeAlias type="com.a7.everyware.board.vo.BoardVO" alias="BoardVO" />
 		<typeAlias type="com.a7.everyware.board.vo.BoardAttachedVO" alias="BoardAttachedVO" />
+		<typeAlias type="com.a7.everyware.board.vo.BoardReplyVO" alias="BoardReplyVO" />
 		<typeAlias type="com.a7.everyware.approval.vo.ApprovalVO" alias="ApprovalVO" />
 		<typeAlias type="com.a7.everyware.approval.vo.ApprovalLineVO" alias="ApprovalLineVO" />
 		<typeAlias type="com.a7.everyware.approval.vo.ApprovalHistoryVO" alias="ApprovalHistoryVO" />
+		<typeAlias type="com.a7.everyware.support.vo.AttendVO" alias="AttendVO" />
 	</typeAliases>
 	
 	<mappers>
@@ -19,5 +21,6 @@
 		<mapper resource="mapper/meetingMapper.xml" />
 		<mapper resource="mapper/boardMapper.xml" />
 		<mapper resource="mapper/approvalMapper.xml" />
+		<mapper resource="mapper/supportMapper.xml" />
 	</mappers>
 </configuration>
