@@ -17,14 +17,14 @@ public class ApprovalVO {
 	}
 
 	public ApprovalVO(int eApproval_id, String user_id, String eApproval_title, String eApproval_content,
-			String eApproval_sDAte, String eApproval_fDate, int eApprovalLine_id, String eApproval_saved,
+			String eApproval_sDate, String eApproval_fDate, int eApprovalLine_id, String eApproval_saved,
 			String eApproval_original) {
 		super();
 		this.eApproval_id = eApproval_id;
 		this.user_id = user_id;
 		this.eApproval_title = eApproval_title;
 		this.eApproval_content = eApproval_content;
-		this.eApproval_sDate = eApproval_sDAte;
+		this.eApproval_sDate = eApproval_sDate;
 		this.eApproval_fDate = eApproval_fDate;
 		this.eApprovalLine_id = eApprovalLine_id;
 		this.eApproval_saved = eApproval_saved;
@@ -63,12 +63,12 @@ public class ApprovalVO {
 		this.eApproval_content = eApproval_content;
 	}
 
-	public String geteApproval_sDAte() {
+	public String geteApproval_sDate() {
 		return eApproval_sDate;
 	}
 
-	public void seteApproval_sDAte(String eApproval_sDAte) {
-		this.eApproval_sDate = eApproval_sDAte;
+	public void seteApproval_sDate(String eApproval_sDate) {
+		this.eApproval_sDate = eApproval_sDate;
 	}
 
 	public String geteApproval_fDate() {
@@ -106,7 +106,7 @@ public class ApprovalVO {
 	@Override
 	public String toString() {
 		return "ApprovalVO [eApproval_id=" + eApproval_id + ", user_id=" + user_id + ", eApproval_title="
-				+ eApproval_title + ", eApproval_content=" + eApproval_content + ", eApproval_sDAte=" + eApproval_sDate
+				+ eApproval_title + ", eApproval_content=" + eApproval_content + ", eApproval_sDate=" + eApproval_sDate
 				+ ", eApproval_fDate=" + eApproval_fDate + ", eApprovalLine_id=" + eApprovalLine_id
 				+ ", eApproval_saved=" + eApproval_saved + ", eApproval_original=" + eApproval_original + "]";
 	}

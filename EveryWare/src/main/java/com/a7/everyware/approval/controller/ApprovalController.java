@@ -108,6 +108,7 @@ public class ApprovalController {
 		//로그인 아이디 세팅
 		String user_id = (String) session.getAttribute("userId");
 		approval.setUser_id(user_id);
+		logger.debug("아이디 : {}", user_id);
 		
 		//첨부파일
 		//첨부파일이 있는 경우 지정된 경로(uploadPath)에 저장하고, 원본, 저장된 파일명 객체에 세팅
@@ -124,7 +125,7 @@ public class ApprovalController {
 		//DAO이용해서 전자결재 등록하기!!!!!
 		approvalDAO.insertApproval(approval);
 		
-		return "redirect:approvalList";
+		return "redirect:myApproval";
 	}
 	
 	

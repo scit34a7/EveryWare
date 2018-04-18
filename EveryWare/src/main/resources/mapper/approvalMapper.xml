@@ -42,7 +42,7 @@
 			)
 	</insert>
 	
-	<!-- 결재선 불러오기 -->
+	<!-- user_id로 결재선 불러오기  (내 결재선 모두 불러오기)-->
 	<select id="findApprovalLine" parameterType="String" resultType="ApprovalLineVO">
 		  select
 			l.eApprovalLine_id
@@ -178,8 +178,8 @@
 				,#{user_id}
 				,#{eApproval_title}
 				,#{eApproval_content}
-				,sysdate
-				,#{eApproval_fDate}
+				,to_date(#{eApproval_sDate}, 'mm/dd/yyyy')
+				,to_date(#{eApproval_fDate}, 'mm/dd/yyyy')
 				,#{eApprovalLine_id}
 				<if test="eApproval_saved != null">
 					,#{eApproval_saved}
