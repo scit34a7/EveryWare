@@ -1,4 +1,4 @@
-package com.a7.everyware.board.dao;
+package com.a7.everyware.support.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,15 +8,25 @@ import org.apache.ibatis.session.RowBounds;
 import com.a7.everyware.board.vo.BoardAttachedVO;
 import com.a7.everyware.board.vo.BoardReplyVO;
 import com.a7.everyware.board.vo.BoardVO;
+import com.a7.everyware.support.vo.AttendVO;
 
-//게시판 DAO
-public interface BoardMapper {
+//업무지원
+public interface SupportMapper {
+
+	//출근 체크
+	public int attendCheck(AttendVO attend);
+	
+	//퇴근 체크
+	public int attendOut(AttendVO attend);
+	
+	//내 근태 가져오기
+	public ArrayList<AttendVO> attendListGet(String user_id);
 
 	
-	//게시글 저장
+	//업무보고 저장
 	public int insertBoard(BoardVO board);
 	
-	//게시글 첨부 저장
+	//업무보고 첨부 저장
 	public int insertBoardAttached(BoardAttachedVO boardAttached);
 	
 	//글번호 가져오기(첨부파일 등록시)
@@ -39,8 +49,9 @@ public interface BoardMapper {
 	public int getTotal(HashMap<String, Object> map);
 	
 	//검색 후의 현재 페이지 목록
-	/*public ArrayList<BoardVO> listBoard(HashMap<String, Object> map, RowBounds rb);*/
+	//public ArrayList<BoardVO> listBoard(HashMap<String, Object> map, RowBounds rb);
 	public ArrayList<BoardVO> listBoard(HashMap<String, Object> map);
+	
 	
 	//글번호와 아이디로 해당 게시글 삭제
 	public int deleteBoard(BoardVO board);
@@ -63,5 +74,19 @@ public interface BoardMapper {
 	
 	//리플 수정
 	public int modifyBoardReply(BoardReplyVO reply);
-		
+	
+	
+	
+	
+	
+	
+/*	//근태 읽기
+	public AttendVO attendGet(int attend_id);*/
+	
+	
+	/*//근태 목록
+	public ArrayList<AttendVO> attendList();*/
+	
+	
+	
 }

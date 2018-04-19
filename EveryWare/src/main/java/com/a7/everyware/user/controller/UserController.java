@@ -69,72 +69,80 @@ public class UserController {
 	
 	
 	//로그아웃
-		@RequestMapping (value="logout", method=RequestMethod.GET)
-		public String logout(HttpSession session) {
-			session.invalidate();
-			return "redirect:/";
-		}
+	@RequestMapping (value="logout", method=RequestMethod.GET)
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
 		
 		
-		//사원 정보 수정 페이지 이동
-		@RequestMapping (value="update", method=RequestMethod.GET)
-		public String updateForm(HttpSession session, Model model) {
-			String id = (String) session.getAttribute("userId");
-			UserVO user = userDAO.findUser(id);
-			
-			model.addAttribute("user", user);
+	//사원 정보
+	@RequestMapping (value="userInfo", method=RequestMethod.GET)
+	public String userInfo(Model model){
+		
+		return "user/userInfo";
+	}
+		
+		
+	//사원 정보 수정 페이지 이동
+	@RequestMapping (value="update", method=RequestMethod.GET)
+	public String updateForm(HttpSession session, Model model) {
+		String id = (String) session.getAttribute("userId");
+		UserVO user = userDAO.findUser(id);
+		
+		model.addAttribute("user", user);
+		return "user/updateForm";
+	}
+
+	
+	//사원 정보 수정 처리
+	@RequestMapping (value="update", method=RequestMethod.POST)
+	public String update(
+			@ModelAttribute("user") UserVO user,
+			Model model, HttpSession session) {
+		
+		String id = (String) session.getAttribute("userId");
+		user.setUser_id(id);
+		
+		session.setAttribute("userDepartment", user.getDept_name());
+		session.setAttribute("userPosition", user.getPosition_name());
+		
+		logger.debug("userConroller update {}", user);
+		
+		int result = userDAO.modifyUser(user);
+		if (result != 1) {
+			//DB update에 실패한 경우 alert() 출력용 메시지를 모델에 저장
+			model.addAttribute("errorMsg", "수정 실패");
 			return "user/updateForm";
 		}
-
 		
-		//사원 정보 수정 처리
-		@RequestMapping (value="update", method=RequestMethod.POST)
-		public String update(
-				@ModelAttribute("user") UserVO user,
-				Model model, HttpSession session) {
-			
-			String id = (String) session.getAttribute("userId");
-			user.setUser_id(id);
-			
-			session.setAttribute("userDepartment", user.getDept_name());
-			session.setAttribute("userPosition", user.getPosition_name());
-			
-			logger.debug("userConroller update {}", user);
-			
-			int result = userDAO.modifyUser(user);
-			if (result != 1) {
-				//DB update에 실패한 경우 alert() 출력용 메시지를 모델에 저장
-				model.addAttribute("errorMsg", "수정 실패");
-				return "user/updateForm";
-			}
-			
-			//수정폼으로 감
-			return "redirect:update";
-		}
+		//수정폼으로 감
+		return "redirect:update";
+	}
+	
+	
+	//사원 주소록
+	@RequestMapping (value="userList", method=RequestMethod.GET)
+	public String userList( 
+			@RequestParam(value="page", defaultValue="1") int page,
+			@RequestParam(value="searchText", defaultValue="") String searchText,
+			Model model) {
+	
+		int total = userDAO.getTotal(searchText);
 		
 		
-		//사원 주소록
-		@RequestMapping (value="userList", method=RequestMethod.GET)
-		public String userList( 
-				@RequestParam(value="page", defaultValue="1") int page,
-				@RequestParam(value="searchText", defaultValue="") String searchText,
-				Model model) {
+		//페이지 계산을 위한 객체 생성
+		PageNavigator navi = new PageNavigator(countPerPage, pagePerGroup, page, total); 
 		
-			int total = userDAO.getTotal(searchText);
-			
-			
-			//페이지 계산을 위한 객체 생성
-			PageNavigator navi = new PageNavigator(countPerPage, pagePerGroup, page, total); 
-			
-			ArrayList<UserVO> userList = userDAO.userList(searchText, navi.getStartRecord(), navi.getCountPerPage());
-			
-			//페이지 정보 객체와 글 목록, 검색어를 모델에 저장
-			model.addAttribute("userList", userList);		
-			model.addAttribute("navi", navi);
-			model.addAttribute("searchText", searchText);
-			
-			return "user/userList";
-		}
+		ArrayList<UserVO> userList = userDAO.userList(searchText, navi.getStartRecord(), navi.getCountPerPage());
+		
+		//페이지 정보 객체와 글 목록, 검색어를 모델에 저장
+		model.addAttribute("userList", userList);		
+		model.addAttribute("navi", navi);
+		model.addAttribute("searchText", searchText);
+		
+		return "user/userList";
+	}
 	
 	
 }

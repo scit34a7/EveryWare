@@ -20,7 +20,7 @@ public interface UserMapper {
 	public int getTotal(String searchText);
 	
 	//유저 주소록(검색 포함)
-	public ArrayList<UserVO> userList(String searchText, RowBounds rb);
-
+	//public ArrayList<UserVO> userList(String searchText, RowBounds rb);
+	public ArrayList<UserVO> userList(String searchText);
 
 }

@@ -5,6 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
+
 <html>
 	<head>
 		<title>Dynamic Tables | Klorofil Pro - Bootstrap Admin Dashboard Template</title>
@@ -19,9 +20,6 @@
 		<link rel="stylesheet" href="../resources/assets/vendor/datatables/css-main/jquery.dataTables.min.css">
 		<link rel="stylesheet" href="../resources/assets/vendor/datatables/css-bootstrap/dataTables.bootstrap.min.css">
 		<link rel="stylesheet" href="../resources/assets/vendor/datatables-tabletools/css/dataTables.tableTools.css">
-		
-		<link rel="stylesheet" href="../resources/assets/vendor/sweetalert2/sweetalert2.css">
-		
 		<!-- MAIN CSS -->
 		<link rel="stylesheet" href="../resources/assets/css/main.css">
 		<link rel="stylesheet" href="../resources/assets/css/skins/sidebar-nav-darkgray.css" type="text/css">
@@ -34,96 +32,24 @@
 		<link rel="icon" type="image/png" sizes="96x96" href="../resources/assets/img/favicon.png">
 		
 		
-	
 		
-	<!-- 
+		
+		<!-- 페이지 이동 스크립트 -->
 		<script>
-		function formCheckIn() {
-			alert("출근했습니다.");
+		function pagingFormSubmit(currentPage) {
+			var form = document.getElementById('pagingForm');
+			var page = document.getElementById('page');
+			page.value = currentPage;
+			form.submit();
 		}
 		</script>
-		
-		<script>
-		function formCheckOut() {
-			alert("퇴근했습니다.");
-		}
-		</script>	
- -->
-		<script>
 	
-		// 브라우저 종류
-       var ie4 = document.all; // Explorer
-       var ns6 = document.getElementById && !document.all; // Netscape
-	   
-	   // 시간 표시 방법
-	   // 0 = 24, 1 = 12
-	   var my12_hour = 1;
-
-	   // 날짜를 출력할지 선택
-	   // 0 = No, 1 = Yes
-	   var DisplayDate = 1;
-	   var mn = "일";
-	   var yn = "년";
-
-	   var daysOfWeek = ["<font color=red>일</font>", "월", "화", "수", "목", "금", "<font color=blue>토</font>"];
-	   var monthsOfYear = ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"];
-
-	   function showClock() {
-	       var today = new Date();
-			
-	       var day = today.getDay(); // 요일(0:일요일, 1:월요일, 2:화요일, 3:수요일, 4:목요일, 5:금요일, 6:토요일)
-	       var mday = today.getDate(); // 일
-	       var month = today.getMonth(); // 월 (0부터 시작)
-	       var year = today.getFullYear(); // 년
-	       
-	       var hours = today.getHours(); // 시간
-	       var minutes = today.getMinutes(); // 분
-	       var seconds = today.getSeconds(); // 초
-
-	       // 시간 표시 설정
-	       var dn='';
-	       if (my12_hour) {
-	           dn = "AM";
-	           if (hours > 12) { 
-	               dn = "PM"; 
-	               hours = hours - 12; 
-	           }
-	           if (hours == 0) {
-	               hours = 12; 
-	           }
-	       } 
-	       
-	       if (minutes <= 9) { 
-	           minutes = "0" + minutes; 
-	       }
-	       if (seconds <= 9) { 
-	           seconds = "0" + seconds; 
-	       }
-
-	       // 화면에 출력시킬 날짜 설정
-	       myclock = '';
-	       if (DisplayDate) { 
-	           myclock += year + yn + ' ' + monthsOfYear[month] + ' ' +  mday + mn + ' '  + '('+daysOfWeek[day]+') ' 
-	       }
-	       myclock += hours + ':' + minutes + ':' + seconds;
-	       myclock += ' ' + dn;
-
-	       // 브라우저에 따라 객체에 HTML 추가
-	       if (ie4) {
-	           liveClock.innerHTML = myclock;
-	       } else if (ns6) {
-	           document.getElementById("liveClock").innerHTML = myclock;
-	               }            
-
-	       setTimeout("showClock()", 1000); //1초마다 실행
-	   }
-	</script>
-			
 	</head>
 
-	<body onLoad="showClock()">
+
+	<body>
 		<!-- WRAPPER -->
-	<div id="wrapper">
+		<div id="wrapper">
 		<!-- NAVBAR -->
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
@@ -315,6 +241,7 @@
 							</ul>
 						</div></li>
 						
+						
 					<li><a href="approval/approvalList"><i class="ti-widget"></i> <span
 							class="title">전자결재</span></a></li>
 					<li><a href="meet/meetingList"><i class="ti-bell"></i> <span
@@ -385,9 +312,8 @@
 				</button>
 			</nav>
 		</div>
-	
 		<!-- END LEFT SIDEBAR -->
-			<!-- MAIN -->
+		<!-- MAIN -->
 			<div class="main">
 				<!-- MAIN CONTENT -->
 				<div class="main-content">
@@ -397,76 +323,178 @@
 						</div>
 						<ul class="breadcrumb">
 							<li><a href="#"><i class="fa fa-home"></i>홈</a></li>
-							<li><a href="#">업무지원</a></li>
+							<li><a href="#">업무보고</a></li>
 							<!-- <li class="active">회의목록</li> -->
 						</ul>
 					</div>
+
+
+
+
+
+			<div class="container-fluid">
+			<!-- FEATURED DATATABLE / 본문 시작-->
+
+				<div class="panel">
+					<div class="panel-heading">
+					<c:choose>
+	
+					<c:when test="${boardFolder_id==1}">
+					<h3 class="panel-title">[ 공지사항 ]</h3>
+					</c:when>
+					
+					<c:when test="${boardFolder_id==2}">
+					<h3 class="panel-title">[ 부서게시판 ]</h3>
+					</c:when>
+					
+					<c:when test="${boardFolder_id==3}">
+					<h3 class="panel-title">[ 커뮤니티 ]</h3>
+					</c:when>
 				
+					<c:when test="${boardFolder_id==4}">
+					<h3 class="panel-title">[ 업무보고 ]</h3>
+					</c:when>
 					
+					</c:choose>
 					
-					
-					
-		<!-- 안씀... -->		
-					<% 
-		String res = (String)request.getAttribute("result");
-		if(res!=null)
-		{
-			if(res.equals("true"))
-			{
-				%>
-				<script>
-					alert("출근이 완료 되었습니다");</script>
-					<%		
-			}
-			else
-			{
-				%>
-			<script>
-				alert("이미출근하셨습니다");</script>
-				<%
-			}
-		}
-		%>
-		<%
-		
-			String flag = (String)request.getAttribute("flag");
-		%>
-		<!-- /안씀... -->	
-	
-	
-	
-	
-		<div class="hero-unit">
-			<h2 id="liveClock"></h2>
-			<br/><br/>
-			<p><a href="#" class="btn btn-primary btn-large span2 pull-right" 
-			onClick="formCheck()"></a></p>
-		</div>
-		
-			<div class="panel-body">
-				<table class="table">
-					<tr>
-						<td>
-						<form action="attendCheck" method="POST" id="attendInForm">
-						<input type="button" value="출근" class ="btn btn-success" id="attendIn">
-						</form>
-						</td>
-						<td>
-						<form action="attendOut" method="POST" id="attendOutForm">
-						<input type="button" value="퇴근" class ="btn btn-info" id="attendOut">
-						</form>
-						</td>
-							<!-- <button class="btn btn-success" id="btn-sw-success">Click me</button> -->
+					</div>
+					<div class="panel-body">
+						<p class="alert alert-info">전체 : ${navi.totalRecordsCount}</p>
+						<input type="button" value="글쓰기" onClick="location.href='write?boardFolder_id=${boardFolder_id}';">
+						<table id="featured-datatable" class="table table-striped table-hover">
+							<thead>
+								<tr>
+									<th>번호</th>
+									<th>제목</th>
+									<th>작성자</th>
+									<th>조회수</th>
+									<th>등록일</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="board" items="${boardlist}">
+						<tr>
+							<td class="center">${board.board_id}</td>
+							<td>
+								<a href="read?board_id=${board.board_id}">${board.board_title}</a>
+							</td>
+							<td class="center">${board.user_id}</td>
+							<td class="center">${board.board_hits}</td>
+							<td>${board.board_date}</td>
+						</tr>
 						
+						</c:forEach>        
+						<!-- 반복 끝 -->
+												</tbody>
+											</table>
+										</div>
+									</div>
+							</div>
+					</div>
+									
+		<!-- END FEATURED DATATABLE / 본문 내용 끝-->
 						
-					</tr>	
+			
+			
+			
+			<!-- 본문 내용 -->
+			<%-- <div class="centerdiv">	
+			<c:choose>
+			
+				<c:when test="${boardFolder_id==1}">
+				<h2>[ 공지사항 ]</h2>
+				</c:when>
+				
+				<c:when test="${boardFolder_id==2}">
+				<h2>[ 부서게시판 ]</h2>
+				</c:when>
+				
+				<c:when test="${boardFolder_id==3}">
+				<h2>[ 커뮤니티 ]</h2>
+				</c:when>
+			
+				<c:when test="${boardFolder_id==4}">
+				<h2>[ 업무보고  ]</h2>
+				</c:when>
+				
+			</c:choose>
+			
+	
+			<br>
+			<table>
+			<tr>
+				<td class="white">
+					전체 : ${navi.totalRecordsCount}
+				</td>
+				<a href="../board/boardList?boardFolder_id=1">공지사항</a>&nbsp;&nbsp;
+				<a href="../board/boardList?boardFolder_id=2">부서게시판</a>&nbsp;&nbsp;
+				<a href="../board/boardList?boardFolder_id=3">커뮤니티</a>&nbsp;&nbsp;
+				<a href="../support/boardList?boardFolder_id=4">업무보고</a>
+				<td class="white" colspan="3"></td>
+				<td class="white">
+					<input type="button" value="글쓰기" onClick="location.href='write?boardFolder_id=${boardFolder_id}';">
+				</td>
+				
+			</tr>
+			<tr>
+				<th>번호</th>
+				<th style="width:220px">제목</th>
+				<th>작성자</th>
+				<th>조회수</th>
+				<th>등록일</th>
+			</tr>
+			
+			<!-- 반복 시작 -->
+			<c:forEach var="board" items="${boardlist}">
+			<tr>
+				<td class="center">${board.board_id}</td>
+				<td>
+					<a href="read?board_id=${board.board_id}">${board.board_title}</a>
+				</td>
+				<td class="center">${board.user_id}</td>
+				<td class="center">${board.board_hits}</td>
+				<td>${board.board_date}</td>
+			</tr>
+			
+			</c:forEach>        
+			<!-- 반복 끝 -->
 			</table>
+			<br/><br/>
+			
+			<div id="navigator">
+			<!-- 페이지 이동 부분 -->                      
+				<a href="javascript:pagingFormSubmit(${navi.currentPage - navi.pagePerGroup})">◁◁ </a> &nbsp;&nbsp;
+				<a href="javascript:pagingFormSubmit(${navi.currentPage - 1})">◀</a> &nbsp;&nbsp;
+			
+				<c:forEach var="counter" begin="${navi.startPageGroup}" end="${navi.endPageGroup}"> 
+					<c:if test="${counter == navi.currentPage}"><b></c:if>
+						<a href="javascript:pagingFormSubmit(${counter})">${counter}</a>&nbsp;
+					<c:if test="${counter == navi.currentPage}"></b></c:if>
+				</c:forEach>
+				&nbsp;&nbsp;
+				<a href="javascript:pagingFormSubmit(${navi.currentPage + 1})">▶</a> &nbsp;&nbsp;
+				<a href="javascript:pagingFormSubmit(${navi.currentPage + navi.pagePerGroup})">▷▷</a>
+			
+			<!-- /페이지 이동 끝 -->                      
+			
+			<br><br>
+			
+			
+			<!-- 검색폼 -->
+			<form id="pagingForm" method="get" action="boardList">
+				<input type="hidden" name="page" id="page" />
+				제목 : <input type="text"  name="searchText" value="${searchText}" />
+				<input type="button" onclick="pagingFormSubmit(1)" value="검색">
+			</form>
+			<!-- /검색폼 --> 
 			</div>
 			
-		
-					
-		</div>	
-				<!-- END MAIN CONTENT -->
+			</div> --%>
+	
+			<!-- END MAIN CONTENT / 본문 내용 끝-->
+			
+			
+			
 				<!-- RIGHT SIDEBAR -->
 				<div id="sidebar-right" class="right-sidebar">
 					<div class="sidebar-widget">
@@ -601,8 +629,6 @@
 		<script src="../resources/assets/vendor/datatables-colreorder/dataTables.colReorder.js"></script>
 		<script src="../resources/assets/vendor/datatables-tabletools/js/dataTables.tableTools.js"></script>
 		<script src="../resources/assets/scripts/klorofilpro-common.js"></script>
-		
-		<script src="../resources/assets/vendor/sweetalert2/sweetalert2.js"></script>
 		<!-- DEMO PANEL -->
 		<!-- for demo purpose only, you should remove it on your project directory -->
 		<script type="text/javascript">
@@ -628,72 +654,63 @@
 		</div>
 		<!-- END DEMO PANEL -->
 		<script>
-	
 		$(function()
 		{
-			
-			$('#attendIn').on('click', function()
+			// datatable column with reorder extension
+			$('#datatable-column-reorder').dataTable(
+			{
+				pagingType: "full_numbers",
+				sDom: "RC" +
+					"t" +
+					"<'row'<'col-sm-6'i><'col-sm-6'p>>",
+				colReorder: true,
+			});
+			// datatable with column filter enabled
+			var dtTable = $('#datatable-column-filter').DataTable(
+			{ // use DataTable, not dataTable
+				sDom: // redefine sDom without lengthChange and default search box
+					"t" +
+					"<'row'<'col-sm-6'i><'col-sm-6'p>>"
+			});
+			$('#datatable-column-filter thead').append('<tr class="row-filter"><th></th><th></th><th></th><th></th><th></th></tr>');
+			$('#datatable-column-filter thead .row-filter th').each(function()
+			{
+				$(this).html('<input type="text" class="form-control input-sm" placeholder="Search...">');
+			});
+			$('#datatable-column-filter .row-filter input').on('keyup change', function()
+			{
+				dtTable
+					.column($(this).parent().index() + ':visible')
+					.search(this.value)
+					.draw();
+			});
+			// datatable with paging options and live search
+			$('#featured-datatable').dataTable(
+			{
+				sDom: "<'row'<'col-sm-6'l><'col-sm-6'f>r>t<'row'<'col-sm-6'i><'col-sm-6'p>>",
+			});
+			// datatable with export feature
+			var exportTable = $('#datatable-data-export').DataTable(
+			{
+				sDom: "T<'clearfix'>" +
+					"<'row'<'col-sm-6'l><'col-sm-6'f>r>" +
+					"t" +
+					"<'row'<'col-sm-6'i><'col-sm-6'p>>",
+				"tableTools":
 				{
-					swal(
-					{
-						title: '출근하시겠습니까?',
-						type: 'info',
-						allowOutsideClick: false,
-						showCancelButton: true,
-						confirmButtonColor: '#F9354C',
-						cancelButtonColor: '#41B314',
-						confirmButtonText: '네',
-						cancelButtonText: '아니오'
-					}).then(function()
-					{
-						
-						var form = document.getElementById('attendInForm');
-						form.submit();
-					}, function(dismiss)
-					{
-						if (dismiss === 'cancel')
-						{
-							swal(
-								'출근이 취소되었습니다.'
-							).catch(swal.noop);
-						}
-					});
-				});
-			
-	
-			
-			$('#attendOut').on('click', function()
-					{
-						swal(
-						{
-							title: '퇴근하시겠습니까?',
-							type: 'info',
-							allowOutsideClick: false,
-							showCancelButton: true,
-							confirmButtonColor: '#F9354C',
-							cancelButtonColor: '#41B314',
-							confirmButtonText: '네',
-							cancelButtonText: '아니오'
-						}).then(function()
-						{
-							
-							var form = document.getElementById('attendOutForm');
-							form.submit();
-						}, function(dismiss)
-						{
-							if (dismiss === 'cancel')
-							{
-								swal(
-									'퇴근이 취소되었습니다.'
-								).catch(swal.noop);
-							}
-						});
-					});
-			
+					"sSwfPath": "../resources/assets/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf"
+				}
+			});
+			// datatable with scrolling
+			$('#datatable-basic-scrolling').dataTable(
+			{
+				scrollY: "300px",
+				scrollCollapse: true,
+				paging: false
+			});
 		});
-		</script>
-		
-		
-	</body>
-</html>
+		</script>		
+			
 	
+</body>
+</html>
