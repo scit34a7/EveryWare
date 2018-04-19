@@ -118,7 +118,7 @@
 		<!-- END WRAPPER -->
 		<!-- Javascript -->
 		
-		<script src="../resources/assets/vendor/datatables/js-main/jquery.dataTables.min.js"></script>
+		<script src="../resources/assets/vendor/datatables/js-main/jquery.dataTablesUser.min.js"></script>
 		<script src="../resources/assets/vendor/datatables/js-bootstrap/dataTables.bootstrap.min.js"></script>
 		<script src="../resources/assets/vendor/datatables-colreorder/dataTables.colReorder.js"></script>
 		<script src="../resources/assets/vendor/datatables-tabletools/js/dataTables.tableTools.js"></script>

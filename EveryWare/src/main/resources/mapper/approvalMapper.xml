@@ -178,8 +178,8 @@
 				,#{user_id}
 				,#{eApproval_title}
 				,#{eApproval_content}
-				,to_date(#{eApproval_sDate}, 'mm/dd/yyyy')
-				,to_date(#{eApproval_fDate}, 'mm/dd/yyyy')
+				,#{eApproval_sDate}
+				,#{eApproval_fDate}
 				,#{eApprovalLine_id}
 				<if test="eApproval_saved != null">
 					,#{eApproval_saved}
@@ -192,7 +192,15 @@
 	<!-- 내가 결재 해야할 결재문서 불러오기 -->
 	<select id="findApprovalToMe" parameterType="String" resultType="ApprovalVO">
 		select
-		    *
+		    eApproval_id
+			,user_id
+			,eApproval_title
+			,eApproval_content
+			,to_char(eApproval_sDate, 'yyyy/mm/dd') as "eApproval_sDate"
+			,to_char(eApproval_fDate, 'yyyy/mm/dd') as "eApproval_fDate"
+			,eApprovalLine_id
+			,eApproval_saved
+			,eApproval_original
 		from 
 		    electronicApproval_tb p
 		where
@@ -215,9 +223,17 @@
 	<!-- 내가 올린 결재문서 불로오기 -->
 	<select id="findApprovalFromMe" parameterType="String" resultType="ApprovalVO">
 		select
-			*
+			eApproval_id
+			,user_id
+			,eApproval_title
+			,eApproval_content
+			,to_char(eApproval_sDate, 'yyyy/mm/dd') as "eApproval_sDate"
+			,to_char(eApproval_fDate, 'yyyy/mm/dd') as "eApproval_fDate"
+			,eApprovalLine_id
+			,eApproval_saved
+			,eApproval_original
 		from
-			 electronicApproval_tb p
+			 electronicApproval_tb 
 		where
 			user_id = #{user_id}
 	</select>
@@ -229,9 +245,65 @@
 		from
 			approvalHistory_tb
 		where
-			user_id = #{user_id}
+			eApproval_id = #{eApproval_id}
 		order by
 			eHistory_date desc
 	</select>
+	
+	
+	<select id="findApprovalById" parameterType="int" resultType="ApprovalVO">
+		select
+			eApproval_id
+			,user_id
+			,eApproval_title
+			,eApproval_content
+			,to_char(eApproval_sDate, 'yyyy/mm/dd') as "eApproval_sDate"
+			,to_char(eApproval_fDate, 'yyyy/mm/dd') as "eApproval_fDate"
+			,eApprovalLine_id
+			,eApproval_saved
+			,eApproval_original
+		from
+			electronicApproval_tb
+		where
+			eApproval_id = #{eApproval_id}
+	
+	</select>
+	
+	<!-- user_id로 이름 / 부서 / 직위 가져오기 -->
+	<select id="findStatusById" parameterType="String" resultType="String">
+		select
+				u.user_name || ' / ' || d.dept_name || ' / ' || p.position_name
+            from
+				user_tb u
+				, dept_tb d
+				, position_tb p
+			where
+				u.dept_id = d.dept_id
+				and u.position_id = p.position_id
+                and u.user_id = #{user_id}	
+	</select>
+                
+                
+    <!-- 결재하기 (history insert) -->
+	<insert id="insertHistory" parameterType="approvalHistoryVO">
+		insert into
+			approvalHistory_tb(
+				eHistory_id
+				,eApproval_id
+				,user_id
+				,eHistory_content
+				<if test="eHistory_reason != null">
+					,eHistory_reason
+				</if>				
+			)values(
+				eHistory_id_seq.nextval
+				,#{eApproval_id}
+				,#{user_id}
+				,#{eHistory_content}
+				<if test="eHistory_reason != null">
+					,#{eHistory_reason}
+				</if>	
+			)
+	</insert>
 	
 </mapper>
