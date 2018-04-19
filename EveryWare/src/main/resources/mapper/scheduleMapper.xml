@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 회원정보 처리 SQL -->
+<mapper namespace="com.a7.everyware.schedule.dao.ScheduleMapper">
+	<insert id="Schedule_add" parameterType="ScheduleVO"> 
+		insert into schedule_tb
+		values
+		(schedule_num_seq.nextval, #{schedule_name},#{user_id},#{user_name},#{schedule_group},#{schedule_sdate},#{schedule_fdate},#{project_id})
+	</insert>
+	
+	<select id="Read_Schedule" parameterType="String" resultType="ScheduleVO">
+		select * from schedule_tb
+		where
+		user_id = #{user_id}	
+	</select>
+	
+</mapper>
