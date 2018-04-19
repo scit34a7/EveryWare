@@ -47,7 +47,7 @@ public class UserDAO {
 		//전체 검색 결과 중 읽을 시작위치와 개수
 		RowBounds rb = new RowBounds(startRecord, countPerPage);
 		
-		ArrayList<UserVO> userList = mapper.userList(searchText, rb);
+		ArrayList<UserVO> userList = mapper.userList(searchText);
 		
 		return userList;
 	}

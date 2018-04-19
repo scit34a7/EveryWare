@@ -1,4 +1,4 @@
-package com.a7.everyware.board.dao;
+package com.a7.everyware.support.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,41 +10,82 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.a7.everyware.board.controller.BoardController;
+import com.a7.everyware.board.dao.BoardMapper;
 import com.a7.everyware.board.vo.BoardAttachedVO;
 import com.a7.everyware.board.vo.BoardReplyVO;
 import com.a7.everyware.board.vo.BoardVO;
+import com.a7.everyware.support.controller.SupportController;
+import com.a7.everyware.support.vo.AttendVO;
 
 
-//게시판DAO
+//업무지원DAO
 @Repository
-public class BoardDAO {
+public class SupportDAO {
 
-	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
-	
+	private static final Logger logger = LoggerFactory.getLogger(SupportController.class);
+
 	@Autowired
 	SqlSession sqlSession;
 	
-	
-	//게시글 저장
-	public int insertBoard(BoardVO board) {
+
+	//출근 체크
+	public int attendCheck(AttendVO attend){
 		
-		logger.info("boardDAO insert para : {}", board);
+		logger.info("AttendDAO insert para : {}", attend);
 		
-		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+		SupportMapper mapper = sqlSession.getMapper(SupportMapper.class);
 		
 		int result = 0;
-		try {
-			result = mapper.insertBoard(board);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+		
+		result = mapper.attendCheck(attend);
+		
 		return result;
 	}
 	
 	
-	//게시글 첨부 저장
+	//퇴근 체크
+	public int attendOut(AttendVO attend){
+		
+		logger.info("AttendDAO insert para : {}", attend);
+		
+		SupportMapper mapper = sqlSession.getMapper(SupportMapper.class);
+		
+		int result = 0;
+		
+		result = mapper.attendCheck(attend);
+		
+		return result;
+	}
+	
+	
+	//내 근태 읽기
+	public ArrayList<AttendVO> attendListGet(String user_id){
+		SupportMapper mapper = sqlSession.getMapper(SupportMapper.class);
+		ArrayList<AttendVO> attendList = mapper.attendListGet(user_id);
+		return attendList;
+	}
+	
+	
+	
+	//업무보고  저장
+	public int insertBoard(BoardVO board) {
+		
+	logger.info("boardDAO insert para : {}", board);
+	
+	BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+	
+	int result = 0;
+	try {
+		result = mapper.insertBoard(board);
+	}
+	catch (Exception e) {
+		e.printStackTrace();
+	}
+	return result;
+	}
+		
+		
+	//업무보고 첨부 저장
 	public int insertBoardAttached(BoardAttachedVO boardAttached) {
 		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
 		
@@ -122,8 +163,9 @@ public class BoardDAO {
 		RowBounds rb = new RowBounds(startRecord, countPerPage);
 		
 		//검색어와 읽을 범위를 전달
-		/*ArrayList<BoardVO> boardlist = mapper.listBoard(map, rb);*/
+		//ArrayList<BoardVO> boardlist = mapper.listBoard(map, rb);
 		ArrayList<BoardVO> boardlist = mapper.listBoard(map);
+		
 		return boardlist;
 	}
 	
@@ -190,4 +232,31 @@ public class BoardDAO {
 		return result;
 	}
 	
+	
+	
+	
+	
+	
+	/*	
+	//근태 읽기
+	public AttendVO attendGet(int attend_id){
+		
+		SupportMapper mapper = sqlSession.getMapper(SupportMapper.class);
+		AttendVO attend = mapper.attendGet(attend_id);
+		
+		return attend;
+	}
+	*/
+	
+	
+/*	
+	//근태 목록
+	public ArrayList<AttendVO> attendList(){
+		
+		SupportMapper mapper = sqlSession.getMapper(SupportMapper.class);
+		ArrayList<AttendVO> attendList = mapper.attendList();
+		
+		return attendList;
+	}
+	*/
 }

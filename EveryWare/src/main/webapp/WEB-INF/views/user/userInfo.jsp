@@ -19,9 +19,6 @@
 		<link rel="stylesheet" href="../resources/assets/vendor/datatables/css-main/jquery.dataTables.min.css">
 		<link rel="stylesheet" href="../resources/assets/vendor/datatables/css-bootstrap/dataTables.bootstrap.min.css">
 		<link rel="stylesheet" href="../resources/assets/vendor/datatables-tabletools/css/dataTables.tableTools.css">
-		
-		<link rel="stylesheet" href="../resources/assets/vendor/sweetalert2/sweetalert2.css">
-		
 		<!-- MAIN CSS -->
 		<link rel="stylesheet" href="../resources/assets/css/main.css">
 		<link rel="stylesheet" href="../resources/assets/css/skins/sidebar-nav-darkgray.css" type="text/css">
@@ -33,97 +30,11 @@
 		<link rel="apple-touch-icon" sizes="76x76" href="../resources/assets/img/apple-icon.png">
 		<link rel="icon" type="image/png" sizes="96x96" href="../resources/assets/img/favicon.png">
 		
-		
 	
-		
-	<!-- 
-		<script>
-		function formCheckIn() {
-			alert("출근했습니다.");
-		}
-		</script>
-		
-		<script>
-		function formCheckOut() {
-			alert("퇴근했습니다.");
-		}
-		</script>	
- -->
-		<script>
-	
-		// 브라우저 종류
-       var ie4 = document.all; // Explorer
-       var ns6 = document.getElementById && !document.all; // Netscape
-	   
-	   // 시간 표시 방법
-	   // 0 = 24, 1 = 12
-	   var my12_hour = 1;
-
-	   // 날짜를 출력할지 선택
-	   // 0 = No, 1 = Yes
-	   var DisplayDate = 1;
-	   var mn = "일";
-	   var yn = "년";
-
-	   var daysOfWeek = ["<font color=red>일</font>", "월", "화", "수", "목", "금", "<font color=blue>토</font>"];
-	   var monthsOfYear = ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"];
-
-	   function showClock() {
-	       var today = new Date();
-			
-	       var day = today.getDay(); // 요일(0:일요일, 1:월요일, 2:화요일, 3:수요일, 4:목요일, 5:금요일, 6:토요일)
-	       var mday = today.getDate(); // 일
-	       var month = today.getMonth(); // 월 (0부터 시작)
-	       var year = today.getFullYear(); // 년
-	       
-	       var hours = today.getHours(); // 시간
-	       var minutes = today.getMinutes(); // 분
-	       var seconds = today.getSeconds(); // 초
-
-	       // 시간 표시 설정
-	       var dn='';
-	       if (my12_hour) {
-	           dn = "AM";
-	           if (hours > 12) { 
-	               dn = "PM"; 
-	               hours = hours - 12; 
-	           }
-	           if (hours == 0) {
-	               hours = 12; 
-	           }
-	       } 
-	       
-	       if (minutes <= 9) { 
-	           minutes = "0" + minutes; 
-	       }
-	       if (seconds <= 9) { 
-	           seconds = "0" + seconds; 
-	       }
-
-	       // 화면에 출력시킬 날짜 설정
-	       myclock = '';
-	       if (DisplayDate) { 
-	           myclock += year + yn + ' ' + monthsOfYear[month] + ' ' +  mday + mn + ' '  + '('+daysOfWeek[day]+') ' 
-	       }
-	       myclock += hours + ':' + minutes + ':' + seconds;
-	       myclock += ' ' + dn;
-
-	       // 브라우저에 따라 객체에 HTML 추가
-	       if (ie4) {
-	           liveClock.innerHTML = myclock;
-	       } else if (ns6) {
-	           document.getElementById("liveClock").innerHTML = myclock;
-	               }            
-
-	       setTimeout("showClock()", 1000); //1초마다 실행
-	   }
-	</script>
-			
 	</head>
-
-	<body onLoad="showClock()">
+	<body>
 		<!-- WRAPPER -->
-	<div id="wrapper">
+		<div id="wrapper">
 		<!-- NAVBAR -->
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
@@ -315,6 +226,7 @@
 							</ul>
 						</div></li>
 						
+						
 					<li><a href="approval/approvalList"><i class="ti-widget"></i> <span
 							class="title">전자결재</span></a></li>
 					<li><a href="meet/meetingList"><i class="ti-bell"></i> <span
@@ -385,7 +297,6 @@
 				</button>
 			</nav>
 		</div>
-	
 		<!-- END LEFT SIDEBAR -->
 			<!-- MAIN -->
 			<div class="main">
@@ -393,79 +304,272 @@
 				<div class="main-content">
 					<div class="content-heading clearfix">
 						<div class="heading-left">
-							<h1 class="page-title">업무지원</h1>
+							<h1 class="page-title">Profile</h1>
+							<p class="page-subtitle">Your profile is
+								<span class="text-success">85%</span> complete. Please <a href="#">complete your profile</a>.</p>
 						</div>
-						<ul class="breadcrumb">
-							<li><a href="#"><i class="fa fa-home"></i>홈</a></li>
-							<li><a href="#">업무지원</a></li>
-							<!-- <li class="active">회의목록</li> -->
-						</ul>
 					</div>
-				
-					
-					
-					
-					
-		<!-- 안씀... -->		
-					<% 
-		String res = (String)request.getAttribute("result");
-		if(res!=null)
-		{
-			if(res.equals("true"))
-			{
-				%>
-				<script>
-					alert("출근이 완료 되었습니다");</script>
-					<%		
-			}
-			else
-			{
-				%>
-			<script>
-				alert("이미출근하셨습니다");</script>
-				<%
-			}
-		}
-		%>
-		<%
-		
-			String flag = (String)request.getAttribute("flag");
-		%>
-		<!-- /안씀... -->	
-	
-	
-	
-	
-		<div class="hero-unit">
-			<h2 id="liveClock"></h2>
-			<br/><br/>
-			<p><a href="#" class="btn btn-primary btn-large span2 pull-right" 
-			onClick="formCheck()"></a></p>
-		</div>
-		
-			<div class="panel-body">
-				<table class="table">
-					<tr>
-						<td>
-						<form action="attendCheck" method="POST" id="attendInForm">
-						<input type="button" value="출근" class ="btn btn-success" id="attendIn">
-						</form>
-						</td>
-						<td>
-						<form action="attendOut" method="POST" id="attendOutForm">
-						<input type="button" value="퇴근" class ="btn btn-info" id="attendOut">
-						</form>
-						</td>
-							<!-- <button class="btn btn-success" id="btn-sw-success">Click me</button> -->
-						
-						
-					</tr>	
-			</table>
-			</div>
-			
-		
-					
-		</div>	
+					<div class="container-fluid">
+						<div class="panel panel-profile">
+							<div class="clearfix">
+								<!-- LEFT COLUMN -->
+								<div class="profile-left">
+									<!-- PROFILE HEADER -->
+									<div class="profile-header">
+										<div class="overlay"></div>
+										<div class="profile-main">
+											<img src="../resources/assets/img/user-medium.png" class="img-circle" alt="Avatar">
+											<h3 class="name">Samuel Gold</h3>
+											<span class="online-status status-available">Available</span>
+										</div>
+										<div class="profile-stat">
+											<div class="row">
+												<div class="col-md-4 stat-item">
+													45
+													<span>Projects</span>
+												</div>
+												<div class="col-md-4 stat-item">
+													15
+													<span>Awards</span>
+												</div>
+												<div class="col-md-4 stat-item">
+													2174
+													<span>Points</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- END PROFILE HEADER -->
+									<!-- PROFILE DETAIL -->
+									<div class="profile-detail">
+										<div class="profile-info">
+											<h4 class="heading">Basic Info</h4>
+											<ul class="list-unstyled list-justify">
+												<li>Birthdate
+													<span>24 Aug, 2016</span>
+												</li>
+												<li>Mobile
+													<span>(124) 823409234</span>
+												</li>
+												<li>Email
+													<span>samuel@mydomain.com</span>
+												</li>
+												<li>Website
+													<span><a href="https://www.themeineed.com">www.themeineed.com</a></span>
+												</li>
+											</ul>
+										</div>
+										<div class="profile-info">
+											<h4 class="heading">Social</h4>
+											<ul class="list-inline social-icons">
+												<li><a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
+												<li><a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a></li>
+												<li><a href="#" class="google-plus-bg"><i class="fa fa-google-plus"></i></a></li>
+												<li><a href="#" class="github-bg"><i class="fa fa-github"></i></a></li>
+											</ul>
+										</div>
+										<div class="profile-info">
+											<h4 class="heading">About</h4>
+											<p>Interactively fashion excellent information after distinctive outsourcing.</p>
+										</div>
+										<div class="text-center"><a href="./update" class="btn btn-primary">Edit Profile</a></div>
+									</div>
+									<!-- END PROFILE DETAIL -->
+								</div>
+								<!-- END LEFT COLUMN -->
+								<!-- RIGHT COLUMN -->
+								<div class="profile-right">
+									<h4 class="heading">Samuel's Awards</h4>
+									<!-- AWARDS -->
+									<div class="awards">
+										<div class="row">
+											<div class="col-md-3 col-sm-6">
+												<div class="award-item">
+													<div class="hexagon">
+														<span class="ti-light-bulb award-icon"></span>
+													</div>
+													<span>Most Bright Idea</span>
+												</div>
+											</div>
+											<div class="col-md-3 col-sm-6">
+												<div class="award-item">
+													<div class="hexagon">
+														<span class="ti-alarm-clock award-icon"></span>
+													</div>
+													<span>Most On-Time</span>
+												</div>
+											</div>
+											<div class="col-md-3 col-sm-6">
+												<div class="award-item">
+													<div class="hexagon">
+														<span class="ti-hummer award-icon"></span>
+													</div>
+													<span>Problem Solver</span>
+												</div>
+											</div>
+											<div class="col-md-3 col-sm-6">
+												<div class="award-item">
+													<div class="hexagon">
+														<span class="ti-heart award-icon"></span>
+													</div>
+													<span>Most Loved</span>
+												</div>
+											</div>
+										</div>
+										<div class="text-center"><a href="#" class="btn btn-default">See all awards</a></div>
+									</div>
+									<!-- END AWARDS -->
+									<!-- TABBED CONTENT -->
+									<div class="custom-tabs-line tabs-line-bottom left-aligned">
+										<ul class="nav" role="tablist">
+											<li class="active"><a href="#tab-bottom-left1" role="tab" data-toggle="tab">Recent Activity</a></li>
+											<li><a href="#tab-bottom-left2" role="tab" data-toggle="tab">Projects <span class="badge">7</span></a></li>
+										</ul>
+									</div>
+									<div class="tab-content">
+										<div class="tab-pane fade in active" id="tab-bottom-left1">
+											<ul class="list-unstyled activity-timeline">
+												<li>
+													<i class="fa fa-comment activity-icon"></i>
+													<p>Commented on post <a href="#">Prototyping</a>
+														<span class="timestamp">2 minutes ago</span>
+													</p>
+												</li>
+												<li>
+													<i class="fa fa-cloud-upload activity-icon"></i>
+													<p>Uploaded new file <a href="#">Proposal.docx</a> to project <a href="#">New Year Campaign</a>
+														<span class="timestamp">7 hours ago</span>
+													</p>
+												</li>
+												<li>
+													<i class="fa fa-plus activity-icon"></i>
+													<p>Added <a href="#">Martin</a> and <a href="#">3 others colleagues</a> to project repository
+														<span class="timestamp">Yesterday</span>
+													</p>
+												</li>
+												<li>
+													<i class="fa fa-check activity-icon"></i>
+													<p>Finished 80% of all <a href="#">assigned tasks</a>
+														<span class="timestamp">1 day ago</span>
+													</p>
+												</li>
+											</ul>
+											<div class="margin-top-30 text-center"><a href="#" class="btn btn-default">See all activity</a></div>
+										</div>
+										<div class="tab-pane fade" id="tab-bottom-left2">
+											<div class="table-responsive">
+												<table class="table project-table">
+													<thead>
+														<tr>
+															<th>Title</th>
+															<th>Progress</th>
+															<th>Leader</th>
+															<th>Status</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td><a href="#">Spot Media</a></td>
+															<td>
+																<div class="progress">
+																	<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+																		<span>60% Complete</span>
+																	</div>
+																</div>
+															</td>
+															<td>
+																<img src="../resources/assets/img/user2.png" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
+															<td>
+																<span class="label label-success">ACTIVE</span>
+															</td>
+														</tr>
+														<tr>
+															<td><a href="#">E-Commerce Site</a></td>
+															<td>
+																<div class="progress">
+																	<div class="progress-bar" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" style="width: 33%;">
+																		<span>33% Complete</span>
+																	</div>
+																</div>
+															</td>
+															<td>
+																<img src="../resources/assets/img/user1.png" alt="Avatar" class="avatar img-circle"> <a href="#">Antonius</a></td>
+															<td>
+																<span class="label label-warning">PENDING</span>
+															</td>
+														</tr>
+														<tr>
+															<td><a href="#">Project 123GO</a></td>
+															<td>
+																<div class="progress">
+																	<div class="progress-bar" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100" style="width: 68%;">
+																		<span>68% Complete</span>
+																	</div>
+																</div>
+															</td>
+															<td>
+																<img src="../resources/assets/img/user1.png" alt="Avatar" class="avatar img-circle"> <a href="#">Antonius</a></td>
+															<td>
+																<span class="label label-success">ACTIVE</span>
+															</td>
+														</tr>
+														<tr>
+															<td><a href="#">Wordpress Theme</a></td>
+															<td>
+																<div class="progress">
+																	<div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">
+																		<span>75%</span>
+																	</div>
+																</div>
+															</td>
+															<td>
+																<img src="../resources/assets/img/user2.png" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
+															<td>
+																<span class="label label-success">ACTIVE</span>
+															</td>
+														</tr>
+														<tr>
+															<td><a href="#">Project 123GO</a></td>
+															<td>
+																<div class="progress">
+																	<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+																		<span>100%</span>
+																	</div>
+																</div>
+															</td>
+															<td>
+																<img src="../resources/assets/img/user1.png" alt="Avatar" class="avatar img-circle" /> <a href="#">Antonius</a></td>
+															<td>
+																<span class="label label-default">CLOSED</span>
+															</td>
+														</tr>
+														<tr>
+															<td><a href="#">Redesign Landing Page</a></td>
+															<td>
+																<div class="progress">
+																	<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+																		<span>100%</span>
+																	</div>
+																</div>
+															</td>
+															<td>
+																<img src="../resources/assets/img/user5.png" alt="Avatar" class="avatar img-circle" /> <a href="#">Jason</a></td>
+															<td>
+																<span class="label label-default">CLOSED</span>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+									<!-- END TABBED CONTENT -->
+								</div>
+								<!-- END RIGHT COLUMN -->
+							</div>
+						</div>
+					</div>
+				</div>
 				<!-- END MAIN CONTENT -->
 				<!-- RIGHT SIDEBAR -->
 				<div id="sidebar-right" class="right-sidebar">
@@ -596,13 +700,7 @@
 		<script src="../resources/assets/vendor/jquery/jquery.min.js"></script>
 		<script src="../resources/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 		<script src="../resources/assets/vendor/pace/pace.min.js"></script>
-		<script src="../resources/assets/vendor/datatables/js-main/jquery.dataTables.min.js"></script>
-		<script src="../resources/assets/vendor/datatables/js-bootstrap/dataTables.bootstrap.min.js"></script>
-		<script src="../resources/assets/vendor/datatables-colreorder/dataTables.colReorder.js"></script>
-		<script src="../resources/assets/vendor/datatables-tabletools/js/dataTables.tableTools.js"></script>
 		<script src="../resources/assets/scripts/klorofilpro-common.js"></script>
-		
-		<script src="../resources/assets/vendor/sweetalert2/sweetalert2.js"></script>
 		<!-- DEMO PANEL -->
 		<!-- for demo purpose only, you should remove it on your project directory -->
 		<script type="text/javascript">
@@ -624,76 +722,8 @@
 		</script>
 		<div id="demo-panel">
 			<a href="#" onclick="toggleDemoPanel(event);"><i class="fa fa-cog fa-spin"></i></a>
-			<iframe src="../resources/demo-panel/index.html"></iframe>
+			<iframe src="../demo-panel/index"></iframe>
 		</div>
 		<!-- END DEMO PANEL -->
-		<script>
-	
-		$(function()
-		{
-			
-			$('#attendIn').on('click', function()
-				{
-					swal(
-					{
-						title: '출근하시겠습니까?',
-						type: 'info',
-						allowOutsideClick: false,
-						showCancelButton: true,
-						confirmButtonColor: '#F9354C',
-						cancelButtonColor: '#41B314',
-						confirmButtonText: '네',
-						cancelButtonText: '아니오'
-					}).then(function()
-					{
-						
-						var form = document.getElementById('attendInForm');
-						form.submit();
-					}, function(dismiss)
-					{
-						if (dismiss === 'cancel')
-						{
-							swal(
-								'출근이 취소되었습니다.'
-							).catch(swal.noop);
-						}
-					});
-				});
-			
-	
-			
-			$('#attendOut').on('click', function()
-					{
-						swal(
-						{
-							title: '퇴근하시겠습니까?',
-							type: 'info',
-							allowOutsideClick: false,
-							showCancelButton: true,
-							confirmButtonColor: '#F9354C',
-							cancelButtonColor: '#41B314',
-							confirmButtonText: '네',
-							cancelButtonText: '아니오'
-						}).then(function()
-						{
-							
-							var form = document.getElementById('attendOutForm');
-							form.submit();
-						}, function(dismiss)
-						{
-							if (dismiss === 'cancel')
-							{
-								swal(
-									'퇴근이 취소되었습니다.'
-								).catch(swal.noop);
-							}
-						});
-					});
-			
-		});
-		</script>
-		
-		
 	</body>
 </html>
-	

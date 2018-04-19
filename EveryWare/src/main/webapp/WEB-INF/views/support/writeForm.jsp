@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
+
 <html>
 	<head>
-		<title>Dynamic Tables | Klorofil Pro - Bootstrap Admin Dashboard Template</title>
+		<title>Text Editor | Klorofil Pro - Bootstrap Admin Dashboard Template</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -16,12 +17,8 @@
 		<link rel="stylesheet" href="../resources/assets/vendor/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="../resources/assets/vendor/themify-icons/css/themify-icons.css">
 		<link rel="stylesheet" href="../resources/assets/vendor/pace/themes/orange/pace-theme-minimal.css">
-		<link rel="stylesheet" href="../resources/assets/vendor/datatables/css-main/jquery.dataTables.min.css">
-		<link rel="stylesheet" href="../resources/assets/vendor/datatables/css-bootstrap/dataTables.bootstrap.min.css">
-		<link rel="stylesheet" href="../resources/assets/vendor/datatables-tabletools/css/dataTables.tableTools.css">
-		
-		<link rel="stylesheet" href="../resources/assets/vendor/sweetalert2/sweetalert2.css">
-		
+		<link rel="stylesheet" href="../resources/assets/vendor/summernote/summernote.css">
+		<link rel="stylesheet" href="../resources/assets/vendor/bootstrap-markdown/bootstrap-markdown.min.css">
 		<!-- MAIN CSS -->
 		<link rel="stylesheet" href="../resources/assets/css/main.css">
 		<link rel="stylesheet" href="../resources/assets/css/skins/sidebar-nav-darkgray.css" type="text/css">
@@ -32,98 +29,59 @@
 		<!-- ICONS -->
 		<link rel="apple-touch-icon" sizes="76x76" href="../resources/assets/img/apple-icon.png">
 		<link rel="icon" type="image/png" sizes="96x96" href="../resources/assets/img/favicon.png">
+		<!-- DatePicker -->
+		<link rel="stylesheet" href="../resources/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+		<!-- DROPIFY 첨부파일 -->
+		<link rel="stylesheet" href="../resources/assets/vendor/dropify/css/dropify.min.css">
 		
 		
-	
 		
-	<!-- 
+		<%-- Jquery --%>
+		<script src="../resources/js/jquery-3.2.1.min.js" ></script>	
+		
+		
+		
+		<!-- 파일 전송 -->
 		<script>
-		function formCheckIn() {
-			alert("출근했습니다.");
-		}
-		</script>
+		$(document).ready(function(){
+			
+			//이벤트 처리
+			$('#plusAttachedBt').on('click', function(){
+				var output = $('#attachedOutput').html();
+				output += '<br>' + '<input type="file" name="upload" size="30">';
+				$('#attachedOutput').html(output);
+			});
+		});
 		
-		<script>
-		function formCheckOut() {
-			alert("퇴근했습니다.");
+		
+		//글쓰기폼 확인
+		function formCheck() {
+			var board_title = document.getElementById('board_title');
+			var board_content = document.getElementById('board_content');
+			
+			if (board_title.value.length < 2) {
+				alert("제목을 입력하세요.");
+				board_title.focus();
+				board_title.select();
+				return false;
+			}
+			if (board_content.value.length < 2) {
+				alert("내용을 입력하세요.");
+				board_content.focus();
+				board_content.select();
+				return false;
+			}
+			return true;
 		}
+		
 		</script>	
- -->
-		<script>
-	
-		// 브라우저 종류
-       var ie4 = document.all; // Explorer
-       var ns6 = document.getElementById && !document.all; // Netscape
-	   
-	   // 시간 표시 방법
-	   // 0 = 24, 1 = 12
-	   var my12_hour = 1;
-
-	   // 날짜를 출력할지 선택
-	   // 0 = No, 1 = Yes
-	   var DisplayDate = 1;
-	   var mn = "일";
-	   var yn = "년";
-
-	   var daysOfWeek = ["<font color=red>일</font>", "월", "화", "수", "목", "금", "<font color=blue>토</font>"];
-	   var monthsOfYear = ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"];
-
-	   function showClock() {
-	       var today = new Date();
-			
-	       var day = today.getDay(); // 요일(0:일요일, 1:월요일, 2:화요일, 3:수요일, 4:목요일, 5:금요일, 6:토요일)
-	       var mday = today.getDate(); // 일
-	       var month = today.getMonth(); // 월 (0부터 시작)
-	       var year = today.getFullYear(); // 년
-	       
-	       var hours = today.getHours(); // 시간
-	       var minutes = today.getMinutes(); // 분
-	       var seconds = today.getSeconds(); // 초
-
-	       // 시간 표시 설정
-	       var dn='';
-	       if (my12_hour) {
-	           dn = "AM";
-	           if (hours > 12) { 
-	               dn = "PM"; 
-	               hours = hours - 12; 
-	           }
-	           if (hours == 0) {
-	               hours = 12; 
-	           }
-	       } 
-	       
-	       if (minutes <= 9) { 
-	           minutes = "0" + minutes; 
-	       }
-	       if (seconds <= 9) { 
-	           seconds = "0" + seconds; 
-	       }
-
-	       // 화면에 출력시킬 날짜 설정
-	       myclock = '';
-	       if (DisplayDate) { 
-	           myclock += year + yn + ' ' + monthsOfYear[month] + ' ' +  mday + mn + ' '  + '('+daysOfWeek[day]+') ' 
-	       }
-	       myclock += hours + ':' + minutes + ':' + seconds;
-	       myclock += ' ' + dn;
-
-	       // 브라우저에 따라 객체에 HTML 추가
-	       if (ie4) {
-	           liveClock.innerHTML = myclock;
-	       } else if (ns6) {
-	           document.getElementById("liveClock").innerHTML = myclock;
-	               }            
-
-	       setTimeout("showClock()", 1000); //1초마다 실행
-	   }
-	</script>
-			
+		
 	</head>
 
-	<body onLoad="showClock()">
+	<body>
+
 		<!-- WRAPPER -->
-	<div id="wrapper">
+		<div id="wrapper">
 		<!-- NAVBAR -->
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
@@ -315,6 +273,7 @@
 							</ul>
 						</div></li>
 						
+						
 					<li><a href="approval/approvalList"><i class="ti-widget"></i> <span
 							class="title">전자결재</span></a></li>
 					<li><a href="meet/meetingList"><i class="ti-bell"></i> <span
@@ -385,9 +344,8 @@
 				</button>
 			</nav>
 		</div>
-	
 		<!-- END LEFT SIDEBAR -->
-			<!-- MAIN -->
+		<!-- MAIN -->
 			<div class="main">
 				<!-- MAIN CONTENT -->
 				<div class="main-content">
@@ -397,199 +355,210 @@
 						</div>
 						<ul class="breadcrumb">
 							<li><a href="#"><i class="fa fa-home"></i>홈</a></li>
-							<li><a href="#">업무지원</a></li>
+							<li><a href="#">업무보고</a></li>
 							<!-- <li class="active">회의목록</li> -->
 						</ul>
 					</div>
-				
+
+
+
+
+		<!-- 본문 내용 시작 -->
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-11">
 					
-					
-					
-					
-		<!-- 안씀... -->		
-					<% 
-		String res = (String)request.getAttribute("result");
-		if(res!=null)
-		{
-			if(res.equals("true"))
-			{
-				%>
-				<script>
-					alert("출근이 완료 되었습니다");</script>
-					<%		
-			}
-			else
-			{
-				%>
-			<script>
-				alert("이미출근하셨습니다");</script>
-				<%
-			}
-		}
-		%>
-		<%
-		
-			String flag = (String)request.getAttribute("flag");
-		%>
-		<!-- /안씀... -->	
-	
-	
-	
-	
-		<div class="hero-unit">
-			<h2 id="liveClock"></h2>
-			<br/><br/>
-			<p><a href="#" class="btn btn-primary btn-large span2 pull-right" 
-			onClick="formCheck()"></a></p>
+					<div class="panel">
+						<div class="panel-heading">
+							<h3 class="panel-title">글쓰기</h3>
+						</div>
+						<div class="panel-body">
+						
+							<!-- 폼 태그 -->
+							<form action="write" method="post" enctype="multipart/form-data" onsubmit="return formCheck();">
+								<div class="form-group">
+									<label class="col-md-2 control-label">게시판 선택</label>
+									<!-- <div class="col-md-10"> -->
+										<select class="form-control" name="boardFolder_id">
+											<option value="1">공지사항</option>
+											<option value="2">부서게시판</option>
+											<option value="3">커뮤니티</option>
+											<option value="4">업무보고</option>
+										</select>
+								</div>
+								
+								<div class="form-group">
+									<label>제목</label>
+									<input type="text" class="form-control" id="board_title" name="board_title" required>
+								</div>
+								
+								<div class="form-group">
+									<label>내용</label>
+									<textarea class="form-control" rows="20" cols="30" id="board_content" name="board_content" required></textarea>
+								</div>
+								
+								
+								<!-- END BASIC TABLE -->
+									
+			<!-- 
+								첨부파일 darg and drop
+								<div class="form-group">	
+									<label>첨부파일</label>
+									<br>
+								
+									<div class="col-md-5" id="attachedOutput">
+									
+										<input type="file" class="dropify" name="upload" size="30">
+									</div>
+									<input type="button" id="plusAttachedBt" value="파일추가">
+						
+								</div>
+								 -->
+								 
+								첨부파일<br>
+								<span id="attachedOutput">
+									<input type="file" name="upload" size="30" value="파일 선택"><br>
+								</span>	
+									<input type="button" id="plusAttachedBt" value="파일 추가">
+								
+								
+								<br><br><br><br><br>
+								<div id="submitBtAlign">
+									<button type="submit" class="btn btn-primary btn-lg">작성</button>
+								</div>
+						
+							</form>	
+						</div>
+					</div>
+				</div>
+				</div>
+				</div>
+				</div>
+
+			<!-- END MAIN CONTENT -->
+			<!-- RIGHT SIDEBAR -->
+			<div id="sidebar-right" class="right-sidebar">
+				<div class="sidebar-widget">
+					<h4 class="widget-heading"><i class="fa fa-calendar"></i> TODAY</h4>
+					<p class="date">Wednesday, 22 December</p>
+					<div class="row margin-top-30">
+						<div class="col-xs-4">
+							<a href="#">
+								<div class="icon-transparent-area custom-color-blue first">
+									<i class="fa fa-tasks"></i>
+									<span>Tasks</span>
+									<span class="badge">5</span>
+								</div>
+							</a>
+						</div>
+						<div class="col-xs-4">
+							<a href="#">
+								<div class="icon-transparent-area custom-color-green">
+									<i class="fa fa-envelope"></i>
+									<span>Mail</span>
+									<span class="badge">12</span>
+								</div>
+							</a>
+						</div>
+						<div class="col-xs-4">
+							<a href="#">
+								<div class="icon-transparent-area custom-color-orange last">
+									<i class="fa fa-user-plus"></i>
+									<span>Users</span>
+									<span class="badge">24</span>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="sidebar-widget">
+					<div class="widget-header">
+						<h4 class="widget-heading">YOUR APPS</h4>
+						<a href="#" class="show-all">Show all</a>
+					</div>
+					<div class="row">
+						<div class="col-xs-3">
+							<a href="#" class="icon-app" title="Dropbox" data-toggle="tooltip" data-placement="top">
+								<i class="fa fa-dropbox dropbox-color"></i>
+							</a>
+						</div>
+						<div class="col-xs-3">
+							<a href="#" class="icon-app" title="WordPress" data-toggle="tooltip" data-placement="top">
+								<i class="fa fa-wordpress wordpress-color"></i>
+							</a>
+						</div>
+						<div class="col-xs-3">
+							<a href="#" class="icon-app" title="Drupal" data-toggle="tooltip" data-placement="top">
+								<i class="fa fa-drupal drupal-color"></i>
+							</a>
+						</div>
+						<div class="col-xs-3">
+							<a href="#" class="icon-app" title="Github" data-toggle="tooltip" data-placement="top">
+								<i class="fa fa-github github-color"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="sidebar-widget">
+					<div class="widget-header">
+						<h4 class="widget-heading">MY PROJECTS</h4>
+						<a href="#" class="show-all">Show all</a>
+					</div>
+					<ul class="list-unstyled list-project-progress">
+						<li>
+							<a href="#" class="project-name">Project XY</a>
+							<div class="progress progress-xs progress-transparent custom-color-orange">
+								<div class="progress-bar" role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="width:67%"></div>
+							</div>
+							<span class="percentage">67%</span>
+						</li>
+						<li>
+							<a href="#" class="project-name">Growth Campaign</a>
+							<div class="progress progress-xs progress-transparent custom-color-blue">
+								<div class="progress-bar" role="progressbar" aria-valuenow="23" aria-valuemin="0" aria-valuemax="100" style="width:23%"></div>
+							</div>
+							<span class="percentage">23%</span>
+						</li>
+						<li>
+							<a href="#" class="project-name">Website Redesign</a>
+							<div class="progress progress-xs progress-transparent custom-color-green">
+								<div class="progress-bar" role="progressbar" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100" style="width:87%"></div>
+							</div>
+							<span class="percentage">87%</span>
+						</li>
+					</ul>
+				</div>
+				<div class="sidebar-widget">
+					<div class="widget-header">
+						<h4 class="widget-heading">MY FILES</h4>
+						<a href="#" class="show-all">Show all</a>
+					</div>
+					<ul class="list-unstyled list-justify list-file-simple">
+						<li><a href="#"><i class="fa fa-file-word-o"></i>Proposal_draft.docx</a>
+							<span>4 MB</span>
+						</li>
+						<li><a href="#"><i class="fa fa-file-pdf-o"></i>Manual_Guide.pdf</a>
+							<span>20 MB</span>
+						</li>
+						<li><a href="#"><i class="fa fa-file-zip-o"></i>all-project-files.zip</a>
+							<span>315 MB</span>
+						</li>
+						<li><a href="#"><i class="fa fa-file-excel-o"></i>budget_estimate.xls</a>
+							<span>1 MB</span>
+						</li>
+					</ul>
+				</div>
+				<p class="text-center"><a href="#" class="btn btn-default btn-xs">More Widgets</a></p>
+			</div>
+			<!-- END RIGHT SIDEBAR -->
 		</div>
-		
-			<div class="panel-body">
-				<table class="table">
-					<tr>
-						<td>
-						<form action="attendCheck" method="POST" id="attendInForm">
-						<input type="button" value="출근" class ="btn btn-success" id="attendIn">
-						</form>
-						</td>
-						<td>
-						<form action="attendOut" method="POST" id="attendOutForm">
-						<input type="button" value="퇴근" class ="btn btn-info" id="attendOut">
-						</form>
-						</td>
-							<!-- <button class="btn btn-success" id="btn-sw-success">Click me</button> -->
-						
-						
-					</tr>	
-			</table>
+		<!-- END MAIN -->
+		<div class="clearfix"></div>
+		<footer>
+			<div class="container-fluid">
+				<p class="copyright">&copy; 2017 <a href="https://www.themeineed.com" target="_blank">Theme I Need</a>. All Rights Reserved.</p>
 			</div>
-			
-		
-					
-		</div>	
-				<!-- END MAIN CONTENT -->
-				<!-- RIGHT SIDEBAR -->
-				<div id="sidebar-right" class="right-sidebar">
-					<div class="sidebar-widget">
-						<h4 class="widget-heading"><i class="fa fa-calendar"></i> TODAY</h4>
-						<p class="date">Wednesday, 22 December</p>
-						<div class="row margin-top-30">
-							<div class="col-xs-4">
-								<a href="#">
-									<div class="icon-transparent-area custom-color-blue first">
-										<i class="fa fa-tasks"></i>
-										<span>Tasks</span>
-										<span class="badge">5</span>
-									</div>
-								</a>
-							</div>
-							<div class="col-xs-4">
-								<a href="#">
-									<div class="icon-transparent-area custom-color-green">
-										<i class="fa fa-envelope"></i>
-										<span>Mail</span>
-										<span class="badge">12</span>
-									</div>
-								</a>
-							</div>
-							<div class="col-xs-4">
-								<a href="#">
-									<div class="icon-transparent-area custom-color-orange last">
-										<i class="fa fa-user-plus"></i>
-										<span>Users</span>
-										<span class="badge">24</span>
-									</div>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="sidebar-widget">
-						<div class="widget-header">
-							<h4 class="widget-heading">YOUR APPS</h4>
-							<a href="#" class="show-all">Show all</a>
-						</div>
-						<div class="row">
-							<div class="col-xs-3">
-								<a href="#" class="icon-app" title="Dropbox" data-toggle="tooltip" data-placement="top">
-									<i class="fa fa-dropbox dropbox-color"></i>
-								</a>
-							</div>
-							<div class="col-xs-3">
-								<a href="#" class="icon-app" title="WordPress" data-toggle="tooltip" data-placement="top">
-									<i class="fa fa-wordpress wordpress-color"></i>
-								</a>
-							</div>
-							<div class="col-xs-3">
-								<a href="#" class="icon-app" title="Drupal" data-toggle="tooltip" data-placement="top">
-									<i class="fa fa-drupal drupal-color"></i>
-								</a>
-							</div>
-							<div class="col-xs-3">
-								<a href="#" class="icon-app" title="Github" data-toggle="tooltip" data-placement="top">
-									<i class="fa fa-github github-color"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="sidebar-widget">
-						<div class="widget-header">
-							<h4 class="widget-heading">MY PROJECTS</h4>
-							<a href="#" class="show-all">Show all</a>
-						</div>
-						<ul class="list-unstyled list-project-progress">
-							<li>
-								<a href="#" class="project-name">Project XY</a>
-								<div class="progress progress-xs progress-transparent custom-color-orange">
-									<div class="progress-bar" role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="width:67%"></div>
-								</div>
-								<span class="percentage">67%</span>
-							</li>
-							<li>
-								<a href="#" class="project-name">Growth Campaign</a>
-								<div class="progress progress-xs progress-transparent custom-color-blue">
-									<div class="progress-bar" role="progressbar" aria-valuenow="23" aria-valuemin="0" aria-valuemax="100" style="width:23%"></div>
-								</div>
-								<span class="percentage">23%</span>
-							</li>
-							<li>
-								<a href="#" class="project-name">Website Redesign</a>
-								<div class="progress progress-xs progress-transparent custom-color-green">
-									<div class="progress-bar" role="progressbar" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100" style="width:87%"></div>
-								</div>
-								<span class="percentage">87%</span>
-							</li>
-						</ul>
-					</div>
-					<div class="sidebar-widget">
-						<div class="widget-header">
-							<h4 class="widget-heading">MY FILES</h4>
-							<a href="#" class="show-all">Show all</a>
-						</div>
-						<ul class="list-unstyled list-justify list-file-simple">
-							<li><a href="#"><i class="fa fa-file-word-o"></i>Proposal_draft.docx</a>
-								<span>4 MB</span>
-							</li>
-							<li><a href="#"><i class="fa fa-file-pdf-o"></i>Manual_Guide.pdf</a>
-								<span>20 MB</span>
-							</li>
-							<li><a href="#"><i class="fa fa-file-zip-o"></i>all-project-files.zip</a>
-								<span>315 MB</span>
-							</li>
-							<li><a href="#"><i class="fa fa-file-excel-o"></i>budget_estimate.xls</a>
-								<span>1 MB</span>
-							</li>
-						</ul>
-					</div>
-					<p class="text-center"><a href="#" class="btn btn-default btn-xs">More Widgets</a></p>
-				</div>
-				<!-- END RIGHT SIDEBAR -->
-			</div>
-			<!-- END MAIN -->
-			<div class="clearfix"></div>
-			<footer>
-				<div class="container-fluid">
-					<p class="copyright">&copy; 2017 <a href="https://www.themeineed.com" target="_blank">Theme I Need</a>. All Rights Reserved.</p>
-				</div>
-			</footer>
+		</footer>
 		</div>
 		<!-- END WRAPPER -->
 		<!-- Javascript -->
@@ -601,11 +570,41 @@
 		<script src="../resources/assets/vendor/datatables-colreorder/dataTables.colReorder.js"></script>
 		<script src="../resources/assets/vendor/datatables-tabletools/js/dataTables.tableTools.js"></script>
 		<script src="../resources/assets/scripts/klorofilpro-common.js"></script>
+		<script src="../resources/assets/vendor/dropify/js/dropify.min.js"></script>
+	
+		<script src="../resources/assets/vendor/to-markdown/to-markdown.js"></script>
+		<script src="../resources/assets/vendor/bootstrap-markdown/bootstrap-markdown.js"></script>
 		
-		<script src="../resources/assets/vendor/sweetalert2/sweetalert2.js"></script>
+		
 		<!-- DEMO PANEL -->
 		<!-- for demo purpose only, you should remove it on your project directory -->
 		<script type="text/javascript">
+		
+		/* DROPIFY */
+		$(function()
+		{
+			$('.dropify').dropify();
+			var drEvent = $('#dropify-event').dropify();
+			drEvent.on('dropify.beforeClear', function(event, element)
+			{
+				return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+			});
+			drEvent.on('dropify.afterClear', function(event, element)
+			{
+				alert('File deleted');
+			});
+			$('.dropify-fr').dropify(
+			{
+				messages:
+				{
+					default: 'Glissez-déposez un fichier ici ou cliquez',
+					replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+					remove: 'Supprimer',
+					error: 'Désolé, le fichier trop volumineux'
+				}
+			});
+		});
+		
 		var toggleDemoPanel = function(e)
 		{
 			e.preventDefault();
@@ -620,80 +619,37 @@
 			{
 				this.src = this.src;
 			});
-		});
-		</script>
+			
+			
+			
+			/*-----------------------------------/
+			/*	DATE PICKER
+			/*----------------------------------*/
+			$('.inline-datepicker').datepicker(
+			{
+				todayHighlight: true
+			});
+			
+			
+			});
+		
+		
+	
+			
+		</script>	
+			
+			
+		
+		
+		
+		
 		<div id="demo-panel">
 			<a href="#" onclick="toggleDemoPanel(event);"><i class="fa fa-cog fa-spin"></i></a>
 			<iframe src="../resources/demo-panel/index.html"></iframe>
 		</div>
 		<!-- END DEMO PANEL -->
-		<script>
-	
-		$(function()
-		{
-			
-			$('#attendIn').on('click', function()
-				{
-					swal(
-					{
-						title: '출근하시겠습니까?',
-						type: 'info',
-						allowOutsideClick: false,
-						showCancelButton: true,
-						confirmButtonColor: '#F9354C',
-						cancelButtonColor: '#41B314',
-						confirmButtonText: '네',
-						cancelButtonText: '아니오'
-					}).then(function()
-					{
-						
-						var form = document.getElementById('attendInForm');
-						form.submit();
-					}, function(dismiss)
-					{
-						if (dismiss === 'cancel')
-						{
-							swal(
-								'출근이 취소되었습니다.'
-							).catch(swal.noop);
-						}
-					});
-				});
-			
-	
-			
-			$('#attendOut').on('click', function()
-					{
-						swal(
-						{
-							title: '퇴근하시겠습니까?',
-							type: 'info',
-							allowOutsideClick: false,
-							showCancelButton: true,
-							confirmButtonColor: '#F9354C',
-							cancelButtonColor: '#41B314',
-							confirmButtonText: '네',
-							cancelButtonText: '아니오'
-						}).then(function()
-						{
-							
-							var form = document.getElementById('attendOutForm');
-							form.submit();
-						}, function(dismiss)
-						{
-							if (dismiss === 'cancel')
-							{
-								swal(
-									'퇴근이 취소되었습니다.'
-								).catch(swal.noop);
-							}
-						});
-					});
-			
-		});
-		</script>
 		
-		
-	</body>
+
+
+</body>
 </html>
-	
