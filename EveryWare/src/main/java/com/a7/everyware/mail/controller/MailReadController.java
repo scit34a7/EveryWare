@@ -69,12 +69,6 @@ public class MailReadController {
 		
 		mail.setMaildate(inbox.getLast_updated());
 		
-		// 필요가 없어심
-		/*String mailTo = inbox.getRecipients();
-		String toWho = mdao.getUserFromMailInfo(mailTo);
-		mail.setRecipients(toWho +"&lt"+mailTo+"&gt");
-		*/
-		
 		byte[] messageBody = inbox.getMessage_body();
 		
 		Message messageMime = null;
