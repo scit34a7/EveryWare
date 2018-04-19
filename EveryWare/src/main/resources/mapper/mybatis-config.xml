@@ -13,7 +13,7 @@
 		<typeAlias type="com.a7.everyware.approval.vo.ApprovalVO" alias="ApprovalVO" />
 		<typeAlias type="com.a7.everyware.approval.vo.ApprovalLineVO" alias="ApprovalLineVO" />
 		<typeAlias type="com.a7.everyware.approval.vo.ApprovalHistoryVO" alias="ApprovalHistoryVO" />
-		<typeAlias type="com.a7.everyware.support.vo.AttendVO" alias="AttendVO" />
+		<!--<typeAlias type="com.a7.everyware.support.vo.AttendVO" alias="AttendVO" />  -->
 		
 		<typeAlias type="com.a7.everyware.mail.vo.Inbox" alias ="Inbox" />
 		<typeAlias type="com.a7.everyware.mail.vo.MailInfo" alias ="MailInfo" />
@@ -27,7 +27,7 @@
 		<mapper resource="mapper/meetingMapper.xml" />
 		<mapper resource="mapper/boardMapper.xml" />
 		<mapper resource="mapper/approvalMapper.xml" />
-		<mapper resource="mapper/supportMapper.xml" />
+		<!-- <mapper resource="mapper/supportMapper.xml" /> -->
 		<mapper resource="mapper/mailMapper.xml" />
 		
 	</mappers>

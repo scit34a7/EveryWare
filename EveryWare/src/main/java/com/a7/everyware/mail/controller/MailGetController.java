@@ -305,10 +305,4 @@ public class MailGetController {
 		return "checked importance";
 	}
 	
-	
-
-	
-	
-	
-	
 }

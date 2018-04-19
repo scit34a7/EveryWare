@@ -178,7 +178,7 @@
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="subLayouts" class="collapse">
 							<ul class="submenu">
-								<li><a href="appviews-inbox">받은메일함 <span
+								<li><a href="./mail/getMail?sort=all">받은메일함 <span
 										class="label label-success">NEW</span></a></li>
 								<li><a href="layout-minified">Minified</a></li>
 								<li><a href="layout-fullwidth">Fullwidth</a></li>
