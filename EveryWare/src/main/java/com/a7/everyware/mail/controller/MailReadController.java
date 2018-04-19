@@ -131,10 +131,8 @@ public class MailReadController {
 				}
 			}
 		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassCastException e) {
 			// Multipart part <- message.getContent() 에서 Content가 순수 String 컨텐츠로
