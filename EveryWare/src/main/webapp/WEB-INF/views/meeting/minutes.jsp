@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>회의실 목록</title>
+		<title>회의록 목록</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -30,20 +30,11 @@
 		<link rel="apple-touch-icon" sizes="76x76" href="../resources/assets/img/apple-icon.png">
 		<link rel="icon" type="image/png" sizes="96x96" href="../resources/assets/img/favicon.png">
 		
-	<script src="../resources/js/jquery-3.2.1.min.js"></script>
-
-	<script>
-	$(document).ready(function () {
-		if (${isRight} == true) {
-			alert("입장할 수 없습니다.");
-		}
-	});
-	</script>
-
-		<script>
-			var w;
-			function createMeetingRoom() {
-			w = window.open('createRoom', 'newwin', 'width=600, height=680, location=no, menubar=no, resizable=no, status= no, toolbar=no');
+		<script type="text/javascript">
+		var w;
+		function meetingLog(meet_title) {
+			var log = 'meetingLog?meet_title=' + meet_title;
+			w = window.open(log, 'newwin', 'width=600, height=680, location=no, menubar=no, resizable=no, status= no, toolbar=no');
 		}
 		</script>
 	</head>
@@ -167,12 +158,12 @@
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="subLayouts" class="collapse">
 							<ul class="submenu">
-								<li><a href="../appviews-inbox">받은메일함 <span
+								<li><a href="appviews-inbox">받은메일함 <span
 										class="label label-success">NEW</span></a></li>
-								<li><a href="../layout-minified">Minified</a></li>
-								<li><a href="../layout-fullwidth">Fullwidth</a></li>
-								<li><a href="../layout-default">Default</a></li>
-								<li><a href="../layout-grid">Grid</a></li>
+								<li><a href="layout-minified">Minified</a></li>
+								<li><a href="layout-fullwidth">Fullwidth</a></li>
+								<li><a href="layout-default">Default</a></li>
+								<li><a href="layout-grid">Grid</a></li>
 							</ul>
 						</div></li>
 					<li class="panel"><a href="#forms" data-toggle="collapse"
@@ -181,16 +172,16 @@
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="forms" class="collapse ">
 							<ul class="submenu">
-								<li><a href="../forms-inputs">Inputs</a></li>
-								<li><a href="../forms-multiselect">Multiselect</a></li>
-								<li><a href="../forms-input-pickers">Input Pickers</a></li>
-								<li><a href="../forms-input-sliders">Input Sliders</a></li>
-								<li><a href="../forms-select2">Select2</a></li>
-								<li><a href="../forms-xeditable">In-place Editing</a></li>
-								<li><a href="../forms-dragdropupload">Drag and Drop Upload</a></li>
-								<li><a href="../forms-layouts">Form Layouts</a></li>
-								<li><a href="../forms-validation">Form Validation</a></li>
-								<li><a href="../forms-texteditor">Text Editor</a></li>
+								<li><a href="forms-inputs">Inputs</a></li>
+								<li><a href="forms-multiselect">Multiselect</a></li>
+								<li><a href="forms-input-pickers">Input Pickers</a></li>
+								<li><a href="forms-input-sliders">Input Sliders</a></li>
+								<li><a href="forms-select2">Select2</a></li>
+								<li><a href="forms-xeditable">In-place Editing</a></li>
+								<li><a href="forms-dragdropupload">Drag and Drop Upload</a></li>
+								<li><a href="forms-layouts">Form Layouts</a></li>
+								<li><a href="forms-validation">Form Validation</a></li>
+								<li><a href="forms-texteditor">Text Editor</a></li>
 							</ul>
 						</div></li>
 					<li class="panel"><a href="#appViews" data-toggle="collapse"
@@ -199,10 +190,10 @@
 							<i class="icon-submenu ti-angle-left"></i></a>
 						<div id="appViews" class="collapse ">
 							<ul class="submenu">
-								<li><a href="../appviews-project-detail">Project Details</a></li>
-								<li><a href="../appviews-projects">Projects</a></li>
-								<li><a href="../appviews-inbox">Inbox <span class="badge">8</span></a></li>
-								<li><a href="../appviews-file-manager">File Manager</a></li>
+								<li><a href="appviews-project-detail">Project Details</a></li>
+								<li><a href="appviews-projects">Projects</a></li>
+								<li><a href="appviews-inbox">Inbox <span class="badge">8</span></a></li>
+								<li><a href="appviews-file-manager">File Manager</a></li>
 							</ul>
 						</div></li>
 
@@ -212,21 +203,21 @@
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="uiElements" class="collapse ">
 							<ul class="submenu">
-								<li><a href="../ui-sweetalert">Sweet Alert</a></li>
-								<li><a href="../ui-treeview">Tree View</a></li>
-								<li><a href="../ui-wizard">Wizard</a></li>
-								<li><a href="../ui-dragdrop-panel">Drag &amp; Drop Panel</a></li>
-								<li><a href="../ui-nestable">Nestable</a></li>
-								<li><a href="../ui-gauge">Gauge <span
+								<li><a href="ui-sweetalert">Sweet Alert</a></li>
+								<li><a href="ui-treeview">Tree View</a></li>
+								<li><a href="ui-wizard">Wizard</a></li>
+								<li><a href="ui-dragdrop-panel">Drag &amp; Drop Panel</a></li>
+								<li><a href="ui-nestable">Nestable</a></li>
+								<li><a href="ui-gauge">Gauge <span
 										class="label label-success">NEW</span></a></li>
-								<li><a href="../ui-panels">Panels</a></li>
-								<li><a href="../ui-progressbars">Progress Bars</a></li>
-								<li><a href="../ui-tabs">Tabs</a></li>
-								<li><a href="../ui-buttons">Buttons <span
+								<li><a href="ui-panels">Panels</a></li>
+								<li><a href="ui-progressbars">Progress Bars</a></li>
+								<li><a href="ui-tabs">Tabs</a></li>
+								<li><a href="ui-buttons">Buttons <span
 										class="label label-info">UPDATED</span></a></li>
-								<li><a href="../ui-bootstrap">Bootstrap UI</a></li>
-								<li><a href="../ui-social-buttons">Social Buttons</a></li>
-								<li><a href="../ui-icons">Icons</a></li>
+								<li><a href="ui-bootstrap">Bootstrap UI</a></li>
+								<li><a href="ui-social-buttons">Social Buttons</a></li>
+								<li><a href="ui-icons">Icons</a></li>
 							</ul>
 						</div></li>
 					<li class="panel"><a href="#charts" data-toggle="collapse"
@@ -235,15 +226,15 @@
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="charts" class="collapse ">
 							<ul class="submenu">
-								<li><a href="../charts-chartjs">Chart.js</a></li>
-								<li><a href="../charts-chartist">Chartist</a></li>
-								<li><a href="../charts-flot">Flot Chart</a></li>
-								<li><a href="../charts-sparkline">Sparkline Chart</a></li>
+								<li><a href="charts-chartjs">Chart.js</a></li>
+								<li><a href="charts-chartist">Chartist</a></li>
+								<li><a href="charts-flot">Flot Chart</a></li>
+								<li><a href="charts-sparkline">Sparkline Chart</a></li>
 							</ul>
 						</div></li>
-					<li><a href="widgets"><i class="ti-widget"></i> <span
+					<li><a href="approval/approvalList"><i class="ti-widget"></i> <span
 							class="title">전자결재</span></a></li>
-
+					
 					<li class="panel"><a href="#" data-toggle="collapse"
 						data-target="#submenuDemo" data-parent="#sidebar-nav-menu"
 						class="collapsed"><i class="ti-menu"></i> <span class="title">화상회의
@@ -262,19 +253,18 @@
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="subPages" class="collapse ">
 							<ul class="submenu">
-								<li><a href="../page-profile">Profile</a></li>
-								<li><a href="../page-login">Login</a></li>
-								<li><a href="../page-register">Register</a></li>
-								<li><a href="../page-lockscreen">Lockscreen</a></li>
-								<li><a href="../page-forgot-password">Forgot Password</a></li>
-								<li><a href="../page-404">Page 404</a></li>
-								<li><a href="../page-500">Page 500</a></li>
-								<li><a href="../page-blank">Blank Page</a></li>
+								<li><a href="page-profile">Profile</a></li>
+								<li><a href="page-login">Login</a></li>
+								<li><a href="page-register">Register</a></li>
+								<li><a href="page-lockscreen">Lockscreen</a></li>
+								<li><a href="page-forgot-password">Forgot Password</a></li>
+								<li><a href="page-404">Page 404</a></li>
+								<li><a href="page-500">Page 500</a></li>
+								<li><a href="page-blank">Blank Page</a></li>
 							</ul>
 						</div></li>
-					<li><a href="../typography"><i class="ti-paragraph"></i> <span
+					<li><a href="typography"><i class="ti-paragraph"></i> <span
 							class="title">게시판</span></a></li>
-
 				</ul>
 				<button type="button" class="btn-toggle-minified"
 					title="Toggle Minified Menu">
@@ -297,34 +287,25 @@
 							<li class="active">회의목록</li>
 						</ul>
 					</div>
+					
 					<div class="container-fluid">
-						<!-- DRAG/DROP COLUMNS REORDER -->
+						<!-- BORDERED TABLE -->
 						<div class="panel">
 							<div class="panel-heading">
-								<h3 class="panel-title">회의목록</h3>
-								<button type="button" class="btn btn-primary" onclick="location.href='javascript:createMeetingRoom()'">회의 개설</button>
+								<h3 class="panel-title">회의록 리스트</h3>
 							</div>
 							<div class="panel-body">
-								<table id="featured-datatable" class="table table-striped table-hover">
+								<table class="table table-bordered">
 									<thead>
 										<tr>
 											<th>제목</th>
-											<th>인원</th>
-											<th>부서</th>
-											<th>직급</th>
-											<th>회의시간</th>
 										</tr>
 									</thead>
 									<tbody>
-										<c:if test="${meetingList != null}">
-											<c:forEach var="i" items="${meetingList}">
+										<c:if test="${logList != null}">
+											<c:forEach var="i" items="${logList}">
 											<tr>
-												<%-- <td><a onclick='checkCondition("${i.user_id}")'>${i.meet_title}</a></td> --%>
-												<td><a href='create?roomid=${i.user_id}'>${i.meet_title}</a></td>
-												<td>${i.meet_maxpeople}</td>
-												<td>${i.meet_dept}</td>
-												<td>${i.meet_etposition}</td>
-												<td>${i.meet_date}</td>
+												<td><a href='javascript:meetingLog("${i.meet_title}")'>${i.meet_title}</a></td>
 											</tr>
 											</c:forEach>
 										</c:if>
@@ -332,6 +313,7 @@
 								</table>
 							</div>
 						</div>
+						<!-- END BORDERED TABLE -->
 					</div>
 				</div>
 				<!-- END MAIN CONTENT -->

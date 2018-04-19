@@ -142,7 +142,7 @@
 							</ul></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown"> <img
-								src="resources/assets/img/user.png" alt="Avatar"> <span>박자바</span>
+								src="resources/assets/img/user.png" alt="Avatar"> <span>${sessionScope.userName}</span>
 						</a>
 							<ul class="dropdown-menu logged-user-menu">
 								<li><a href="#"><i class="ti-user"></i> <span>개인정보</span></a></li>
@@ -164,14 +164,7 @@
 					<li class="panel"><a href="index" data-toggle="collapse"
 						data-parent="#sidebar-nav-menu" class="active"><i
 							class="ti-dashboard"></i> <span class="title">MainHome</span> <i
-							class="icon-submenu ti-angle-left"></i></a> <!-- <div id="dashboards" class="collapse in">
-								<ul class="submenu">
-									<li><a href="index" class="active">Dashboard v1 <span class="label label-info">UPDATED</span></a></li>
-									<li><a href="dashboard2">Dashboard v2</a></li>
-									<li><a href="dashboard3">Dashboard v3</a></li>
-									<li><a href="dashboard4">Dashboard v4 <span class="label label-success">NEW</span></a></li>
-								</ul>
-							</div> --></li>
+							class="icon-submenu ti-angle-left"></i></a></li>
 					<li class="panel"><a href="#subLayouts" data-toggle="collapse"
 						data-parent="#sidebar-nav-menu" class="collapsed"><i
 							class="ti-layout"></i> <span class="title">e메일</span> <i
@@ -254,8 +247,18 @@
 						</div></li>
 					<li><a href="approval/approvalList"><i class="ti-widget"></i> <span
 							class="title">전자결재</span></a></li>
-					<li><a href="meet/meetingList"><i class="ti-bell"></i> <span
-							class="title">화상회의</span> <span class="badge">15</span></a></li>
+
+					<li class="panel"><a href="#" data-toggle="collapse"
+						data-target="#submenuDemo" data-parent="#sidebar-nav-menu"
+						class="collapsed"><i class="ti-menu"></i> <span class="title">화상회의
+						</span><i class="icon-submenu ti-angle-left"></i></a>
+						<div id="submenuDemo" class="collapse">
+							<ul class="submenu">
+								<li><a href="meet/meetingList">회의실</a></li>
+								<li><a href="meet/minutes">회외록</a></li>
+							</ul>
+						</div>
+					</li>
 
 					<li class="panel"><a href="#subPages" data-toggle="collapse"
 						data-parent="#sidebar-nav-menu" class="collapsed"><i
@@ -275,26 +278,6 @@
 						</div></li>
 					<li><a href="typography"><i class="ti-paragraph"></i> <span
 							class="title">게시판</span></a></li>
-					<li class="panel"><a href="#" data-toggle="collapse"
-						data-target="#submenuDemo" data-parent="#sidebar-nav-menu"
-						class="collapsed"><i class="ti-menu"></i> <span class="title">Multilevel
-								Menu</span><i class="icon-submenu ti-angle-left"></i></a>
-						<div id="submenuDemo" class="collapse">
-							<ul class="submenu">
-								<li class="panel"><a href="#" data-toggle="collapse"
-									data-target="#submenuDemoLv2" class="collapsed">Submenu 1 <i
-										class="icon-submenu ti-angle-left"></i></a>
-									<div id="submenuDemoLv2" class="collapse">
-										<ul class="submenu">
-											<li><a href="#">Another menu level</a></li>
-											<li><a href="#" class="active">Another menu level</a></li>
-											<li><a href="#">Another menu level</a></li>
-										</ul>
-									</div></li>
-								<li><a href="javascript:test1()">회의실</a></li>
-								<li><a href="meet/annyangTest">음성 테스트</a></li>
-							</ul>
-						</div></li>
 				</ul>
 				<button type="button" class="btn-toggle-minified"
 					title="Toggle Minified Menu">

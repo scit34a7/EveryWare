@@ -9,17 +9,17 @@ public class MeetingLogVO {
 	private String user_id;		// 유저 아이디
 	private String log_content;	// 로그 내용
 	private String log_time;	// 로그 시간
-	private int meet_id;		// 회의 번호
+	private String meet_title;	// 회의 제목
 	
 	public MeetingLogVO() {}
 	
-	public MeetingLogVO(int log_id, String user_id, String log_content, String log_time, int meet_id) {
+	public MeetingLogVO(int log_id, String user_id, String log_content, String log_time, String meet_title) {
 		super();
 		this.log_id = log_id;
 		this.user_id = user_id;
 		this.log_content = log_content;
 		this.log_time = log_time;
-		this.meet_id = meet_id;
+		this.meet_title = meet_title;
 	}
 
 	public int getLog_id() {
@@ -54,17 +54,17 @@ public class MeetingLogVO {
 		this.log_time = log_time;
 	}
 
-	public int getMeet_id() {
-		return meet_id;
+	public String getmeet_title() {
+		return meet_title;
 	}
 
-	public void setMeet_id(int meet_id) {
-		this.meet_id = meet_id;
+	public void setmeet_title(String meet_title) {
+		this.meet_title = meet_title;
 	}
 
 	@Override
 	public String toString() {
 		return "MeetingLogVO [log_id=" + log_id + ", user_id=" + user_id + ", log_content=" + log_content
-				+ ", log_time=" + log_time + ", meet_id=" + meet_id + "]";
+				+ ", log_time=" + log_time + ", meet_title=" + meet_title + "]";
 	}
 }

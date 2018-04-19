@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Form Validations | Klorofil Pro - Bootstrap Admin Dashboard Template</title>
+		<title>회의실 개설</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -65,7 +65,6 @@
 														<option value="5">5명</option>
 														<option value="6">6명</option>
 														<option value="7">7명</option>
-														<option value="8">8명</option>
 													</select>
 												</div>
 											</div>
@@ -140,30 +139,7 @@
 		<script src="../resources/assets/vendor/parsleyjs/js/parsley.min.js"></script>
 		<script src="../resources/assets/scripts/klorofilpro-common.js"></script>
 		<script src="../resources/assets/vendor/clockpicker/bootstrap-clockpicker.min.js"></script>
-		<!-- DEMO PANEL -->
-		<!-- for demo purpose only, you should remove it on your project directory -->
-		<script type="text/javascript">
-		var toggleDemoPanel = function(e)
-		{
-			e.preventDefault();
-			var panel = document.getElementById('demo-panel');
-			if (panel.className) panel.className = '';
-			else panel.className = 'active';
-		}
-		// fix each iframe src when back button is clicked
-		$(function()
-		{
-			$('iframe').each(function()
-			{
-				this.src = this.src;
-			});
-		});
-		</script>
-		<div id="demo-panel">
-			<a href="#" onclick="toggleDemoPanel(event);"><i class="fa fa-cog fa-spin"></i></a>
-			<iframe src="../resources/demo-panel/index.html"></iframe>
-		</div>
-		<!-- END DEMO PANEL -->
+
 		<script>
 		$(function()
 		{
