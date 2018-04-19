@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 회원정보 처리 SQL -->
+<mapper namespace="com.a7.everyware.resource.dao.ResourceMapper">
+	<select id="readMeetingRoom" parameterType="String" resultType="ResourceVO">
+		select * from Resource_tb
+		where resource_type like '회의실%'
+	</select>
+
+	<insert id="Resource_add" parameterType="ReservationVO"> 
+		insert into R_reservation_tb
+		values
+		(R_reservation_id_seq.nextval, #{R_reservation_type},#{resource_id},#{r_reservation_sdate},#{r_reservation_fdate})
+	</insert>
+	
+	<select id="getMeetingRoom" parameterType="String" resultType="ReservationVO">
+		select* from R_reservation_tb
+	</select>
+	
+	<select id="readNoteBook" parameterType="String" resultType="ResourceVO">
+		select * from Resource_tb
+		where resource_type like '노트북%'
+	</select>
+</mapper>

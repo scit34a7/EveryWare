@@ -192,7 +192,7 @@
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="forms" class="collapse ">
 							<ul class="submenu">
-								<li><a href="forms-inputs">Inputs</a></li>
+								<!-- <li><a href="forms-inputs">Inputs</a></li>
 								<li><a href="forms-multiselect">Multiselect</a></li>
 								<li><a href="forms-input-pickers">Input Pickers</a></li>
 								<li><a href="forms-input-sliders">Input Sliders</a></li>
@@ -201,7 +201,9 @@
 								<li><a href="forms-dragdropupload">Drag and Drop Upload</a></li>
 								<li><a href="forms-layouts">Form Layouts</a></li>
 								<li><a href="forms-validation">Form Validation</a></li>
-								<li><a href="forms-texteditor">Text Editor</a></li>
+								<li><a href="forms-texteditor">Text Editor</a></li> -->
+								<li><a href="schedule">일정 관리</a></li>
+								<li><a href="resource">자원 예약 관리</a></li>
 							</ul>
 						</div></li>
 					<li class="panel"><a href="#appViews" data-toggle="collapse"
