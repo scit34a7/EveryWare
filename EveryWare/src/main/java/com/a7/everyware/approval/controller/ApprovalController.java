@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -151,6 +152,26 @@ public class ApprovalController {
 		//approvalList_toMe를  ( past / now / future )로 나누는 과정
 		for(ApprovalVO app : approvalList_toMe){
 			
+			//진행도
+			//진행도를 체크하기위해 히스토리 가져오기
+			ArrayList<ApprovalHistoryVO> approvalHistoryList2 = approvalDAO.findApprovalHistory(app.geteApproval_id());
+			int count = 0;		//진행도 계산을위해 승인 받은 기록 확인
+			for(ApprovalHistoryVO history : approvalHistoryList2){
+				if(history.geteHistory_content().equals("승인")){
+					count ++;
+				}
+			}
+			
+			int progress = count * 33;		//진행률
+			if(count == 3){
+				progress = 100;
+			}
+			app.seteApproval_saved(Integer.toString(progress));
+			//진행도 끝
+			
+			
+			
+			
 			//결재 문서에 결재라인 불러오기
 			ApprovalLineVO line = approvalDAO.findApprovalLineById2(app.geteApprovalLine_id());
 			
@@ -184,13 +205,20 @@ public class ApprovalController {
 				//내가 이결재에대해 승인 했는지 여부
 				boolean isApproval = false;
 				for(ApprovalHistoryVO history : approvalHistoryList){
+					
+					
+					logger.debug("history : {}", history);
+					
 					if(history.getUser_id().equals(line.geteApprovalLine_person1()) && history.geteHistory_content().equals("승인")){
 						//내가 승인 한경우
 						isApproval = true;
 						logger.debug("order:1 person1 승인!");
 						break;
 					}
+	
+					
 				}
+			
 				
 				if(isApproval){
 					//내가 승인했다면 past에
@@ -297,6 +325,27 @@ public class ApprovalController {
 		
 		ArrayList<ApprovalVO> approvalList_fromMe = approvalDAO.findApprovalFromMe(user_id);
 		
+		
+		for(ApprovalVO app : approvalList_fromMe){
+			//진행도
+			//진행도를 체크하기위해 히스토리 가져오기
+			ArrayList<ApprovalHistoryVO> approvalHistoryList3 = approvalDAO.findApprovalHistory(app.geteApproval_id());
+			int count = 0;		//진행도 계산을위해 승인 받은 기록 확인
+			for(ApprovalHistoryVO history : approvalHistoryList3){
+				if(history.geteHistory_content().equals("승인")){
+					count ++;
+				}
+			}
+			
+			int progress = count * 33;		//진행률
+			if(count == 3){
+				progress = 100;
+			}
+			app.seteApproval_saved(Integer.toString(progress));
+			//진행도 끝
+		}
+		
+		
 		logger.debug("내가 승인한 결재 : {}", approvalList_past);
 		logger.debug("내가 봐야할 결재 : {}", approvalList_now);
 		logger.debug("내가 승인할 결재 : {}", approvalList_future);
@@ -312,13 +361,103 @@ public class ApprovalController {
 		
 		
 		
+		
+		
+		
+		
 		return "approval/myApproval";
 	}//myApproval
 	
 	
 	
+	//전자결재문서 읽기 창으로
+	@RequestMapping (value="readApproval", method=RequestMethod.GET)
+	public String readApproval(Model model, int eApproval_id,
+			@RequestParam(value="isApproval", defaultValue="false") boolean isApproval) {
+		
+		logger.debug("readApproval para : eApproval_id={}, isApproval={}", eApproval_id, isApproval);
+		
+		ApprovalVO approval = approvalDAO.findApprovalById(eApproval_id);
+		
+		//결재라인 객체에 정보 담기
+		ApprovalLineVO approvalLine = approvalDAO.findApprovalLineById(approval.geteApprovalLine_id());
+		String status = approvalDAO.findStatusById(approval.getUser_id());
+		approvalLine.setUser_id(status);
+		
+		//진행도
+		//진행도를 체크하기위해 히스토리 가져오기
+		ArrayList<ApprovalHistoryVO> approvalHistoryList = approvalDAO.findApprovalHistory(eApproval_id);
+		int count = 0;		//진행도 계산을위해 승인 받은 기록 확인
+		for(ApprovalHistoryVO history : approvalHistoryList){
+			if(history.geteHistory_content().equals("승인")){
+				count ++;
+			}
+		}
+		
+		int progress = count * 33;		//진행률
+		if(count == 3){
+			progress = 100;
+		}
+		//진행도 끝 (모델에 저장은 따로)
+		
+		
+		
+		
+		model.addAttribute("approval", approval);			//읽고자하는 전자결재 객체
+		model.addAttribute("isApproval", isApproval);		//전자결재를 현재 승인 할 수 있는지의 여부
+		model.addAttribute("approvalLine", approvalLine);	//결재라인 
+		model.addAttribute("progress", progress);			//진행률
+		
+		return "approval/readApproval";
+	}
 	
 	
+	
+	//전자결재문서 읽기 창으로
+	@RequestMapping (value="insertHistory", method=RequestMethod.POST)
+	public String insertHistory(HttpSession session
+			, @RequestParam(value="type", defaultValue="0") int type
+			, @RequestParam(value="eApproval_id", defaultValue="0") int eApproval_id) {
+		
+		logger.debug("insertHistory para : type={}, eApproval_id={}", type, eApproval_id);
+		
+		//로그인한 아이디
+		String user_id = (String) session.getAttribute("userId");
+		
+		//등록할 History 객체 생성
+		ApprovalHistoryVO history = new ApprovalHistoryVO();
+		
+		//속성 셋팅
+		history.setUser_id(user_id);
+		history.seteApproval_id(eApproval_id);
+		
+		//eApproval_content 셋팅
+		switch (type) {
+		case 1:
+			//승인
+			history.seteHistory_content("승인");
+			break;
+			
+		case 2:
+			//거절
+			history.seteHistory_content("거절");
+			break;
+			
+		case 3:
+			//반려
+			history.seteHistory_content("반려");
+			break;
+
+		default:
+			break;
+		}
+		
+		logger.debug("insert 직전 history객체 : {}", history);
+		
+		approvalDAO.insertHistory(history);
+		
+		return "redirect:myApproval";
+	}
 	
 	
 	

@@ -13,6 +13,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 		<!-- VENDOR CSS -->
 		<link rel="stylesheet" href="../resources/assets/vendor/bootstrap/css/bootstrap.min.css">
+		<!-- PROGRESS BAR -->
+		<link rel="stylesheet" href="../resources/assets/vendor/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css">
+		
 		<link rel="stylesheet" href="../resources/assets/vendor/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="../resources/assets/vendor/themify-icons/css/themify-icons.css">
 		<link rel="stylesheet" href="../resources/assets/vendor/pace/themes/orange/pace-theme-minimal.css">
@@ -331,75 +334,6 @@
 					
 					<div class="container-fluid">
 
-						<!-- FEATURED DATATABLE 내가 올린 결재 fromMe-->
-						<div class="panel">
-							<div class="panel-heading">
-								<h3 class="panel-title">내가 올린 결재</h3>
-							</div>
-							<div class="panel-body">
-								<!-- <p class="alert alert-info">Added paging options and live search</p> -->
-								<table class="featured-datatable" class="table table-striped table-hover" >
-									
-									<thead>
-										<tr>
-											<th>결재번호</th>
-											<th>제목</th>
-											<th>내용</th>
-											<th>등록날짜</th>
-											<th>마감날짜</th>
-											<th>첨부파일</th>
-											<th>진행률</th>
-											<th>비고</th>
-										</tr>
-									</thead>
-									<tbody>						
-									
-									<c:choose>
-										<c:when test="${approvalList_fromMe != null}">
-											<c:forEach var="eApp" items="${approvalList_fromMe}">
-												<tr>
-													<td>${eApp.eApproval_id}		</td>
-													<td>${eApp.eApproval_title}		</td>
-													<td>${eApp.eApproval_content}	</td>
-													<td>${eApp.eApproval_sDate}		</td>
-													<td>${eApp.eApproval_fDate}		</td>
-													<td>
-													<c:choose>
-														<c:when test="${eApp.eApproval_original != null}">
-															${eApp.eApproval_original}
-														</c:when>
-														<c:otherwise>
-															-
-														</c:otherwise>
-													</c:choose>
-													</td>
-													<td>							</td>
-													<td>							</td>
-												
-												</tr>
-											</c:forEach>		
-										</c:when>
-										<c:otherwise>
-											<td rowspan="5">
-												-
-											</td>
-											</tr>
-										</c:otherwise>
-									</c:choose>
-									
-									
-								</tbody>
-								</table>
-							</div>
-						</div>
-						<!-- END FEATURED DATATABLE 내가 올린 결재 fromMe-->
-					</div>
-					
-					
-					
-					
-					<div class="container-fluid">
-
 						<!-- FEATURED DATATABLE 승인 가능 Now-->
 						<div class="panel">
 							<div class="panel-heading">
@@ -428,7 +362,11 @@
 											<c:forEach var="eApp" items="${approvalList_now}">
 												<tr>
 													<td>${eApp.eApproval_id}		</td>
-													<td>${eApp.eApproval_title}		</td>
+													<td>
+														<a href="readApproval?eApproval_id=${eApp.eApproval_id}&isApproval=true">
+															${eApp.eApproval_title}
+														</a>
+													</td>
 													<td>${eApp.eApproval_content}	</td>
 													<td>${eApp.eApproval_sDate}		</td>
 													<td>${eApp.eApproval_fDate}		</td>
@@ -442,7 +380,11 @@
 														</c:otherwise>
 													</c:choose>
 													</td>
-													<td>							</td>
+													<td>
+														<div id="project-progress" class="progress progress-transparent custom-color-orange2">
+															<div class="progress-bar" data-transitiongoal="${eApp.eApproval_saved}"></div>
+														</div>
+													</td>
 													<td>							</td>
 												
 												</tr>
@@ -463,6 +405,88 @@
 						</div>
 						<!-- END FEATURED DATATABLE 승인 가능 Now-->
 					</div>
+					
+					
+					
+					
+					<div class="container-fluid">
+
+						<!-- FEATURED DATATABLE 내가 올린 결재 fromMe-->
+						<div class="panel">
+							<div class="panel-heading">
+								<h3 class="panel-title">내가 올린 결재</h3>
+							</div>
+							<div class="panel-body">
+								<!-- <p class="alert alert-info">Added paging options and live search</p> -->
+								<table class="featured-datatable" class="table table-striped table-hover" >
+									
+									<thead>
+										<tr>
+											<th>결재번호</th>
+											<th>제목</th>
+											<th>내용</th>
+											<th>등록날짜</th>
+											<th>마감날짜</th>
+											<th>첨부파일</th>
+											<th>진행률</th>
+											<th>비고</th>
+										</tr>
+									</thead>
+									<tbody>						
+									
+									<c:choose>
+										<c:when test="${approvalList_fromMe != null}">
+											<c:forEach var="eApp" items="${approvalList_fromMe}">
+												<tr>
+													<td>${eApp.eApproval_id}		</td>
+													<td>
+														<a href="readApproval?eApproval_id=${eApp.eApproval_id}">
+															${eApp.eApproval_title}
+														</a>
+													</td>
+													<td>${eApp.eApproval_content}	</td>
+													<td>${eApp.eApproval_sDate}		</td>
+													<td>${eApp.eApproval_fDate}		</td>
+													<td>
+													<c:choose>
+														<c:when test="${eApp.eApproval_original != null}">
+															${eApp.eApproval_original}
+														</c:when>
+														<c:otherwise>
+															-
+														</c:otherwise>
+													</c:choose>
+													</td>
+													<td>
+														<div id="project-progress" class="progress progress-transparent custom-color-orange2">
+															<div class="progress-bar" data-transitiongoal="${eApp.eApproval_saved}"></div>
+														</div>
+													</td>
+													<td>							</td>
+												
+												</tr>
+											</c:forEach>		
+										</c:when>
+										<c:otherwise>
+											<td rowspan="5">
+												-
+											</td>
+											</tr>
+										</c:otherwise>
+									</c:choose>
+									
+									
+								</tbody>
+								</table>
+							</div>
+						</div>
+						<!-- END FEATURED DATATABLE 내가 올린 결재 fromMe-->
+					</div>
+					
+					
+					
+					
+					
 					
 					
 					
@@ -496,7 +520,11 @@
 											<c:forEach var="eApp" items="${approvalList_future}">
 												<tr>
 													<td>${eApp.eApproval_id}		</td>
-													<td>${eApp.eApproval_title}		</td>
+													<td>
+														<a href="readApproval?eApproval_id=${eApp.eApproval_id}">
+															${eApp.eApproval_title}
+														</a>
+													</td>
 													<td>${eApp.eApproval_content}	</td>
 													<td>${eApp.eApproval_sDate}		</td>
 													<td>${eApp.eApproval_fDate}		</td>
@@ -510,7 +538,11 @@
 														</c:otherwise>
 													</c:choose>
 													</td>
-													<td>							</td>
+													<td>
+														<div id="project-progress" class="progress progress-transparent custom-color-orange2">
+															<div class="progress-bar" data-transitiongoal="${eApp.eApproval_saved}"></div>
+														</div>
+													</td>	
 													<td>							</td>
 												
 												</tr>
@@ -564,7 +596,11 @@
 											<c:forEach var="eApp" items="${approvalList_past}">
 												<tr>
 													<td>${eApp.eApproval_id}		</td>
-													<td>${eApp.eApproval_title}		</td>
+													<td>
+														<a href="readApproval?eApproval_id=${eApp.eApproval_id}">
+															${eApp.eApproval_title}
+														</a>
+													</td>
 													<td>${eApp.eApproval_content}	</td>
 													<td>${eApp.eApproval_sDate}		</td>
 													<td>${eApp.eApproval_fDate}		</td>
@@ -578,7 +614,11 @@
 														</c:otherwise>
 													</c:choose>
 													</td>
-													<td>							</td>
+													<td>
+														<div id="project-progress" class="progress progress-transparent custom-color-orange2">
+															<div class="progress-bar" data-transitiongoal="${eApp.eApproval_saved}"></div>
+														</div>
+													</td>
 													<td>							</td>
 												
 												</tr>
@@ -735,11 +775,18 @@
 		<script src="../resources/assets/vendor/jquery/jquery.min.js"></script>
 		<script src="../resources/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 		<script src="../resources/assets/vendor/pace/pace.min.js"></script>
-		<script src="../resources/assets/vendor/datatables/js-main/jquery.dataTables.min.js"></script>
+		
+		<!-- Approval버전으로 따로 만듬 -->
+		<script src="../resources/assets/vendor/datatables/js-main/jquery.dataTablesApproval.min.js"></script>
+		
 		<script src="../resources/assets/vendor/datatables/js-bootstrap/dataTables.bootstrap.min.js"></script>
 		<script src="../resources/assets/vendor/datatables-colreorder/dataTables.colReorder.js"></script>
 		<script src="../resources/assets/vendor/datatables-tabletools/js/dataTables.tableTools.js"></script>
 		<script src="../resources/assets/scripts/klorofilpro-common.js"></script>
+		
+		<!-- PROGRESS BAR -->
+		<script src="../resources/assets/vendor/bootstrap-progressbar/js/bootstrap-progressbar.min.js"></script>
+		
 		<!-- DEMO PANEL -->
 		<!-- for demo purpose only, you should remove it on your project directory -->
 		<script type="text/javascript">
@@ -753,6 +800,13 @@
 		// fix each iframe src when back button is clicked
 		$(function()
 		{
+			
+			// project progress
+			$('#project-progress .progress-bar').progressbar(
+			{
+				display_text: 'fill'
+			});
+			
 			$('iframe').each(function()
 			{
 				this.src = this.src;

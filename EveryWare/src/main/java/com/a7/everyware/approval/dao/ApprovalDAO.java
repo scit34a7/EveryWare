@@ -130,5 +130,39 @@ public class ApprovalDAO {
 		ArrayList<ApprovalHistoryVO> list = mapper.findApprovalHistory(eApproval_id);
 		return list;
 	}
+	
+	
+	
+	/**
+	 * eApproval_id로 Approval 객체 가져오기
+	 * @param user_id
+	 * @return ApprovalVO
+	 */
+	public ApprovalVO findApprovalById(int eApproval_id){
+		ApprovalMapper mapper = sqlSession.getMapper(ApprovalMapper.class);
+		ApprovalVO approval = mapper.findApprovalById(eApproval_id);
+		return approval;
+	}
+	
+	
+	/**
+	 * user_id로 이름 / 부서 / 직책 불러오기
+	 * @param user_id
+	 * @return
+	 */
+	public String findStatusById(String user_id){
+		ApprovalMapper mapper = sqlSession.getMapper(ApprovalMapper.class);
+		String status = mapper.findStatusById(user_id);
+		return status;
+	}
+	
+	/**
+	 * ApprovalHistoryVO 객체 등록
+	 * @param history
+	 */
+	public void insertHistory(ApprovalHistoryVO history){
+		ApprovalMapper mapper = sqlSession.getMapper(ApprovalMapper.class);
+		mapper.insertHistory(history);
+	}
 
 }
