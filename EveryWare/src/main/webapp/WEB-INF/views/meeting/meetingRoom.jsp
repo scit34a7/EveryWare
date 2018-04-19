@@ -183,7 +183,7 @@
 		}
 		</style>
 	</head>
-	<body class="sidebar-minified" onload="openOrJoinRoom();resizeWin()">
+	<body class="sidebar-minified" onload="openOrJoinRoom()">
 		<!-- WRAPPER -->
 		<div id="wrapper" style="height:100%">
 			<!-- LEFT SIDEBAR -->
