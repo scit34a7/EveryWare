@@ -12,20 +12,20 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 		<!-- VENDOR CSS -->
-		<link rel="stylesheet" href="resources/assets/vendor/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" href="resources/assets/vendor/font-awesome/css/font-awesome.min.css">
-		<link rel="stylesheet" href="resources/assets/vendor/themify-icons/css/themify-icons.css">
-		<link rel="stylesheet" href="resources/assets/vendor/pace/themes/orange/pace-theme-minimal.css">
+		<link rel="stylesheet" href="../resources/assets/vendor/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../resources/assets/vendor/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../resources/assets/vendor/themify-icons/css/themify-icons.css">
+		<link rel="stylesheet" href="../resources/assets/vendor/pace/themes/orange/pace-theme-minimal.css">
 		<!-- MAIN CSS -->
-		<link rel="stylesheet" href="resources/assets/css/main.css">
-		<link rel="stylesheet" href="resources/assets/css/skins/sidebar-nav-darkgray.css" type="text/css">
-		<link rel="stylesheet" href="resources/assets/css/skins/navbar3.css" type="text/css">
+		<link rel="stylesheet" href="../resources/assets/css/main.css">
+		<link rel="stylesheet" href="../resources/assets/css/skins/sidebar-nav-darkgray.css" type="text/css">
+		<link rel="stylesheet" href="../resources/assets/css/skins/navbar3.css" type="text/css">
 		<!-- FOR DEMO PURPOSES ONLY. You should/may remove this in your project -->
-		<link rel="stylesheet" href="resources/assets/css/demo.css">
-		<link rel="stylesheet" href="resources/demo-panel/style-switcher.css">
+		<link rel="stylesheet" href="../resources/assets/css/demo.css">
+		<link rel="stylesheet" href="../resources/demo-panel/style-switcher.css">
 		<!-- ICONS -->
-		<link rel="apple-touch-icon" sizes="76x76" href="resources/assets/img/apple-icon.png">
-		<link rel="icon" type="image/png" sizes="96x96" href="resources/assets/img/favicon.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="../resources/assets/img/apple-icon.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="../resources/assets/img/favicon.png">
 	</head>
 	<body class="sidebar-minified has-content-menu page-inbox">
 		<!-- WRAPPER -->
@@ -33,7 +33,7 @@
 			<!-- NAVBAR -->
 			<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
-				<a href="index"> <img src="resources/assets/img/logo-white.png"
+				<a href="index"> <img src="../resources/assets/img/logo-white.png"
 					alt="Klorofil Pro Logo" class="img-responsive logo">
 				</a>
 			</div>
@@ -111,7 +111,7 @@
 							</ul></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown"> <img
-								src="resources/assets/img/user.png" alt="Avatar"> <span>박자바</span>
+								src="../resources/assets/img/user.png" alt="Avatar"> <span>박자바</span>
 						</a>
 							<ul class="dropdown-menu logged-user-menu">
 								<li><a href="#"><i class="ti-user"></i> <span>개인정보</span></a></li>
@@ -225,7 +225,7 @@
 					<li><a href="notifications"><i class="ti-bell"></i> <span
 							class="title">화상회의</span> <span class="badge">15</span></a></li>
 
-					+
+					
 					<li class="panel"><a href="#subPages" data-toggle="collapse"
 						data-parent="#sidebar-nav-menu" class="collapsed"><i
 							class="ti-files"></i> <span class="title">자원예약</span> <i
@@ -299,12 +299,14 @@
 											<nav>
 												<span>Mail Service</span>
 												<ul class="nav-content-menu">
-													<li><a href="./appviews-inbox-inbox"><i class="fa fa-inbox"></i> 받은편지함</a></li>
-													<li><a href="./appviews-inbox-write"><i class="fa fa-mail-forward"></i> 보낸편지함</a></li>
+													<li><a href="./sendMail"  ><i class ="fa fa-pencil"></i> 편지쓰기</a></li>
+													<li><a href="./getMail?sort=all" <c:if test ="${sort== 0}">style = "color : blue; font-weight:bold"</c:if> ><i class="fa fa-inbox"></i> 받은편지함</a></li>
+													<li><a href="#"><i class="fa fa-mail-forward"></i> 보낸편지함</a></li>
 													<li><a href="#"><i class="fa fa-folder"></i> 임시보관함</a></li>
-													<li><a href="#"><i class="fa fa-flag"></i> 중요편지함</a></li>
+													<li><a href="./getMail?sort=important" <c:if test ="${sort== 3}">style = "color : blue; font-weight:bold"</c:if>><i class="fa fa-flag"></i> 중요편지함</a></li>
 													<li><a href="#"><i class="fa fa-folder"></i> 내게쓴편지함</a></li>
-													<li><a href="#"><i class="fa fa-trash"></i> 휴지통</a></li>
+													<li><a href="./getMail?sort=trash" <c:if test ="${sort== 4}">style = "color : blue; font-weight:bold"</c:if> ><i class="fa fa-trash"></i> 휴지통</a></li>
+													<li><a href="./setMailForm"><i class = "fa fa-cog"></i> 양식 설정</a></li>
 												</ul>
 												
 											</nav>
@@ -329,20 +331,37 @@
 															<td>
 																<div class="fancy-checkbox custom-bgcolor-green">
 																	<label>
-																		<input type="checkbox" checked>
+																		<input type="checkbox" id = "checkAllBt">
 																		<span></span>
 																	</label>
 																</div>		
 															</td>
-															<td>
-																<button type="button" class="btn btn-primary btn-toastr" data-context="info" data-message="This is general theme info" data-position="top-right">삭제</button>
-															</td>
-															<td>
-																<button class="btn btn-default" id="btn-sw-question">답장</button>
-															</td>
-															<td style="margin-left: 10px;">
-																<button class="btn btn-default" id="btn-sw-question">전달</button>
-															</td>		
+															
+														<c:choose>															
+															<c:when test="${sort == 4 }">
+																<td>
+																<button type="button" id = "permanentDeleteBt" class="btn btn-primary btn-toastr" data-context="info" 
+																		data-message="This is general theme info" data-position="top-right">영구 삭제</button>
+																</td>
+																<td>
+																	<button class="btn btn-default" id="getBackBt" >복원</button>
+																</td>	
+															</c:when>
+															<c:otherwise>
+																<td>
+																<button type="button" id = "mailDeleteBt" class="btn btn-primary btn-toastr" data-context="info" 
+																		data-message="This is general theme info" data-position="top-right">삭제</button>
+																</td>
+																<td>
+																	<button class="btn btn-default" id="replyBt">답장</button>
+																</td>
+																<td style="margin-left: 10px;">
+																	<button class="btn btn-default" id="forwardBt">전달</button>
+																</td>
+															</c:otherwise>
+																	
+														
+														</c:choose>
 														</tr>
 													</table>
 												</div>
@@ -353,87 +372,57 @@
 											
 											<div id="list-message-scrollable">
 												<ul class="inbox-list-message">
+													
+													<!-- 반복문  -->
+													<form value = "./deleteMail" method ="post">
+													<c:forEach var="a" items="${viewList}">
 													<li class = "unread">
 														<table>
 															<tr>
 																<td>
 																	<div class="fancy-checkbox custom-bgcolor-green">
 																		<label>
-																			<input type="checkbox" checked>
+																			<input type="checkbox" name = "mailSelectBt" attr1 = "${a.message_name }" attr2 = "${seesionScope.userId }">
 																			<span></span>
 																		</label>
 																	</div>		
 																</td>
+																<td>
+																	<div name = "importanceCheck" class="fancy-checkbox custom-bgcolor-green" style="cursor: pointer;" attr1 = "${a.message_name }" attr2 ="${a.mailimportance }">
+																		<label>
+																			<c:choose>
+																				<c:when test ="${a.mailimportance!=null&& a.mailimportance !=''}">
+																					<span class ="mailImportance " style="font-size:2em; color:Blue;cursor: pointer;"><i class = "fa fa-star"></i></span>
+																				</c:when>
+																				<c:otherwise>
+																					<span class ="mailImportance " style="font-size:2em; color:Blue;cursor: pointer;"><i class = "fa fa-star-o"></i></span>
+																				</c:otherwise>
+																			</c:choose>
+																		</label>
+																	</div>
+																</td>
 																<td width="100%">
-																	<a href="#">
-																		<img src="resources/assets/img/user1.png" class="user-image" alt="">
+																	<a href="./read?message_name=${a.message_name}">
+																		<img src="../resources/assets/img/user1.png" class="user-image" alt="">
 																		<div class="text">
-																			<span class="sender">Robby</span>
-																			<span class="timestamp">13:45</span>
-																			<h3 class="title">Weekly Meeting</h3>
-																			<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
-																			<span class="attachment"><i class="fa fa-paperclip"></i></span>
+																			<span class="sender">${a.from }</span>
+																			<span class="timestamp">${a.maildate }</span>
+																			<h3 class="title">${a.mailsubject }</h3>
+																			<span class="timestamp">${a.mailreaded }</span>
+																			<p class="preview">${a.contentpreview} ...</p>
+																			
+																			<c:if test="${a.mailattached!=''&&a.mailattached!=null}">
+																				<span class="attachment"><i class="fa fa-paperclip"></i></span>
+																			</c:if>
 																		</div>
 																	</a>		
 																</td>
 															</tr>
 														</table>
 													</li>
-													
-													<li class="unread">
-													
-														<table>
-															<tr>
-																<td>
-																	<div class="fancy-checkbox custom-bgcolor-green">
-																		<label>
-																			<input type="checkbox" checked>
-																			<span></span>
-																		</label>
-																	</div>
-																</td>
-																<td width="100%">
-																	<a href="#">
-																		<img src="resources/assets/img/user2.png" class="user-image" alt="">
-																		<div class="text">
-																			<span class="sender">Robby</span>
-																			<span class="timestamp">13:45</span>
-																			<h3 class="title">Weekly Meeting</h3>
-																			<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
-																			<span class="attachment"><i class="fa fa-paperclip"></i></span>
-																		</div>
-																	</a>	
-																</td>
-															</tr>
-														</table>
-													</li>
-													<li class="active">
-													
-													<table>
-														<tr>
-															<td>
-																<div class="fancy-checkbox custom-bgcolor-green">
-																		<label>
-																			<input type="checkbox" checked>
-																			<span></span>
-																		</label>
-																</div>
-															</td>
-															<td width="100%">
-																<a href="#">
-																	<img src="resources/assets/img/user3.png" class="user-image" alt="">
-																	<div class="text">
-																		<span class="sender">Jessie Monica</span>
-																		<span class="timestamp">13:45</span>
-																		<h3 class="title">Weekly Meeting</h3>
-																		<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
-																		<span class="attachment"><i class="fa fa-paperclip"></i></span>
-																	</div>
-																</a>
-															</td>
-														</tr>
-													</table>
-													</li>
+													</form>
+													</c:forEach>
+										
 												</ul>
 												</div>
 											</div>		
@@ -447,117 +436,7 @@
 				<!-- END MAIN CONTENT -->
 				<!-- RIGHT SIDEBAR -->
 				<div id="sidebar-right" class="right-sidebar">
-					<div class="sidebar-widget">
-						<h4 class="widget-heading"><i class="fa fa-calendar"></i> TODAY</h4>
-						<p class="date">Wednesday, 22 December</p>
-						<div class="row margin-top-30">
-							<div class="col-xs-4">
-								<a href="#">
-									<div class="icon-transparent-area custom-color-blue first">
-										<i class="fa fa-tasks"></i>
-										<span>Tasks</span>
-										<span class="badge">5</span>
-									</div>
-								</a>
-							</div>
-							<div class="col-xs-4">
-								<a href="#">
-									<div class="icon-transparent-area custom-color-green">
-										<i class="fa fa-envelope"></i>
-										<span>Mail</span>
-										<span class="badge">12</span>
-									</div>
-								</a>
-							</div>
-							<div class="col-xs-4">
-								<a href="#">
-									<div class="icon-transparent-area custom-color-orange last">
-										<i class="fa fa-user-plus"></i>
-										<span>Users</span>
-										<span class="badge">24</span>
-									</div>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="sidebar-widget">
-						<div class="widget-header">
-							<h4 class="widget-heading">YOUR APPS</h4>
-							<a href="#" class="show-all">Show all</a>
-						</div>
-						<div class="row">
-							<div class="col-xs-3">
-								<a href="#" class="icon-app" title="Dropbox" data-toggle="tooltip" data-placement="top">
-									<i class="fa fa-dropbox dropbox-color"></i>
-								</a>
-							</div>
-							<div class="col-xs-3">
-								<a href="#" class="icon-app" title="WordPress" data-toggle="tooltip" data-placement="top">
-									<i class="fa fa-wordpress wordpress-color"></i>
-								</a>
-							</div>
-							<div class="col-xs-3">
-								<a href="#" class="icon-app" title="Drupal" data-toggle="tooltip" data-placement="top">
-									<i class="fa fa-drupal drupal-color"></i>
-								</a>
-							</div>
-							<div class="col-xs-3">
-								<a href="#" class="icon-app" title="Github" data-toggle="tooltip" data-placement="top">
-									<i class="fa fa-github github-color"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="sidebar-widget">
-						<div class="widget-header">
-							<h4 class="widget-heading">MY PROJECTS</h4>
-							<a href="#" class="show-all">Show all</a>
-						</div>
-						<ul class="list-unstyled list-project-progress">
-							<li>
-								<a href="#" class="project-name">Project XY</a>
-								<div class="progress progress-xs progress-transparent custom-color-orange">
-									<div class="progress-bar" role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="width:67%"></div>
-								</div>
-								<span class="percentage">67%</span>
-							</li>
-							<li>
-								<a href="#" class="project-name">Growth Campaign</a>
-								<div class="progress progress-xs progress-transparent custom-color-blue">
-									<div class="progress-bar" role="progressbar" aria-valuenow="23" aria-valuemin="0" aria-valuemax="100" style="width:23%"></div>
-								</div>
-								<span class="percentage">23%</span>
-							</li>
-							<li>
-								<a href="#" class="project-name">Website Redesign</a>
-								<div class="progress progress-xs progress-transparent custom-color-green">
-									<div class="progress-bar" role="progressbar" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100" style="width:87%"></div>
-								</div>
-								<span class="percentage">87%</span>
-							</li>
-						</ul>
-					</div>
-					<div class="sidebar-widget">
-						<div class="widget-header">
-							<h4 class="widget-heading">MY FILES</h4>
-							<a href="#" class="show-all">Show all</a>
-						</div>
-						<ul class="list-unstyled list-justify list-file-simple">
-							<li><a href="#"><i class="fa fa-file-word-o"></i>Proposal_draft.docx</a>
-								<span>4 MB</span>
-							</li>
-							<li><a href="#"><i class="fa fa-file-pdf-o"></i>Manual_Guide.pdf</a>
-								<span>20 MB</span>
-							</li>
-							<li><a href="#"><i class="fa fa-file-zip-o"></i>all-project-files.zip</a>
-								<span>315 MB</span>
-							</li>
-							<li><a href="#"><i class="fa fa-file-excel-o"></i>budget_estimate.xls</a>
-								<span>1 MB</span>
-							</li>
-						</ul>
-					</div>
-					<p class="text-center"><a href="#" class="btn btn-default btn-xs">More Widgets</a></p>
+					
 				</div>
 				<!-- END RIGHT SIDEBAR -->
 			</div>
@@ -571,11 +450,11 @@
 		</div>
 		<!-- END WRAPPER -->
 		<!-- Javascript -->
-		<script src="resources/assets/vendor/jquery/jquery.min.js"></script>
-		<script src="resources/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-		<script src="resources/assets/vendor/pace/pace.min.js"></script>
-		<script src="resources/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-		<script src="resources/assets/scripts/klorofilpro-common.js"></script>
+		<script src="../resources/assets/vendor/jquery/jquery.min.js"></script>
+		<script src="../resources/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+		<script src="../resources/assets/vendor/pace/pace.min.js"></script>
+		<script src="../resources/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+		<script src="../resources/assets/scripts/klorofilpro-common.js"></script>
 		<!-- DEMO PANEL -->
 		<!-- for demo purpose only, you should remove it on your project directory -->
 		<script type="text/javascript">
@@ -597,7 +476,7 @@
 		</script>
 		<div id="demo-panel">
 			<a href="#" onclick="toggleDemoPanel(event);"><i class="fa fa-cog fa-spin"></i></a>
-			<iframe src="resources/demo-panel/index.html"></iframe>
+			<iframe src="../resources/demo-panel/index.html"></iframe>
 		</div>
 		<!-- END DEMO PANEL -->
 		<script>
@@ -609,7 +488,198 @@
 				wheelStep: 1,
 				color: '#cecece'
 			});
+		
+			//button 클리학면 전체 클릭 , 한번 더 클릭하면 해제 
+			$('#checkAllBt').click(checkAllorNot);
+			
+			$('#mailDeleteBt').click(submitDeleteForm);
+			
+			$('div[name="importanceCheck"]').click(importanceCheck);
+				
+			$('#permanentDeleteBt').click(permanentDelete);
+			
+			$('#getBackBt').click(getBack);
+			
+			$('#forwardBt').click(forwardMail);
+			
+			$('#replyBt').click(replyMail);
+			
 		});
+		
+		//#checkAllBt
+		function checkAllorNot(){
+			
+			if($('input:checkbox[id="checkAllBt"]').is(":checked")==true){
+				
+				$('input:checkbox[name="mailSelectBt"]').each(function(){
+					this.checked = true; 
+				});
+			}else{
+				
+				$('input:checkbox[name="mailSelectBt"]').each(function(){
+					this.checked = false; 
+				});
+			}
+		}
+		
+		//submit Delete Form
+		function submitDeleteForm(){
+			
+			var deleteArray = new Array(); 
+			
+			$('input:checkbox[name= "mailSelectBt"]').each(function(i){
+				
+				if( $(this).is(':checked') ){
+					deleteArray[i] = $(this).attr('attr1');
+				}
+				
+			});
+			
+			alert(deleteArray); 
+			jQuery.ajaxSettings.traditional = true;
+			
+			$.ajax({
+				url : './deleteMail', 
+				type : 'POST',
+				data: {deleteArray: JSON.stringify(deleteArray), sort : "normal"},
+				dataType : 'text',
+				success : function(txt){
+					location.reload();
+					
+				},
+				error : function(e){
+					alert(e);
+				}
+				
+			});
+			
+			return false;
+		}
+		
+		function importanceCheck(){
+			
+			var message_name = $(this).attr('attr1'); 
+			var message_importance = $(this).attr('attr2');; 
+			
+			$.ajax({
+				url : './importanceCheck', 
+				type : 'GET',
+				data: {message_name: message_name, message_importance: message_importance},
+				dataType : 'text',
+				success : function(txt){
+					location.reload();
+				},
+				error : function(e){
+					alert(e);
+				}
+			});	
+		}
+		
+		function permanentDelete(){
+			
+			var deleteArray = new Array(); 
+			
+			$('input:checkbox[name= "mailSelectBt"]').each(function(i){
+				
+				if( $(this).is(':checked') ){
+					deleteArray[i] = $(this).attr('attr1');
+				}
+				
+			});
+			
+			alert(deleteArray); 
+			jQuery.ajaxSettings.traditional = true;
+			
+			$.ajax({
+				url : './deleteMail', 
+				type : 'POST',
+				data: {deleteArray: JSON.stringify(deleteArray), sort: "permanent"},
+				dataType : 'text',
+				success : function(txt){
+					location.reload();
+					
+				},
+				error : function(e){
+					alert(e);
+				}
+			});
+			
+			return false;
+		}
+		
+		function getBack(){
+			
+			var deleteArray = new Array(); 
+			
+			$('input:checkbox[name= "mailSelectBt"]').each(function(i){
+				
+				if( $(this).is(':checked') ){
+					deleteArray[i] = $(this).attr('attr1');
+				}
+				
+			});
+			
+			alert(deleteArray); 
+			jQuery.ajaxSettings.traditional = true;
+			
+			$.ajax({
+				url : './deleteMail', 
+				type : 'POST',
+				data: {deleteArray: JSON.stringify(deleteArray), sort: "getBack"},
+				dataType : 'text',
+				success : function(txt){
+					location.reload();
+					
+				},
+				error : function(e){
+					alert(e);
+				}
+			});
+			
+			return false;
+		}
+		// 전달 ;
+		function forwardMail(){
+				
+			var message_name =null;
+			
+			$('input:checkbox[name= "mailSelectBt"]').each(function(i){
+				
+				if( $(this).is(':checked') ){
+					message_name = $(this).attr('attr1');
+				}
+			});
+			
+			if(message_name != null){
+				location.href = './forwardMail?message_name='+message_name+'&check=forward';
+
+			}else{
+				alert('[Forward] there is no messageName');	
+			}
+			return false;
+		}
+		
+		function replyMail(){
+			
+			var message_name =null;
+			
+			$('input:checkbox[name= "mailSelectBt"]').each(function(i){
+				
+				if( $(this).is(':checked') ){
+					message_name = $(this).attr('attr1');
+				}
+			});
+			
+			if(message_name != null){
+				location.href = './forwardMail?message_name='+message_name+'&check=reply';
+
+			}else{
+				alert('[Forward] there is no messageName');	
+			}
+			return false;
+		}
+		
+		
 		</script>
 	</body>
 </html>

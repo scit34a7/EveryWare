@@ -12,20 +12,20 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 		<!-- VENDOR CSS -->
-		<link rel="stylesheet" href="resources/assets/vendor/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" href="resources/assets/vendor/font-awesome/css/font-awesome.min.css">
-		<link rel="stylesheet" href="resources/assets/vendor/themify-icons/css/themify-icons.css">
-		<link rel="stylesheet" href="resources/assets/vendor/pace/themes/orange/pace-theme-minimal.css">
+		<link rel="stylesheet" href="../resources/assets/vendor/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../resources/assets/vendor/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../resources/assets/vendor/themify-icons/css/themify-icons.css">
+		<link rel="stylesheet" href="../resources/assets/vendor/pace/themes/orange/pace-theme-minimal.css">
 		<!-- MAIN CSS -->
-		<link rel="stylesheet" href="resources/assets/css/main.css">
-		<link rel="stylesheet" href="resources/assets/css/skins/sidebar-nav-darkgray.css" type="text/css">
-		<link rel="stylesheet" href="resources/assets/css/skins/navbar3.css" type="text/css">
+		<link rel="stylesheet" href="../resources/assets/css/main.css">
+		<link rel="stylesheet" href="../resources/assets/css/skins/sidebar-nav-darkgray.css" type="text/css">
+		<link rel="stylesheet" href="../resources/assets/css/skins/navbar3.css" type="text/css">
 		<!-- FOR DEMO PURPOSES ONLY. You should/may remove this in your project -->
-		<link rel="stylesheet" href="resources/assets/css/demo.css">
-		<link rel="stylesheet" href="resources/demo-panel/style-switcher.css">
+		<link rel="stylesheet" href="../resources/assets/css/demo.css">
+		<link rel="stylesheet" href="../resources/demo-panel/style-switcher.css">
 		<!-- ICONS -->
-		<link rel="apple-touch-icon" sizes="76x76" href="resources/assets/img/apple-icon.png">
-		<link rel="icon" type="image/png" sizes="96x96" href="resources/assets/img/favicon.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="../resources/assets/img/apple-icon.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="../resources/assets/img/favicon.png">
 	</head>
 	<body class="sidebar-minified has-content-menu page-inbox">
 		<!-- WRAPPER -->
@@ -33,7 +33,7 @@
 			<!-- NAVBAR -->
 			<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
-				<a href="index"> <img src="resources/assets/img/logo-white.png"
+				<a href="index"> <img src="../resources/assets/img/logo-white.png"
 					alt="Klorofil Pro Logo" class="img-responsive logo">
 				</a>
 			</div>
@@ -111,7 +111,7 @@
 							</ul></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown"> <img
-								src="resources/assets/img/user.png" alt="Avatar"> <span>박자바</span>
+								src="../resources/assets/img/user.png" alt="Avatar"> <span>박자바</span>
 						</a>
 							<ul class="dropdown-menu logged-user-menu">
 								<li><a href="#"><i class="ti-user"></i> <span>개인정보</span></a></li>
@@ -299,12 +299,14 @@
 											<nav>
 												<span>Mail Service</span>
 												<ul class="nav-content-menu">
-													<li><a href="./appviews-inbox-inbox"><i class="fa fa-inbox"></i> 받은편지함</a></li>
-													<li><a href="./appviews-inbox-write"><i class="fa fa-mail-forward"></i> 보낸편지함</a></li>
+													<li><a href="./sendMail"><i class ="fa fa-pencil"></i> 편지쓰기</a></li>
+													<li><a href="./getMail?sort=all"><i class="fa fa-inbox"></i> 받은편지함</a></li>
+													<li><a href="#"><i class="fa fa-mail-forward"></i> 보낸편지함</a></li>
 													<li><a href="#"><i class="fa fa-folder"></i> 임시보관함</a></li>
-													<li><a href="#"><i class="fa fa-flag"></i> 중요편지함</a></li>
+													<li><a href="./getMail?sort=important"><i class="fa fa-flag"></i> 중요편지함</a></li>
 													<li><a href="#"><i class="fa fa-folder"></i> 내게쓴편지함</a></li>
-													<li><a href="#"><i class="fa fa-trash"></i> 휴지통</a></li>
+													<li><a href="./getMail?sort=trash"><i class="fa fa-trash"></i> 휴지통</a></li>
+													<li><a href="./setMailForm"><i class = "fa fa-cog"></i> 양식 설정</a></li>
 												</ul>
 											</nav>
 										</div>
@@ -317,19 +319,19 @@
 										<button type="button" class="btn-close-content-right"><i class="fa fa-close"></i></button>
 										<div class="header">
 											<div class="top clearfix">
-												<h3 class="title">Weekly Meeting</h3>
-												<span class="timestamp">Jan, 2</span>
+												<h3 class="title">${mail.mailsubject} </h3>
+												<span class="timestamp">${mail.maildate}</span>
 											</div>
 											<div class="bottom clearfix">
 												<div class="contact-info">
-													<img src="resources/assets/img/user3.png" class="user-image" alt="Sender">
-													<span class="sender">Jessie Monica
-														<span class="email">(jessie@yourdomain.com)</span>
+													<img src="../resources/assets/img/user3.png" class="user-image" alt="Sender">
+													<span class="sender">${mail.from }
+														<span class="email">(${mail.from})</span>
 														<br>
 													</span>
 													<span class="text-muted">to:</span>
-													<span class="receiver" data-toggle="tooltip" data-title="samuel@yourdomain">me</span>,
-													<span class="receiver" data-toggle="tooltip" data-title="robby@yourdomain">Robby</span>
+													<span class="receiver" data-toggle="tooltip" data-title="samuel@yourdomain">${mail.recipients }</span>,
+													<!-- <span class="receiver" data-toggle="tooltip" data-title="robby@yourdomain">Robby</span> -->
 												</div>
 												<div class="btn-group">
 													<button type="button" class="btn btn-primary btn-replyx"><i class="fa fa-mail-reply"></i>
@@ -351,49 +353,37 @@
 											</div>
 										</div>
 										<div class="content">
-											<span>Dear 쯰형,</span>
-											<br/>
-											<br/>
-											<p>메일 예시(1)</p>
-											<p>메일 예시(1)</p>
-											<p>메일 예시(1)</p>
-											<p>메일 예시(1)</p>
+											${mail.contentpreview }
 											
-											<br> Regards,
-											<br> Jessie Monica
 											<hr class="content-separator">
 											<div class="attachment-list">
-												<h4> 3 Attachments</h4>
+											 <c:if test = "${fn:length(attaches)>0}"> 
+												<h4> ${fn:length(attaches)} Attachments</h4>
 												<ul class="list-inline">
-													<li>
-														<a href="#">
+													
+													<!-- 그림 일갈 바꾸기 , href 또는 클릭 이벤트 부여해서 ajax로 다운받기 ;  -->
+													<c:forEach var = "a" items ="${attaches}">
+													<li style="cursor: pointer">
+														<!--<a href="./download?message_number=${a.message_number}&part_number=${a.part_number}"  -->
+														<a class = "download_attached" attr1 = "${a.message_number}" attr2="${a.part_number}">
 															<span class="file-type">
-																<img src="resources/assets/img/pages/inbox/attachment-img.jpg" alt="Thumbnail">
+																<img src="../resources/assets/img/pages/inbox/attachment-img.jpg" alt="Thumbnail">
 																<span class="text">
-																	<span class="filename">login-background.jpg</span>
+																	<span class="filename">${a.fileName }</span>
 																	<br>
-																	<span class="filesize">127 KB</span>
+																	<span class="filesize">${a.size} byte</span>
 																</span>
 															</span>
 														</a>
 													</li>
-													<li>
-														<a href="#">
-															<span class="file-type"><i class="fa fa-file-word-o"></i>
-																<span class="text">
-																	<span class="filename">Proposal_Final.docx</span>
-																	<br>
-																	<span class="filesize">4.2 MB</span>
-																</span>
-															</span>
-														</a>
-													</li>
+													</c:forEach>
 												</ul>
+											</c:if> 
 											</div>
 										</div>
 										<div class="footer">
 											<div class="reply-message">
-												<img src="resources/assets/img/user-medium.png" class="user-image" alt="User Image">
+												<img src="../resources/assets/img/user-medium.png" class="user-image" alt="User Image">
 												<div id="reply-message" class="reply-box">
 													Click here to <a href="#">reply</a>, <a href="#">reply to all</a> or <a href="#">forward</a>
 												</div>
@@ -532,11 +522,11 @@
 		</div>
 		<!-- END WRAPPER -->
 		<!-- Javascript -->
-		<script src="resources/assets/vendor/jquery/jquery.min.js"></script>
-		<script src="resources/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-		<script src="resources/assets/vendor/pace/pace.min.js"></script>
-		<script src="resources/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-		<script src="resources/assets/scripts/klorofilpro-common.js"></script>
+		<script src="../resources/assets/vendor/jquery/jquery.min.js"></script>
+		<script src="../resources/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+		<script src="../resources/assets/vendor/pace/pace.min.js"></script>
+		<script src="../resources/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+		<script src="../resources/assets/scripts/klorofilpro-common.js"></script>
 		<!-- DEMO PANEL -->
 		<!-- for demo purpose only, you should remove it on your project directory -->
 		<script type="text/javascript">
@@ -558,7 +548,7 @@
 		</script>
 		<div id="demo-panel">
 			<a href="#" onclick="toggleDemoPanel(event);"><i class="fa fa-cog fa-spin"></i></a>
-			<iframe src="resources/demo-panel/index.html"></iframe>
+			<iframe src="../resources/demo-panel/index.html"></iframe>
 		</div>
 		<!-- END DEMO PANEL -->
 		<script>
@@ -570,7 +560,29 @@
 				wheelStep: 1,
 				color: '#cecece'
 			});
+			
+			$('.download_attached').on('click',downloadAttached);
 		});
+		
+		//for download; // 일단 파일다운로드 체크하기 
+		function downloadAttached(){
+			
+			var message_number = $(this).attr('attr1');
+			var part_number =	$(this).attr('attr2');
+				
+			$.ajax({
+				url : "./download",
+				type : "get",
+				data: {message_number: message_number, part_number: part_number }, 
+				dataType : "text",
+				success : function(txt){
+								
+				},
+				error : function(e){
+					alert(e);
+				}
+			});	
+		}
 		</script>
 	</body>
 </html>

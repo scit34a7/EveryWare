@@ -66,9 +66,11 @@ public class MailUtil {
 		return null;
 	}
 
-	public static void printAddresses(Address[] addresses, PrintWriter out){
+	public static String printAddresses(Address[] addresses){
 		if(addresses == null)
-			return; 
+			return null; 
+		
+		String result = "";
 		
 		for(int i = 0 ; i < addresses.length;i++){
 			
@@ -80,12 +82,18 @@ public class MailUtil {
 			}
 			
 			name = name.replaceAll("<", "&lt;");
+			name = name.replaceAll(">", "&gt;");
+			
 			if(i==0)
-				out.print(name);
+				result += name;
 			else
-				out.println(","+name);
+				result += ","+name;
 		}
+		return result;
 	}
+	
+	
+	
 	
 	public static String getAddress(Address[] addresses){
 		if(addresses == null)
@@ -108,7 +116,7 @@ public class MailUtil {
 	
 	public static InternetAddress[] parse(String addr){
 		
-		StringTokenizer  st = new StringTokenizer(addr, ",;", false);
+		StringTokenizer  st = new StringTokenizer(addr, ",", false);
 		int count = st.countTokens();
 		InternetAddress ia[] = new InternetAddress[count];
 		int i = 0; 
@@ -119,11 +127,16 @@ public class MailUtil {
 				int index = token.indexOf("<");
 				String email = token, name = "";
 				
+				System.out.println("external check: "+email);
 				if(index != -1){
 					name =token.substring(0, index);
-					email = token.substring(index, token.length()-1);
+					
+					email = token.substring(index+1, token.length()-1); //token.length()-1 을 변경 
+				
+					System.out.println("name: "+name);
+					System.out.println("email: "+email);
 				}
-				ia[i] = new InternetAddress(email, name, "KSC5601");
+				ia[i] = new InternetAddress(email, name, "UTF-8");
 				
 			}catch(UnsupportedEncodingException e){e.printStackTrace();}
 			i++;
@@ -135,9 +148,3 @@ public class MailUtil {
 	
 	
 	
-	
-		
-
-	
-	
-

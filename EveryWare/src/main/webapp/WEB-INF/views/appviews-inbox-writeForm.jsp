@@ -317,7 +317,7 @@
 							</div>
 						</div>
 						<div class="col-lg-9">
-							<form action ="./sendMail" id = "sendForm" method = "post" enctype ="multipart/form-data">
+							
 							<div class="content-right clearfix">
 								
 								<div class="content-panel view-message">
@@ -332,44 +332,7 @@
 											
 											<table>
 												<tr>
-													<td><h4>받는 사람&nbsp;&nbsp;&nbsp;&nbsp;</h4> </td>
-													<td style = "position: absolute;" width = "50%";>
-													<label for="contact-email" class="control-label sr-only">Email</label>
-													<span class="form-control" >
-													<span id = "blankForSending">
-													<!-- reply 또는 forward -->
-													</span>
-													<input type="text" id="mailSearcher">
-													</span>
-													<ul class ="list-group" id= "mailResult" style = "position: relative; z-index:100;"></ul>
-													<input type="hidden" id ="mailRecipients" name="mailRecipients" >
-													</td>
-												</tr>
-											
-												<tr>	
-													<td><h4>참조&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h4></td>
-													<td>
-														<label for="contact-subject" class="control-label sr-only">Reference</label>
-														<input type="text" name ="mailRecipients_refer" class="form-control" id="contact-subject" placeholder="참조 "  size = "80">
-													</td>
-												</tr>
-												
-												<tr>
-													<td width="13%"><h4>제목&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h4></td>
-													<td>
-														<label for="contact-subject" class="control-label sr-only">Subject</label>
-														<input type="text" name ="mailSubject" class="form-control" id="mailSubject" placeholder="Subject"  size = "80">
-													</td>	
-														
-													<td>
-														<div class="fancy-checkbox custom-bgcolor-green" style ="margin :0">
-															<label>
-																&nbsp;&nbsp;
-															<input type="checkbox" name = "mailImportance">
-																<span>중요도</span>
-															</label>
-														</div>
-													</td>
+													<td><h3>메일 양식 설정</h3> </td>
 												</tr>
 											</table>
 										
@@ -391,51 +354,32 @@
 										
 									<div class="content">									
 										<div class="container-fluid">
-										<textarea class="summernote" name ="mailContent_summer">
+										<form action ="./saveMailForm" id = "saveMailForm" method = "post" enctype ="multipart/form-data">
+										<textarea class="summernote" id ="summernote"  name ="mailContent_summer">
 											
-											${writeForm }
+												 "${writeForm}"
 											
-											<c:if test = "${mail != null }">
-											
-											<br>
-											<p>-------------------Original Message -----------------</p>
-											<p id = "dataFrom">  From : "${mail.from}" </p>
-											<p id = "dataTo">  To : "${mail.recipients}"</p>
-											<p>  Cc :</p>
-											<p>  Sent : ${mail. maildate}</p>
-											<p>  Subject: ${mail.mailsubject }</p>
-											<p>  Content: </p>	
-												${mail.contentpreview }
-											</c:if>
+											<!--  c:if writeForm != null tag 지 움  -->
 										</textarea>
+										</form>
 										<div class="margin-bottom-30"></div>
 										</div>
 									<div class="container-fluid">
-										
+										<button type="button" id = "formSubmiter1" class="btn btn-primary btn-block" width = "100%">양식 저장하기</button>			
 										<hr class="content-separator">
 										<div class="attachment-list">
-											<h4>첨부 파일</h4>
 											
-												<div class="form-group">
-													<label for="ticket-attachment" class="col-sm-3 control-label">Attach File</label>
-													<div class="col-md-9">
-														<input type="file" id="ticket-attachment" name ="mailAttach" multiple >
-														<p class="help-block">
-															<em>Valid file type: .jpg, .png, .txt, .pdf. File size max: 1 MB</em>
-														</p>
-													</div>
-												</div>
 										</div>
 										
 									</div>
-									</form>
+									
 									<div class="footer">
 										<div class="reply-message">
 												Footer in the Mails<hr>
 								
-										<button type="submit" class="btn btn-primary btn-replyx" id = "formSubmiter">보내기</button>
+										<!-- <button type="submit" class="btn btn-primary btn-replyx" id = "formSubmiter">보내기</button>
 										<button type="button" class="btn btn-primary btn-replyx">미리보기</button>
-										<button type="button" class="btn btn-primary btn-replyx">임시저장</button>			
+										<button type="button" class="btn btn-primary btn-replyx">임시저장</button>		 -->	
 										</div>
 									</div>
 								</div>
@@ -600,104 +544,33 @@
 					alert('You have pasted something to the editor');
 				}
 			});
-			
+			// markdown editor
+			var initContent = '<h4>Hello there</h4> ' +
+				'<p>How are you? I have below task for you :</p> ' +
+				'<p>Select from this text... Click the bold on THIS WORD and make THESE ONE italic, ' +
+				'link GOOGLE to google.com, ' +
+				'test to insert image (and try to tab after write the image description)</p>' +
+				'<p>Test Preview And ending here...</p> ' +
+				'<p>Click "List"</p> Enjoy!';
+			$('#markdown-editor').text(toMarkdown(initContent));
 		
 			// 이메일 보내기 버튼에 이벤트 부여하기 
-			document.getElementById('formSubmiter').onclick = function(){
-				document.getElementById('sendForm').submit();	
+			document.getElementById('formSubmiter1').onclick = function(){
+				document.getElementById('saveMailForm').submit();	
 				return false;
 			};
 		
-			$('#mailSearcher').click(mailSearch);
-		
-			if('${mail.mailsubject}' != null){
-				
-				var check = '${check}'; 
-				
-				if(check == 'reply'){
-					
-					$('#blankForSending').html('${mail.from}');
-					$('#mailRecipients').val('${mail.from}');	
-				}
-				
-				$('#mailSubject').val('['+'${check}'+']'+ '${mail.mailsubject}');
+			/* if("${writeForm}"!= null){
+				alert('null 이 아닙니다. ');
 			
-				$('#dataFrom').html('<span>From : '+'${mail.from}'+'</span>');
-			
-				$('#dataTo').html('<span>To : '+'${mail.recipients}'+'</span>');
-			}
-		
+				$('#summernote').html("${writeForm}");
+				
+				alert('칸료우! ');
+				
+				return false; 
+			} */
 		});
 		
-		function mailSearch(){
-			$('#mailSearcher').keyup(function(){
-				var searchTxt = $('#mailSearcher').val();
-				
-				if(searchTxt != ''){
-					$.ajax({
-						url: './mailSearch',
-						type: 'get',
-						data: {searchTxt: searchTxt},
-						dataType: 'json',
-						success: resultOfSearch,
-						error: function(e){
-							
-						}
-					});	
-				}else{
-					$('#mailResult').html('');
-				}
-			});
-		}
-		
-		function resultOfSearch(resultList){
-			
-			if(resultList.length > 0){
-				
-				var searchResult = '';
-				
-				$.each(resultList, function(i,n){
-					searchResult += '<li class="list-group-item" name = "choice" style = "cursor:pointer; position: relative; z-index:100;" attr1 ='+resultList[i]+'>' + resultList[i] + '</li>';
-				
-				});
-				
-				$('#mailResult').html(searchResult);
-				
-			}else{
-				var searchResult = '<li class="list-group-item" name = "choice" style = "cursor:pointer; position: relative; z-index:100;" attr1 ='+$('#mailSearcher').val()+'>' + $('#mailSearcher').val() +'</li>';
-		
-				$('#mailResult').html(searchResult);
-			}	
-		
-			$('li[name="choice"]').click(selectChoice);
-			
-		
-				
-		}
-		
-		function selectChoice(){
-			var selectedValue = $(this).attr('attr1');
-			
-			// 여기서 다시 바꿔줘야함 , &lt; &gt		
-			var selectedValueModified = deleteHtmlTag(selectedValue);
-			
-			$('#blankForSending').append('<span>'+selectedValueModified+' <i class ="fa fa-times"></i></span>'); //XXX: 보여줄 때는 &lt; 로 ; 
-			
-			$('i[class= "fa fa-times"]').css('cursor','pointer');
-		
-			$('i[class= "fa fa-times"]').click(deleteAddress);
-			
-			
-			$('#mailRecipients').val($('#mailRecipients').val()+selectedValue+","); //XXX: 실제로 갈 때에는 <>태그 그대로 
-			
-			$('#mailResult').html('');
-			
-			$('#mailSearcher').val('');
-			
-			return false;
-		}
-		
-		//특수문자 대체 ! 
 		function deleteHtmlTag(id) {
 		    
 			//var content = id.value.trim();
@@ -708,11 +581,6 @@
 		    content = content.replace(/\"/g, "&quot;");
 		    
 		    return content;
-		}
-		
-		function deleteAddress(){
-			//지우기 ; 상위요소의 
-			$(this).closest('span').html('');
 		}
 		
 	</script>
