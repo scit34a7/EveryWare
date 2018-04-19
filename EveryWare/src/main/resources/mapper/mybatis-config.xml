@@ -9,11 +9,15 @@
 		<typeAlias type="com.a7.everyware.meeting.vo.MeetingLogVO" alias="MeetingLogVO" />
 		<typeAlias type="com.a7.everyware.board.vo.BoardVO" alias="BoardVO" />
 		<typeAlias type="com.a7.everyware.board.vo.BoardAttachedVO" alias="BoardAttachedVO" />
+		<typeAlias type="com.a7.everyware.mail.vo.Inbox" alias ="Inbox" />
+		<typeAlias type="com.a7.everyware.mail.vo.MailInfo" alias ="MailInfo" />
+		<typeAlias type="com.a7.everyware.mail.vo.BlobData" alias ="BlobData" />
+		
 	</typeAliases>
-	
 	<mappers>
 		<mapper resource="mapper/userMapper.xml" />
 		<mapper resource="mapper/meetingMapper.xml" />
 		<mapper resource="mapper/boardMapper.xml" />
+		<mapper resource="mapper/mailMapper.xml" />
 	</mappers>
 </configuration>
