@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 메일가져오기 처리 SQL -->
+<mapper namespace="com.a7.everyware.mail.dao.MailMapper">
+	
+	
+	
+	<resultMap id="responseMap" type="Inbox">
+    	  
+    	  <result property="message_name" javaType="java.lang.String" column="message_name" jdbcType="VARCHAR"/>
+    	  <result property="repository_name" javaType="java.lang.String" column="repository_name" jdbcType="VARCHAR"/>
+    	  <result property="message_state" javaType="java.lang.String" column="message_state" jdbcType="VARCHAR"/>
+    	  <result property="error_message" javaType="java.lang.String" column="error_message" jdbcType="VARCHAR"/>
+    	  <result property="sender" javaType="java.lang.String" column="sender" jdbcType="VARCHAR"/>
+    	  <result property="recipients" javaType="java.lang.String" column="recipients" jdbcType="VARCHAR"/>
+    	  <result property="remote_host" javaType="java.lang.String" column="remote_host" jdbcType="VARCHAR"/>
+    	  <result property="remote_addr" javaType="java.lang.String" column="remote_addr" jdbcType="VARCHAR"/>
+    
+    	  <result property="message_body" javaType="_byte[]" column="message_body" jdbcType="BLOB"/>
+  		  <result property="message_attribute" javaType="_byte[]" column="message_attribute" jdbcType="BLOB"/>
+    
+   		  <result property="message_importance" javaType="java.lang.String" column="message_importance" jdbcType="VARCHAR"/>
+   	   	  <result property="message_receiving" javaType="java.lang.String" column="message_receiving" jdbcType="VARCHAR"/>
+    	  <result property="message_deleted" javaType="java.lang.String" column="message_deleted" jdbcType="VARCHAR"/>
+    
+      	  <result property="last_updated" javaType="java.lang.String" column="last_updated" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<resultMap id="mailinfoMap" type = "MailInfo">
+		<result property = "user_id" javaType = "java.lang.String" column = "user_id" jdbcType = "VARCHAR"/>
+		<result property = "user_name" javaType = "java.lang.String" column = "user_name" jdbcType = "VARCHAR"/>
+		<result property = "mailinfo_repository" javaType = "java.lang.String" column = "mailinfo_repository" jdbcType = "VARCHAR"/>
+		<result property = "mailinfo_address" javaType = "java.lang.String" column = "mailinfo_address" jdbcType = "VARCHAR"/>
+		<result property = "mailinfo_writeform" javaType = "_byte[]" column = "mailinfo_writeform" jdbcType = "BLOB"/>
+		<result property = "etc1" javaType = "java.lang.String" column = "etc1" jdbcType = "VARCHAR"/>
+	</resultMap>
+	
+	<resultMap id ="writeForm_bt" type = "BlobData">
+		<result property = "blobData" javaType = "_byte[]" column = "mailinfo_writeformat" jdbcType = "BLOB"/>
+	</resultMap>
+	
+	
+	<!-- list Mail -->
+	<select id = "getMailList" parameterType= "java.lang.String" resultMap = "responseMap">
+		select 
+			*	 
+		from
+			inbox 
+		where 
+			message_deleted is null
+		and
+			repository_name = #{userName}
+		
+		order by 
+			last_updated desc
+	</select>
+	
+	<!--  List of mail deleted  -->
+	<select id = "getMailList_trash" parameterType= "java.lang.String" resultMap = "responseMap">
+		select 
+			*	 
+		from
+			inbox 
+		where 
+			repository_name = #{userName}
+		and
+			message_deleted is not null
+		
+		order by 
+			last_updated desc
+	</select>
+	
+	<!--  List of mail important  -->
+	<select id = "getMailList_important" parameterType= "java.lang.String" resultMap = "responseMap">
+		select 
+			*	 
+		from
+			inbox 
+		where 
+			repository_name = #{userName}
+		and
+			message_deleted is null
+		and 
+			message_importance is not null
+		order by 
+			last_updated desc
+	</select>
+	
+	
+	
+	
+	<!-- read Mail -->	
+	<select id = "readMail" parameterType = "hashMap" resultMap = "responseMap">
+		select 
+			* 
+		from 
+			inbox
+		where 
+			repository_name = #{repository_name}
+		and 
+			message_name = #{message_name}	
+	</select>
+	
+	<!--   delete Mail 
+	<delete id = "deleteMail" parameterType = "java.util.List" >
+		update inbox set
+		
+		message_deleted = 'deleted'
+		
+		where message_name IN
+		
+		<foreach collection="list" item="type" index="index"  open="(" close=")" separator=",">
+            #{list[index]}
+		</foreach>	
+		
+		<foreach collection="list" item="item"  separator=" , ">
+            #{list[index]}  #{item}
+        </foreach>
+	</delete> -->
+	
+	<update id = "deleteOneMail" parameterType = "java.lang.String" >
+		update inbox set
+		
+		message_deleted = 'deleted'
+	
+		where message_name = #{message_name}
+   
+	</update>
+	
+	<!--  Check Importance / 'important' in value  -->
+	<update id = "checkImportance" parameterType = "java.lang.String" >
+		update inbox set
+		
+		message_importance = 'important'
+	
+		where message_name = #{message_name}
+	</update>
+	
+	<!--  Cancel Importance / change value to null ; -->
+	<update id = "cancelImportance" parameterType = "java.lang.String" >
+		update inbox set
+		
+		message_importance = null
+	
+		where message_name = #{message_name}
+	</update>
+	
+	
+	<select id="getUserFromMailInfo" parameterType = "java.lang.String" resultType = "java.lang.String">
+		select 
+			user_name 
+		from 
+			mailinfo_tb
+		where
+			mailinfo_address = #{mailaddress}
+	</select>
+	
+	<select id ="getRepositoryFormMailInfo" parameterType ="java.lang.String" resultType = "java.lang.String">
+		select 
+			mailinfo_repository
+		from
+			mailinfo_tb
+		where 
+			user_id = #{user_id}
+	</select>
+	
+	<!-- 받는 사람 메일 주소 검색 -->
+	<select id = "mailSearch" parameterType = "java.lang.String" resultMap = "mailinfoMap">
+		select 
+			*
+		from 
+			mailinfo_tb
+		where 
+			user_name like '%'||#{searchTxt}||'%'
+		or 
+			mailinfo_address like '%'||#{searchTxt}||'%'
+	</select>
+	
+	<!-- blob으로 저장 / 메일 쓰기 양식 저장 -->
+	<update id = "updateWriteForm" parameterType = "hashMap">
+	
+		update mailinfo_tb set
+	
+		mailinfo_writeformat = #{writeForm.blobData}
+		
+		<!-- utl_raw.cast_to_raw(#{writeForm}) -->
+	
+		where user_id = #{userId}
+	
+	</update>
+	
+	<select id ="selectWriteForm" parameterType = "java.lang.String" resultMap ="writeForm_bt">
+	
+		select
+			mailinfo_writeformat
+		from
+			mailinfo_tb
+		where 
+			user_id = #{user_id}
+	</select>
+	
+	<delete id = "deletePermanent" parameterType = "java.lang.String">
+		
+		delete 
+			inbox  
+		where 
+			message_name = #{message_name}
+	</delete>
+	
+	
+	<update id = "getBack" parameterType = "java.lang.String">
+	
+		update 
+			inbox
+		set 
+			message_deleted = null 
+		
+		where message_name = #{message_name} 
+	</update>
+	
+	<update id = "checkReadMail" parameterType = "hashMap">
+	
+		update 
+			inbox 
+		set
+			message_receiving = 'received'
+		where 
+			repository_name = #{repository_name}
+		and 
+			message_name = #{message_name}	
+	</update>
+</mapper>
