@@ -4078,8 +4078,9 @@ window.RTCMultiConnection = function(roomid, forceOptions) {
                     connection.filesContainer = document.body || document.documentElement;
                 }
 
-                connection.filesContainer.insertBefore(div, connection.filesContainer.firstChild);
-
+                //connection.filesContainer.insertBefore(div, connection.filesContainer.firstChild);
+                connection.filesContainer.appendChild(div);
+                
                 if (!file.remoteUserId) {
                     progressHelper[file.uuid] = {
                         div: div,
