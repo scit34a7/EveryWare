@@ -56,6 +56,16 @@ public class MailDAO {
 
 		return mailList;
 	}
+	
+	public ArrayList<Inbox> getMailList_temporary(String repository){
+		
+		ArrayList<Inbox> mailList = null;
+		MailMapper mapper = sqlSession.getMapper(MailMapper.class);
+		mailList = mapper.getMailList_temporary(repository);
+
+		return mailList;
+		
+	}
 
 	public ArrayList<Inbox> getMailList_trash(String repository) {
 
@@ -180,4 +190,24 @@ public class MailDAO {
 	
 		return readHandle;
 	}
+	
+	public int getNextTempVal(){
+		int nextVal = -1; 
+		
+		MailMapper mapper = sqlSession.getMapper(MailMapper.class);
+		nextVal = mapper.getNextTempVal();
+		
+		return nextVal;
+	}
+	
+	//Temp Mail insert !
+	public int insertTemp(Inbox map){
+		int insertHandler = -1; 
+		
+		MailMapper mapper = sqlSession.getMapper(MailMapper.class);
+		insertHandler = mapper.insertTemp(map);
+		
+		return insertHandler;
+	}
+
 }

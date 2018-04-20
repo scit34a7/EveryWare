@@ -53,7 +53,8 @@
 			message_deleted is null
 		and
 			repository_name = #{userName}
-		
+		and 
+			message_state != 'temp'
 		order by 
 			last_updated desc
 	</select>
@@ -89,7 +90,19 @@
 			last_updated desc
 	</select>
 	
-	
+	<!--  List of mail temporary  -->
+	<select id = "getMailList_temporary" parameterType= "java.lang.String" resultMap = "responseMap">
+		select 
+			*	 
+		from
+			inbox 
+		where 
+			repository_name = #{userName}
+		and
+			message_state = 'temp'
+		order by 
+			last_updated desc
+	</select>
 	
 	
 	<!-- read Mail -->	
@@ -232,4 +245,36 @@
 		and 
 			message_name = #{message_name}	
 	</update>
+	
+	<select id = "getNextTempVal" resultType = "int">
+		
+		select inboxtemp_seq.nextval from dual
+	
+	</select>
+	
+	
+	<insert id = "insertTemp" parameterType = "Inbox">
+	
+		insert into inbox(
+			 message_name		,
+			 repository_name 	,
+			 message_state		,
+			 recipients			,
+			 remote_host 		,
+			 remote_addr 		,
+			 message_body 		,
+			 last_updated
+			)
+		values (
+			  #{message_name}		,
+			  #{repository_name}	,
+			  #{message_state}		,
+			  #{recipients}			,
+			  #{remote_host}		,
+			  #{remote_addr}		,
+			  #{message_body}		,
+			  sysdate
+		) 
+	</insert>
+
 </mapper>

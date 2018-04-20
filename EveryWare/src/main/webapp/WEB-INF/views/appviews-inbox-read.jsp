@@ -299,13 +299,13 @@
 											<nav>
 												<span>Mail Service</span>
 												<ul class="nav-content-menu">
-													<li><a href="./sendMail"><i class ="fa fa-pencil"></i> 편지쓰기</a></li>
-													<li><a href="./getMail?sort=all"><i class="fa fa-inbox"></i> 받은편지함</a></li>
+													<li><a href="./sendMail"  ><i class ="fa fa-pencil"></i> 편지쓰기</a></li>
+													<li><a href="./getMail?sort=all" <c:if test ="${sort== 0}">style = "color : blue; font-weight:bold"</c:if> ><i class="fa fa-inbox"></i> 받은편지함</a></li>
 													<li><a href="#"><i class="fa fa-mail-forward"></i> 보낸편지함</a></li>
-													<li><a href="#"><i class="fa fa-folder"></i> 임시보관함</a></li>
-													<li><a href="./getMail?sort=important"><i class="fa fa-flag"></i> 중요편지함</a></li>
+													<li><a href="./getMail?sort=temporary"><i class="fa fa-folder"></i> 임시보관함</a></li>
+													<li><a href="./getMail?sort=important" <c:if test ="${sort== 3}">style = "color : blue; font-weight:bold"</c:if>><i class="fa fa-flag"></i> 중요편지함</a></li>
 													<li><a href="#"><i class="fa fa-folder"></i> 내게쓴편지함</a></li>
-													<li><a href="./getMail?sort=trash"><i class="fa fa-trash"></i> 휴지통</a></li>
+													<li><a href="./getMail?sort=trash" <c:if test ="${sort== 4}">style = "color : blue; font-weight:bold"</c:if> ><i class="fa fa-trash"></i> 휴지통</a></li>
 													<li><a href="./setMailForm"><i class = "fa fa-cog"></i> 양식 설정</a></li>
 												</ul>
 											</nav>
@@ -324,12 +324,11 @@
 											</div>
 											<div class="bottom clearfix">
 												<div class="contact-info">
-													<img src="../resources/assets/img/user3.png" class="user-image" alt="Sender">
-													<span class="sender">${mail.from }
-														<span class="email">(${mail.from})</span>
+														<span class="email">FROM: </span>&nbsp;&nbsp;
+														<span class="sender">${mail.from }
 														<br>
 													</span>
-													<span class="text-muted">to:</span>
+													<span class="text-muted">TO: </span>&nbsp;&nbsp;
 													<span class="receiver" data-toggle="tooltip" data-title="samuel@yourdomain">${mail.recipients }</span>,
 													<!-- <span class="receiver" data-toggle="tooltip" data-title="robby@yourdomain">Robby</span> -->
 												</div>

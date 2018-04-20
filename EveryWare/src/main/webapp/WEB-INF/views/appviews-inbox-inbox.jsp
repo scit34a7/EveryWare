@@ -302,7 +302,7 @@
 													<li><a href="./sendMail"  ><i class ="fa fa-pencil"></i> 편지쓰기</a></li>
 													<li><a href="./getMail?sort=all" <c:if test ="${sort== 0}">style = "color : blue; font-weight:bold"</c:if> ><i class="fa fa-inbox"></i> 받은편지함</a></li>
 													<li><a href="#"><i class="fa fa-mail-forward"></i> 보낸편지함</a></li>
-													<li><a href="#"><i class="fa fa-folder"></i> 임시보관함</a></li>
+													<li><a href="./getMail?sort=temporary"  <c:if test ="${sort== 5}">style = "color : blue; font-weight:bold"</c:if>><i class="fa fa-folder"></i> 임시보관함</a></li>
 													<li><a href="./getMail?sort=important" <c:if test ="${sort== 3}">style = "color : blue; font-weight:bold"</c:if>><i class="fa fa-flag"></i> 중요편지함</a></li>
 													<li><a href="#"><i class="fa fa-folder"></i> 내게쓴편지함</a></li>
 													<li><a href="./getMail?sort=trash" <c:if test ="${sort== 4}">style = "color : blue; font-weight:bold"</c:if> ><i class="fa fa-trash"></i> 휴지통</a></li>
@@ -403,13 +403,12 @@
 																</td>
 																<td width="100%">
 																	<a href="./read?message_name=${a.message_name}">
-																		<img src="../resources/assets/img/user1.png" class="user-image" alt="">
 																		<div class="text">
 																			<span class="sender">${a.from }</span>
 																			<span class="timestamp">${a.maildate }</span>
 																			<h3 class="title">${a.mailsubject }</h3>
 																			<span class="timestamp">${a.mailreaded }</span>
-																			<p class="preview">${a.contentpreview} ...</p>
+																			<p class="preview"></p>
 																			
 																			<c:if test="${a.mailattached!=''&&a.mailattached!=null}">
 																				<span class="attachment"><i class="fa fa-paperclip"></i></span>
@@ -525,12 +524,12 @@
 		//submit Delete Form
 		function submitDeleteForm(){
 			
-			var deleteArray = new Array(); 
+			var deleteArray = []; 
 			
 			$('input:checkbox[name= "mailSelectBt"]').each(function(i){
 				
 				if( $(this).is(':checked') ){
-					deleteArray[i] = $(this).attr('attr1');
+					deleteArray.push($(this).attr('attr1'));
 				}
 				
 			});
@@ -555,7 +554,8 @@
 			
 			return false;
 		}
-		
+		78
+		// 중요한 메일 체크하기 
 		function importanceCheck(){
 			
 			var message_name = $(this).attr('attr1'); 
@@ -575,14 +575,15 @@
 			});	
 		}
 		
+		// 영구 삭제 
 		function permanentDelete(){
 			
-			var deleteArray = new Array(); 
+			var deleteArray = []; 
 			
 			$('input:checkbox[name= "mailSelectBt"]').each(function(i){
 				
 				if( $(this).is(':checked') ){
-					deleteArray[i] = $(this).attr('attr1');
+					deleteArray.push($(this).attr('attr1'));
 				}
 				
 			});
@@ -607,14 +608,15 @@
 			return false;
 		}
 		
+		// 메일 휴지통으로 부터 복원하기 ;
 		function getBack(){
 			
-			var deleteArray = new Array(); 
+			var deleteArray = []; 
 			
 			$('input:checkbox[name= "mailSelectBt"]').each(function(i){
-				
+					
 				if( $(this).is(':checked') ){
-					deleteArray[i] = $(this).attr('attr1');
+					deleteArray.push($(this).attr('attr1'));
 				}
 				
 			});
@@ -638,7 +640,8 @@
 			
 			return false;
 		}
-		// 전달 ;
+		
+		// ForwardMail  ;
 		function forwardMail(){
 				
 			var message_name =null;
@@ -659,6 +662,7 @@
 			return false;
 		}
 		
+		// ReplyMail 
 		function replyMail(){
 			
 			var message_name =null;

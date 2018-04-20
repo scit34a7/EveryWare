@@ -22,8 +22,7 @@
 		<typeAlias type="com.a7.everyware.resource.vo.ResourceVO" alias="ResourceVO" />
 		<typeAlias type="com.a7.everyware.resource.vo.R_reservationVO" alias="ReservationVO" />
 		<typeAlias type="com.a7.everyware.schedule.vo.ScheduleVO" alias="ScheduleVO" />
-		
-		
+
 	</typeAliases>
 	
 	<mappers>

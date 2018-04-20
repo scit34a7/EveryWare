@@ -302,13 +302,13 @@
 										<nav>
 											<span>Mail Service</span>
 												<ul class="nav-content-menu">
-													<li><a href="./sendMail"><i class ="fa fa-pencil"></i> 편지쓰기</a></li>
-													<li><a href="./getMail?sort=all"><i class="fa fa-inbox"></i> 받은편지함</a></li>
+													<li><a href="./sendMail"  ><i class ="fa fa-pencil"></i> 편지쓰기</a></li>
+													<li><a href="./getMail?sort=all" <c:if test ="${sort== 0}">style = "color : blue; font-weight:bold"</c:if> ><i class="fa fa-inbox"></i> 받은편지함</a></li>
 													<li><a href="#"><i class="fa fa-mail-forward"></i> 보낸편지함</a></li>
-													<li><a href="#"><i class="fa fa-folder"></i> 임시보관함</a></li>
-													<li><a href="./getMail?sort=important"><i class="fa fa-flag"></i> 중요편지함</a></li>
+													<li><a href="./getMail?sort=temporary"><i class="fa fa-folder"></i> 임시보관함</a></li>
+													<li><a href="./getMail?sort=important" <c:if test ="${sort== 3}">style = "color : blue; font-weight:bold"</c:if>><i class="fa fa-flag"></i> 중요편지함</a></li>
 													<li><a href="#"><i class="fa fa-folder"></i> 내게쓴편지함</a></li>
-													<li><a href="./getMail?sort=trash"><i class="fa fa-trash"></i> 휴지통</a></li>
+													<li><a href="./getMail?sort=trash" <c:if test ="${sort== 4}">style = "color : blue; font-weight:bold"</c:if> ><i class="fa fa-trash"></i> 휴지통</a></li>
 													<li><a href="./setMailForm"><i class = "fa fa-cog"></i> 양식 설정</a></li>
 												</ul>
 										</nav>
@@ -317,7 +317,7 @@
 							</div>
 						</div>
 						<div class="col-lg-9">
-							<form action ="./sendMail" id = "sendForm" method = "post" enctype ="multipart/form-data">
+							<form action ="./sendMail" id = "sendForm" method = "post" name = "sendForm" enctype ="multipart/form-data">
 							<div class="content-right clearfix">
 								
 								<div class="content-panel view-message">
@@ -435,7 +435,7 @@
 								
 										<button type="submit" class="btn btn-primary btn-replyx" id = "formSubmiter">보내기</button>
 										<button type="button" class="btn btn-primary btn-replyx">미리보기</button>
-										<button type="button" class="btn btn-primary btn-replyx">임시저장</button>			
+										<button type="button" class="btn btn-primary btn-replyx" onclick = "insertTemp();">임시저장</button>			
 										</div>
 									</div>
 								</div>
@@ -618,16 +618,22 @@
 					
 					$('#blankForSending').html('${mail.from}');
 					$('#mailRecipients').val('${mail.from}');	
+				
+					$('#mailSubject').val('['+'${check}'+']'+ '${mail.mailsubject}');
 				}
 				
-				$('#mailSubject').val('['+'${check}'+']'+ '${mail.mailsubject}');
+				
 			
 				$('#dataFrom').html('<span>From : '+'${mail.from}'+'</span>');
 			
 				$('#dataTo').html('<span>To : '+'${mail.recipients}'+'</span>');
 			}
+			
+			
 		
-		});
+		});//end of preparation; 
+		
+		
 		
 		function mailSearch(){
 			$('#mailSearcher').keyup(function(){
@@ -714,6 +720,19 @@
 			//지우기 ; 상위요소의 
 			$(this).closest('span').html('');
 		}
+		
+		//임시저장 
+		function insertTemp(){
+			
+			var sendForm = document.sendForm;
+			var url = './tempMail'
+			
+			sendForm.action = url;
+			sendForm.submit();
+			
+			return false;
+		}
+		
 		
 	</script>
 </body>
