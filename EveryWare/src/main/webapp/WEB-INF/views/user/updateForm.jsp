@@ -29,6 +29,8 @@
 		<!-- ICONS -->
 		<link rel="apple-touch-icon" sizes="76x76" href="../resources/assets/img/apple-icon.png">
 		<link rel="icon" type="image/png" sizes="96x96" href="../resources/assets/img/favicon.png">
+		<!-- GOOGLE FONTS -->
+		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
 		
 		
 		
@@ -343,6 +345,70 @@
 	
 	
 	
+
+			<div class="vertical-align-wrap">
+				<div class="vertical-align-middle">
+					<div class="auth-box register">
+						<div class="content">
+							<div class="header">
+								<div class="logo text-center">
+									<img src="../resources/assets/img/logo-dark.png" alt="Klorofil Logo">
+								</div>
+								<p class="lead">개인정보수정</p>
+							</div>
+							
+							<form class="form-auth-small" id="updateform" action="update" method="post" onsubmit="return formCheck();">
+								<div class="form-group">
+									<label style="width:100px; height:30px">사번</label>
+									${userId}
+								</div>
+								<div class="form-group">
+									<label style="width:100px; height:10px">비밀번호</label>
+									<input type="password" name="user_pw" id="user_pw" style="width:300px" placeholder="비밀번호 입력">
+								</div>
+								<div class="form-group">	
+									<label style="width:100px; height:10px">비밀번호 <br>다시 입력</label>
+									<input type="password" name="user_pw2" id="user_pw2" style="width:300px" placeholder="비밀번호 다시 입력">
+								</div>	
+								<div class="form-group">
+									<label style="width:100px; height:30px">이름</label>
+									${userName}
+								</div>
+						
+								<div class="form-group">
+									<label style="width:100px; height:30px">부서</label>
+									${userDepartment}
+								</div>
+								<div class="form-group">
+									<label style="width:100px; height:30px">직위</label>
+									${userPosition}
+								</div>
+								<div class="form-group">
+									<label style="width:100px; height:30px">주소</label>
+									<input type="text" name="user_address" id="user_address" style="width:300px" value="${user.user_address}" />
+								</div>
+								<div class="form-group">
+									<label style="width:100px; height:30px">연락처</label>
+									<input type="text" name="user_phone" id="user_phone" style="width:300px" value="${user.user_phone}" />
+								</div>
+								
+								<center>
+								<input type="submit" value="수정" />&nbsp;&nbsp;&nbsp;
+								<input type="reset" value="다시 쓰기" />
+								</center>
+								
+								<!-- <button type="submit" class="btn btn-primary btn-lg btn-block">REGISTER</button> -->
+								
+							</form>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		<!-- END WRAPPER -->
+			
+			<%-- 
 	
 			<!-- 본문 내용 시작 -->	
 			<div class="centerdiv">
@@ -363,10 +429,10 @@
 					<th>이름</th>
 					<td>${userName}</td>
 				</tr>
-				<%-- <tr>
+				<tr>
 					<th>주민등록번호</th>
 					<td><input type="text" name="user_idNum" id="user_idNum" value="${user.user_idNum}" /></td>
-				</tr> --%>
+				</tr>
 				<tr>
 					<th>부서</th>
 					<td>${userDepartment}</td>
@@ -392,7 +458,7 @@
 			
 			</form>
 			</div>
-			
+			 --%>
 			
 			
 			
