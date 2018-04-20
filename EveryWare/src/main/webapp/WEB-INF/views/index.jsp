@@ -247,8 +247,30 @@
 								<li><a href="support/boardList">업무보고</a></li>
 							</ul>
 						</div></li>
-					<li><a href="approval/approvalList"><i class="ti-widget"></i> <span
-							class="title">전자결재</span></a></li>
+						
+						<!-- collapse : 서브메뉴 닫혀있음 collapse in : 서브메뉴 열려있음 -->
+						
+					<li class="panel">
+						<a href="#approval" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed">
+							<i class="ti-widget"></i>
+							<span class="title">전자결재</span> 
+							<i class="icon-submenu ti-angle-left"></i>
+						</a>
+						<div id="approval" class="collapse">
+							<ul class="submenu">
+								<li><a href="approval/myApproval">내 결재</a></li>
+								<li><a href="approval/writeApproval">결재 작성</a></li>
+								<li><a href="#">Submenu 3</a></li>
+							</ul>
+								
+						</div>
+					</li>
+					
+					
+					
+							
+							
+							
 
 					<li class="panel"><a href="#" data-toggle="collapse"
 						data-target="#submenuDemo" data-parent="#sidebar-nav-menu"
