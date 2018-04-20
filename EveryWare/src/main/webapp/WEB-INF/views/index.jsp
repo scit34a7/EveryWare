@@ -207,10 +207,9 @@
 							<i class="icon-submenu ti-angle-left"></i></a>
 						<div id="appViews" class="collapse ">
 							<ul class="submenu">
-								<li><a href="appviews-project-detail">Project Details</a></li>
-								<li><a href="appviews-projects">Projects</a></li>
-								<li><a href="appviews-inbox">Inbox <span class="badge">8</span></a></li>
-								<li><a href="appviews-file-manager">File Manager</a></li>
+								<li><a href="user/userInfo">내 정보</a></li>
+								<li><a href="user/update">내 정보 수정</a></li>
+								<li><a href="user/userList">주소록</a></li>
 							</ul>
 						</div></li>
 
@@ -243,10 +242,9 @@
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="charts" class="collapse ">
 							<ul class="submenu">
-								<li><a href="charts-chartjs">Chart.js</a></li>
-								<li><a href="charts-chartist">Chartist</a></li>
-								<li><a href="charts-flot">Flot Chart</a></li>
-								<li><a href="charts-sparkline">Sparkline Chart</a></li>
+								<li><a href="support/supportMain">출퇴근체크</a></li>
+								<li><a href="support/attendList">출퇴근확인</a></li>
+								<li><a href="support/boardList">업무보고</a></li>
 							</ul>
 						</div></li>
 					<li><a href="approval/approvalList"><i class="ti-widget"></i> <span
@@ -280,8 +278,21 @@
 								<li><a href="page-blank">Blank Page</a></li>
 							</ul>
 						</div></li>
-					<li><a href="typography"><i class="ti-paragraph"></i> <span
-							class="title">게시판</span></a></li>
+					<!-- <li><a href="typography"><i class="ti-paragraph"></i> <span
+							class="title">게시판</span></a></li> -->
+							
+							<li class="panel"><a href="#board" data-toggle="collapse"
+						data-parent="#sidebar-nav-menu" class="collapsed"><i
+							class="ti-pie-chart"></i> <span class="title">게시판</span> <i
+							class="icon-submenu ti-angle-left"></i></a>
+						<div id="board" class="collapse">
+							<ul class="submenu">
+								<li><a href="board/boardList?boardFolder_id=1">공지사항</a></li>
+								<li><a href="board/boardList?boardFolder_id=2">부서게시판</a></li>
+								<li><a href="board/boardList?boardFolder_id=3">커뮤니티</a></li>
+							</ul>
+						</div></li>	
+							
 				</ul>
 				<button type="button" class="btn-toggle-minified"
 					title="Toggle Minified Menu">
