@@ -200,13 +200,13 @@
 					<c:if test="${sessionScope.userId == roomid}">
 						<li class="panel"><a href='javascript:void(0)' onclick="shareScreen()" data-toggle="collapse" id="share-screen"
 							data-parent="#sidebar-nav-menu" class="collapsed"><i
-								class="ti-layout"></i> <span class="title">화면공유</span> <i
+								class="ti-share"></i> <span class="title">화면공유</span> <i
 								class="icon-submenu ti-angle-left"></i></a>
 						</li>
 						
 						<li class="panel"><a href="#forms" data-toggle="collapse"
 							data-parent="#sidebar-nav-menu" class="collapsed"><i
-								class="ti-receipt"></i> <span class="title">회의시작</span> <i
+								class="ti-control-play"></i> <span class="title">회의시작</span> <i
 								class="icon-submenu ti-angle-left"></i></a>
 							<div id="forms" class="collapse ">
 							</div>
@@ -214,7 +214,7 @@
 					</c:if>
 					<li class="panel"><a href='javascript:void(0)' onclick="leaveRoom()" data-toggle="collapse" id="btn-leave-room"
 						data-parent="#sidebar-nav-menu" class="collapsed"><i
-							class="ti-layout-tab-window"></i> <span class="title">나가기</span>
+							class="ti-power-off"></i> <span class="title">나가기</span>
 							<i class="icon-submenu ti-angle-left"></i></a>
 						<div id="appViews" class="collapse ">
 						</div>
@@ -366,32 +366,27 @@ document.getElementById('share-file').onclick = function() {
 
 document.getElementById('input-text-chat').onkeyup = function(e) {
     if (e.keyCode != 13) return;
-    // removing trailing/leading whitespace
     this.value = this.value.replace(/^\s+|\s+$/g, '');
     if (!this.value.length) return;
-    // connection.send(this.value);
 	connection.send({
         userid: "${sessionScope.userName}",
         value: this.value
     });
-	//var sendData = {userid: "${sessionScope.userId}", value: this.value};
-	//appendDIV(sendData);
+
 	appendDIV(this.value);
     this.value = '';
 };
 
 function sendText() {
-    // removing trailing/leading whitespace
     this.value = this.value.replace(/^\s+|\s+$/g, '');
     if (!this.value.length) return;
-    // connection.send(this.value);
-	connection.send({
+
+    connection.send({
         userid: "${sessionScope.userName}",
         value: this.value
     });
-	//var sendData = {userid: "${sessionScope.userId}", value: this.value};
-	//appendDIV(sendData);
-	appendDIV(this.value);
+
+    appendDIV(this.value);
     this.value = '';
 };
 
@@ -424,7 +419,6 @@ function saveLog(id, data) {
 	var contentLog = data.value;
 	var meet_title = "${roomInfo.meet_title}";
 	
-	//showObj2(contentLog);
    	$.ajax({
 		url: 'saveLog',
 		type: 'post',
@@ -432,11 +426,9 @@ function saveLog(id, data) {
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",  
 		datatype: 'json',
 		success: function(isCorrect) {
-			//alert("성공");
-			//location.href = "meetingRoom";
 		},
 		error: function (e) {
-			alert('실패');
+			console.log('실패');
 		}
 	});
 }
@@ -449,20 +441,18 @@ function appendDIV(event) {
 	var steam = showObj(event.data, 'stream');
 	var isScreen = showObj(steam, 'isScreen');
 	
-	//showObj2(event);
-	//showObj2(data);
-	
+	//alert("ID:" + id);
+	//alert("DATA:" + data);
+	// data.userid
+	//alert(data);
+	//alert(isScreen);
 	if (typeof data == 'object' && isScreen == true) {
-		//alert("?????");
   		cnt = 1;
 	    location.reload();
 	    return;
 	} else if (id != undefined) {
-		//saveLog(id, data);
+		saveLog(id, data);
 	}
-	
-	//alert(id);
-	//alert(data);
 	
 	if(id != undefined) {
 		var test = data.userid + ": " + data.value;
@@ -483,8 +473,6 @@ function appendDIV(event) {
 // ......................................................
 var connection = new RTCMultiConnection();
 
-// Using getScreenId.js to capture screen from any domain
-// You do NOT need to deploy Chrome Extension YOUR-Self!!
 connection.getScreenConstraints = function(callback) {
     getScreenConstraints(function(error, screen_constraints) {
         if (!error) {
@@ -496,11 +484,7 @@ connection.getScreenConstraints = function(callback) {
     });
 };
 
-// by default, socket.io server is assumed to be deployed on your own URL
-// connection.socketURL = '/';
  connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
-// comment-out below line if you do not have your own socket.io server
-// connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
 connection.socketMessageEvent = 'audio-video-file-chat-demo';
 connection.enableFileSharing = true; // by default, it is "false".
 connection.session = {
@@ -562,22 +546,19 @@ connection.onstreamended = function(event) {
 connection.onmessage = appendDIV;
 connection.filesContainer = document.getElementById('file-container');
 connection.onopen = function() {
-    //document.getElementById('send').disabled = false;
     document.getElementById('share-file').disabled = false;
     document.getElementById('input-text-chat').disabled = false;
     document.getElementById('btn-leave-room').disabled = false;
-    //document.querySelector('h5').innerHTML = 'You are connected with: ' + connection.getAllParticipants().join(', ');
 };
 
 connection.onclose = function() {
     if (connection.getAllParticipants().length) {
-        //document.querySelector('h5').innerHTML = 'You are still connected with: ' + connection.getAllParticipants().join(', ');
+
     } else {
-        //document.querySelector('h5').innerHTML = 'Seems session has been closed or all participants left.';
+
     }
 };
 connection.onEntireSessionClosed = function(event) {
-	//document.getElementById('send').disabled = true;
     document.getElementById('share-file').disabled = true;
     document.getElementById('input-text-chat').disabled = true;
     document.getElementById('btn-leave-room').disabled = true;
