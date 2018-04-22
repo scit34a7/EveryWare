@@ -83,8 +83,7 @@
 				</form>
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#" class="btn-toggle-rightsidebar"> <i
-								class="ti-layout-sidebar-right"></i>
+					
 						</a></li>
 						<li class="dropdown"><a href="#"
 							class="dropdown-toggle icon-menu" data-toggle="dropdown"> <i
@@ -129,20 +128,9 @@
 								</a></li>
 								<li><a href="#" class="more">전체 알람 보러 가기</a></li>
 							</ul></li>
-						<li class="dropdown"><a href="#" id="tour-help"
-							class="dropdown-toggle" data-toggle="dropdown"><i
-								class="ti-help"></i> <span class="hide">Help</span></a>
-							<ul class="dropdown-menu">
-								<li><a href="#"><i class="ti-direction"></i> Basic Use</a></li>
-								<li><a href="#"><i class="ti-server"></i> Working With
-										Data</a></li>
-								<li><a href="#"><i class="ti-lock"></i> Security</a></li>
-								<li><a href="#"><i class="ti-light-bulb"></i>
-										Troubleshooting</a></li>
-							</ul></li>
+						
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown"> <img
-								src="resources/assets/img/user.png" alt="Avatar"> <span>${sessionScope.userName}</span>
+							data-toggle="dropdown">  <span>${sessionScope.userName}</span>
 						</a>
 							<ul class="dropdown-menu logged-user-menu">
 								<li><a href="#"><i class="ti-user"></i> <span>개인정보</span></a></li>
@@ -173,10 +161,10 @@
 							<ul class="submenu">
 								<li><a href="./mail/getMail?sort=all">받은메일함 <span
 										class="label label-success">NEW</span></a></li>
-								<li><a href="layout-minified">Minified</a></li>
-								<li><a href="layout-fullwidth">Fullwidth</a></li>
-								<li><a href="layout-default">Default</a></li>
-								<li><a href="layout-grid">Grid</a></li>
+								<li><a href="./mail/getMail?sort=send">보낸메일함</a></li>
+								<li><a href="./mail/sendMail">편지쓰기</a></li>
+								<li><a href="./mail/getMail?sort=important">중요편지함</a></li>
+								
 							</ul>
 						</div></li>
 					<li class="panel"><a href="#forms" data-toggle="collapse"
@@ -187,18 +175,7 @@
 							<ul class="submenu">
 								<li><a href="schedule">일정 관리</a></li>
 								<li><a href="resource">자원 예약 관리</a></li>
-								<!-- 
-								<li><a href="forms-inputs">Inputs</a></li>
-								<li><a href="forms-multiselect">Multiselect</a></li>
-								<li><a href="forms-input-pickers">Input Pickers</a></li>
-								<li><a href="forms-input-sliders">Input Sliders</a></li>
-								<li><a href="forms-select2">Select2</a></li>
-								<li><a href="forms-xeditable">In-place Editing</a></li>
-								<li><a href="forms-dragdropupload">Drag and Drop Upload</a></li>
-								<li><a href="forms-layouts">Form Layouts</a></li>
-								<li><a href="forms-validation">Form Validation</a></li>
-								<li><a href="forms-texteditor">Text Editor</a></li>
-							 -->
+								
 							</ul>
 						</div></li>
 					<li class="panel"><a href="#appViews" data-toggle="collapse"
@@ -637,115 +614,7 @@
 			</div>
 			<!-- END MAIN CONTENT -->
 			<!-- RIGHT SIDEBAR -->
-			<div id="sidebar-right" class="right-sidebar">
-				<div class="sidebar-widget">
-					<h4 class="widget-heading">
-						<i class="fa fa-calendar"></i> TODAY
-					</h4>
-					<p class="date">Wednesday, 22 December</p>
-					<div class="row margin-top-30">
-						<div class="col-xs-4">
-							<a href="#">
-								<div class="icon-transparent-area custom-color-blue first">
-									<i class="fa fa-tasks"></i> <span>Tasks</span> <span
-										class="badge">5</span>
-								</div>
-							</a>
-						</div>
-						<div class="col-xs-4">
-							<a href="#">
-								<div class="icon-transparent-area custom-color-green">
-									<i class="fa fa-envelope"></i> <span>Mail</span> <span
-										class="badge">12</span>
-								</div>
-							</a>
-						</div>
-						<div class="col-xs-4">
-							<a href="#">
-								<div class="icon-transparent-area custom-color-orange last">
-									<i class="fa fa-user-plus"></i> <span>Users</span> <span
-										class="badge">24</span>
-								</div>
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="sidebar-widget">
-					<div class="widget-header">
-						<h4 class="widget-heading">YOUR APPS</h4>
-						<a href="#" class="show-all">Show all</a>
-					</div>
-					<div class="row">
-						<div class="col-xs-3">
-							<a href="#" class="icon-app" title="Dropbox"
-								data-toggle="tooltip" data-placement="top"> <i
-								class="fa fa-dropbox dropbox-color"></i>
-							</a>
-						</div>
-						<div class="col-xs-3">
-							<a href="#" class="icon-app" title="WordPress"
-								data-toggle="tooltip" data-placement="top"> <i
-								class="fa fa-wordpress wordpress-color"></i>
-							</a>
-						</div>
-						<div class="col-xs-3">
-							<a href="#" class="icon-app" title="Drupal" data-toggle="tooltip"
-								data-placement="top"> <i class="fa fa-drupal drupal-color"></i>
-							</a>
-						</div>
-						<div class="col-xs-3">
-							<a href="#" class="icon-app" title="Github" data-toggle="tooltip"
-								data-placement="top"> <i class="fa fa-github github-color"></i>
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="sidebar-widget">
-					<div class="widget-header">
-						<h4 class="widget-heading">MY PROJECTS</h4>
-						<a href="#" class="show-all">Show all</a>
-					</div>
-					<ul class="list-unstyled list-project-progress">
-						<li><a href="#" class="project-name">Project XY</a>
-							<div
-								class="progress progress-xs progress-transparent custom-color-orange">
-								<div class="progress-bar" role="progressbar" aria-valuenow="67"
-									aria-valuemin="0" aria-valuemax="100" style="width: 67%"></div>
-							</div> <span class="percentage">67%</span></li>
-						<li><a href="#" class="project-name">Growth Campaign</a>
-							<div
-								class="progress progress-xs progress-transparent custom-color-blue">
-								<div class="progress-bar" role="progressbar" aria-valuenow="23"
-									aria-valuemin="0" aria-valuemax="100" style="width: 23%"></div>
-							</div> <span class="percentage">23%</span></li>
-						<li><a href="#" class="project-name">Website Redesign</a>
-							<div
-								class="progress progress-xs progress-transparent custom-color-green">
-								<div class="progress-bar" role="progressbar" aria-valuenow="87"
-									aria-valuemin="0" aria-valuemax="100" style="width: 87%"></div>
-							</div> <span class="percentage">87%</span></li>
-					</ul>
-				</div>
-				<div class="sidebar-widget">
-					<div class="widget-header">
-						<h4 class="widget-heading">MY FILES</h4>
-						<a href="#" class="show-all">Show all</a>
-					</div>
-					<ul class="list-unstyled list-justify list-file-simple">
-						<li><a href="#"><i class="fa fa-file-word-o"></i>Proposal_draft.docx</a>
-							<span>4 MB</span></li>
-						<li><a href="#"><i class="fa fa-file-pdf-o"></i>Manual_Guide.pdf</a>
-							<span>20 MB</span></li>
-						<li><a href="#"><i class="fa fa-file-zip-o"></i>all-project-files.zip</a>
-							<span>315 MB</span></li>
-						<li><a href="#"><i class="fa fa-file-excel-o"></i>budget_estimate.xls</a>
-							<span>1 MB</span></li>
-					</ul>
-				</div>
-				<p class="text-center">
-					<a href="#" class="btn btn-default btn-xs">More Widgets</a>
-				</p>
-			</div>
+			
 			<!-- END RIGHT SIDEBAR -->
 		</div>
 		<!-- END MAIN -->
@@ -817,11 +686,7 @@
 			});
 		});
 	</script>
-	<div id="demo-panel">
-		<a href="#" onclick="toggleDemoPanel(event);"><i
-			class="fa fa-cog fa-spin"></i></a>
-		<iframe src="resources/demo-panel/index.html"></iframe>
-	</div>
+	
 	<!-- END DEMO PANEL -->
 	<script>
 		$(function() {
@@ -1007,64 +872,7 @@
 				chartRangeMin : 0,
 				chartRangeMax : 100
 			});
-			// Bootstrap tour
-			var tour = new Tour(
-					{
-						steps : [
-								{
-									element : '#tour-help',
-									placement : 'bottom',
-									title : 'Welcome to Klorofil Pro',
-									content : 'Hello, welcome to Klorofil Pro. Use this tour feature to guide new users to your website or show existing users new features.',
-									onShow : function() {
-										var popupSound = new Audio();
-										if (navigator.userAgent
-												.match("Firefox/")) {
-											popupSound.src = "resources/assets/audio/popup.ogg";
-										} else {
-											popupSound.src = "resources/assets/audio/popup.mp3";
-										}
-										// sound setting saved on localStorage as 0 or 1, by default sound on (null value on localStorage)
-										$globalVolume = localStorage
-												.getItem('global-volume');
-										if (($globalVolume == null || $globalVolume == '1')) {
-											popupSound.play();
-										}
-									}
-								},
-								{
-									element : '#tour-sales-stat',
-									title : 'Backdrop Container',
-									backdrop : true,
-									content : 'Add backdrop container to give focus on the step. It can be added to all steps or certain step you choose.'
-								},
-								{
-									element : '#tour-online-count',
-									placement : 'top',
-									title : 'Anywhere on page',
-									content : 'You can target specific element on the page like this one. You can also determine the placement either right (default), bottom, left, top or auto.'
-								},
-								{
-									element : '#tour-fullwidth',
-									placement : 'bottom',
-									title : 'Layout',
-									content : 'This toggle button will make the layout at fullwidth mode. More space, more content. Try now!'
-								}, ],
-						template : "<div class='popover tour'> "
-								+ "<div class='arrow'></div> "
-								+ "<h3 class='popover-title'></h3>"
-								+ "<div class='popover-content'></div>"
-								+ "<div class='popover-navigation'>"
-								+ "<button class='btn btn-default btn-sm' data-role='prev'>« Prev</button>"
-								+ "<button class='btn btn-primary btn-sm' data-role='next'>Next »</button>"
-								+ "<button class='btn btn-default btn-sm' data-role='end'>End tour</button>"
-								+ "</div>" + "</div>",
-					});
-			tour.init();
-			tour.start();
-			if (tour.ended()) {
-				tour.restart();
-			}
+			
 			$('.sortable-grid .sortable-item').sortable({
 				connectWith : '.sortable-grid .sortable-item',
 				handle : '.panel-heading',

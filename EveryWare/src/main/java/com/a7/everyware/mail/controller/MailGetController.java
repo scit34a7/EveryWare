@@ -3,6 +3,7 @@ package com.a7.everyware.mail.controller;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.mail.*;
 import javax.mail.Part;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.a7.everyware.mail.dao.MailDAO;
+import com.a7.everyware.mail.util.MailUtil;
 import com.a7.everyware.mail.vo.Inbox;
 import com.a7.everyware.mail.vo.MailList;
 
@@ -48,14 +50,27 @@ public class MailGetController {
 
 		ArrayList<Inbox> inboxList = null;
 
+		
+		// all = 0, self = 1, send = 2, important = 3, trash =4, temporary = 5;
 		if (sort.equals("all")) {
 
 			inboxList = mdao.getMailList(repository);
 			model.addAttribute("sort", 0);
 
-		} else if (sort.equals("send")) {
+		} else if (sort.equals("send")||sort.equals("self")) {
 
-			// TODO:not yet
+			HashMap<String, String> map = new HashMap<String,String>();
+			
+			map.put("repository", repository);
+			map.put("sender", repository+"@everywareit.com");
+			
+			inboxList  = mdao.getMailList_byOneSelf(map);
+			
+			if(sort.equals("self")){
+				model.addAttribute("sort",1);
+			}else{
+				model.addAttribute("sort",2);
+			}
 
 		} else if (sort.equals("trash")) {
 
@@ -69,15 +84,17 @@ public class MailGetController {
 
 		} else if (sort.equals("temporary")){
 			
-			inboxList = mdao.getMailList_temporary(repository);
+			inboxList = mdao.getMailList_temporary(repository+"@everywareit.com"); // 여기는 repository 가 아닌 sender로 들어감.
 			model.addAttribute("sort", 5);
 			
 			
 		}else {
-
+			
+			
 		}
 
 		MailList mail = null;
+		boolean selfCheck = false; 
 
 		for (int i = 0; i < inboxList.size(); i++) {
 
@@ -86,13 +103,18 @@ public class MailGetController {
 			// MDAO: mailinfo 에서 가져오기
 			String mailFrom = inboxList.get(i).getSender();
 			
-			if(mailFrom != null){
-			String fromWho = mdao.getUserFromMailInfo(mailFrom);
+			if(mailFrom != null &&!mailFrom.equals("")){
+				
+				System.out.println("mailFrom Check: "+mailFrom);
+				String fromWho = mdao.getUserFromMailInfo(mailFrom);
 
-			mail.setFrom(fromWho + "&lt;" + mailFrom + "&gt;");
+				mail.setFrom(fromWho + "&lt;" + mailFrom + "&gt;");
+			
+			}else{
+				String fromWho = "temporary";			
 			}
 			
-			
+			mail.setRecipients(inboxList.get(i).getRecipients());
 			mail.setMaildate(inboxList.get(i).getLast_updated());
 			mail.setMessage_name(inboxList.get(i).getMessage_name());
 			mail.setMailimportance(inboxList.get(i).getMessage_importance());
@@ -113,8 +135,19 @@ public class MailGetController {
 
 				messageMime = new MimeMessage(null, bis);
 
-				mail.setMailsubject(messageMime.getSubject());
+				if(messageMime.getSubject() != null && !messageMime.getSubject().equals("")){
+					
+					mail.setMailsubject(messageMime.getSubject());
+				}else{
+					// 임시저장시에  잘못했었던 
+					mail.setMailsubject("temporary Mail");
+				}
 
+				mail.setRecipients(MailUtil.printAddresses(messageMime.getRecipients(Message.RecipientType.TO)));
+				
+				//self/ send 의 경우, 이것이 자신에게 보낸 것인가 다른사람에게 보낸것인가를 체크하기 위해서: self 면 true; 
+				selfCheck = MailUtil.isSelfMail(messageMime.getRecipients(Message.RecipientType.TO), repository);
+				
 				Multipart multipart = (Multipart) messageMime.getContent();
 
 				if (messageMime.isMimeType("multipart/*")) {
@@ -197,11 +230,22 @@ public class MailGetController {
 				}
 			}
 
-			viewList.add(mail);
+			//편지함 종류에 따라서 리스트에 추가되는 메일이 다름 크게  내게보낸편지 / 보낸편지 / 나머지 로 분류 
+			if(sort.equals("self")){
+				if(selfCheck){
+					viewList.add(mail);
+				}
+			}else if(sort.equals("send")){
+				if(!selfCheck){
+					viewList.add(mail);
+				}
+			}else{
+				viewList.add(mail);
+			}
 		}
 
 		model.addAttribute("viewList", viewList);
-
+		
 		return "appviews-inbox-inbox";
 	}
 

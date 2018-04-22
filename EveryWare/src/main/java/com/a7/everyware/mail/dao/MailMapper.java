@@ -17,6 +17,8 @@ public interface MailMapper {
 	
 	public ArrayList<Inbox> getMailList_temporary(String repository);
 	
+	public ArrayList<Inbox> getMailList_byOneself(HashMap<String, String> map);
+	
 	public Inbox readMail(HashMap<String,String> map);
 	
 	public int deleteMail(ArrayList<String> deleteArray);
@@ -46,5 +48,7 @@ public interface MailMapper {
 	public int getNextTempVal();
 
 	public int insertTemp(Inbox map);
+	
+	
 	
 }

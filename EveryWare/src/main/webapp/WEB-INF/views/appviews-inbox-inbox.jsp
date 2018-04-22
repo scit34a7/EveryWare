@@ -33,7 +33,7 @@
 			<!-- NAVBAR -->
 			<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
-				<a href="index"> <img src="../resources/assets/img/logo-white.png"
+				<a href="../index"> <img src="../resources/assets/img/logo-white.png"
 					alt="Klorofil Pro Logo" class="img-responsive logo">
 				</a>
 			</div>
@@ -52,9 +52,7 @@
 				</form>
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#" class="btn-toggle-rightsidebar"> <i
-								class="ti-layout-sidebar-right"></i>
-						</a></li>
+						
 						<li class="dropdown"><a href="#"
 							class="dropdown-toggle icon-menu" data-toggle="dropdown"> <i
 								class="ti-bell"></i> <span class="badge bg-danger">5</span>
@@ -98,20 +96,10 @@
 								</a></li>
 								<li><a href="#" class="more">전체 알람 보러 가기</a></li>
 							</ul></li>
-						<li class="dropdown"><a href="#" id="tour-help"
-							class="dropdown-toggle" data-toggle="dropdown"><i
-								class="ti-help"></i> <span class="hide">Help</span></a>
-							<ul class="dropdown-menu">
-								<li><a href="#"><i class="ti-direction"></i> Basic Use</a></li>
-								<li><a href="#"><i class="ti-server"></i> Working With
-										Data</a></li>
-								<li><a href="#"><i class="ti-lock"></i> Security</a></li>
-								<li><a href="#"><i class="ti-light-bulb"></i>
-										Troubleshooting</a></li>
-							</ul></li>
+						
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown"> <img
-								src="../resources/assets/img/user.png" alt="Avatar"> <span>박자바</span>
+							data-toggle="dropdown"> 
+								  <span>${sessionScope.userName}</span>
 						</a>
 							<ul class="dropdown-menu logged-user-menu">
 								<li><a href="#"><i class="ti-user"></i> <span>개인정보</span></a></li>
@@ -146,12 +134,12 @@
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="subLayouts" class="collapse">
 							<ul class="submenu">
-								<li><a href="appviews-inbox">받은메일함 <span
+								<li><a href="./getMail?sort=all">받은메일함 <span
 										class="label label-success">NEW</span></a></li>
-								<li><a href="layout-minified">Minified</a></li>
-								<li><a href="layout-fullwidth">Fullwidth</a></li>
-								<li><a href="layout-default">Default</a></li>
-								<li><a href="layout-grid">Grid</a></li>
+								<li><a href="./getMail?sort=send">보낸메일함</a></li>
+								<li><a href="./sendMail">편지쓰기</a></li>
+								<li><a href="./getMail?sort=important">중요편지함</a></li>
+								
 							</ul>
 						</div></li>
 					<li class="panel"><a href="#forms" data-toggle="collapse"
@@ -300,12 +288,12 @@
 												<span>Mail Service</span>
 												<ul class="nav-content-menu">
 													<li><a href="./sendMail"  ><i class ="fa fa-pencil"></i> 편지쓰기</a></li>
-													<li><a href="./getMail?sort=all" <c:if test ="${sort== 0}">style = "color : blue; font-weight:bold"</c:if> ><i class="fa fa-inbox"></i> 받은편지함</a></li>
-													<li><a href="#"><i class="fa fa-mail-forward"></i> 보낸편지함</a></li>
-													<li><a href="./getMail?sort=temporary"  <c:if test ="${sort== 5}">style = "color : blue; font-weight:bold"</c:if>><i class="fa fa-folder"></i> 임시보관함</a></li>
-													<li><a href="./getMail?sort=important" <c:if test ="${sort== 3}">style = "color : blue; font-weight:bold"</c:if>><i class="fa fa-flag"></i> 중요편지함</a></li>
-													<li><a href="#"><i class="fa fa-folder"></i> 내게쓴편지함</a></li>
-													<li><a href="./getMail?sort=trash" <c:if test ="${sort== 4}">style = "color : blue; font-weight:bold"</c:if> ><i class="fa fa-trash"></i> 휴지통</a></li>
+													<li><a href="./getMail?sort=all" 		<c:if test ="${sort== 0}">style = "color : blue; font-weight:bold"</c:if>	><i class="fa fa-inbox"></i> 		받은편지함</a></li>
+													<li><a href="./getMail?sort=send" 		<c:if test ="${sort== 2}">style = "color : blue; font-weight:bold"</c:if>	><i class="fa fa-mail-forward"></i> 보낸편지함</a></li>
+													<li><a href="./getMail?sort=temporary"  <c:if test ="${sort== 5}">style = "color : blue; font-weight:bold"</c:if>	><i class="fa fa-folder"></i>		 임시보관함</a></li>
+													<li><a href="./getMail?sort=important" 	<c:if test ="${sort== 3}">style = "color : blue; font-weight:bold"</c:if>	><i class="fa fa-flag"></i> 		중요편지함</a></li>
+													<li><a href="./getMail?sort=self" 		<c:if test ="${sort== 1}">style = "color : blue; font-weight:bold"</c:if>	><i class="fa fa-folder"></i> 		내게쓴편지함</a></li>
+													<li><a href="./getMail?sort=trash" 		<c:if test ="${sort== 4}">style = "color : blue; font-weight:bold"</c:if> 	><i class="fa fa-trash"></i> 		휴지통</a></li>
 													<li><a href="./setMailForm"><i class = "fa fa-cog"></i> 양식 설정</a></li>
 												</ul>
 												
@@ -402,26 +390,47 @@
 																	</div>
 																</td>
 																<td width="100%">
-																	<a href="./read?message_name=${a.message_name}">
-																		<div class="text">
-																			<span class="sender">${a.from }</span>
-																			<span class="timestamp">${a.maildate }</span>
-																			<h3 class="title">${a.mailsubject }</h3>
-																			<span class="timestamp">${a.mailreaded }</span>
-																			<p class="preview"></p>
+																	
+																	<c:choose>
+																		<c:when test = "${sort == 5}">
+																			<a href="./readTemp?message_name=${a.message_name}">
+																				<div class="text">
+																					<span class="sender">${a.from }</span>
+																					<span class="timestamp">${a.maildate }</span>
+																					<h3 class="title">${a.mailsubject }</h3>
+																					<span class="timestamp">${a.mailreaded }</span>
+																					<p class="preview"></p>
 																			
-																			<c:if test="${a.mailattached!=''&&a.mailattached!=null}">
-																				<span class="attachment"><i class="fa fa-paperclip"></i></span>
-																			</c:if>
-																		</div>
-																	</a>		
+																					<c:if test="${a.mailattached!=''&&a.mailattached!=null}">
+																						<span class="attachment"><i class="fa fa-paperclip"></i></span>
+																					</c:if>
+																				</div>
+																			</a>
+																		</c:when>																	
+																		
+																		<c:otherwise>
+																			<a href="./read?message_name=${a.message_name}">
+																				<div class="text">
+																					<span class="sender">${a.from }</span>
+																					<span class="timestamp">${a.maildate }</span>
+																					<h4 class="title">${a.mailsubject }</h4>
+																					<span class="timestamp">${a.mailreaded }</span>
+																					<p class="preview"></p>
+																			
+																					<c:if test="${a.mailattached!=''&&a.mailattached!=null}">
+																						<span class="attachment"><i class="fa fa-paperclip"></i></span>
+																					</c:if>
+																				</div>
+																			</a>	
+																		</c:otherwise>
+																	</c:choose>
+																		
 																</td>
 															</tr>
 														</table>
 													</li>
 													</form>
 													</c:forEach>
-										
 												</ul>
 												</div>
 											</div>		
@@ -473,11 +482,7 @@
 			});
 		});
 		</script>
-		<div id="demo-panel">
-			<a href="#" onclick="toggleDemoPanel(event);"><i class="fa fa-cog fa-spin"></i></a>
-			<iframe src="../resources/demo-panel/index.html"></iframe>
-		</div>
-		<!-- END DEMO PANEL -->
+		
 		<script>
 		$(function()
 		{

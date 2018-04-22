@@ -6,8 +6,6 @@
 <!-- 메일가져오기 처리 SQL -->
 <mapper namespace="com.a7.everyware.mail.dao.MailMapper">
 	
-	
-	
 	<resultMap id="responseMap" type="Inbox">
     	  
     	  <result property="message_name" javaType="java.lang.String" column="message_name" jdbcType="VARCHAR"/>
@@ -55,6 +53,8 @@
 			repository_name = #{userName}
 		and 
 			message_state != 'temp'
+		and 
+			sender != #{userName}||'@everywareit.com'
 		order by 
 			last_updated desc
 	</select>
@@ -86,6 +86,8 @@
 			message_deleted is null
 		and 
 			message_importance is not null
+			
+			
 		order by 
 			last_updated desc
 	</select>
@@ -97,14 +99,27 @@
 		from
 			inbox 
 		where 
-			repository_name = #{userName}
+			sender = #{userName}
 		and
-			message_state = 'temp'
+			repository_name = 'temp'
 		order by 
 			last_updated desc
 	</select>
 	
-	
+	<!--  List of mail by Self or for Sender's -->
+	<select id = "getMailList_byOneself" parameterType = "hashMap" resultMap = "responseMap">
+		select 
+			* 
+		from
+			inbox 
+		where 
+			sender = #{sender} 
+		and 
+			repository_name = #{repository} 
+		order by 
+			last_updated desc	
+	</select>	
+			
 	<!-- read Mail -->	
 	<select id = "readMail" parameterType = "hashMap" resultMap = "responseMap">
 		select 

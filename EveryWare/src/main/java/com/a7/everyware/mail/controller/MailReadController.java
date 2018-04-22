@@ -63,7 +63,9 @@ public class MailReadController {
 		MailList mail = new MailList();
 		
 		String mailFrom = inbox.getSender();
-		String fromWho = mdao.getUserFromMailInfo(mailFrom);
+		String fromWho = null;
+		
+		fromWho = mdao.getUserFromMailInfo(mailFrom);
 		
 		mail.setFrom(fromWho + "&lt;"+mailFrom+"&gt;");
 		
@@ -85,7 +87,7 @@ public class MailReadController {
 		
 			mail.setRecipients(MailUtil.printAddresses(messageMime.getRecipients(Message.RecipientType.TO)));
 		
-			mail.setMailsubject(messageMime.getSubject());
+			mail.setMailsubject("[Temporary]"+messageMime.getSubject());
 
 			Multipart multipart = (Multipart) messageMime.getContent();
 
@@ -234,6 +236,143 @@ public class MailReadController {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	@RequestMapping(value = "readTemp", method = RequestMethod.GET)
+	public String readTemp(String message_name, HttpSession session, Model model ){
+		
+		model.addAttribute("sort","5");
+		String repository = "temp";
+		
+		// Attachment multi showing and donwload
+		ArrayList<AttachInfo> attachList = new ArrayList<AttachInfo>();
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("repository_name", repository);
+		map.put("message_name", message_name);
+
+		Inbox inbox = mdao.readMail(map);
+
+		//update read; 
+		int checkRead = mdao.checkReadMail(map);
+		
+		//출력물을 위한 메일리스트 객체; 
+		MailList mail = new MailList();
+		
+		String mailFrom = inbox.getSender();
+		String fromWho = null;
+		
+		if(mailFrom != null && mailFrom.equals("")){
+			fromWho = mdao.getUserFromMailInfo(mailFrom);
+		}else{
+			fromWho = "temp";
+		}
+		
+		mail.setFrom(fromWho + "&lt;"+mailFrom+"&gt;");
+		
+		mail.setMaildate(inbox.getLast_updated());
+		
+		// 필요가 없어심
+		/*String mailTo = inbox.getRecipients();
+		String toWho = mdao.getUserFromMailInfo(mailTo);
+		mail.setRecipients(toWho +"&lt"+mailTo+"&gt");
+		*/
+		
+		byte[] messageBody = inbox.getMessage_body();
+		
+		Message messageMime = null;
+		try {
+			ByteArrayInputStream bis = new ByteArrayInputStream(messageBody);
+
+			messageMime = new MimeMessage(null, bis);
+		
+			mail.setRecipients(MailUtil.printAddresses(messageMime.getRecipients(Message.RecipientType.TO)));
+		
+			mail.setMailsubject("[Temporary]"+messageMime.getSubject());
+
+			Multipart multipart = (Multipart) messageMime.getContent();
+
+			if (messageMime.isMimeType("multipart/*")) {
+				for (int i1 = 0; i1 < multipart.getCount(); i1++) {
+
+					Part p = multipart.getBodyPart(i1);
+
+					if ((p.isMimeType("text/plain") || p.isMimeType("text/html")) && (p.getFileName() == null)) {
+						String mime = messageMime.getContentType();
+						int index = mime.indexOf(";");
+						
+						if (index < 0) {
+							System.out.println("[multiType]index of ';' is minus : "+(String) p.getContent());
+						} else {
+							mail.setContentpreview((String) p.getContent());
+						}
+					} else {
+						String filename = p.getFileName();
+						mail.setMailattached(filename);
+					
+						//AttachInfo 추가 
+						AttachInfo attachInfo = new AttachInfo();
+						
+						attachInfo.setFileName(p.getFileName());
+						attachInfo.setMessage_number(inbox.getMessage_name());// message Num?
+						attachInfo.setPart_number(i1+"");
+						attachInfo.setSize(p.getSize()+"");
+					
+						attachList.add(attachInfo);
+					}
+				}
+			} else if (messageMime.isMimeType("text/plain") || messageMime.isMimeType("text/html")) {
+				String mime = messageMime.getContentType();
+				int index = mime.indexOf(";");
+
+				if (index < 0) {
+					System.out.println("[text/plain]index of ';' is minus : "+(String) messageMime.getContent());
+				} else {
+					mail.setContentpreview((String)messageMime.getContent());
+				}
+			} else {
+				String mime = messageMime.getContentType();
+				if (mime.startsWith("text")) {					
+					mail.setContentpreview((String)messageMime.getContent());
+				} else {
+					String filename = messageMime.getFileName();
+					mail.setMailattached(filename);
+				}
+			}
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassCastException e) {
+			// Multipart part <- message.getContent() 에서 Content가 순수 String 컨텐츠로
+			// 짜여졌을 때에 발생는 오류s
+			try {
+				
+				String preview = null;
+
+				if (((String) messageMime.getContent()).length() < 150) {
+					preview = messageMime.getContent().toString();
+
+				} else {
+					preview = ((String) messageMime.getContent()).substring(0, 150);
+				}
+
+				mail.setContentpreview(preview);
+
+			} catch (IOException | MessagingException e1) {
+				// TODO Auto-generated catch block
+
+				System.out.println("try catch 전면 수정 필요: catch 안에 catch");
+				e1.printStackTrace();
+			}
+		}		
+		model.addAttribute("mail", mail);
+		model.addAttribute("attaches",attachList);
+		
+		
+		return "appviews-inbox-write";
 	}
 	
 }

@@ -72,7 +72,7 @@ public class MailUtil {
 		
 		String result = "";
 		
-		for(int i = 0 ; i < addresses.length;i++){
+		for(int i = 0 ; i < addresses.length-1;i++){ //length -1 : 보낸편지함을 위해서 자신에게 보내는 주소는 생략 ; 
 			
 			String name = addresses[i].toString();
 			try{
@@ -92,8 +92,17 @@ public class MailUtil {
 		return result;
 	}
 	
-	
-	
+	public static Boolean isSelfMail(Address[] address, String repositoryOfUser){
+		
+		boolean checkSelf= false;
+		
+		if(address.length==2){
+			if(address[0].toString().contains(repositoryOfUser)&& address[1].toString().contains(repositoryOfUser)){
+				checkSelf = true;
+			}
+		}
+		return checkSelf;
+	}
 	
 	public static String getAddress(Address[] addresses){
 		if(addresses == null)

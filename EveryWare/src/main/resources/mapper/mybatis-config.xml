@@ -14,7 +14,6 @@
 		<typeAlias type="com.a7.everyware.approval.vo.ApprovalLineVO" alias="ApprovalLineVO" />
 		<typeAlias type="com.a7.everyware.approval.vo.ApprovalHistoryVO" alias="ApprovalHistoryVO" />
 		<typeAlias type="com.a7.everyware.support.vo.AttendVO" alias="AttendVO" />
-
 		
 		<typeAlias type="com.a7.everyware.mail.vo.Inbox" alias ="Inbox" />
 		<typeAlias type="com.a7.everyware.mail.vo.MailInfo" alias ="MailInfo" />
@@ -23,8 +22,6 @@
 		<typeAlias type="com.a7.everyware.resource.vo.ResourceVO" alias="ResourceVO" />
 		<typeAlias type="com.a7.everyware.resource.vo.R_reservationVO" alias="ReservationVO" />
 		<typeAlias type="com.a7.everyware.schedule.vo.ScheduleVO" alias="ScheduleVO" />
-
-
 	</typeAliases>
 	
 	<mappers>

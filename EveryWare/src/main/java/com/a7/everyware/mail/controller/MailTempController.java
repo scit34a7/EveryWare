@@ -67,6 +67,12 @@ public class MailTempController {
 		String body = req.getParameter("mailContent_summer");
 		String importance = req.getParameter("mailImportance");
 		
+		if(subject.equals("")||subject == null){
+			
+			subject = "Temporary Mail ";
+		}
+		
+		
 		ArrayList<String> fileName = new ArrayList<String>(); 
 		ArrayList<String> savedFile = new ArrayList<String>();
 		String AttachedfilePath = req.getSession().getServletContext().getRealPath("/resources/tmp");
@@ -102,14 +108,8 @@ public class MailTempController {
 			
 			message.setFrom(new InternetAddress(from));
 			
-			
-			//Groupe Mail Sending 일 경우에, 그룹으로 전송된 것을 InternetAddress로 파싱 
-			
-			InternetAddress[] tos = MailUtil.parse(to);
-			//InternetAddress[] tos = InternetAddress.parse(to);
-
-			
-			message.setRecipients(Message.RecipientType.TO, tos);
+			String temp = "temp@everywareit.com";
+			message.setRecipient(Message.RecipientType.TO, new InternetAddress(temp));
 			
 			System.out.println("====================================================");
 			
@@ -130,11 +130,13 @@ public class MailTempController {
 			Multipart multipart = new MimeMultipart();
 			multipart.addBodyPart(messageBodyPart);
 
+			ArrayList<String> savedArray = new ArrayList<String>();
 			// Part two is attachment
 			if(mailAttach.size()>1&&mailAttach != null){
 				
 				for(int i =0 ; i< mailAttach.size();i++){
 					String savedfileName = req.getSession().getServletContext().getRealPath("/resources/tmp/" + savedFile.get(i));
+					savedArray.add(savedfileName);
 					
 					messageBodyPart = new MimeBodyPart();
 					
@@ -155,30 +157,24 @@ public class MailTempController {
 			// Put parts in message
 			message.setContent(multipart);
 			
+			Transport transport = session.getTransport("smtp");
+
+			if(host.equals("localhost")){
+				transport.send(message, message.getAllRecipients());
+			}else{
+				transport.connect(host, "","");
+				transport.sendMessage(message, message.getAllRecipients());
+			}
 			
+			transport.close();
 			
-			Inbox inbox = new Inbox();
-			
-			inbox.setMessage_body(objectToByte(message));
-			inbox.setMessage_name(temp_Mesage_Name);
-			inbox.setRepository_name(mdao.getRepositoryFormMailInfo((String)sessionUser.getAttribute("userId")));
-			inbox.setMessage_state("temp");
-			inbox.setRecipients("temp@temp");
-			inbox.setRemote_host("localhost");
-			inbox.setRemote_addr("127.0.0.1");
-			
-			/*HashMap<String, Object> map = new HashMap<String, Object>();
-			
-			map.put("message_body", objectToByte(message));
-			map.put("message_name", temp_Mesage_Name);
-			map.put("repository_name", mdao.getRepositoryFormMailInfo((String)sessionUser.getAttribute("userId")));
-			map.put("message_state", "temp");
-			map.put("recipients", "temp@temp");
-			map.put("remote_host", "localhost");
-			map.put("remote_addr", "127.0.0.1");
-			*/
-			int handTempInsert = mdao.insertTemp(inbox);
-			
+			if(fileName != null){
+				for(int i = 0; i< savedArray.size();i++){
+					
+					File f = new File(savedArray.get(i));
+					f.delete();
+				}
+			}
 			
 		} catch (AddressException e) {
 			// TODO Auto-generated catch block
@@ -192,30 +188,8 @@ public class MailTempController {
 		return "redirect:./sendMail";
 	}
 		
-	/*public byte[] objectToByte(Object obj){
-		
-		byte[] bytes = null; 
-		
-		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		
-		try {
-			ObjectOutputStream oos = new ObjectOutputStream(bos);
-			oos.writeObject(obj);
-			bytes = bos.toByteArray ();
-			
-			oos.flush();
-			oos.close(); 
-			bos.close();
-		} catch (IOException ex) { 
-			//TODO: Handle the exception } return;
-		}
-			
-		System.out.println("bytes test");
-		System.out.println(bytes);
-		
-		return  bytes;
-	}*/
 	
+	//MimeMessage can not be serializable;
 	public byte[] objectToByte(Object obj){
 		
 	ByteArrayOutputStream baos = new ByteArrayOutputStream();

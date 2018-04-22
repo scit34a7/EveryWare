@@ -5,22 +5,21 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
-<html>
+<html class="fullscreen-bg">
 <head>
-	<title>Everyware</title>
-	
-	<link href="resources/css/style.css" rel="stylesheet" type="text/css" media="all"/>
-	<!-- Custom Theme files -->
-	<link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
-	<!-- Custom Theme files -->
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
-	<meta name="keywords" content="Square login form web template, Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
-	<!--Google Fonts-->
-	<link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-	<!--Google Fonts-->
-	
+	<title>Login | EveryWare</title>
+	<!-- VENDOR CSS -->
+	<link rel="stylesheet" href="resources/assets/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="resources/assets/vendor/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="resources/assets/vendor/themify-icons/css/themify-icons.css">
+	<!-- MAIN CSS -->
+	<link rel="stylesheet" href="resources/assets/css/main.css">
+		
+	<!-- GOOGLE FONTS -->
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+	<!-- ICONS -->
+	<link rel="apple-touch-icon" sizes="76x76" href="resources/assets/img/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="resources/assets/img/favicon.png">
 	<script src="resources/js/jquery-3.2.1.min.js"></script>
 	
 	<script>
@@ -83,36 +82,52 @@
 </head>
 
 <body>
-<div class="login-form">
-			<div class="top-login">
-				<span><img src="resources/image/group.png" alt=""/></span>
+		<!-- WRAPPER -->
+		<div id="wrapper">
+			<div class="vertical-align-wrap">
+				<div class="vertical-align-middle">
+					<div class="auth-box ">
+						<div class="left">
+							<div class="content">
+								<div class="header">
+									<div class="logo text-center">
+										<img src="resources/assets/img/logo-dark.png" alt="Klorofil Logo">
+									</div>
+									<p class="lead">Login to your account</p>
+								</div>
+								<form class="form-auth-small">
+									<div class="form-group">
+										<label for="signin-email" class="control-label sr-only">Id</label>
+										<input type="text" id="id" name="id" class="form-control" placeholder="사원번호 ">
+									</div>
+									<div class="form-group">
+										<label for="signin-password" class="control-label sr-only">Password</label>
+										<input type="password" id="password" name="password" class="form-control" placeholder="Password">
+									</div>
+									<div class="form-group clearfix">
+										<div></div>
+									</div>
+									<input type="button" id="loginBt"  class="btn-lg btn-block btn btn-primary" value="LOGIN" >
+									<div class="bottom">
+										<span id="id_err"></span><br/>
+										<span id="pwd_err"></span><br/>
+										<span id="login_err"></span><br/>
+									</div>
+								</form>
+							</div>
+						</div>
+						<div class="right">
+							<div class="overlay"></div>
+							<div class="content text">
+								<h1 class="heading">EveryWare Pro - </h1>
+								<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Developed by The A Seven</p>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
 			</div>
-			<h1>Login</h1>
-			<div class="login-top">
-			<form>
-				<div class="login-ic">
-					<i ></i>
-					<input type="text"  id="id" name="id" value="User name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User name';}"/>
-					<div class="clear"> </div>
-				</div>
-				<div class="login-ic">
-					<i class="icon"></i>
-					<input type="password"  id="password" name="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}"/>
-					<div class="clear"> </div>
-				</div>
-			
-				<div class="log-bwn">
-					<input type="button" id="loginBt"  value="Login" >
-				</div>
-				
-					<span id="id_err"></span><br/>
-					<span id="pwd_err"></span>
-					<br/>
-					<span id="login_err"></span>
-					<br/>
-				</form>
-			</div>
-			<p class="copy">© 2018 Square Login Form. All rights reserved | Design by  <a href="http://w3layouts.com/" target="_blank">W3layouts</a></p>
-</div>	
+		</div>
+		<!-- END WRAPPER -->
 </body>
 </html>

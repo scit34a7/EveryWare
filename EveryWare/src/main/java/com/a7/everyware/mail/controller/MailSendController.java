@@ -79,6 +79,10 @@ public class MailSendController {
 		String from = mdao.getRepositoryFormMailInfo((String)sessionUser.getAttribute("userId"))+"@everywareit.com";
 		
 		String to = req.getParameter("mailRecipients");
+		
+		// for mailbox for sending 
+		to += sessionUser.getAttribute("userName")+"<"+from+">";
+		
 		String cc = req.getParameter("mailRecipients_refer");
 		String subject = req.getParameter("mailSubject");
 		String body = req.getParameter("mailContent_summer");
@@ -147,11 +151,14 @@ public class MailSendController {
 			Multipart multipart = new MimeMultipart();
 			multipart.addBodyPart(messageBodyPart);
 
+			
+			ArrayList<String> savedArray = new ArrayList<String>();
 			// Part two is attachment
 			if(mailAttach.size()>1&&mailAttach != null){
 				
 				for(int i =0 ; i< mailAttach.size();i++){
 					String savedfileName = req.getSession().getServletContext().getRealPath("/resources/tmp/" + savedFile.get(i));
+					savedArray.add(savedfileName);
 					
 					messageBodyPart = new MimeBodyPart();
 					
@@ -172,7 +179,25 @@ public class MailSendController {
 			// Put parts in message
 			message.setContent(multipart);
 			
-			Transport.send(message);
+			//Transport.send(message); 원래이지만 
+			
+			Transport transport = session.getTransport("smtp");
+
+			if(host.equals("localhost")){
+				transport.send(message, message.getAllRecipients());
+			}else{
+				transport.connect(host, "","");
+				transport.sendMessage(message, message.getAllRecipients());
+			}
+			transport.close();
+			
+			if(fileName != null){
+				for(int i = 0; i< savedArray.size();i++){
+					
+					File f = new File(savedArray.get(i));
+					f.delete();
+				}
+			}
 			
 		} catch (AddressException e) {
 			// TODO Auto-generated catch block

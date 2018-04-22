@@ -76,6 +76,15 @@ public class MailDAO {
 		return mailList;
 	}
 
+	public ArrayList<Inbox> getMailList_byOneSelf(HashMap<String,String> map){
+		
+		ArrayList<Inbox> mailList = null; 
+		MailMapper mapper = sqlSession.getMapper(MailMapper.class);
+		mailList = mapper.getMailList_byOneself(map);
+		
+		return mailList;
+	}
+	
 	public Inbox readMail(HashMap<String, String> map) {
 
 		Inbox inbox = null;

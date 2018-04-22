@@ -40,6 +40,9 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value="loginUser", method=RequestMethod.POST)
 	public String loginUser(HttpSession session, Model model, String id, String password) {
+		
+		System.out.println(id+","+password);
+		
 		String msg = null;
 		
 		if ((String) session.getAttribute("userId") != null) {
@@ -50,6 +53,7 @@ public class UserController {
 
 		if (vo != null) {
 			if (password.equals(vo.getUser_pw())) {
+			
 				session.setAttribute("userId", vo.getUser_id());
 				session.setAttribute("userName", vo.getUser_name());
 				session.setAttribute("userDepartment", vo.getDept_name());
@@ -57,7 +61,6 @@ public class UserController {
 				return "1";
 			}
 		}
-		
 		return "0";
 	}
 	
