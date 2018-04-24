@@ -31,6 +31,9 @@
 		<script src="../resources/js/jquery-3.2.1.min.js"></script>
 		<script src="../resources/meeting/voice/annyang.js"></script>
 		
+		<link rel="stylesheet" href="../resources/test/css/bootstrap.min.css">
+    	<link rel="stylesheet" href="../resources/test/css/style.min.css">
+    	<link rel="stylesheet" href="../resources/test/css/style.css">
 		<script>
 		$(document).ready(function () {
 			var w = screen.availWidth;
@@ -97,7 +100,7 @@
 		
 		  // Define function called by getUserMedia 
 		  function startUserMedia(stream) {
-		    // Create MediaStreamAudioSourceNode
+		    // create MediaStreamAudioSourceNode 
 		    var source = audioContext.createMediaStreamSource(stream);
 		
 		    // Setup options
@@ -112,7 +115,7 @@
 		    	}
 		    }; 
 		    
-		    // Create VAD
+		    // create VAD
 		    var vad = new VAD(options);
 		  }
 		
@@ -137,8 +140,13 @@
 		}
 		
 		#container {
-		  display: flex;
-		  height: 100%;
+			display: flex;
+			height: 100%;
+			background: url("../resources/meeting/image/meet_back.png") no-repeat center center fixed;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
 		}
 		
 		#left {
@@ -149,7 +157,6 @@
 		
 		#box-left {
 		  overflow:auto;
-		  background: #00264d;
 		  flex: 1;
 		  text-align: center;
 		  height: 100%;
@@ -157,29 +164,36 @@
 		
 		#box-center {
 	      overflow:auto;
-		  background: #00264d;
 		  flex: 3;
 		  text-align: center;
 		  height: 100%;
 		}
 		#box-right {
 		  overflow:auto;
-		  background: #00264d;
 		  flex: 1;
 		  text-align: center;
 		  height: 100%;
+/* 		  	zoom: 1;
+			filter: alpha(opacity=80);
+			opacity: 0.8; */
 		}
 		
 		#chat-container {
 			overflow:auto;
-			background: #fff;
-			border: 1px solid blue;
+			background: white;
 			height: 90%;
+			zoom: 1;
+			filter: alpha(opacity=80);
+			opacity: 0.8;
 		}
 		#chat-input {
 			/* overflow:auto; */
 			background: white;
+			margin: 0 auto;
 			height: 10%;
+			zoom: 1;
+			filter: alpha(opacity=80);
+			opacity: 0.8;
 		}
 		</style>
 	</head>
@@ -226,9 +240,7 @@
 			<!-- MAIN -->
 
 			<div id='container'>
-				<div id="left" style="background-color: black">
-				
-				</div>
+				<div id="left" style="background-color: black"></div>
 			
 			    <div id='box-left'>
 				    <h5>WebcamChat Section</h5><br>
@@ -236,8 +248,8 @@
 			    </div>
 			
 			    <div id='box-center'>
-			    <h5>Board Section</h5><br>
-			    <div id="videos"></div>
+			    	<h5>Board Section</h5><br>
+			    	<div id="videos"></div>
 			    </div>
 			    
 			    <div id='box-right'>
@@ -288,7 +300,6 @@ var connection = new RTCMultiConnection();
 connection.sendMessage = function(message) {
     message.userid = connection.userid;
     message.extra = true;
-    //alert("MESSAGE");
     showObj2(message);
     connection.send(message);
 };
@@ -351,6 +362,7 @@ function leaveRoom() {
     	});
     } else {
         connection.leave();
+        history.back();
     }
 };
 
@@ -456,11 +468,15 @@ function appendDIV(event) {
 	
 	if(id != undefined) {
 		var test = data.userid + ": " + data.value;
-		div.innerHTML = test;
+		//div.innerHTML = test;
+		div.innerHTML = '<div>' + data.userid + '</div>';
+		div.innerHTML += '<div class="message" style="background-color:#ffff99;">' + data.value + '</div>';
 		div.style.textAlign="left";
 		chatContainer.appendChild(div);
 	} else {
-		div.innerHTML = (event.data) || ("${sessionScope.userName}" + ": " + event); //+ connection.userid
+		div.innerHTML = '<div>' + "${sessionScope.userName}" + "</div>";
+		div.innerHTML += '<div class="message" style="background-color:#66ccff;">' + event + '</div>';
+		//div.innerHTML = (event.data) || ("${sessionScope.userName}" + ": " + event); //+ connection.userid
 		div.style.textAlign="right";
 		chatContainer.appendChild(div);
 	}
@@ -484,7 +500,7 @@ connection.getScreenConstraints = function(callback) {
     });
 };
 
- connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
+connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
 connection.socketMessageEvent = 'audio-video-file-chat-demo';
 connection.enableFileSharing = true; // by default, it is "false".
 connection.session = {
@@ -497,6 +513,7 @@ connection.sdpConstraints.mandatory = {
     OfferToReceiveVideo: true
 };
 connection.videosContainer = document.getElementById('videos-container');
+
 connection.onstream = function(event) {
 	//alert("test:" + test);
 	if (test == event.userid) {

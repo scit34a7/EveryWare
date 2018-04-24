@@ -69,33 +69,17 @@
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="control-label">직급</label>
-												<br/>
-												<label class="fancy-checkbox">
-													<input type="checkbox" value="사장" name="position" required data-parsley-errors-container="#error-checkbox">
-													<span>사장</span>
-												</label>
-												<label class="fancy-checkbox">
-													<input type="checkbox" value="부장" name="position">
-													<span>부장</span>
-												</label>
-												<label class="fancy-checkbox">
-													<input type="checkbox" value="차장" name="position">
-													<span>차장</span>
-												</label>
-												<label class="fancy-checkbox">
-													<input type="checkbox" value="과장" name="position">
-													<span>과장</span>
-												</label>
-												<label class="fancy-checkbox">
-													<input type="checkbox" value="대리" name="position">
-													<span>대리</span>
-												</label>
-												<label class="fancy-checkbox">
-													<input type="checkbox" value="사원" name="position">
-													<span>사원</span>
-												</label>
-												<p id="error-checkbox"></p>
+												<label for="ticket-type" class="control-label">직급</label>
+												<div>
+													<select id="position" name="position" class="form-control">
+														<option value="사장,부장,차장,과장,대리,사원">전체</option>
+														<option value="사장,부장,차장,과장,대리">대리 이상</option>
+														<option value="사장,부장,차장,과장">과장 이상</option>
+														<option value="사장,부장,차장">차장 이상</option>
+														<option value="사장,부장">부장 이상</option>
+														<option value="사장">임원급</option>
+													</select>
+												</div>
 											</div>
 											<div class="form-group">
 												<label class="control-label" for="department">부서</label>

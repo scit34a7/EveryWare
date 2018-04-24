@@ -118,13 +118,12 @@ public class MeetingController {
 	}
 	
 	@RequestMapping(value = "create", method = RequestMethod.GET)
-	public String create(HttpSession session, Model model, String title, String content, String people, String[] position, String[] department, String time, String roomid) {
+	public String create(HttpSession session, Model model, String title, String content, String people, String position, String[] department, String time, String roomid) {
 		if (meetingDAO.findRoom((String) session.getAttribute("userId")) == null && roomid == null) {
-			logger.debug("title: {}", title);
-			logger.debug("content: {}", content);
-			logger.debug("people: {}", people);
-			logger.debug("position: {}", concatData(department));
-			logger.debug("department: {}", concatData(position));
+//			logger.debug("title: {}", title);
+//			logger.debug("content: {}", content);
+//			logger.debug("people: {}", people);
+//			logger.debug("position: {}", concatData(department));
 			String[] startTime = time.split(":");
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 			Calendar calendar = Calendar.getInstance();
@@ -133,12 +132,13 @@ public class MeetingController {
 			
 			String strDate = sdf.format(calendar.getTime());
 			logger.debug("date: {}", strDate);
+			logger.debug("position: {}", position);
 			
 			MeetingVO vo = new MeetingVO();
 			vo.setUser_id((String) session.getAttribute("userId"));
 			vo.setMeet_title(title);
 			vo.setMeet_dept(concatData(department));
-			vo.setMeet_etposition(concatData(position));
+			vo.setMeet_etposition(position);
 			vo.setMeet_date(strDate);
 			vo.setMeet_maxpeople(Integer.parseInt(people));
 
