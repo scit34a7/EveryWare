@@ -128,14 +128,91 @@ public class SupportController {
 		//출퇴근 확인하던 업무지원 메인페이지로 이동
 		return "redirect:attendList";
 	}
+	
+	
+	//외출체크
+	@RequestMapping (value="goOut", method=RequestMethod.POST)
+	public String goOut(AttendVO attendVO, HttpSession session, Model model) {
+		
+		logger.debug("SupportController attendCheck para {}", attendVO);
+		
+		//세션에서 로그인한 사용자 아이디를 읽어 Attend객체의 사용자 정보에 세팅
+		String id = (String) session.getAttribute("userId");
+		attendVO.setUser_id(id);
+		
+		attendVO.setAttend_check("외출");
+		logger.debug("SupportController attendCheck para {}", attendVO);
+		
+		supportDAO.attendOut(attendVO);
+		
+		logger.debug("어텐드 객체{}", attendVO);
 		
 		
+		//어레이리스트 생성
+		ArrayList<AttendVO> attendList = new ArrayList<AttendVO>();
+		
+		
+		//다오에서 리스트를 받아서 저장
+		attendList = supportDAO.attendListGet(id);
+		
+		//모델에 넣는다
+		model.addAttribute("attendList", attendList);
+		
+		
+		
+		//출퇴근 확인하던 업무지원 메인페이지로 이동
+		return "redirect:attendList";
+	}
+		
+	
+	//외출복귀
+	@RequestMapping (value="goIn", method=RequestMethod.POST)
+	public String goIn(AttendVO attendVO, HttpSession session, Model model) {
+		
+		logger.debug("SupportController attendCheck para {}", attendVO);
+		
+		//세션에서 로그인한 사용자 아이디를 읽어 Attend객체의 사용자 정보에 세팅
+		String id = (String) session.getAttribute("userId");
+		attendVO.setUser_id(id);
+		
+		attendVO.setAttend_check("복귀");
+		logger.debug("SupportController attendCheck para {}", attendVO);
+		
+		supportDAO.attendOut(attendVO);
+		
+		logger.debug("어텐드 객체{}", attendVO);
+		
+		
+		//어레이리스트 생성
+		ArrayList<AttendVO> attendList = new ArrayList<AttendVO>();
+		
+		
+		//다오에서 리스트를 받아서 저장
+		attendList = supportDAO.attendListGet(id);
+		
+		//모델에 넣는다
+		model.addAttribute("attendList", attendList);
+		
+		
+		
+		//출퇴근 확인하던 업무지원 메인페이지로 이동
+		return "redirect:attendList";
+	}
+	
 	
 	//내 근태목록
 	@RequestMapping(value="attendList", method=RequestMethod.GET)
-	public String attendList(Model model, String user_id){
+	public String attendList(AttendVO attendVO, Model model, HttpSession session){
 		
-		ArrayList<AttendVO> attendList = supportDAO.attendListGet(user_id);
+		
+		//세션에서 로그인한 사용자 아이디를 읽어 Attend객체의 사용자 정보에 세팅
+		String id = (String) session.getAttribute("userId");
+		attendVO.setUser_id(id);
+		
+
+		logger.debug("user_id : {}", id);
+		
+		ArrayList<AttendVO> attendList = supportDAO.attendListGet(id);
 		
 		model.addAttribute("attendList", attendList);
 		

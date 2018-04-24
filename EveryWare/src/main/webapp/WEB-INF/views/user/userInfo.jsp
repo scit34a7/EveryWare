@@ -222,7 +222,7 @@
 								<li><a href="../support/supportMain">출퇴근체크</a></li>
 								<li><a href="../support/attendList">출퇴근확인</a></li>
 								<li><a href="../support/boardList">업무보고</a></li>
-								<li><a href="charts-sparkline">Sparkline Chart</a></li>
+							
 							</ul>
 						</div></li>
 						
@@ -299,42 +299,41 @@
 		</div>
 		<!-- END LEFT SIDEBAR -->
 			<!-- MAIN -->
-			<div class="main">
+		    <div class="main">
 				<!-- MAIN CONTENT -->
 				<div class="main-content">
 					<div class="content-heading clearfix">
 						<div class="heading-left">
-							<h1 class="page-title">Profile</h1>
-							<p class="page-subtitle">Your profile is
-								<span class="text-success">85%</span> complete. Please <a href="#">complete your profile</a>.</p>
+							<h1 class="page-title">개인정보</h1>
+						
 						</div>
 					</div>
 					<div class="container-fluid">
 						<div class="panel panel-profile">
 							<div class="clearfix">
 								<!-- LEFT COLUMN -->
-								<div class="profile-left">
+								<div class="profile-center">
 									<!-- PROFILE HEADER -->
 									<div class="profile-header">
 										<div class="overlay"></div>
-										<div class="profile-main">
+											<div class="profile-main"> 
 											<img src="../resources/assets/img/user-medium.png" class="img-circle" alt="Avatar">
-											<h3 class="name">Samuel Gold</h3>
-											<span class="online-status status-available">Available</span>
-										</div>
+											<h3 class="name">${userName}</h3>
+											<span class="online-status status-available">접속 중</span>
+											</div>
 										<div class="profile-stat">
 											<div class="row">
 												<div class="col-md-4 stat-item">
-													45
-													<span>Projects</span>
+													Employee Num.
+													<span>${userId}</span>
 												</div>
 												<div class="col-md-4 stat-item">
-													15
-													<span>Awards</span>
+													Dept.
+													<span>${userDepartment}</span>
 												</div>
 												<div class="col-md-4 stat-item">
-													2174
-													<span>Points</span>
+													Position.
+													<span>${userPosition}</span>
 												</div>
 											</div>
 										</div>
@@ -343,19 +342,25 @@
 									<!-- PROFILE DETAIL -->
 									<div class="profile-detail">
 										<div class="profile-info">
-											<h4 class="heading">Basic Info</h4>
+											<h4 class="heading">기본정보</h4>
 											<ul class="list-unstyled list-justify">
-												<li>Birthdate
-													<span>24 Aug, 2016</span>
+												<li>생일
+													<span>1987. 12. 15</span>
 												</li>
-												<li>Mobile
-													<span>(124) 823409234</span>
+												<li>휴대폰 번호
+													<span>010-5401-7695</span>
 												</li>
-												<li>Email
-													<span>samuel@mydomain.com</span>
+												<li>내선 번호
+													<span>5678</span>
 												</li>
-												<li>Website
-													<span><a href="https://www.themeineed.com">www.themeineed.com</a></span>
+												<li>E-mail
+													<span>snlee@everyware.com</span>
+												</li>
+												<li>주소
+													<span>경남 창원시</span>
+												</li>
+												<li>입사일
+													<span>2015.11.27.</span>
 												</li>
 											</ul>
 										</div>
@@ -368,333 +373,26 @@
 												<li><a href="#" class="github-bg"><i class="fa fa-github"></i></a></li>
 											</ul>
 										</div>
-										<div class="profile-info">
-											<h4 class="heading">About</h4>
-											<p>Interactively fashion excellent information after distinctive outsourcing.</p>
-										</div>
-										<div class="text-center"><a href="./update" class="btn btn-primary">Edit Profile</a></div>
+										
+										<div class="text-center"><a href="update" class="btn btn-primary">개인정보수정</a></div>
 									</div>
 									<!-- END PROFILE DETAIL -->
 								</div>
 								<!-- END LEFT COLUMN -->
-								<!-- RIGHT COLUMN -->
-								<div class="profile-right">
-									<h4 class="heading">Samuel's Awards</h4>
-									<!-- AWARDS -->
-									<div class="awards">
-										<div class="row">
-											<div class="col-md-3 col-sm-6">
-												<div class="award-item">
-													<div class="hexagon">
-														<span class="ti-light-bulb award-icon"></span>
-													</div>
-													<span>Most Bright Idea</span>
-												</div>
-											</div>
-											<div class="col-md-3 col-sm-6">
-												<div class="award-item">
-													<div class="hexagon">
-														<span class="ti-alarm-clock award-icon"></span>
-													</div>
-													<span>Most On-Time</span>
-												</div>
-											</div>
-											<div class="col-md-3 col-sm-6">
-												<div class="award-item">
-													<div class="hexagon">
-														<span class="ti-hummer award-icon"></span>
-													</div>
-													<span>Problem Solver</span>
-												</div>
-											</div>
-											<div class="col-md-3 col-sm-6">
-												<div class="award-item">
-													<div class="hexagon">
-														<span class="ti-heart award-icon"></span>
-													</div>
-													<span>Most Loved</span>
-												</div>
-											</div>
-										</div>
-										<div class="text-center"><a href="#" class="btn btn-default">See all awards</a></div>
-									</div>
-									<!-- END AWARDS -->
-									<!-- TABBED CONTENT -->
-									<div class="custom-tabs-line tabs-line-bottom left-aligned">
-										<ul class="nav" role="tablist">
-											<li class="active"><a href="#tab-bottom-left1" role="tab" data-toggle="tab">Recent Activity</a></li>
-											<li><a href="#tab-bottom-left2" role="tab" data-toggle="tab">Projects <span class="badge">7</span></a></li>
-										</ul>
-									</div>
-									<div class="tab-content">
-										<div class="tab-pane fade in active" id="tab-bottom-left1">
-											<ul class="list-unstyled activity-timeline">
-												<li>
-													<i class="fa fa-comment activity-icon"></i>
-													<p>Commented on post <a href="#">Prototyping</a>
-														<span class="timestamp">2 minutes ago</span>
-													</p>
-												</li>
-												<li>
-													<i class="fa fa-cloud-upload activity-icon"></i>
-													<p>Uploaded new file <a href="#">Proposal.docx</a> to project <a href="#">New Year Campaign</a>
-														<span class="timestamp">7 hours ago</span>
-													</p>
-												</li>
-												<li>
-													<i class="fa fa-plus activity-icon"></i>
-													<p>Added <a href="#">Martin</a> and <a href="#">3 others colleagues</a> to project repository
-														<span class="timestamp">Yesterday</span>
-													</p>
-												</li>
-												<li>
-													<i class="fa fa-check activity-icon"></i>
-													<p>Finished 80% of all <a href="#">assigned tasks</a>
-														<span class="timestamp">1 day ago</span>
-													</p>
-												</li>
-											</ul>
-											<div class="margin-top-30 text-center"><a href="#" class="btn btn-default">See all activity</a></div>
-										</div>
-										<div class="tab-pane fade" id="tab-bottom-left2">
-											<div class="table-responsive">
-												<table class="table project-table">
-													<thead>
-														<tr>
-															<th>Title</th>
-															<th>Progress</th>
-															<th>Leader</th>
-															<th>Status</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td><a href="#">Spot Media</a></td>
-															<td>
-																<div class="progress">
-																	<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-																		<span>60% Complete</span>
-																	</div>
-																</div>
-															</td>
-															<td>
-																<img src="../resources/assets/img/user2.png" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
-															<td>
-																<span class="label label-success">ACTIVE</span>
-															</td>
-														</tr>
-														<tr>
-															<td><a href="#">E-Commerce Site</a></td>
-															<td>
-																<div class="progress">
-																	<div class="progress-bar" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" style="width: 33%;">
-																		<span>33% Complete</span>
-																	</div>
-																</div>
-															</td>
-															<td>
-																<img src="../resources/assets/img/user1.png" alt="Avatar" class="avatar img-circle"> <a href="#">Antonius</a></td>
-															<td>
-																<span class="label label-warning">PENDING</span>
-															</td>
-														</tr>
-														<tr>
-															<td><a href="#">Project 123GO</a></td>
-															<td>
-																<div class="progress">
-																	<div class="progress-bar" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100" style="width: 68%;">
-																		<span>68% Complete</span>
-																	</div>
-																</div>
-															</td>
-															<td>
-																<img src="../resources/assets/img/user1.png" alt="Avatar" class="avatar img-circle"> <a href="#">Antonius</a></td>
-															<td>
-																<span class="label label-success">ACTIVE</span>
-															</td>
-														</tr>
-														<tr>
-															<td><a href="#">Wordpress Theme</a></td>
-															<td>
-																<div class="progress">
-																	<div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">
-																		<span>75%</span>
-																	</div>
-																</div>
-															</td>
-															<td>
-																<img src="../resources/assets/img/user2.png" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
-															<td>
-																<span class="label label-success">ACTIVE</span>
-															</td>
-														</tr>
-														<tr>
-															<td><a href="#">Project 123GO</a></td>
-															<td>
-																<div class="progress">
-																	<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-																		<span>100%</span>
-																	</div>
-																</div>
-															</td>
-															<td>
-																<img src="../resources/assets/img/user1.png" alt="Avatar" class="avatar img-circle" /> <a href="#">Antonius</a></td>
-															<td>
-																<span class="label label-default">CLOSED</span>
-															</td>
-														</tr>
-														<tr>
-															<td><a href="#">Redesign Landing Page</a></td>
-															<td>
-																<div class="progress">
-																	<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-																		<span>100%</span>
-																	</div>
-																</div>
-															</td>
-															<td>
-																<img src="../resources/assets/img/user5.png" alt="Avatar" class="avatar img-circle" /> <a href="#">Jason</a></td>
-															<td>
-																<span class="label label-default">CLOSED</span>
-															</td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</div>
-									</div>
-									<!-- END TABBED CONTENT -->
-								</div>
-								<!-- END RIGHT COLUMN -->
-							</div>
+								
+				
 						</div>
-					</div>
-				</div>
-				<!-- END MAIN CONTENT -->
-				<!-- RIGHT SIDEBAR -->
-				<div id="sidebar-right" class="right-sidebar">
-					<div class="sidebar-widget">
-						<h4 class="widget-heading"><i class="fa fa-calendar"></i> TODAY</h4>
-						<p class="date">Wednesday, 22 December</p>
-						<div class="row margin-top-30">
-							<div class="col-xs-4">
-								<a href="#">
-									<div class="icon-transparent-area custom-color-blue first">
-										<i class="fa fa-tasks"></i>
-										<span>Tasks</span>
-										<span class="badge">5</span>
-									</div>
-								</a>
-							</div>
-							<div class="col-xs-4">
-								<a href="#">
-									<div class="icon-transparent-area custom-color-green">
-										<i class="fa fa-envelope"></i>
-										<span>Mail</span>
-										<span class="badge">12</span>
-									</div>
-								</a>
-							</div>
-							<div class="col-xs-4">
-								<a href="#">
-									<div class="icon-transparent-area custom-color-orange last">
-										<i class="fa fa-user-plus"></i>
-										<span>Users</span>
-										<span class="badge">24</span>
-									</div>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="sidebar-widget">
-						<div class="widget-header">
-							<h4 class="widget-heading">YOUR APPS</h4>
-							<a href="#" class="show-all">Show all</a>
-						</div>
-						<div class="row">
-							<div class="col-xs-3">
-								<a href="#" class="icon-app" title="Dropbox" data-toggle="tooltip" data-placement="top">
-									<i class="fa fa-dropbox dropbox-color"></i>
-								</a>
-							</div>
-							<div class="col-xs-3">
-								<a href="#" class="icon-app" title="WordPress" data-toggle="tooltip" data-placement="top">
-									<i class="fa fa-wordpress wordpress-color"></i>
-								</a>
-							</div>
-							<div class="col-xs-3">
-								<a href="#" class="icon-app" title="Drupal" data-toggle="tooltip" data-placement="top">
-									<i class="fa fa-drupal drupal-color"></i>
-								</a>
-							</div>
-							<div class="col-xs-3">
-								<a href="#" class="icon-app" title="Github" data-toggle="tooltip" data-placement="top">
-									<i class="fa fa-github github-color"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="sidebar-widget">
-						<div class="widget-header">
-							<h4 class="widget-heading">MY PROJECTS</h4>
-							<a href="#" class="show-all">Show all</a>
-						</div>
-						<ul class="list-unstyled list-project-progress">
-							<li>
-								<a href="#" class="project-name">Project XY</a>
-								<div class="progress progress-xs progress-transparent custom-color-orange">
-									<div class="progress-bar" role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="width:67%"></div>
-								</div>
-								<span class="percentage">67%</span>
-							</li>
-							<li>
-								<a href="#" class="project-name">Growth Campaign</a>
-								<div class="progress progress-xs progress-transparent custom-color-blue">
-									<div class="progress-bar" role="progressbar" aria-valuenow="23" aria-valuemin="0" aria-valuemax="100" style="width:23%"></div>
-								</div>
-								<span class="percentage">23%</span>
-							</li>
-							<li>
-								<a href="#" class="project-name">Website Redesign</a>
-								<div class="progress progress-xs progress-transparent custom-color-green">
-									<div class="progress-bar" role="progressbar" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100" style="width:87%"></div>
-								</div>
-								<span class="percentage">87%</span>
-							</li>
-						</ul>
-					</div>
-					<div class="sidebar-widget">
-						<div class="widget-header">
-							<h4 class="widget-heading">MY FILES</h4>
-							<a href="#" class="show-all">Show all</a>
-						</div>
-						<ul class="list-unstyled list-justify list-file-simple">
-							<li><a href="#"><i class="fa fa-file-word-o"></i>Proposal_draft.docx</a>
-								<span>4 MB</span>
-							</li>
-							<li><a href="#"><i class="fa fa-file-pdf-o"></i>Manual_Guide.pdf</a>
-								<span>20 MB</span>
-							</li>
-							<li><a href="#"><i class="fa fa-file-zip-o"></i>all-project-files.zip</a>
-								<span>315 MB</span>
-							</li>
-							<li><a href="#"><i class="fa fa-file-excel-o"></i>budget_estimate.xls</a>
-								<span>1 MB</span>
-							</li>
-						</ul>
-					</div>
-					<p class="text-center"><a href="#" class="btn btn-default btn-xs">More Widgets</a></p>
-				</div>
-				<!-- END RIGHT SIDEBAR -->
-			</div>
 			<!-- END MAIN -->
-			<div class="clearfix"></div>
+			<!--<div class="clearfix"></div>
 			<footer>
 				<div class="container-fluid">
 					<p class="copyright">&copy; 2017 <a href="https://www.themeineed.com" target="_blank">Theme I Need</a>. All Rights Reserved.</p>
 				</div>
-			</footer>
+			</footer> -->
+				</div>
+			</div>
 		</div>
+		</div></div>
 		<!-- END WRAPPER -->
 		<!-- Javascript -->
 		<script src="../resources/assets/vendor/jquery/jquery.min.js"></script>
@@ -704,14 +402,7 @@
 		<!-- DEMO PANEL -->
 		<!-- for demo purpose only, you should remove it on your project directory -->
 		<script type="text/javascript">
-		var toggleDemoPanel = function(e)
-		{
-			e.preventDefault();
-			var panel = document.getElementById('demo-panel');
-			if (panel.className) panel.className = '';
-			else panel.className = 'active';
-		}
-		// fix each iframe src when back button is clicked
+		
 		$(function()
 		{
 			$('iframe').each(function()
@@ -720,10 +411,7 @@
 			});
 		});
 		</script>
-		<div id="demo-panel">
-			<a href="#" onclick="toggleDemoPanel(event);"><i class="fa fa-cog fa-spin"></i></a>
-			<iframe src="../demo-panel/index"></iframe>
-		</div>
+		
 		<!-- END DEMO PANEL -->
 	</body>
 </html>

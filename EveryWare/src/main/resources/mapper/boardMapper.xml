@@ -66,18 +66,24 @@
 	<!-- 게시글 읽기  -->
 	<select id="get" parameterType="int" resultType="BoardVO">
 		select 
-			board_id
-			, user_id
-			, board_title
-			, board_content
-			, to_char(board_date, 'YYYY-MM-DD HH24:MI:SS') board_date
-			, board_hits
-			, boardFolder_id
-			, board_attached
+			b.board_id
+			, (select
+					u.user_name
+				from
+					user_tb u
+				where
+					b.user_id = u.user_id
+				)as user_id
+			, b.board_title
+			, b.board_content
+			, to_char(b.board_date, 'YYYY-MM-DD HH24:MI:SS') board_date
+			, b.board_hits
+			, b.boardFolder_id
+			, b.board_attached
 		from 
-			board_tb 
+			board_tb b
 		where 
-			board_id = #{board_id}
+			b.board_id = #{board_id}
 		
 	</select>
 	
@@ -124,8 +130,8 @@
 			boardFolder_id = #{boardFolder_id}
 	</select>
 	
-	
-	<!-- 현재 페이지 목록 (검색 필터링 후) -->
+<!-- 	
+	현재 페이지 목록 (검색 필터링 후: 글목록에서 작성자 사번으로 출력됨)
 	<select id="listBoard" parameterType="string" resultType="BoardVO">
 		select 
 			board_id
@@ -143,6 +149,36 @@
 			boardFolder_id = #{boardFolder_id}
 	
 		order by board_id desc
+	</select>
+	
+	 -->
+	<!-- 현재 페이지 목록 (검색 필터링 후) -->
+	<select id="listBoard" parameterType="string" resultType="BoardVO">
+		select 
+			b.board_id
+			, (select 
+					u.user_name || '(' || d.dept_name || ')'
+				from
+					user_tb u
+					, dept_tb d
+				where
+					u.dept_id = d.dept_id
+					and b.user_id = u.user_id
+				) as user_id
+				, b.board_title
+				, to_char(b.board_date, 'YYYY-MM-DD') board_date
+				, b.board_hits
+			
+		from 
+			board_tb b
+	
+		where 
+			<if test="_parameter != null">
+			b.board_title like '%' || #{searchText} || '%'
+			and </if>
+			b.boardFolder_id = #{boardFolder_id}
+	
+		order by board_date desc
 	</select>
 	
 	
@@ -214,7 +250,7 @@
 	
 	
 	<!-- 현재 글의 리플 목록 -->
-	<select id="listBoardReply" parameterType="int" resultType="BoardReplyVO">
+	<!-- <select id="listBoardReply" parameterType="int" resultType="BoardReplyVO">
 		select 
 			bReply_id
 			, board_id
@@ -225,6 +261,28 @@
 			boardReply_tb 
 		where
 			board_id = #{board_id}
+		order by bReply_id desc
+	</select> -->
+	
+	
+	<!-- 현재 글의 리플 목록 -->
+	<select id="listBoardReply" parameterType="int" resultType="BoardReplyVO">
+		select 
+			r.bReply_id
+			, r.board_id
+			, (select
+					u.user_name
+				from
+					user_tb u
+				where
+					r.user_id = u.user_id
+				)as user_id
+			, r.bReply_content
+			, to_char(r.bReply_date, 'YYYY-MM-DD') bReply_date
+		from 
+			boardReply_tb r
+		where
+			r.board_id = #{board_id}
 		order by bReply_id desc
 	</select>
 

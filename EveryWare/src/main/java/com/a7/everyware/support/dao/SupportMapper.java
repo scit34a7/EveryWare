@@ -19,6 +19,12 @@ public interface SupportMapper {
 	//퇴근 체크
 	public int attendOut(AttendVO attend);
 	
+	//외출 체크
+	public int goOut(AttendVO attend);
+	
+	//외출 복귀
+	public int goIn(AttendVO attend);
+	
 	//내 근태 가져오기
 	public ArrayList<AttendVO> attendListGet(String user_id);
 

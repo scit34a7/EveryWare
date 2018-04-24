@@ -78,8 +78,11 @@ public class UserController {
 		
 	//사원 정보
 	@RequestMapping (value="userInfo", method=RequestMethod.GET)
-	public String userInfo(Model model){
+	public String userInfo(HttpSession session, Model model){
+		String id = (String) session.getAttribute("userId");
+		UserVO user = userDAO.findUser(id);
 		
+		model.addAttribute("user", user);
 		return "user/userInfo";
 	}
 		

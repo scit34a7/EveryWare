@@ -58,6 +58,36 @@ public class SupportDAO {
 	}
 	
 	
+	//외출 복귀
+	public int goIn(AttendVO attend){
+		
+		logger.info("AttendDAO insert para : {}", attend);
+		
+		SupportMapper mapper = sqlSession.getMapper(SupportMapper.class);
+		
+		int result = 0;
+		
+		result = mapper.attendCheck(attend);
+		
+		return result;
+	}
+	
+	
+	//외출 체크
+	public int goOut(AttendVO attend){
+		
+		logger.info("AttendDAO insert para : {}", attend);
+		
+		SupportMapper mapper = sqlSession.getMapper(SupportMapper.class);
+		
+		int result = 0;
+		
+		result = mapper.attendCheck(attend);
+		
+		return result;
+	}
+
+	
 	//내 근태 읽기
 	public ArrayList<AttendVO> attendListGet(String user_id){
 		SupportMapper mapper = sqlSession.getMapper(SupportMapper.class);

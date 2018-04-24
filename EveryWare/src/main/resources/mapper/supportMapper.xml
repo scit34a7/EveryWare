@@ -38,6 +38,37 @@
 		
 	</insert>
 	
+	<!-- 외출 체크 -->
+	<insert id="goOut" parameterType="AttendVO">
+		insert into attend_tb (
+			attend_id
+			, user_id
+			, attend_check
+		
+		)
+		values (
+			attend_id_seq.nextval
+			, #{user_id}
+			, #{attend_check}
+		)
+		
+	</insert>
+	
+	<!-- 외출 복귀 -->
+	<insert id="goIn" parameterType="AttendVO">
+		insert into attend_tb (
+			attend_id
+			, user_id
+			, attend_check
+		
+		)
+		values (
+			attend_id_seq.nextval
+			, #{user_id}
+			, #{attend_check}
+		)
+		
+	</insert>
 
 	<!-- 근태 읽기 user_id로 ** 근태 현황 출력시 이용-->
 	<select id="attendListGet" parameterType="String" resultType="AttendVO">
@@ -45,7 +76,7 @@
 		select
 			a.attend_id 
 			, (select
-					u.user_id || ' / ' || u.user_name || ' / ' || d.dept_name || ' / ' || p.position_name
+					u.user_id ||  ' / ' || u.user_name || '   /   ' || d.dept_name || '   /   ' || p.position_name
 	            from
 					user_tb u
 					, dept_tb d
@@ -59,6 +90,8 @@
 			, to_char(a.attend_time, 'YY-MM-DD HH24:MI:SS') attend_time
 		from
 			attend_tb a
+		where
+			a.user_id = #{user_id}
 		order by attend_time desc
 		
 	

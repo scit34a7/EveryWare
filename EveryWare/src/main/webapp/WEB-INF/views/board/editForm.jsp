@@ -19,6 +19,10 @@
 		<link rel="stylesheet" href="../resources/assets/vendor/datatables/css-main/jquery.dataTables.min.css">
 		<link rel="stylesheet" href="../resources/assets/vendor/datatables/css-bootstrap/dataTables.bootstrap.min.css">
 		<link rel="stylesheet" href="../resources/assets/vendor/datatables-tabletools/css/dataTables.tableTools.css">
+		
+		<link rel="stylesheet" href="../resources/assets/vendor/summernote/summernote.css">
+		<link rel="stylesheet" href="../resources/assets/vendor/bootstrap-markdown/bootstrap-markdown.min.css">
+		
 		<!-- MAIN CSS -->
 		<link rel="stylesheet" href="../resources/assets/css/main.css">
 		<link rel="stylesheet" href="../resources/assets/css/skins/sidebar-nav-darkgray.css" type="text/css">
@@ -33,7 +37,6 @@
 		<link rel="stylesheet" href="../resources/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
 		<!-- DROPIFY 첨부파일 -->
 		<link rel="stylesheet" href="../resources/assets/vendor/dropify/css/dropify.min.css">
-		
 		
 		
 		
@@ -271,7 +274,7 @@
 								<li><a href="../support/supportMain">출퇴근체크</a></li>
 								<li><a href="../support/attendList">출퇴근확인</a></li>
 								<li><a href="../support/boardList">업무보고</a></li>
-								<li><a href="charts-sparkline">Sparkline Chart</a></li>
+								
 							</ul>
 						</div></li>
 						
@@ -379,49 +382,36 @@
 			
 			
 			<!-- 폼 태그 -->
-			<form id="writeform" action="edit"  method="post" 
+			<form id="writeform" action="edit" method="post" 
 				enctype="multipart/form-data" onsubmit="return formCheck();">
 				<!-- 폼 전송 시 글번호도 전달 -->
 				<input type="hidden" name="board_id" value="${board.board_id }">
 				
-					<div class="form-group">
-							<label>제목</label>
-							<input type="text" class="form-control" id="board_title" name="board_title" value="${board.board_title}" required>
-						</div>
-						
 						<div class="form-group">
-							<label>내용</label>
-							<textarea class="form-control" rows="20" cols="30" id="board_content" name="board_content" required>${board.board_content}</textarea>
+						<label>제목</label>
+						<input type="text" class="form-control" id="board_title" name="board_title" value="${board.board_title}" required>
 						</div>
 						
-						
-						<!-- END BASIC TABLE -->
-									
-	<!-- 
-						첨부파일 darg and drop
-						<div class="form-group">	
-							<label>첨부파일</label>
-							<br>
-						
-							<div class="col-md-5" id="attachedOutput">
-							
-								<input type="file" class="dropify" name="upload" size="30">
-							</div>
-							<input type="button" id="plusAttachedBt" value="파일추가">
+						 <div class="form-group">
+						 <label>내용</label>
+						 <textarea class="summernote" id="board_content" name="board_content" required>
+						 ${board.board_content}</textarea> 
+						 </div>	
 				
-						</div>
-						 -->
-						 
-						첨부파일<br>
-						<span id="attachedOutput">
-							<input type="file" name="upload" size="30" value="파일 선택"><br>
-						</span>	
-							<input type="button" id="plusAttachedBt" value="파일 추가">
+						<div class="margin-bottom-30"></div>		
 						
+						
+		
+						<label>첨부파일</label>
+						<span id="attachedOutput">
+							<input type="file" name="upload" value="파일 선택">
+						</span>	
+							<br><input type="button" id="plusAttachedBt" class="btn btn-success btn-outline" value="파일 추가">
+								
 						
 						<br><br><br><br><br>
 						<div id="submitBtAlign">
-							<button type="submit" class="btn btn-primary btn-lg">작성</button>
+							<button type="submit" class="btn btn-primary btn-lg">수정</button>
 						</div>
 				
 					</form>	
@@ -436,121 +426,7 @@
 			
 			
 			<!-- END MAIN CONTENT / 본문 내용 끝-->
-			<!-- RIGHT SIDEBAR -->
-			<div id="sidebar-right" class="right-sidebar">
-				<div class="sidebar-widget">
-					<h4 class="widget-heading"><i class="fa fa-calendar"></i> TODAY</h4>
-					<p class="date">Wednesday, 22 December</p>
-					<div class="row margin-top-30">
-						<div class="col-xs-4">
-							<a href="#">
-								<div class="icon-transparent-area custom-color-blue first">
-									<i class="fa fa-tasks"></i>
-									<span>Tasks</span>
-									<span class="badge">5</span>
-								</div>
-							</a>
-						</div>
-						<div class="col-xs-4">
-							<a href="#">
-								<div class="icon-transparent-area custom-color-green">
-									<i class="fa fa-envelope"></i>
-									<span>Mail</span>
-									<span class="badge">12</span>
-								</div>
-							</a>
-						</div>
-						<div class="col-xs-4">
-							<a href="#">
-								<div class="icon-transparent-area custom-color-orange last">
-									<i class="fa fa-user-plus"></i>
-									<span>Users</span>
-									<span class="badge">24</span>
-								</div>
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="sidebar-widget">
-					<div class="widget-header">
-						<h4 class="widget-heading">YOUR APPS</h4>
-						<a href="#" class="show-all">Show all</a>
-					</div>
-					<div class="row">
-						<div class="col-xs-3">
-							<a href="#" class="icon-app" title="Dropbox" data-toggle="tooltip" data-placement="top">
-								<i class="fa fa-dropbox dropbox-color"></i>
-							</a>
-						</div>
-						<div class="col-xs-3">
-							<a href="#" class="icon-app" title="WordPress" data-toggle="tooltip" data-placement="top">
-								<i class="fa fa-wordpress wordpress-color"></i>
-							</a>
-						</div>
-						<div class="col-xs-3">
-							<a href="#" class="icon-app" title="Drupal" data-toggle="tooltip" data-placement="top">
-								<i class="fa fa-drupal drupal-color"></i>
-							</a>
-						</div>
-						<div class="col-xs-3">
-							<a href="#" class="icon-app" title="Github" data-toggle="tooltip" data-placement="top">
-								<i class="fa fa-github github-color"></i>
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="sidebar-widget">
-					<div class="widget-header">
-						<h4 class="widget-heading">MY PROJECTS</h4>
-						<a href="#" class="show-all">Show all</a>
-					</div>
-					<ul class="list-unstyled list-project-progress">
-						<li>
-							<a href="#" class="project-name">Project XY</a>
-							<div class="progress progress-xs progress-transparent custom-color-orange">
-								<div class="progress-bar" role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="width:67%"></div>
-							</div>
-							<span class="percentage">67%</span>
-						</li>
-						<li>
-							<a href="#" class="project-name">Growth Campaign</a>
-							<div class="progress progress-xs progress-transparent custom-color-blue">
-								<div class="progress-bar" role="progressbar" aria-valuenow="23" aria-valuemin="0" aria-valuemax="100" style="width:23%"></div>
-							</div>
-							<span class="percentage">23%</span>
-						</li>
-						<li>
-							<a href="#" class="project-name">Website Redesign</a>
-							<div class="progress progress-xs progress-transparent custom-color-green">
-								<div class="progress-bar" role="progressbar" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100" style="width:87%"></div>
-							</div>
-							<span class="percentage">87%</span>
-						</li>
-					</ul>
-				</div>
-				<div class="sidebar-widget">
-					<div class="widget-header">
-						<h4 class="widget-heading">MY FILES</h4>
-						<a href="#" class="show-all">Show all</a>
-					</div>
-					<ul class="list-unstyled list-justify list-file-simple">
-						<li><a href="#"><i class="fa fa-file-word-o"></i>Proposal_draft.docx</a>
-							<span>4 MB</span>
-						</li>
-						<li><a href="#"><i class="fa fa-file-pdf-o"></i>Manual_Guide.pdf</a>
-							<span>20 MB</span>
-						</li>
-						<li><a href="#"><i class="fa fa-file-zip-o"></i>all-project-files.zip</a>
-							<span>315 MB</span>
-						</li>
-						<li><a href="#"><i class="fa fa-file-excel-o"></i>budget_estimate.xls</a>
-							<span>1 MB</span>
-						</li>
-					</ul>
-				</div>
-				<p class="text-center"><a href="#" class="btn btn-default btn-xs">More Widgets</a></p>
-			</div>
-			<!-- END RIGHT SIDEBAR -->
+			
 		</div>
 			<!-- END MAIN -->
 			<div class="clearfix"></div>
@@ -571,79 +447,35 @@
 		<script src="../resources/assets/vendor/datatables-tabletools/js/dataTables.tableTools.js"></script>
 		<script src="../resources/assets/scripts/klorofilpro-common.js"></script>
 		<script src="../resources/assets/vendor/dropify/js/dropify.min.js"></script>
+		<script src="../resources/assets/vendor/markdown/markdown.js"></script>
+		<script src="../resources/assets/vendor/summernote/summernote.min.js"></script>
+		<script src="../resources/assets/vendor/to-markdown/to-markdown.js"></script>
+		<script src="../resources/assets/vendor/bootstrap-markdown/bootstrap-markdown.js"></script>
 		
-		<!-- DEMO PANEL -->
-		<!-- for demo purpose only, you should remove it on your project directory -->
-		<script type="text/javascript">
 		
-		/* DROPIFY */
+		<script>
 		$(function()
 		{
-			$('.dropify').dropify();
-			var drEvent = $('#dropify-event').dropify();
-			drEvent.on('dropify.beforeClear', function(event, element)
+			// summernote editor
+			$('.summernote').summernote(
 			{
-				return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
-			});
-			drEvent.on('dropify.afterClear', function(event, element)
-			{
-				alert('File deleted');
-			});
-			$('.dropify-fr').dropify(
-			{
-				messages:
+				height: 300,
+				focus: true,
+				onpaste: function()
 				{
-					default: 'Glissez-déposez un fichier ici ou cliquez',
-					replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
-					remove: 'Supprimer',
-					error: 'Désolé, le fichier trop volumineux'
+					alert('You have pasted something to the editor');
 				}
 			});
+			// markdown editor
+			var initContent = '<h4>업무보고</h4> ' +
+				'<p>날짜: </p> ' +
+				'<p>작성자: </p>' +
+				'<p>내용: </p>' +
+				'<p>참고: </p>';
+			$('#markdown-editor').text(toMarkdown(initContent));
 		});
+		</script>
 		
-		var toggleDemoPanel = function(e)
-		{
-			e.preventDefault();
-			var panel = document.getElementById('demo-panel');
-			if (panel.className) panel.className = '';
-			else panel.className = 'active';
-		}
-		// fix each iframe src when back button is clicked
-		$(function()
-		{
-			$('iframe').each(function()
-			{
-				this.src = this.src;
-			});
-			
-			
-			
-			/*-----------------------------------/
-			/*	DATE PICKER
-			/*----------------------------------*/
-			$('.inline-datepicker').datepicker(
-			{
-				todayHighlight: true
-			});
-			
-			
-			});
-		
-		
-	
-			
-		</script>	
-			
-			
-		
-		
-		
-		
-		<div id="demo-panel">
-			<a href="#" onclick="toggleDemoPanel(event);"><i class="fa fa-cog fa-spin"></i></a>
-			<iframe src="../resources/demo-panel/index.html"></iframe>
-		</div>
-		<!-- END DEMO PANEL -->
 		
 </body>
 </html>

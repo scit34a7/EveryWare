@@ -291,7 +291,7 @@
 								<li><a href="../support/supportMain">출퇴근체크</a></li>
 								<li><a href="../support/attendList">출퇴근확인</a></li>
 								<li><a href="../support/boardList">업무보고</a></li>
-								<li><a href="charts-sparkline">Sparkline Chart</a></li>
+							
 							</ul>
 						</div></li>
 						
@@ -395,20 +395,20 @@
 							
 							<c:choose>
 			
-							<c:when test="${board.boardFolder_id==1}">
-							<h3>[ 공지사항 ]</h3>
+							<c:when test="${boardFolder_id==1}">
+							<h3 class="panel-title">공지사항 </h3>
 							</c:when>
 							
-							<c:when test="${board.boardFolder_id==2}">
-							<h3>[ 부서게시판 ]</h3>
+							<c:when test="${boardFolder_id==2}">
+							<h3 class="panel-title">부서게시판 </h3>
 							</c:when>
 							
-							<c:when test="${board.boardFolder_id==3}">
-							<h3>[ 커뮤니티 ]</h3>
+							<c:when test="${boardFolder_id==3}">
+							<h3 class="panel-title">커뮤니티 </h3>
 							</c:when>
-							
-							<c:when test="${board.boardFolder_id==4}">
-							<h3>[ 업무보고 ]</h3>
+						
+							<c:when test="${boardFolder_id==4}">
+							<h3 class="panel-title">업무보고</h3>
 							</c:when>
 						
 							</c:choose>
@@ -459,39 +459,48 @@
 							</table>
 								</div>
 								
-						<div id="navigator">	
+							
 						<br>
-						<!-- 본인 글인 경우에만 보이기 -->
-						<c:if test="${userId == board.user_id}">
-							<!-- 현재글 삭제하기-->
-							<a href="javascript:deleteCheck(${board.board_id})">삭제&nbsp;&nbsp;</a>
-							<!-- 현재글 수정하기-->
-							<a href="edit?board_id=${board.board_id}">수정&nbsp;&nbsp;</a>
-						</c:if>
+						
+						
+						<center>
+						<p class="demo-button">
 						
 						<!-- 목록보기-->
-						<a href="boardList?boardFolder_id=${board.boardFolder_id}">목록보기</a>
-						</div>
+						<a href="boardList?boardFolder_id=${board.boardFolder_id}" class="btn btn-success btn-outline">목록보기</a>&nbsp;&nbsp;
+						
+						<!-- 본인 글인 경우에만 보이기 -->
+						<c:if test="${userName == board.user_id}">
+							<!-- 현재글 삭제하기-->
+							<a href="javascript:deleteCheck(${board.board_id})" class="btn btn-danger btn-outline">삭제</a>&nbsp;&nbsp;
+							<!-- 현재글 수정하기-->
+							<a href="edit?board_id=${board.board_id}" class="btn btn-primary btn-outline">수정</a>
+						</c:if>
+					
+						</p>
+						</center>
+						
 						<br><br>
 						
 						<!-- 리플 내용 -->
 						<!-- 리플 작성 폼 시작 -->
 						<form id="replyform" action="replyWrite" method="post" onSubmit="return replyFormCheck();">
 						
-						리플내용&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						리플&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="hidden" name="board_id" value="${board.board_id}" />
 							<input type="text" name="bReply_content" id="bReply_content" style="width:700px;" />
-							&nbsp;<input type="submit" value="저장" />
+							&nbsp;<input type="submit" class="btn btn-info" value="저장" />
 						</form>
 						<!-- /리플 작성 폼 끝 -->
 						<br>
+						
 						
 						<!-- 리플 목록 출력 시작 -->
 						<table class="reply">
 						<c:forEach var="reply" items="${replylist}">
 							<tr>
 								<td class="replyid" style="width:100px;">
-									<b>${reply.user_id}</b>
+									${reply.user_id}
 								</td>
 								<td class="replytext" style="width:600px;">
 									${reply.bReply_content}
@@ -499,14 +508,16 @@
 								<td class="replydate" style="width:100px;">
 									${reply.bReply_date}
 								</td>
-								<td class="replybutton" style="width:50px;">
-									<c:if test="${userId == reply.user_id}">
-										[<a href="javascript:replyEditForm(${reply.bReply_id}, ${reply.board_id}, '${reply.bReply_content}')">수정</a>]
+								<td>
+									<c:if test="${userName == reply.user_id}">
+										&nbsp;&nbsp;
+										<a style="width:70px; height:30px;" class="btn btn-primary btn-outline" href="javascript:replyEditForm(${reply.bReply_id}, ${reply.board_id}, '${reply.bReply_content}')">수정</a>
 									</c:if>
 								</td>
-								<td class="replybutton" style="width:50px;">
-									<c:if test="${userId == reply.user_id}">
-										[<a href="javascript:replyDelete(${reply.bReply_id}, ${reply.board_id })">삭제</a>]
+								<td>
+									<c:if test="${userName == reply.user_id}">
+										
+										<a style="width:70px; height:30px;" class="btn btn-danger btn-outline" href="javascript:replyDelete(${reply.bReply_id}, ${reply.board_id })">삭제</a>
 									</c:if>
 								</td>
 							</tr>	
@@ -530,121 +541,7 @@
 		
 		
 			<!-- END MAIN CONTENT -->
-			<!-- RIGHT SIDEBAR -->
-			<div id="sidebar-right" class="right-sidebar">
-				<div class="sidebar-widget">
-					<h4 class="widget-heading"><i class="fa fa-calendar"></i> TODAY</h4>
-					<p class="date">Wednesday, 22 December</p>
-					<div class="row margin-top-30">
-						<div class="col-xs-4">
-							<a href="#">
-								<div class="icon-transparent-area custom-color-blue first">
-									<i class="fa fa-tasks"></i>
-									<span>Tasks</span>
-									<span class="badge">5</span>
-								</div>
-							</a>
-						</div>
-						<div class="col-xs-4">
-							<a href="#">
-								<div class="icon-transparent-area custom-color-green">
-									<i class="fa fa-envelope"></i>
-									<span>Mail</span>
-									<span class="badge">12</span>
-								</div>
-							</a>
-						</div>
-						<div class="col-xs-4">
-							<a href="#">
-								<div class="icon-transparent-area custom-color-orange last">
-									<i class="fa fa-user-plus"></i>
-									<span>Users</span>
-									<span class="badge">24</span>
-								</div>
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="sidebar-widget">
-					<div class="widget-header">
-						<h4 class="widget-heading">YOUR APPS</h4>
-						<a href="#" class="show-all">Show all</a>
-					</div>
-					<div class="row">
-						<div class="col-xs-3">
-							<a href="#" class="icon-app" title="Dropbox" data-toggle="tooltip" data-placement="top">
-								<i class="fa fa-dropbox dropbox-color"></i>
-							</a>
-						</div>
-						<div class="col-xs-3">
-							<a href="#" class="icon-app" title="WordPress" data-toggle="tooltip" data-placement="top">
-								<i class="fa fa-wordpress wordpress-color"></i>
-							</a>
-						</div>
-						<div class="col-xs-3">
-							<a href="#" class="icon-app" title="Drupal" data-toggle="tooltip" data-placement="top">
-								<i class="fa fa-drupal drupal-color"></i>
-							</a>
-						</div>
-						<div class="col-xs-3">
-							<a href="#" class="icon-app" title="Github" data-toggle="tooltip" data-placement="top">
-								<i class="fa fa-github github-color"></i>
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="sidebar-widget">
-					<div class="widget-header">
-						<h4 class="widget-heading">MY PROJECTS</h4>
-						<a href="#" class="show-all">Show all</a>
-					</div>
-					<ul class="list-unstyled list-project-progress">
-						<li>
-							<a href="#" class="project-name">Project XY</a>
-							<div class="progress progress-xs progress-transparent custom-color-orange">
-								<div class="progress-bar" role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="width:67%"></div>
-							</div>
-							<span class="percentage">67%</span>
-						</li>
-						<li>
-							<a href="#" class="project-name">Growth Campaign</a>
-							<div class="progress progress-xs progress-transparent custom-color-blue">
-								<div class="progress-bar" role="progressbar" aria-valuenow="23" aria-valuemin="0" aria-valuemax="100" style="width:23%"></div>
-							</div>
-							<span class="percentage">23%</span>
-						</li>
-						<li>
-							<a href="#" class="project-name">Website Redesign</a>
-							<div class="progress progress-xs progress-transparent custom-color-green">
-								<div class="progress-bar" role="progressbar" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100" style="width:87%"></div>
-							</div>
-							<span class="percentage">87%</span>
-						</li>
-					</ul>
-				</div>
-				<div class="sidebar-widget">
-					<div class="widget-header">
-						<h4 class="widget-heading">MY FILES</h4>
-						<a href="#" class="show-all">Show all</a>
-					</div>
-					<ul class="list-unstyled list-justify list-file-simple">
-						<li><a href="#"><i class="fa fa-file-word-o"></i>Proposal_draft.docx</a>
-							<span>4 MB</span>
-						</li>
-						<li><a href="#"><i class="fa fa-file-pdf-o"></i>Manual_Guide.pdf</a>
-							<span>20 MB</span>
-						</li>
-						<li><a href="#"><i class="fa fa-file-zip-o"></i>all-project-files.zip</a>
-							<span>315 MB</span>
-						</li>
-						<li><a href="#"><i class="fa fa-file-excel-o"></i>budget_estimate.xls</a>
-							<span>1 MB</span>
-						</li>
-					</ul>
-				</div>
-				<p class="text-center"><a href="#" class="btn btn-default btn-xs">More Widgets</a></p>
-			</div>
-			<!-- END RIGHT SIDEBAR -->
+			
 		</div>
 			<!-- END MAIN -->
 			<div class="clearfix"></div>
@@ -664,30 +561,7 @@
 		<script src="../resources/assets/vendor/datatables-colreorder/dataTables.colReorder.js"></script>
 		<script src="../resources/assets/vendor/datatables-tabletools/js/dataTables.tableTools.js"></script>
 		<script src="../resources/assets/scripts/klorofilpro-common.js"></script>
-		<!-- DEMO PANEL -->
-		<!-- for demo purpose only, you should remove it on your project directory -->
-		<script type="text/javascript">
-		var toggleDemoPanel = function(e)
-		{
-			e.preventDefault();
-			var panel = document.getElementById('demo-panel');
-			if (panel.className) panel.className = '';
-			else panel.className = 'active';
-		}
-		// fix each iframe src when back button is clicked
-		$(function()
-		{
-			$('iframe').each(function()
-			{
-				this.src = this.src;
-			});
-		});
-		</script>
-		<div id="demo-panel">
-			<a href="#" onclick="toggleDemoPanel(event);"><i class="fa fa-cog fa-spin"></i></a>
-			<iframe src="demo-panel/index.html"></iframe>
-		</div>
-		<!-- END DEMO PANEL -->
+		
 
 </body>
 </html>
