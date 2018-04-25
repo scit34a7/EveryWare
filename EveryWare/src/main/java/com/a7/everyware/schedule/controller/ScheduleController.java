@@ -43,7 +43,7 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/Schedule_add", method = RequestMethod.POST)
-	public String Schedule_add(ScheduleVO schedule_vo ) {
+	public String Schedule_add(ScheduleVO schedule_vo) {
 	
 		System.out.println(schedule_vo);
 		int result = 0;
@@ -52,5 +52,17 @@ public class ScheduleController {
 		}
 		return "redirect:/schedule";
 	}
-
+	
+	@RequestMapping(value = "/Schedule_delete", method = RequestMethod.POST)
+	public String Schedule_delete(String schedule_num) {
+	
+		System.out.println("스케쥴 번호" + schedule_num);
+		int result = 0;
+		result = scheduledao.Schedule_Delete(schedule_num);
+		if(result == 0)
+		{
+		}
+		return "redirect:/schedule";
+	}
+	
 }

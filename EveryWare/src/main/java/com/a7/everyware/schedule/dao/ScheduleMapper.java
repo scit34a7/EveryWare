@@ -8,5 +8,6 @@ import com.a7.everyware.schedule.vo.ScheduleVO;
 interface ScheduleMapper {
 	int Schedule_add(ScheduleVO schedule_vo);
 	ArrayList<ScheduleVO> Read_Schedule(String user_id);
+	int Schedule_Delete(String schedule_num);
 
 }

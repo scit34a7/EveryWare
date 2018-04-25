@@ -61,10 +61,11 @@
 											schedulerLicenseKey : 'GPL-My-Project-Is-Open-Source',
 											selectable : true,
 											navLinks : true,
+											defaultView:"agendaWeek",
 											header : {
-												left : "prev, next",
+												left : "prev",
 												center : "title",
-												right : "agendaWeek, month"
+												right : "next"
 											},
 											
 											monthNames : [ '1월', '2월', '3월',
@@ -100,17 +101,21 @@
 														textColor : "#000000"
 													}
 											],
-											events: ${Slist}
-											,
+											groupByResource : true,
+											resources : ${MRlist},
+											events: ${RRlist},
 											select : function(startDate,
 													endDate, event, view,
 													resource, split) {
 												/* alert('selected ' + startDate.format() + ' to ' + endDate.format() + 'resource id' + resource.id ); */
 
-												var schedule_sdate = document.getElementById('schedule_sdate');
+												var schedule_sdate = document.getElementById('R_reservation_sdate');
 												schedule_sdate.value = startDate.format();
-												var schedule_fdate = document.getElementById('schedule_fdate');
+												var schedule_fdate = document.getElementById('R_reservation_fdate');
 												schedule_fdate.value = endDate.format();
+												var resource_id = document.getElementById('resource_id');
+												resource_id.value = resource.id;
+											
 												$("#dialog-addMessage").dialog({
 													width : "600px"
 												});
@@ -119,8 +124,9 @@
 												var curDate = new Date();
 												var curTime = curDate.getFullYear() + "-" + (curDate.getMonth() + 1) + "-" + curDate.getDate() + " " + curDate.getHours() + ":" + curDate.getMinutes();
 												
-												var schedule_num = document.getElementById('schedule_num');
-												schedule_num.value = calEvent.id;
+												var R_reservation_id = document.getElementById('R_reservation_id');
+												R_reservation_id.value = calEvent.id;
+
 			
 												$("#dialog-readMessage").dialog({
 													width : "600px"
@@ -136,25 +142,12 @@
 								{
 									schedulerLicenseKey : 'GPL-My-Project-Is-Open-Source',
 									header : {	
-										left : " ",
-										center : "prev, next",
-										right : " "
+										left : "prev ",
+										center : "title",
+										right : "next "
 									},
 									defaultView:"list",
-									monthNames : [ '1월', '2월', '3월',
-											'4월', '5월', '6월', '7월',
-											'8월', '9월', '10월', '11월',
-											'12월' ],
-									monthNamesShort : [ '1월', '2월',
-											'3월', '4월', '5월', '6월',
-											'7월', '8월', '9월', '10월',
-											'11월', '12월' ],
-									dayNames : [ '일', '월', '화', '수',
-											'목', '금', '토' ],
-									dayNamesShort : [ '일', '월', '화',
-											'수', '목', '금', '토' ],
-									dayNamesMin : [ '일', '월', '화', '수',
-											'목', '금', '토' ],
+									
 									lang : "ko",
 									contentHeight : 455,
 									eventLimit : true,
@@ -173,7 +166,9 @@
 												textColor : "#000000"
 											}
 									],
-									events: ${Slist},
+									groupByResource : true,
+									resources : ${MRlist},
+									events: ${RRlist},
 									loading : function(bool) {
 										jQuery("#loading").toggle(bool);
 									}
@@ -479,7 +474,7 @@
 				<div class="content-heading clearfix">
 					<div style="width: 100%; display: table-cell; float: center;">
 						<div class="barkKategorie">
-							<label><b>일정 관리</b></label>
+							<label><b>z</b></label>
 							
 						
 							
@@ -526,60 +521,40 @@
 						</div>
 					</div>
 				</div>
-				<div class="panel" id="dialog-addMessage" title="일정 입력하기" style="display: none;">
-						<form action="Schedule_add" method="post">
-							<input type="hidden" name="user_id" value="${userId}">
-							<input type="hidden" name="project_id" value="${project_id}">
+				<div class="container-fluid">
+
+					<div id="calendar"></div>
+					<div id="dialog-addMessage" title="예약 하기" style="display: none;">
+						<form action="BeamProjector001_add" method="post">
+							<input type="hidden" id="resource_id" name="resource_id">
 							<table>
 								<tr>
-									<td>일정 명 :&nbsp&nbsp</td>
-									
-									<td><input type="text" id="" name="schedule_name" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
-								
-									<td>
-										<input type="radio" name="schedule_group" value="개인" checked="checked">개인 일정<br>
-										<input type="radio" name="schedule_group" value="${userDepartment}">부서 일정<br>
-										<input type="radio" name="schedule_group" value="2">프로젝트 일정<br>
+									<td>사원 명</td>
+									<td><input type="text" value="${userName}" readonly>
 									</td>
-									<td style="widows: 10%">
-										<label class="switch-input"> 
-										<input type="checkbox" name="switch-checkbox" id="switch-checkbox" onchange="change_check"> 
-											<i data-swon-text="YES" data-swoff-text="NO"></i> <p style="color: black;">중요</p>
-										</label>
-									</td>	
+									<td>부서 명</td>
+									<td><input type="text" value="${userDepartment}"
+										name="R_reservation_type" readonly></td>
 								</tr>
 								<tr>
-									<td>사원 명 :&nbsp&nbsp</td>
-									
-									<td><input type="text" name="user_name" value="${userName}" readonly style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;">
-									</td>
-									
-									<td>부서 명 :&nbsp&nbsp</td>
-								
-									<td style="width: 1%"><input type="text" value="${userDepartment}"
-										name="R_reservation_type" readonly style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
+									<td>시작 날짜</td>
+									<td><input type="text" id="R_reservation_sdate"
+										name="R_reservation_sdate" readonly></td>
+									<td>종료 날짜</td>
+									<td><input type="text" id="R_reservation_fdate"
+										name="R_reservation_fdate" readonly></td>
 								</tr>
 								<tr>
-									<td>시작  :&nbsp&nbsp</td>
-									
-									<td><input type="text" id="schedule_sdate"
-										name="schedule_sdate" readonly style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
-								
-									<td>종료  :&nbsp&nbsp</td>
-								
-									<td><input type="text" id="schedule_fdate"
-										name="schedule_fdate" readonly style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
-								</tr>
-								<tr>
-									<td colspan="7" align="center"><input type="submit"
+									<td colspan="4" align="center"><input type="submit"
 										value="등록하기" align="center"></td>
 								</tr>
 							</table>
 						</form>
 					</div>
-					<div id="dialog-readMessage" title="일정 상세보기" style="display: none;">
-						<form action="Schedule_delete" method="post">
-							<input type="hidden" name="schedule_num" id="schedule_num">
+				</div>
+					<div id="dialog-readMessage" title="상세보기" style="display: none;">
+						<form action="BeamProjector001_delete" method="post">
+							<input type="hidden" name="R_reservation_id" id="R_reservation_id">
 							<table>
 								<tr>
 									<td colspan="7" align="center"><input type="submit"

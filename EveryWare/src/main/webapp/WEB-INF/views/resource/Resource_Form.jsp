@@ -61,10 +61,11 @@
 											schedulerLicenseKey : 'GPL-My-Project-Is-Open-Source',
 											selectable : true,
 											navLinks : true,
+											defaultView:"agendaWeek",
 											header : {
-												left : "prev, next",
+												left : "prev",
 												center : "title",
-												right : "agendaWeek, month"
+												right : "next"
 											},
 											
 											monthNames : [ '1월', '2월', '3월',
@@ -82,7 +83,7 @@
 											dayNamesMin : [ '일', '월', '화', '수',
 													'목', '금', '토' ],
 											lang : "ko",
-											contentHeight : 455,
+											contentHeight : 445,
 											/* editable : true, */
 											eventLimit : true,
 											googleCalendarApiKey : "AIzaSyDcnW6WejpTOCffshGDDb4neIrXVUA1EAE",
@@ -100,27 +101,37 @@
 														textColor : "#000000"
 													}
 											],
-											events: ${Slist}
-											,
+											groupByResource : true,
+											resources : ${MRlist},
+											events: ${RRlist},
 											select : function(startDate,
 													endDate, event, view,
 													resource, split) {
 												/* alert('selected ' + startDate.format() + ' to ' + endDate.format() + 'resource id' + resource.id ); */
 
-												var schedule_sdate = document.getElementById('schedule_sdate');
+												var schedule_sdate = document.getElementById('R_reservation_sdate');
 												schedule_sdate.value = startDate.format();
-												var schedule_fdate = document.getElementById('schedule_fdate');
+												var schedule_fdate = document.getElementById('R_reservation_fdate');
 												schedule_fdate.value = endDate.format();
+												var resource_id = document.getElementById('resource_id');
+												resource_id.value = resource.id;
+											
+												var curDate = new Date();
+												var curTime = curDate.getFullYear() + "-" + (curDate.getMonth() + 1) + "-" + curDate.getDate() + " " + curDate.getHours() + ":" + curDate.getMinutes();
+												
+												var regDate = document.getElementById('regDate');
+												regDate.value = curTime;
+												
 												$("#dialog-addMessage").dialog({
 													width : "600px"
 												});
 											},
 											eventClick: function(calEvent, jsEvent, view) {
-												var curDate = new Date();
-												var curTime = curDate.getFullYear() + "-" + (curDate.getMonth() + 1) + "-" + curDate.getDate() + " " + curDate.getHours() + ":" + curDate.getMinutes();
 												
-												var schedule_num = document.getElementById('schedule_num');
-												schedule_num.value = calEvent.id;
+												
+												var R_reservation_id = document.getElementById('R_reservation_id');
+												R_reservation_id.value = calEvent.id;
+
 			
 												$("#dialog-readMessage").dialog({
 													width : "600px"
@@ -136,27 +147,14 @@
 								{
 									schedulerLicenseKey : 'GPL-My-Project-Is-Open-Source',
 									header : {	
-										left : " ",
-										center : "prev, next",
-										right : " "
+										left : "prev ",
+										center : "title",
+										right : "next "
 									},
 									defaultView:"list",
-									monthNames : [ '1월', '2월', '3월',
-											'4월', '5월', '6월', '7월',
-											'8월', '9월', '10월', '11월',
-											'12월' ],
-									monthNamesShort : [ '1월', '2월',
-											'3월', '4월', '5월', '6월',
-											'7월', '8월', '9월', '10월',
-											'11월', '12월' ],
-									dayNames : [ '일', '월', '화', '수',
-											'목', '금', '토' ],
-									dayNamesShort : [ '일', '월', '화',
-											'수', '목', '금', '토' ],
-									dayNamesMin : [ '일', '월', '화', '수',
-											'목', '금', '토' ],
+									
 									lang : "ko",
-									contentHeight : 455,
+									contentHeight : 445,
 									eventLimit : true,
 									googleCalendarApiKey : "AIzaSyDcnW6WejpTOCffshGDDb4neIrXVUA1EAE",
 									eventSources : [
@@ -173,7 +171,9 @@
 												textColor : "#000000"
 											}
 									],
-									events: ${Slist},
+									groupByResource : true,
+									resources : ${MRlist},
+									events: ${RRlist},
 									loading : function(bool) {
 										jQuery("#loading").toggle(bool);
 									}
@@ -473,24 +473,20 @@
 		<!-- MAIN -->
 		<div class="main">
 			<!-- MAIN CONTENT -->
-
-			<div class="main-content">
-
+<div class="main-content">
 				<div class="content-heading clearfix">
-					<div style="width: 100%; display: table-cell; float: center;">
-						<div class="barkKategorie">
-							<label><b>일정 관리</b></label>
-							
-						
-							
-						</div>
-						<div>
-							<ul class="breadcrumb">
-							<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-							<li><a href="#">App Views</a></li>
-							<li class="active">Inbox</li>
-							</ul>
-							</div>
+					<div class="heading-left">
+						<h1 class="page-title">자원예약 관리</h1>
+						<p class="page-subtitle">
+							<input type="button" class="btn btn-primary btn-toastr" value="뒤로가기" onClick="history.back();">
+						</p>
+					</div>
+					<ul class="breadcrumb">
+						<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+						<li><a href="#">App Views</a></li>
+						<li class="active">Inbox</li>
+					</ul>
+				</div>
 						<!-- 
 						<div class="barKategorie"
 							style="background-color: #FFF; color: #000000;">
@@ -508,9 +504,7 @@
 							</label>
 						</div>
 						 -->
-					
-					</div>
-				</div>
+				
 				<div class="col-md-9">
 					<div class="panel">
 						<div class="panel-body no-padding">
@@ -526,61 +520,47 @@
 						</div>
 					</div>
 				</div>
-				<div class="panel" id="dialog-addMessage" title="일정 입력하기" style="display: none;">
-						<form action="Schedule_add" method="post">
-							<input type="hidden" name="user_id" value="${userId}">
-							<input type="hidden" name="project_id" value="${project_id}">
+				<div class="container-fluid">
+
+					<div id="calendar"></div>
+					<div id="dialog-addMessage" title="예약 하기" style="display: none;">
+						<form action="Resource_add" method="post">
+							<input type="hidden" id="resource_id" name="resource_id">
 							<table>
 								<tr>
-									<td>일정 명 :&nbsp&nbsp</td>
-									
-									<td><input type="text" id="" name="schedule_name" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
-								
-									<td>
-										<input type="radio" name="schedule_group" value="개인" checked="checked">개인 일정<br>
-										<input type="radio" name="schedule_group" value="${userDepartment}">부서 일정<br>
-										<input type="radio" name="schedule_group" value="2">프로젝트 일정<br>
+									<td>사원 명</td>
+									<td><input type="text" name="userName" value="${userName}" readonly>
 									</td>
-									<td style="widows: 10%">
-										<label class="switch-input"> 
-										<input type="checkbox" name="switch-checkbox" id="switch-checkbox" onchange="change_check"> 
-											<i data-swon-text="YES" data-swoff-text="NO"></i> <p style="color: black;">중요</p>
-										</label>
-									</td>	
+									<td>부서 명</td>
+									<td><input type="text" value="${userDepartment}"
+										name="R_reservation_type" readonly></td>
 								</tr>
 								<tr>
-									<td>사원 명 :&nbsp&nbsp</td>
-									
-									<td><input type="text" name="user_name" value="${userName}" readonly style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;">
-									</td>
-									
-									<td>부서 명 :&nbsp&nbsp</td>
-								
-									<td style="width: 1%"><input type="text" value="${userDepartment}"
-										name="R_reservation_type" readonly style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
+									<td>시작 날짜</td>
+									<td><input type="text" id="R_reservation_sdate"
+										name="R_reservation_sdate" readonly></td>
+									<td>종료 날짜</td>
+									<td><input type="text" id="R_reservation_fdate"
+										name="R_reservation_fdate" readonly></td>
 								</tr>
 								<tr>
-									<td>시작  :&nbsp&nbsp</td>
-									
-									<td><input type="text" id="schedule_sdate"
-										name="schedule_sdate" readonly style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
-								
-									<td>종료  :&nbsp&nbsp</td>
-								
-									<td><input type="text" id="schedule_fdate"
-										name="schedule_fdate" readonly style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
+									<td>등록 날짜</td>
+									<td><input type="text" id="regDate" name="regDate" readonly="readonly"></td>
+									<td>메 모</td>
+									<td><input type="text" id="memo" name="memo" required="required"></td>
 								</tr>
 								<tr>
-									<td colspan="7" align="center"><input type="submit"
+									<td colspan="4" align="center"><input type="submit"
 										value="등록하기" align="center"></td>
 								</tr>
 							</table>
 						</form>
 					</div>
-					<div id="dialog-readMessage" title="일정 상세보기" style="display: none;">
-						<form action="Schedule_delete" method="post">
-							<input type="hidden" name="schedule_num" id="schedule_num">
-							<table>
+				</div>
+					<div id="dialog-readMessage" title="상세보기" style="display: none;">
+						<form action="Resource_delete" method="post">
+							<input type="hidden" name="R_reservation_id" id="R_reservation_id">
+							<table border="1">
 								<tr>
 									<td colspan="7" align="center"><input type="submit"
 										value="삭제하기" align="center"></td>

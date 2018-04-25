@@ -6,8 +6,9 @@ import com.a7.everyware.resource.vo.R_reservationVO;
 import com.a7.everyware.resource.vo.ResourceVO;
 
 interface ResourceMapper {
-	ArrayList<ResourceVO> readMeetingRoom();
+	ArrayList<ResourceVO> readMeetingRoom(String resource_id);
+	ArrayList<R_reservationVO> getMeetingRoom(String resource_id);
+	
 	int Resource_add(R_reservationVO reservationvo);
-	ArrayList<R_reservationVO> getMeetingRoom();
-	ArrayList<ResourceVO> readNoteBook();
+	int Resource_delete(String R_reservation_id);
 }
