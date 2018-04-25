@@ -346,7 +346,8 @@
 											<ul class="list-unstyled list-justify">
 												<li>생일
 													<span>1990. 03. 08</span>
-												</li>
+					
+								</li>
 												<li>휴대폰 번호
 													<span>010-1478-9632</span>
 												</li>
