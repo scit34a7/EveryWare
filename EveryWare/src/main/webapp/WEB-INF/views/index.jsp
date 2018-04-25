@@ -84,7 +84,6 @@
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
 					
-						</a></li>
 						<li class="dropdown"><a href="#"
 							class="dropdown-toggle icon-menu" data-toggle="dropdown"> <i
 								class="ti-bell"></i> <span class="badge bg-danger">5</span>

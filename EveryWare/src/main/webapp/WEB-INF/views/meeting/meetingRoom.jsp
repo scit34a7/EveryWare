@@ -35,6 +35,7 @@
     	<link rel="stylesheet" href="../resources/test/css/style.min.css">
     	<link rel="stylesheet" href="../resources/test/css/style.css">
 		<script>
+		
 		$(document).ready(function () {
 			var w = screen.availWidth;
 			var h = screen.availHeight;
@@ -43,6 +44,8 @@
 		
 		var text;
 		var countTest = 0;
+		
+		// 음성인식 활성화 비활성화 (두 개 이상의 인스턴스가 존재할 때 루한루프 방지)
 		function handleVisibilityChange() {
 			if (document.webkitHidden) {
 				console.log("handleVisibilityChange abort");
@@ -51,6 +54,7 @@
 				console.log("handleVisibilityChange Start");
 				annyang.start();
 				
+				// 인식한 음성 텍스트화 해서 저장
 			    annyang.addCallback("result", function(data){
 			    	var tot = document.getElementById('change');
 			        console.log("result");
@@ -90,17 +94,17 @@
 		window.addEventListener("focus", speechStart, false);
 		window.addEventListener("blur", speechStop, false);
 		</script>
-		  
+		
 		<script type="text/javascript" src="../resources//meeting/vad.js"></script>
 		
 		<script type="text/javascript">
-		  // Create AudioContext
+		  // AudioContext 생성
 		  window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		  var audioContext = new AudioContext();
 		
-		  // Define function called by getUserMedia 
+		  // getUserMedia에 의해 호출되는 함수 정의
 		  function startUserMedia(stream) {
-		    // create MediaStreamAudioSourceNode 
+		    // MediaStreamAudioSourceNode 생성 
 		    var source = audioContext.createMediaStreamSource(stream);
 		
 		    // Setup options
@@ -115,11 +119,11 @@
 		    	}
 		    }; 
 		    
-		    // create VAD
+		    // VAD 생성
 		    var vad = new VAD(options);
 		  }
 		
-		  // Ask for audio device
+		  // audio device 요청
 		  navigator.getUserMedia = navigator.getUserMedia || 
 		                           navigator.mozGetUserMedia || 
 		                           navigator.webkitGetUserMedia;
@@ -173,9 +177,6 @@
 		  flex: 1;
 		  text-align: center;
 		  height: 100%;
-/* 		  	zoom: 1;
-			filter: alpha(opacity=80);
-			opacity: 0.8; */
 		}
 		
 		#chat-container {
@@ -187,7 +188,6 @@
 			opacity: 0.8;
 		}
 		#chat-input {
-			/* overflow:auto; */
 			background: white;
 			margin: 0 auto;
 			height: 10%;
@@ -307,10 +307,9 @@ connection.sendMessage = function(message) {
 var test;
 var cnt=0;
 window.enableAdapter = true; // enable adapter.js
-// ......................................................
-// .......................UI Code........................
-// ......................................................
-function shareScreen() {
+
+// UI
+function shareScreen() { // 화면 공유
         this.disabled = true;
         connection.videosContainer = document.getElementById('videos');
 	    var session = { screen: true };
@@ -327,7 +326,7 @@ function shareScreen() {
 	    }, session);
 };
 
-function openOrJoinRoom() {
+function openOrJoinRoom() { // create room 또는 join room
 	//alert(${sessionScope.userId});
 	//alert(${roomid});
 	if(${sessionScope.userId} == ${roomid}) {
@@ -337,14 +336,10 @@ function openOrJoinRoom() {
 	}
 }
 
-function leaveRoom() {
+function leaveRoom() { // 나가기 버튼 클릭 했을 시
     this.disabled = true;
     if (connection.isInitiator) {
-        // use this method if you did NOT set "autoCloseEntireSession===true"
-        // for more info: https://github.com/muaz-khan/RTCMultiConnection#closeentiresession
-        connection.closeEntireSession(function() {
-            //document.querySelector('h5').innerHTML = 'Entire session has been closed.';
-        });
+        connection.closeEntireSession(function() {}); // 전체 세션 종료 (개설자인 경우)
         
        	$.ajax({
     		url: 'removeRoom',
@@ -366,9 +361,7 @@ function leaveRoom() {
     }
 };
 
-// ......................................................
-// ................FileSharing/TextChat Code.............
-// ......................................................
+// FileSharing/TextChat
 document.getElementById('share-file').onclick = function() {
     var fileSelector = new FileSelector();
     fileSelector.selectSingleFile(function(file) {
@@ -376,6 +369,7 @@ document.getElementById('share-file').onclick = function() {
     });
 };
 
+// 엔터눌렀을 경우 메시지 전송
 document.getElementById('input-text-chat').onkeyup = function(e) {
     if (e.keyCode != 13) return;
     this.value = this.value.replace(/^\s+|\s+$/g, '');
@@ -426,6 +420,7 @@ function insertAfter(newNode, referenceNode) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
 
+// 회의록 저장 함수
 function saveLog(id, data) {
 	var idLog = data.userid;
 	var contentLog = data.value;
@@ -445,6 +440,7 @@ function saveLog(id, data) {
 	});
 }
 
+// 채팅 내용을 추가하기 위한 함수
 var chatContainer = document.querySelector('.chat-output');
 function appendDIV(event) {
     var div = document.createElement('div');
@@ -484,9 +480,8 @@ function appendDIV(event) {
 	div.focus();
 	document.getElementById('input-text-chat').focus();
 }
-// ......................................................
-// ..................RTCMultiConnection Code.............
-// ......................................................
+
+// RTCMultiConnection
 var connection = new RTCMultiConnection();
 
 connection.getScreenConstraints = function(callback) {
@@ -502,16 +497,18 @@ connection.getScreenConstraints = function(callback) {
 
 connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
 connection.socketMessageEvent = 'audio-video-file-chat-demo';
-connection.enableFileSharing = true; // by default, it is "false".
+connection.enableFileSharing = true;
 connection.session = {
     audio: true,
     video: true,
     data: true
 };
+
 connection.sdpConstraints.mandatory = {
     OfferToReceiveAudio: true,
     OfferToReceiveVideo: true
 };
+
 connection.videosContainer = document.getElementById('videos-container');
 
 connection.onstream = function(event) {
@@ -575,6 +572,7 @@ connection.onclose = function() {
 
     }
 };
+
 connection.onEntireSessionClosed = function(event) {
     document.getElementById('share-file').disabled = true;
     document.getElementById('input-text-chat').disabled = true;
@@ -582,14 +580,10 @@ connection.onEntireSessionClosed = function(event) {
     connection.attachStreams.forEach(function(stream) {
         stream.stop();
     });
-    // don't display alert for moderator
     if (connection.userid === event.userid) return;
-    //document.querySelector('h5').innerHTML = 'Entire session has been closed by the moderator: ' + event.userid;
 };
+
 connection.onUserIdAlreadyTaken = function(useridAlreadyTaken, yourNewUserId) {
-    // seems room is already opened
-    //alert(useridAlreadyTaken);
-    //alert(yourNewUserId);
     connection.join(useridAlreadyTaken);
 };
 
