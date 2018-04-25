@@ -19,7 +19,7 @@ public class ScheduleController {
 	ScheduleDAO scheduledao;
 	
 	
-	@RequestMapping(value = "/schedule", method = RequestMethod.GET)
+	@RequestMapping(value = "schedule", method = RequestMethod.GET)
 	public String schedule(HttpSession session) {
 		
 		String user_id = (String) session.getAttribute("userId");	

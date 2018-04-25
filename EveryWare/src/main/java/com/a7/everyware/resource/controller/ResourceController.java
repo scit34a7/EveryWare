@@ -13,6 +13,7 @@ import com.a7.everyware.resource.vo.R_reservationVO;
 import com.a7.everyware.resource.vo.ResourceVO;
 import com.a7.everyware.resource.dao.ResourceDAO;;
 
+
 @Controller
 public class ResourceController {
 
@@ -20,7 +21,7 @@ public class ResourceController {
 	ResourceDAO resourcedao;
 	SqlSession sqlSession;
 
-	@RequestMapping(value = "/resource", method = RequestMethod.GET)
+	@RequestMapping(value = "resource", method = RequestMethod.GET)
 	public String resource(HttpSession session) {
 
 		return "resource/Resource_Home";

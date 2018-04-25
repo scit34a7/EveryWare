@@ -40,7 +40,11 @@ public class MailReplyForwardController {
 	@RequestMapping(value = "forwardMail", method = RequestMethod.GET)
 	public String forwardMail( String message_name, HttpSession session, Model model, String check ){
 		
-		System.out.println(message_name +","+ check );
+		if(check.equals("forward")){
+			check = "FW";
+		}else{
+			check = "RE";
+		}
 		
 		String userId = (String)session.getAttribute("userId");
 		String repository = mdao.getRepositoryFormMailInfo(userId);
@@ -183,7 +187,7 @@ public class MailReplyForwardController {
 		
 		model.addAttribute("mail", mail);
 		
-		return "appviews-inbox-write";
+		return "mail/appviews-inbox-write";
 	}
 	
 }

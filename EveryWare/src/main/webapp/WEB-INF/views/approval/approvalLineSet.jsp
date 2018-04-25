@@ -60,6 +60,8 @@
 					opener.document.getElementById('eApprovalLine_person3').value = person3;
 					opener.document.getElementById('eApprovalLine_id').value = id;
 					
+					$('submitForm').submit();
+					
 					self.close();
 					
 				});	//이벤트 처리
@@ -79,7 +81,7 @@
 				<div class="col-md-12">	<!-- 뒤에 숙자가 크기 조절 -->
 					<div class="panel">
 						<div class="panel-heading">
-							<h3 class="panel-title">결재선 지정</h3>
+							<h3 class="panel-title">주소록 지정</h3>
 						</div>
 						<div class="panel-body">
 						

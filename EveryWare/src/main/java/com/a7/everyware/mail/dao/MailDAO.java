@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.a7.everyware.mail.vo.AddressBook;
 import com.a7.everyware.mail.vo.BlobData;
 import com.a7.everyware.mail.vo.Inbox;
 import com.a7.everyware.mail.vo.MailInfo;
@@ -217,6 +218,28 @@ public class MailDAO {
 		insertHandler = mapper.insertTemp(map);
 		
 		return insertHandler;
+	}
+
+
+	//Mail Address 
+	public int insertOneAddr(AddressBook addrBook){
+		
+		int insertHandler = -1 ; 
+		
+		MailMapper mapper = sqlSession.getMapper(MailMapper.class);
+		insertHandler = mapper.insertOneAddr(addrBook);
+		
+		return insertHandler;
+	}
+
+	public ArrayList<AddressBook> selectAddress(String repository){
+		
+		ArrayList<AddressBook> addressBook = null; 
+		
+		MailMapper mapper = sqlSession.getMapper(MailMapper.class);
+		addressBook = mapper.selectAddress(repository);
+		
+		return addressBook ; 
 	}
 
 }

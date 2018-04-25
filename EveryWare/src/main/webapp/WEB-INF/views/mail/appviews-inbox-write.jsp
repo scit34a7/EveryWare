@@ -364,11 +364,11 @@
 										</div>
 												<div class="btn-group">
 													<div class="form-group">
-														<button type="submit" class="btn btn-primary btn-replyx">주소록</button>
+														<button type="button" class="btn btn-primary btn-replyx" id = "getAddrBook">주소록 불러오기</button>
 														<br>
 													</div>
 													<div class="form-group">
-														<button type="submit" class="btn btn-primary btn-replyx">미리보기</button>
+														<button type="button" class="btn btn-primary btn-replyx" id = "setAddrBook" >주소록으로 저장하기</button>
 														<br>
 													</div>
 												</div> <!--  end of the button division -->
@@ -413,7 +413,9 @@
 										<hr class="content-separator">
 										<div class="attachment-list">
 											<h4>첨부 파일</h4>
-												<c:if test = "${fn:length(attaches)>0}"> 
+											
+											<c:choose>
+												<c:when test = "${fn:length(attaches)>0}"> 
 												<h4> ${fn:length(attaches)} Attachments</h4>
 												
 												<div class="form-group">
@@ -445,7 +447,23 @@
 													</li>
 													</c:forEach>
 												</ul>
-											</c:if>					
+												</c:when>	
+												<c:otherwise>
+														<h4>  Attachments</h4>
+													
+													<div class="form-group">
+														<label for="ticket-attachment" class="col-sm-3 control-label">Attach File</label>
+														<div class="col-md-9">
+														<input type="file" id="ticket-attachment" name ="mailAttach" multiple >
+														<p class="help-block">
+															<em>Valid file type: .jpg, .png, .txt, .pdf. File size max: 1 MB</em>
+														</p>
+													</div>
+												</div>
+												</c:otherwise>
+											
+											
+											</c:choose>	
 										</div>
 									</div>
 									</form>
@@ -454,8 +472,14 @@
 												Footer in the Mails<hr>
 								
 										<button type="submit" class="btn btn-primary btn-replyx" id = "formSubmiter">보내기</button>
-										<button type="button" class="btn btn-primary btn-replyx">미리보기</button>
+									
 										<button type="button" class="btn btn-primary btn-replyx" onclick = "insertTemp();">임시저장</button>			
+										
+										<form id= "hiddenAddressSetter" action = "./saveAddress" method = "post">
+										<input type = "hidden" name ="mailto">
+										<input type = "hidden" name = "mailreference">
+										</form>
+										
 										</div>
 									</div>
 								</div>
@@ -546,9 +570,10 @@
 				$('#mailSubject').val('${mail.mailsubject}');
 			}
 		
+			$('#setAddrBook').click(setAddrBook);
+			$('#getAddrBook').click(getAddrBook);
+			
 		});//end of preparation; 
-		
-		
 		
 		function mailSearch(){
 			$('#mailSearcher').keyup(function(){
@@ -648,6 +673,28 @@
 			return false;
 		}
 		
+		function setAddrBook(){
+			
+			var form = document.getElementById('hiddenAddressSetter');
+			var url = './saveAddress';
+			
+			window.open('','addressSetWindow','top=100, left=500, width=600, height=600');
+			
+			 form.setAttribute('target','addressSetWindow');
+			 form.mailto.value= $('#mailRecipients').val();
+			 form.mailreference.value=''; 
+		 
+			 form.submit();  
+			
+			 return false;
+		}
+		
+		function getAddrBook(){
+			
+			window.open('./getAddress','addressGetWindow','top=100, left=500, width=600, height=600');
+			
+			return false;
+		}
 		
 	</script>
 </body>

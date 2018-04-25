@@ -246,7 +246,7 @@ public class MailGetController {
 
 		model.addAttribute("viewList", viewList);
 		
-		return "appviews-inbox-inbox";
+		return "mail/appviews-inbox-inbox";
 	}
 
 	// Mail Content PreView

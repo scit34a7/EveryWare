@@ -687,7 +687,7 @@ function getTextCoo1(){
 											<span class="icon-wrapper custom-bg-purple"><i
 												class="fa fa-truck"></i></span>
 											<div class="right">
-												<span class="value"><a href="resource_Resource_Form?resource_id=78">003</a>
+												<span class="value"><a href="resource_Resource_Form?resource_id=78">Vehicle003</a>
 												</span>
 												<span class="title">Hyundai Porter</span>
 											</div>
