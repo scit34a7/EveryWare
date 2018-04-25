@@ -249,10 +249,10 @@
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="charts" class="collapse ">
 							<ul class="submenu">
-								<li><a href="../support/supportMain">출퇴근체크</a></li>
-								<li><a href="../support/attendList">출퇴근확인</a></li>
+								<li><a href="../support/supportMain">근태확인</a></li>
+								<li><a href="../support/attendList">근태현황</a></li>
 								<li><a href="../support/boardList">업무보고</a></li>
-								<li><a href="charts-sparkline">Sparkline Chart</a></li>
+								
 							</ul>
 						</div></li>
 						
@@ -338,7 +338,7 @@
 						</div>
 						<ul class="breadcrumb">
 							<li><a href="#"><i class="fa fa-home"></i>홈</a></li>
-							<li><a href="#">개인정보수정</a></li>
+							<li><a href="#">내 정보 수정</a></li>
 							<!-- <li class="active">회의목록</li> -->
 						</ul>
 					</div>
@@ -354,7 +354,7 @@
 								<div class="logo text-center">
 									<img src="../resources/assets/img/logo-dark.png" alt="Klorofil Logo">
 								</div>
-								<p class="lead">개인정보수정</p>
+								<p class="lead"><b>내 정보 수정</b></p>
 							</div>
 							
 							<form class="form-auth-small" id="updateform" action="update" method="post" onsubmit="return formCheck();">
@@ -393,8 +393,8 @@
 								</div>
 								
 								<center>
-								<input type="submit" value="수정" />&nbsp;&nbsp;&nbsp;
-								<input type="reset" value="다시 쓰기" />
+								<input type="submit" class="btn btn-primary" value="수정" />&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="reset" class="btn btn-success" value="다시 쓰기" />
 								</center>
 								
 								<!-- <button type="submit" class="btn btn-primary btn-lg btn-block">REGISTER</button> -->
@@ -405,179 +405,9 @@
 					</div>
 				</div>
 			</div>
-		
-		<!-- END WRAPPER -->
-			
-			<%-- 
-	
-			<!-- 본문 내용 시작 -->	
-			<div class="centerdiv">
-			<h1>[ 개인 정보 수정 ]</h1>
-			
-			<form id="updateform" action="update"  method="post" onsubmit="return formCheck();">
-			<table>
-				<tr>
-					<th>사번</th>
-					<td>${userId}</td>
-				</tr>
-				<tr>
-					<th>비밀번호</th>
-					<td><input type="password" name="user_pw" id="user_pw" placeholder="비밀번호 입력" /><br>
-					<input type="password" id="user_pw2" placeholder="비밀번호 다시 입력" /></td>
-				</tr>
-				<tr>
-					<th>이름</th>
-					<td>${userName}</td>
-				</tr>
-				<tr>
-					<th>주민등록번호</th>
-					<td><input type="text" name="user_idNum" id="user_idNum" value="${user.user_idNum}" /></td>
-				</tr>
-				<tr>
-					<th>부서</th>
-					<td>${userDepartment}</td>
-				</tr>
-				<tr>
-					<th>직위</th>
-					<td>${userPosition}</td>
-				</tr>
-				<tr>
-					<th>주소</th>
-					<td><input type="text" name="user_address" id="user_address" value="${user.user_address}" style="width:300px;" /></td>
-				</tr>
-				<tr>
-					<th>연락처</th>
-					<td><input type="text" name="user_phone" id="user_phone" value="${user.user_phone}" /></td>
-				</tr>
-				
-			</table>
-				<br>
-			
-			<input type="submit" value="수정" />
-			<input type="reset" value="다시 쓰기" />
-			
-			</form>
-			</div>
-			 --%>
-			
-			
 			
 			<!-- END MAIN CONTENT / 본문 내용 끝-->
-			<!-- RIGHT SIDEBAR -->
-			<div id="sidebar-right" class="right-sidebar">
-				<div class="sidebar-widget">
-					<h4 class="widget-heading"><i class="fa fa-calendar"></i> TODAY</h4>
-					<p class="date">Wednesday, 22 December</p>
-					<div class="row margin-top-30">
-						<div class="col-xs-4">
-							<a href="#">
-								<div class="icon-transparent-area custom-color-blue first">
-									<i class="fa fa-tasks"></i>
-									<span>Tasks</span>
-									<span class="badge">5</span>
-								</div>
-							</a>
-						</div>
-						<div class="col-xs-4">
-							<a href="#">
-								<div class="icon-transparent-area custom-color-green">
-									<i class="fa fa-envelope"></i>
-									<span>Mail</span>
-									<span class="badge">12</span>
-								</div>
-							</a>
-						</div>
-						<div class="col-xs-4">
-							<a href="#">
-								<div class="icon-transparent-area custom-color-orange last">
-									<i class="fa fa-user-plus"></i>
-									<span>Users</span>
-									<span class="badge">24</span>
-								</div>
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="sidebar-widget">
-					<div class="widget-header">
-						<h4 class="widget-heading">YOUR APPS</h4>
-						<a href="#" class="show-all">Show all</a>
-					</div>
-					<div class="row">
-						<div class="col-xs-3">
-							<a href="#" class="icon-app" title="Dropbox" data-toggle="tooltip" data-placement="top">
-								<i class="fa fa-dropbox dropbox-color"></i>
-							</a>
-						</div>
-						<div class="col-xs-3">
-							<a href="#" class="icon-app" title="WordPress" data-toggle="tooltip" data-placement="top">
-								<i class="fa fa-wordpress wordpress-color"></i>
-							</a>
-						</div>
-						<div class="col-xs-3">
-							<a href="#" class="icon-app" title="Drupal" data-toggle="tooltip" data-placement="top">
-								<i class="fa fa-drupal drupal-color"></i>
-							</a>
-						</div>
-						<div class="col-xs-3">
-							<a href="#" class="icon-app" title="Github" data-toggle="tooltip" data-placement="top">
-								<i class="fa fa-github github-color"></i>
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="sidebar-widget">
-					<div class="widget-header">
-						<h4 class="widget-heading">MY PROJECTS</h4>
-						<a href="#" class="show-all">Show all</a>
-					</div>
-					<ul class="list-unstyled list-project-progress">
-						<li>
-							<a href="#" class="project-name">Project XY</a>
-							<div class="progress progress-xs progress-transparent custom-color-orange">
-								<div class="progress-bar" role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="width:67%"></div>
-							</div>
-							<span class="percentage">67%</span>
-						</li>
-						<li>
-							<a href="#" class="project-name">Growth Campaign</a>
-							<div class="progress progress-xs progress-transparent custom-color-blue">
-								<div class="progress-bar" role="progressbar" aria-valuenow="23" aria-valuemin="0" aria-valuemax="100" style="width:23%"></div>
-							</div>
-							<span class="percentage">23%</span>
-						</li>
-						<li>
-							<a href="#" class="project-name">Website Redesign</a>
-							<div class="progress progress-xs progress-transparent custom-color-green">
-								<div class="progress-bar" role="progressbar" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100" style="width:87%"></div>
-							</div>
-							<span class="percentage">87%</span>
-						</li>
-					</ul>
-				</div>
-				<div class="sidebar-widget">
-					<div class="widget-header">
-						<h4 class="widget-heading">MY FILES</h4>
-						<a href="#" class="show-all">Show all</a>
-					</div>
-					<ul class="list-unstyled list-justify list-file-simple">
-						<li><a href="#"><i class="fa fa-file-word-o"></i>Proposal_draft.docx</a>
-							<span>4 MB</span>
-						</li>
-						<li><a href="#"><i class="fa fa-file-pdf-o"></i>Manual_Guide.pdf</a>
-							<span>20 MB</span>
-						</li>
-						<li><a href="#"><i class="fa fa-file-zip-o"></i>all-project-files.zip</a>
-							<span>315 MB</span>
-						</li>
-						<li><a href="#"><i class="fa fa-file-excel-o"></i>budget_estimate.xls</a>
-							<span>1 MB</span>
-						</li>
-					</ul>
-				</div>
-				<p class="text-center"><a href="#" class="btn btn-default btn-xs">More Widgets</a></p>
-			</div>
-			<!-- END RIGHT SIDEBAR -->
+			
 		</div>
 			<!-- END MAIN -->
 			<div class="clearfix"></div>
@@ -600,13 +430,7 @@
 		<!-- DEMO PANEL -->
 		<!-- for demo purpose only, you should remove it on your project directory -->
 		<script type="text/javascript">
-		var toggleDemoPanel = function(e)
-		{
-			e.preventDefault();
-			var panel = document.getElementById('demo-panel');
-			if (panel.className) panel.className = '';
-			else panel.className = 'active';
-		}
+		
 		// fix each iframe src when back button is clicked
 		$(function()
 		{
@@ -616,10 +440,7 @@
 			});
 		});
 		</script>
-		<div id="demo-panel">
-			<a href="#" onclick="toggleDemoPanel(event);"><i class="fa fa-cog fa-spin"></i></a>
-			<iframe src="../resources/demo-panel/index.html"></iframe>
-		</div>
+		
 		<!-- END DEMO PANEL -->
 		<script>
 		$(function()
