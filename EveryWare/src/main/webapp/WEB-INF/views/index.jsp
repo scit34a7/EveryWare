@@ -217,7 +217,7 @@
 							<ul class="submenu">
 								<li><a href="approval/myApproval">내 결재</a></li>
 								<li><a href="approval/writeApproval">결재 작성</a></li>
-								<li><a href="#">Submenu 3</a></li>
+								<li><a href="approval/approvalFormat">결재 양식 작성</a></li>
 							</ul>
 								
 						</div>
