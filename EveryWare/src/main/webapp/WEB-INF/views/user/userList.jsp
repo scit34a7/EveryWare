@@ -234,8 +234,8 @@
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="charts" class="collapse ">
 							<ul class="submenu">
-								<li><a href="../support/supportMain">출퇴근체크</a></li>
-								<li><a href="../support/attendList">출퇴근확인</a></li>
+								<li><a href="../support/supportMain">근태확인</a></li>
+								<li><a href="../support/attendList">근태현황</a></li>
 								<li><a href="../support/boardList">업무보고</a></li>
 								
 							</ul>
@@ -389,7 +389,7 @@
 		<script src="../resources/assets/vendor/jquery/jquery.min.js"></script>
 		<script src="../resources/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 		<script src="../resources/assets/vendor/pace/pace.min.js"></script>
-		<script src="../resources/assets/vendor/datatables/js-main/jquery.dataTables.min.js"></script>
+		<script src="../resources/assets/vendor/datatables/js-main/jquery.dataTablesBoard.min.js"></script>
 		<script src="../resources/assets/vendor/datatables/js-bootstrap/dataTables.bootstrap.min.js"></script>
 		<script src="../resources/assets/vendor/datatables-colreorder/dataTables.colReorder.js"></script>
 		<script src="../resources/assets/vendor/datatables-tabletools/js/dataTables.tableTools.js"></script>

@@ -219,8 +219,8 @@
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="charts" class="collapse ">
 							<ul class="submenu">
-								<li><a href="../support/supportMain">출퇴근체크</a></li>
-								<li><a href="../support/attendList">출퇴근확인</a></li>
+								<li><a href="../support/supportMain">근태확인</a></li>
+								<li><a href="../support/attendList">근태현황</a></li>
 								<li><a href="../support/boardList">업무보고</a></li>
 							
 							</ul>
@@ -304,7 +304,7 @@
 				<div class="main-content">
 					<div class="content-heading clearfix">
 						<div class="heading-left">
-							<h1 class="page-title">개인정보</h1>
+							<h1 class="page-title">내 정보</h1>
 						
 						</div>
 					</div>
@@ -317,8 +317,8 @@
 									<div class="profile-header">
 										<div class="overlay"></div>
 											<div class="profile-main"> 
-											<img src="../resources/assets/img/user-medium.png" class="img-circle" alt="Avatar">
-											<h3 class="name">${userName}</h3>
+											<!-- <img src="../resources/assets/img/user-medium.png" class="img-circle" alt="Avatar"> -->
+											<h3 class="name">${userName}</h3><br>
 											<span class="online-status status-available">접속 중</span>
 											</div>
 										<div class="profile-stat">
@@ -345,26 +345,26 @@
 											<h4 class="heading">기본정보</h4>
 											<ul class="list-unstyled list-justify">
 												<li>생일
-													<span>1987. 12. 15</span>
+													<span>1990. 03. 08</span>
 												</li>
 												<li>휴대폰 번호
-													<span>010-5401-7695</span>
+													<span>010-1478-9632</span>
 												</li>
 												<li>내선 번호
-													<span>5678</span>
+													<span>1591</span>
 												</li>
 												<li>E-mail
-													<span>snlee@everyware.com</span>
+													<span>ganbare@everyware.com</span>
 												</li>
 												<li>주소
-													<span>경남 창원시</span>
+													<span>서울시</span>
 												</li>
 												<li>입사일
 													<span>2015.11.27.</span>
 												</li>
 											</ul>
 										</div>
-										<div class="profile-info">
+										<!-- <div class="profile-info">
 											<h4 class="heading">Social</h4>
 											<ul class="list-inline social-icons">
 												<li><a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
@@ -372,9 +372,9 @@
 												<li><a href="#" class="google-plus-bg"><i class="fa fa-google-plus"></i></a></li>
 												<li><a href="#" class="github-bg"><i class="fa fa-github"></i></a></li>
 											</ul>
-										</div>
+										</div> -->
 										
-										<div class="text-center"><a href="update" class="btn btn-primary">개인정보수정</a></div>
+										<div class="text-center"><a href="update" class="btn btn-primary">내 정보 수정</a></div>
 									</div>
 									<!-- END PROFILE DETAIL -->
 								</div>

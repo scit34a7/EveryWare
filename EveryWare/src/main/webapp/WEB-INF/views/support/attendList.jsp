@@ -221,8 +221,8 @@
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="charts" class="collapse ">
 							<ul class="submenu">
-								<li><a href="../support/supportMain">출퇴근체크</a></li>
-								<li><a href="../support/attendList">출퇴근확인</a></li>
+								<li><a href="../support/supportMain">근태확인</a></li>
+								<li><a href="../support/attendList">근태현황</a></li>
 								<li><a href="../support/boardList">업무보고</a></li>
 								
 							</ul>
@@ -321,15 +321,15 @@
 				<!-- BASIC TABLE -->
 				<div class="panel">
 					<div class="panel-heading">
-						<h3 class="panel-title">출퇴근 조회</h3>
+						<h3 class="panel-title">근태현황</h3>
 					</div>
 					<div class="panel-body">
 						<table class="table">
 							<thead>
 							<tr>
 								<th>사용자</th>
-								<th>출퇴근 확인</th>
-								<th>출퇴근 시간</th>
+								<th>근태확인</th>
+								<th>시간</th>
 							</tr>
 							</thead>
 							<tbody>

@@ -60,7 +60,7 @@
 				$('#attachedOutput').html(output);
 				
 				var output2 = $('#attachedOutput').html();
-				output2 += '<button class="btn btn-default btn-outline">파일선택</button>';
+				output2 += '<button class="btn btn-success">파일선택</button>';
 				$('#attachedOutput').html(output2);
 			});
 			
@@ -291,8 +291,8 @@
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="charts" class="collapse ">
 							<ul class="submenu">
-								<li><a href="../support/supportMain">출퇴근체크</a></li>
-								<li><a href="../support/attendList">출퇴근확인</a></li>
+								<li><a href="../support/supportMain">근태확인</a></li>
+								<li><a href="../support/attendList">근태현황</a></li>
 								<li><a href="../support/boardList">업무보고</a></li>
 						
 							</ul>
@@ -421,14 +421,41 @@
 								 <div class="form-group">
 								 <label>내용</label>
 								 <textarea class="summernote" id="board_content" name="board_content">
-								 <h3><center>업무보고</center></h3>
+								<h3><center>업무보고</center></h3>
 								<br>
-								<p><b>-작성자:</b></p><br>
+								<table border="1">
+								 <tr>
+								 	<td height = "50" width = "100" align="center"><b>작성일</td>
+								 	<td width = "470">&nbsp;&nbsp;2018.</td>
+								 	<td height = "50" width = "100" align="center"><b>부서명</td>
+								 	<td width = "470">&nbsp;&nbsp;</td>
+								 	<td height = "50" width = "100" align="center"><b>작성자</td>
+								 	<td width = "470">&nbsp;&nbsp;</td>
+								 </tr>
+								
+								 <tr>
+								 	<td height = "50" width = "100" align="center"><b>업무보고</td>
+								 	<td colspan ="5">&nbsp;&nbsp;</td>
+								 	
+								 </tr>
+								 <tr>
+								 	<td height = "50" width = "100" align="center"><b>향후계획</td>
+								 	<td colspan ="5">&nbsp;&nbsp;</td>
+								 </tr>
+								 <tr>
+								 	<td height = "50" width = "100" align="center"><b>참고사항</td>
+								 	<td colspan ="5">&nbsp;&nbsp;</td>
+								 </tr>
+								
+								<!-- <p><b>-작성자:</b></p><br>
 								<p><b>-작성일:</b></p><br>
 								<p><b>-내용:</b></p><br><br>
 								<p><b>-참고:</b></p>
-								</div>
+								 -->
+								
+								</table>
 								</textarea> 
+								</div>
 								</div>	
 						
 								<div class="margin-bottom-30"></div>		
@@ -447,9 +474,9 @@
 								<label>첨부파일</label><br>
 								<span id="attachedOutput">
 									<input type="file" name="upload" class="upload">
-									<button class="btn btn-default btn-outline">파일선택</button>
+									<button class="btn btn-success">파일선택</button>
 								</span>	
-									<br><br><input type="button" id="plusAttachedBt" class="btn btn-warning btn-outline" value="파일 추가">
+									<br><br><input type="button" id="plusAttachedBt" class="btn btn-info" value="파일 추가">
 								 
 								 
 								

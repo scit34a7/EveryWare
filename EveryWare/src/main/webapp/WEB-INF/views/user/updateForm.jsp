@@ -249,8 +249,8 @@
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="charts" class="collapse ">
 							<ul class="submenu">
-								<li><a href="../support/supportMain">출퇴근체크</a></li>
-								<li><a href="../support/attendList">출퇴근확인</a></li>
+								<li><a href="../support/supportMain">근태확인</a></li>
+								<li><a href="../support/attendList">근태현황</a></li>
 								<li><a href="../support/boardList">업무보고</a></li>
 								
 							</ul>
@@ -338,7 +338,7 @@
 						</div>
 						<ul class="breadcrumb">
 							<li><a href="#"><i class="fa fa-home"></i>홈</a></li>
-							<li><a href="#">개인정보수정</a></li>
+							<li><a href="#">내 정보 수정</a></li>
 							<!-- <li class="active">회의목록</li> -->
 						</ul>
 					</div>
@@ -354,7 +354,7 @@
 								<div class="logo text-center">
 									<img src="../resources/assets/img/logo-dark.png" alt="Klorofil Logo">
 								</div>
-								<p class="lead"><b>개인정보수정</b></p>
+								<p class="lead"><b>내 정보 수정</b></p>
 							</div>
 							
 							<form class="form-auth-small" id="updateform" action="update" method="post" onsubmit="return formCheck();">
@@ -394,7 +394,7 @@
 								
 								<center>
 								<input type="submit" class="btn btn-primary" value="수정" />&nbsp;&nbsp;&nbsp;&nbsp;
-								<input type="reset" class="btn btn-info" value="다시 쓰기" />
+								<input type="reset" class="btn btn-success" value="다시 쓰기" />
 								</center>
 								
 								<!-- <button type="submit" class="btn btn-primary btn-lg btn-block">REGISTER</button> -->

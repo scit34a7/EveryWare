@@ -50,12 +50,25 @@
 		<script>
 		$(document).ready(function(){
 			
-			//이벤트 처리
+			/* //이벤트 처리
 			$('#plusAttachedBt').on('click', function(){
 				var output = $('#attachedOutput').html();
 				output += '<br>' + '<input type="file" name="upload" size="30">';
 				$('#attachedOutput').html(output);
+			}); */
+			
+			
+			//이벤트 처리(첨부파일)
+			$('#plusAttachedBt').on('click', function(){
+				var output = $('#attachedOutput').html();
+				output += '<br>' + '<input type="file" name="upload" class="upload">';
+				$('#attachedOutput').html(output);
+				
+				var output2 = $('#attachedOutput').html();
+				output2 += '<button class="btn btn-success">파일선택</button>';
+				$('#attachedOutput').html(output2);
 			});
+			
 		});
 		
 		
@@ -81,6 +94,17 @@
 		
 		</script>	
 		
+		
+		<!-- 첨부파일시 기존 파일버튼 숨김 -->
+		<style>
+		input.upload {  
+		  opacity: 0;       /*input type="file" tag 투명하게 처리*/
+		  position:absolute;
+		
+			/* filter:alpha(opacity=0); */
+		  /* position: relative; */
+		}
+		</style>
 		
 	</head>
 	
@@ -271,8 +295,8 @@
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="charts" class="collapse ">
 							<ul class="submenu">
-								<li><a href="../support/supportMain">출퇴근체크</a></li>
-								<li><a href="../support/attendList">출퇴근확인</a></li>
+								<li><a href="../support/supportMain">근태확인</a></li>
+								<li><a href="../support/attendList">근태현황</a></li>
 								<li><a href="../support/boardList">업무보고</a></li>
 								
 							</ul>
@@ -401,17 +425,25 @@
 						<div class="margin-bottom-30"></div>		
 						
 						
-		
+						<!-- 
 						<label>첨부파일</label>
 						<span id="attachedOutput">
 							<input type="file" name="upload" value="파일 선택">
 						</span>	
 							<br><input type="button" id="plusAttachedBt" class="btn btn-success btn-outline" value="파일 추가">
-								
+								 -->
+								 
+						<label>첨부파일</label><br>
+						<span id="attachedOutput">
+							<input type="file" name="upload" class="upload">
+							<button class="btn btn-success">파일선택</button>
+						</span>	
+							<br><br><input type="button" id="plusAttachedBt" class="btn btn-info" value="파일 추가">
+						 		 
 						
 						<br><br><br><br><br>
 						<div id="submitBtAlign">
-							<button type="submit" class="btn btn-primary btn-lg">수정</button>
+							<center><button type="submit" class="btn btn-primary btn-lg">수정</button></center>
 						</div>
 				
 					</form>	

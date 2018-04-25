@@ -38,8 +38,18 @@
 		<!-- jQuery -->
 		<script src="../resources/js/jquery-3.2.1.min.js"></script>
 		
+		
+		<!-- 파일 전송 -->
 		<script>
 		$(document).ready(function(){
+			
+			/* //이벤트 처리
+			$('#plusAttachedBt').on('click', function(){
+				var output = $('#attachedOutput').html();
+				output += '<br>' + '<input type="file" name="upload" size="30">';
+				$('#attachedOutput').html(output);
+			}); */
+			
 			
 			//이벤트 처리(첨부파일)
 			$('#plusAttachedBt').on('click', function(){
@@ -48,11 +58,11 @@
 				$('#attachedOutput').html(output);
 				
 				var output2 = $('#attachedOutput').html();
-				output2 += '<button class="btn btn-default btn-outline">파일선택</button>';
+				output2 += '<button class="btn btn-success">파일선택</button>';
 				$('#attachedOutput').html(output2);
 			});
+			
 		});
-		
 		
 		//글쓰기폼 확인
 		function formCheck() {
@@ -278,8 +288,8 @@
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="charts" class="collapse ">
 							<ul class="submenu">
-								<li><a href="../support/supportMain">출퇴근체크</a></li>
-								<li><a href="../support/attendList">출퇴근확인</a></li>
+								<li><a href="../support/supportMain">근태확인</a></li>
+								<li><a href="../support/attendList">근태현황</a></li>
 								<li><a href="../support/boardList">업무보고</a></li>
 							
 							</ul>
@@ -426,13 +436,14 @@
 								
 								 -->
 										
+								 
 								<label>첨부파일</label><br>
 								<span id="attachedOutput">
 									<input type="file" name="upload" class="upload">
-									<button class="btn btn-default btn-outline">파일선택</button>
+									<button class="btn btn-success">파일선택</button>
 								</span>	
-									<br><br><input type="button" id="plusAttachedBt" class="btn btn-warning btn-outline" value="파일 추가">
-								
+									<br><br><input type="button" id="plusAttachedBt" class="btn btn-info" value="파일 추가">
+								 
 								
 								<br><br><br><br><br>
 								<div id="submitBtAlign">

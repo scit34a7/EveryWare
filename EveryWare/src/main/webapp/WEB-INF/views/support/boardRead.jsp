@@ -288,8 +288,8 @@
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="charts" class="collapse ">
 							<ul class="submenu">
-								<li><a href="../support/supportMain">출퇴근체크</a></li>
-								<li><a href="../support/attendList">출퇴근확인</a></li>
+								<li><a href="../support/supportMain">근태확인</a></li>
+								<li><a href="../support/attendList">근태현황</a></li>
 								<li><a href="../support/boardList">업무보고</a></li>
 							
 							</ul>
@@ -416,6 +416,7 @@
 							
 						</div>
 						<div class="panel-body">
+							
 							<div class="form-group">
 								<table>
 								<tr>
@@ -467,14 +468,14 @@
 						<p class="demo-button">
 						
 						<!-- 목록보기-->
-						<a href="boardList?boardFolder_id=${board.boardFolder_id}" class="btn btn-success btn-outline">목록보기</a>&nbsp;&nbsp;
+						<a href="boardList?boardFolder_id=${board.boardFolder_id}" class="btn btn-success">목록보기</a>&nbsp;&nbsp;
 						
 						<!-- 본인 글인 경우에만 보이기 -->
 						<c:if test="${userName == board.user_id}">
 							<!-- 현재글 삭제하기-->
-							<a href="javascript:deleteCheck(${board.board_id})" class="btn btn-danger btn-outline">삭제</a>&nbsp;&nbsp;
+							<a href="javascript:deleteCheck(${board.board_id})" class="btn btn-danger">삭제</a>&nbsp;&nbsp;
 							<!-- 현재글 수정하기-->
-							<a href="edit?board_id=${board.board_id}" class="btn btn-primary btn-outline">수정</a>
+							<a href="edit?board_id=${board.board_id}" class="btn btn-primary">수정</a>
 						</c:if>
 					
 						</p>
@@ -511,13 +512,21 @@
 								<td>
 									<c:if test="${userName == reply.user_id}">
 										&nbsp;&nbsp;
-										<a style="width:70px; height:30px;" class="btn btn-primary btn-outline" href="javascript:replyEditForm(${reply.bReply_id}, ${reply.board_id}, '${reply.bReply_content}')">수정</a>
+										<a style="width:70px; height:30px;" href="javascript:replyEditForm(${reply.bReply_id}, ${reply.board_id}, '${reply.bReply_content}')">
+											<button type="button" class="btn btn-success" title="Save"><i class="fa fa-save"></i>
+												
+											</button>
+										</a>
 									</c:if>
 								</td>
 								<td>
 									<c:if test="${userName == reply.user_id}">
 										
-										<a style="width:70px; height:30px;" class="btn btn-danger btn-outline" href="javascript:replyDelete(${reply.bReply_id}, ${reply.board_id })">삭제</a>
+										<a style="width:70px; height:30px;" href="javascript:replyDelete(${reply.bReply_id}, ${reply.board_id })">
+											<button type="button" class="btn btn-danger" title="Delete"><i class="fa fa-trash-o"></i>
+												
+											</button>
+										</a>
 									</c:if>
 								</td>
 							</tr>	

@@ -295,8 +295,8 @@
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="charts" class="collapse ">
 							<ul class="submenu">
-								<li><a href="../support/supportMain">출퇴근체크</a></li>
-								<li><a href="../support/attendList">출퇴근확인</a></li>
+								<li><a href="../support/supportMain">근태확인</a></li>
+								<li><a href="../support/attendList">근태현황</a></li>
 								<li><a href="../support/boardList">업무보고</a></li>
 							
 							</ul>
@@ -420,7 +420,7 @@
 										<span class="ti-alarm-clock award-icon"></span>
 									</div>
 									<form action="attendCheck" method="POST" id="attendInForm">
-									<input type="button" value="출근" class="btn btn-primary btn-outline" id="attendIn">
+									<input type="button" value="출근" class="btn btn-primary" id="attendIn">
 									</form>
 											
 								</div>
@@ -432,7 +432,7 @@
 										<span class="ti-home award-icon"></span>
 									</div>
 									<form action="attendOut" method="POST" id="attendOutForm">
-									<input type="button" value="퇴근" class="btn btn-danger btn-outline" id="attendOut">
+									<input type="button" value="퇴근" class="btn btn-danger" id="attendOut">
 									</form>
 											
 								</div>
@@ -444,7 +444,7 @@
 										<span class="ti-map award-icon"></span>
 									</div>
 									<form action="goOut" method="POST" id="goOutForm">
-									<input type="button" value="외출" class="btn btn-success btn-outline" id="goOut">
+									<input type="button" value="외출" class="btn btn-success" id="goOut">
 									</form>
 											
 								</div>
@@ -456,7 +456,7 @@
 										<span class="ti-location-arrow award-icon"></span>
 									</div>
 									<form action="goIn" method="POST" id="goInForm">
-									<input type="button" value="복귀" class="btn btn-warning btn-outline" id="goIn">
+									<input type="button" value="복귀" class="btn btn-warning" id="goIn">
 									</form>
 											
 								</div>
@@ -465,7 +465,7 @@
 				
 						</div>
 						<br>
-						<div class="text-center"><a href="attendList" class="btn btn-default">근태 현황 조회</a></div>
+						<div class="text-center"><a href="attendList" class="btn btn-info">근태 현황 조회</a></div>
 					</div>
 					<!-- END AWARDS -->
 
