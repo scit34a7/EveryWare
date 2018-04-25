@@ -68,7 +68,7 @@ public class MailSendController {
 		model.addAttribute("writeForm", writeForm);
 		
 		//'메일 글쓰기로 이동 '
-		return "appviews-inbox-write";
+		return "mail/appviews-inbox-write";
 	}
 	
 	@RequestMapping(value = "sendMail", method = RequestMethod.POST)

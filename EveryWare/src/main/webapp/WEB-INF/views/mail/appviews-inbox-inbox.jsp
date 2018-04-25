@@ -98,7 +98,8 @@
 							</ul></li>
 						
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">  <span>${sessionScope.userName}</span>
+							data-toggle="dropdown"> 
+								  <span>${sessionScope.userName}</span>
 						</a>
 							<ul class="dropdown-menu logged-user-menu">
 								<li><a href="#"><i class="ti-user"></i> <span>개인정보</span></a></li>
@@ -295,6 +296,7 @@
 													<li><a href="./getMail?sort=trash" 		<c:if test ="${sort== 4}">style = "color : blue; font-weight:bold"</c:if> 	><i class="fa fa-trash"></i> 		휴지통</a></li>
 													<li><a href="./setMailForm"><i class = "fa fa-cog"></i> 양식 설정</a></li>
 												</ul>
+												
 											</nav>
 										</div>
 									</div>
@@ -303,77 +305,156 @@
 							<div class="col-lg-9">
 								<div class="content-right clearfix">
 									<div class="content-panel view-message">
-										<button type="button" class="btn-close-content-right"><i class="fa fa-close"></i></button>
-										<div class="header">
-											<div class="top clearfix">
-												<h3 class="title">${mail.mailsubject} </h3>
-												<span class="timestamp">${mail.maildate}</span>
-											</div>
-											<div class="bottom clearfix">
-												<div class="contact-info">
-														<span class="email">FROM: </span>&nbsp;&nbsp;
-														<span class="sender">${mail.from }
-														<br>
-													</span>
-													<span class="text-muted">TO: </span>&nbsp;&nbsp;
-													<span class="receiver" data-toggle="tooltip" data-title="samuel@yourdomain">${mail.recipients }</span>,
-													<!-- <span class="receiver" data-toggle="tooltip" data-title="robby@yourdomain">Robby</span> -->
+										<div class="content-menu-right">
+											<div class="header">
+												<div class="content-menu-header clearfix">
+													<button type="button" class="btn-open-content-menu"><i class="fa fa-bars"></i></button>
+													<h2 class="heading">Messages</h2>
+													<button type="button" class="btn-icon"><i class="fa fa-refresh"></i></button>
 												</div>
-												<div class="btn-group">
-													<button type="button" class="btn btn-primary btn-replyx"><i class="fa fa-mail-reply"></i>
-														<span>Reply</span>
-													</button>
-													<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-														<span class="caret"></span>
-														<span class="sr-only">Toggle Dropdown</span>
-													</button>
-													<ul class="dropdown-menu pull-right" role="menu">
-														<li><a href="#"><i class="fa fa-mail-reply"></i> Reply</a></li>
-														<li><a href="#"><i class="fa fa-mail-forward"></i> Forward</a></li>
-														<li><a href="#"><i class="fa fa-book"></i> Add Jessie to contact</a></li>
-														<li><a href="#"><i class="fa fa-trash"></i> Dele	te this message</a></li>
-														<li><a href="#"><i class="fa fa-warning"></i> Report spam</a></li>
-														<li><a href="#"><i class="fa fa-check-square"></i> Mark as unread</a></li>
-													</ul>
+
+												<div class="content-menu-header clearfix">
+													<table style = "border-spacing:10px; padding:10px;">
+														<tr>
+															<td>
+																<div class="fancy-checkbox custom-bgcolor-green">
+																	<label>
+																		<input type="checkbox" id = "checkAllBt">
+																		<span></span>
+																	</label>
+																</div>		
+															</td>
+															
+														<c:choose>															
+															<c:when test="${sort == 4 }">
+																<td>
+																<button type="button" id = "permanentDeleteBt" class="btn btn-primary btn-toastr" data-context="info" 
+																		data-message="This is general theme info" data-position="top-right">영구 삭제</button>
+																</td>
+																<td>
+																	<button class="btn btn-default" id="getBackBt" >복원</button>
+																</td>	
+															</c:when>
+															
+															<c:when test="${sort == 5 }">
+																<td>
+																	<button type="button" id = "mailDeleteBt" class="btn btn-primary btn-block" data-context="info" 
+																			 width="100%" data-message="This is general theme info" data-position="top-right">임시 메일 삭제</button>
+																</td>
+															</c:when>
+															
+															<c:otherwise>
+																<td>
+																<button type="button" id = "mailDeleteBt" class="btn btn-primary btn-toastr" data-context="info" 
+																		data-message="This is general theme info" data-position="top-right">삭제</button>
+																</td>
+																<td>
+																	<button class="btn btn-default" id="replyBt">답장</button>
+																</td>
+																<td style="margin-left: 10px;">
+																	<button class="btn btn-default" id="forwardBt">전달</button>
+																</td>
+															</c:otherwise>
+																	
+														
+														</c:choose>
+														</tr>
+													</table>
 												</div>
-											</div>
-										</div>
-										<div class="content">
-											${mail.contentpreview }
+											</div> <!--  end of header -->
 											
-											<hr class="content-separator">
-											<div class="attachment-list">
-											 <c:if test = "${fn:length(attaches)>0}"> 
-												<h4> ${fn:length(attaches)} Attachments</h4>
-												<ul class="list-inline">
+											<!-- in content, button line and list line -->
+											<div class="content">
+											
+											<div id="list-message-scrollable">
+												<ul class="inbox-list-message">
 													
-													<!-- 그림 일갈 바꾸기 , href 또는 클릭 이벤트 부여해서 ajax로 다운받기 ;  -->
-													<c:forEach var = "a" items ="${attaches}">
-													<li style="cursor: pointer">
-														<!--<a href="./download?message_number=${a.message_number}&part_number=${a.part_number}"  -->
-														<a class = "download_attached" attr1 = "${a.message_number}" attr2="${a.part_number}">
-															<span class="file-type">
-																<img src="../resources/assets/img/pages/inbox/attachment-img.jpg" alt="Thumbnail">
-																<span class="text">
-																	<span class="filename">${a.fileName }</span>
-																	<br>
-																	<span class="filesize">${a.size} byte</span>
-																</span>
-															</span>
-														</a>
+													<!-- 반복문  -->
+													<form value = "./deleteMail" method ="post">
+													<c:forEach var="a" items="${viewList}">
+													<li class = "unread">
+														<table>
+															<tr>
+																<td>
+																	<div class="fancy-checkbox custom-bgcolor-green">
+																		<label>
+																			<input type="checkbox" name = "mailSelectBt" attr1 = "${a.message_name }" attr2 = "${seesionScope.userId }">
+																			<span></span>
+																		</label>
+																	</div>		
+																</td>
+																<td>
+																	<div name = "importanceCheck" class="fancy-checkbox custom-bgcolor-green" style="cursor: pointer;" attr1 = "${a.message_name }" attr2 ="${a.mailimportance }">
+																		<label>
+																			<c:choose>
+																				<c:when test ="${a.mailimportance!=null&& a.mailimportance !=''}">
+																					<span class ="mailImportance " style="font-size:2em; color:Blue;cursor: pointer;"><i class = "fa fa-star"></i></span>
+																				</c:when>
+																				<c:otherwise>
+																					<span class ="mailImportance " style="font-size:2em; color:Blue;cursor: pointer;"><i class = "fa fa-star-o"></i></span>
+																				</c:otherwise>
+																			</c:choose>
+																		</label>
+																	</div>
+																</td>
+																<td>
+																	<label>
+																			<c:choose>
+																				<c:when test ="${a.mailreaded=='received'}">
+																					<span class ="mailShape" style="font-size:2em; color:Blue;cursor: pointer;"><i class = "fa fa-envelope-open-o"></i></span>
+																				</c:when>
+																				<c:otherwise>
+																					<span class ="mailShape" style="font-size:2em; color:Blue;cursor: pointer;"><i class = "fa fa-envelope"></i></span>
+																				</c:otherwise>
+																			</c:choose>
+																		</label>
+																
+																</td>
+																<td width="100%">
+																	
+																	<c:choose>
+																		<c:when test = "${sort == 5}">
+																			<a href="./readTemp?message_name=${a.message_name}">
+																				<div class="text">
+																					<span class="sender">${a.from }</span>
+																					<span class="timestamp">${a.maildate }</span>
+																					<h3 class="title">${a.mailsubject }</h3>
+																					<span class="timestamp">${a.mailreaded }</span>
+																					<p class="preview"></p>
+																			
+																					<c:if test="${a.mailattached!=''&&a.mailattached!=null}">
+																						<span class="attachment"><i class="fa fa-paperclip"></i></span>
+																					</c:if>
+																				</div>
+																			</a>
+																		</c:when>																	
+																		
+																		<c:otherwise>
+																			<a href="./read?message_name=${a.message_name}">
+																				<div class="text">
+																					<span class="sender">${a.from }</span>
+																					<span class="timestamp">${a.maildate }</span>
+																					<h4 class="title">${a.mailsubject }</h4>
+																					<span class="timestamp">${a.mailreaded }</span>
+																					<p class="preview"></p>
+																			
+																					<c:if test="${a.mailattached!=''&&a.mailattached!=null}">
+																						<span class="attachment"><i class="fa fa-paperclip"></i></span>
+																					</c:if>
+																				</div>
+																			</a>	
+																		</c:otherwise>
+																	</c:choose>
+																		
+																</td>
+															</tr>
+														</table>
 													</li>
+													</form>
 													</c:forEach>
 												</ul>
-											</c:if> 
-											</div>
-										</div>
-										<div class="footer">
-											<div class="reply-message">
-												<img src="../resources/assets/img/user-medium.png" class="user-image" alt="User Image">
-												<div id="reply-message" class="reply-box">
-													Click here to <a href="#">reply</a>, <a href="#">reply to all</a> or <a href="#">forward</a>
 												</div>
-											</div>
+											</div>		
 										</div>
 									</div>
 								</div>
@@ -383,7 +464,9 @@
 				</div>
 				<!-- END MAIN CONTENT -->
 				<!-- RIGHT SIDEBAR -->
-				
+				<div id="sidebar-right" class="right-sidebar">
+					
+				</div>
 				<!-- END RIGHT SIDEBAR -->
 			</div>
 			<!-- END MAIN -->
@@ -420,11 +503,7 @@
 			});
 		});
 		</script>
-		<div id="demo-panel">
-			<a href="#" onclick="toggleDemoPanel(event);"><i class="fa fa-cog fa-spin"></i></a>
-			<iframe src="../resources/demo-panel/index.html"></iframe>
-		</div>
-		<!-- END DEMO PANEL -->
+		
 		<script>
 		$(function()
 		{
@@ -434,29 +513,203 @@
 				wheelStep: 1,
 				color: '#cecece'
 			});
+		
+			//button 클리학면 전체 클릭 , 한번 더 클릭하면 해제 
+			$('#checkAllBt').click(checkAllorNot);
 			
-			$('.download_attached').on('click',downloadAttached);
+			$('#mailDeleteBt').click(submitDeleteForm);
+			
+			$('div[name="importanceCheck"]').click(importanceCheck);
+				
+			$('#permanentDeleteBt').click(permanentDelete);
+			
+			$('#getBackBt').click(getBack);
+			
+			$('#forwardBt').click(forwardMail);
+			
+			$('#replyBt').click(replyMail);
+			
 		});
 		
-		//for download; // 일단 파일다운로드 체크하기 
-		function downloadAttached(){
+		//#checkAllBt
+		function checkAllorNot(){
 			
-			var message_number = $(this).attr('attr1');
-			var part_number =	$(this).attr('attr2');
+			if($('input:checkbox[id="checkAllBt"]').is(":checked")==true){
 				
+				$('input:checkbox[name="mailSelectBt"]').each(function(){
+					this.checked = true; 
+				});
+			}else{
+				
+				$('input:checkbox[name="mailSelectBt"]').each(function(){
+					this.checked = false; 
+				});
+			}
+		}
+		
+		//submit Delete Form
+		function submitDeleteForm(){
+			
+			var deleteArray = []; 
+			
+			$('input:checkbox[name= "mailSelectBt"]').each(function(i){
+				
+				if( $(this).is(':checked') ){
+					deleteArray.push($(this).attr('attr1'));
+				}
+				
+			});
+			
+			alert(deleteArray); 
+			jQuery.ajaxSettings.traditional = true;
+			
 			$.ajax({
-				url : "./download",
-				type : "get",
-				data: {message_number: message_number, part_number: part_number }, 
-				dataType : "text",
+				url : './deleteMail', 
+				type : 'POST',
+				data: {deleteArray: JSON.stringify(deleteArray), sort : "normal"},
+				dataType : 'text',
 				success : function(txt){
-								
+					location.reload();
+					
+				},
+				error : function(e){
+					alert(e);
+				}
+				
+			});
+			
+			return false;
+		}
+		78
+		// 중요한 메일 체크하기 
+		function importanceCheck(){
+			
+			var message_name = $(this).attr('attr1'); 
+			var message_importance = $(this).attr('attr2');; 
+			
+			$.ajax({
+				url : './importanceCheck', 
+				type : 'GET',
+				data: {message_name: message_name, message_importance: message_importance},
+				dataType : 'text',
+				success : function(txt){
+					location.reload();
 				},
 				error : function(e){
 					alert(e);
 				}
 			});	
 		}
+		
+		// 영구 삭제 
+		function permanentDelete(){
+			
+			var deleteArray = []; 
+			
+			$('input:checkbox[name= "mailSelectBt"]').each(function(i){
+				
+				if( $(this).is(':checked') ){
+					deleteArray.push($(this).attr('attr1'));
+				}
+				
+			});
+			
+			alert(deleteArray); 
+			jQuery.ajaxSettings.traditional = true;
+			
+			$.ajax({
+				url : './deleteMail', 
+				type : 'POST',
+				data: {deleteArray: JSON.stringify(deleteArray), sort: "permanent"},
+				dataType : 'text',
+				success : function(txt){
+					location.reload();
+					
+				},
+				error : function(e){
+					alert(e);
+				}
+			});
+			
+			return false;
+		}
+		
+		// 메일 휴지통으로 부터 복원하기 ;
+		function getBack(){
+			
+			var deleteArray = []; 
+			
+			$('input:checkbox[name= "mailSelectBt"]').each(function(i){
+					
+				if( $(this).is(':checked') ){
+					deleteArray.push($(this).attr('attr1'));
+				}
+				
+			});
+			
+			alert(deleteArray); 
+			jQuery.ajaxSettings.traditional = true;
+			
+			$.ajax({
+				url : './deleteMail', 
+				type : 'POST',
+				data: {deleteArray: JSON.stringify(deleteArray), sort: "getBack"},
+				dataType : 'text',
+				success : function(txt){
+					location.reload();
+					
+				},
+				error : function(e){
+					alert(e);
+				}
+			});
+			
+			return false;
+		}
+		
+		// ForwardMail  ;
+		function forwardMail(){
+				
+			var message_name =null;
+			
+			$('input:checkbox[name= "mailSelectBt"]').each(function(i){
+				
+				if( $(this).is(':checked') ){
+					message_name = $(this).attr('attr1');
+				}
+			});
+			
+			if(message_name != null){
+				location.href = './forwardMail?message_name='+message_name+'&check=forward';
+
+			}else{
+				alert('[Forward] there is no messageName');	
+			}
+			return false;
+		}
+		
+		// ReplyMail 
+		function replyMail(){
+			
+			var message_name =null;
+			
+			$('input:checkbox[name= "mailSelectBt"]').each(function(i){
+				
+				if( $(this).is(':checked') ){
+					message_name = $(this).attr('attr1');
+				}
+			});
+			
+			if(message_name != null){
+				location.href = './forwardMail?message_name='+message_name+'&check=reply';
+
+			}else{
+				alert('[Forward] there is no messageName');	
+			}
+			return false;
+		}
+		
+		
 		</script>
 	</body>
 </html>

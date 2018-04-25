@@ -18,6 +18,8 @@
 		<typeAlias type="com.a7.everyware.mail.vo.Inbox" alias ="Inbox" />
 		<typeAlias type="com.a7.everyware.mail.vo.MailInfo" alias ="MailInfo" />
 		<typeAlias type="com.a7.everyware.mail.vo.BlobData" alias ="BlobData" />
+		<typeAlias type="com.a7.everyware.mail.vo.AddressBook" alias ="AddressBook" />
+		
 		<!-- 이슬기 추가 -->
 		<typeAlias type="com.a7.everyware.resource.vo.ResourceVO" alias="ResourceVO" />
 		<typeAlias type="com.a7.everyware.resource.vo.R_reservationVO" alias="ReservationVO" />

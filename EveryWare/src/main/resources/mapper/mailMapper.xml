@@ -132,22 +132,7 @@
 			message_name = #{message_name}	
 	</select>
 	
-	<!--   delete Mail 
-	<delete id = "deleteMail" parameterType = "java.util.List" >
-		update inbox set
-		
-		message_deleted = 'deleted'
-		
-		where message_name IN
-		
-		<foreach collection="list" item="type" index="index"  open="(" close=")" separator=",">
-            #{list[index]}
-		</foreach>	
-		
-		<foreach collection="list" item="item"  separator=" , ">
-            #{list[index]}  #{item}
-        </foreach>
-	</delete> -->
+	
 	
 	<update id = "deleteOneMail" parameterType = "java.lang.String" >
 		update inbox set
@@ -292,4 +277,35 @@
 		) 
 	</insert>
 
+	<insert id = "insertOneAddr" parameterType = "AddressBook">
+	
+		insert into addressbook_tb(
+			addrbook_num, 
+			user_id,
+			repository,
+			addrbook_name,
+			mailto,
+			mailreference,
+			etc
+			)
+		values(
+			addressbook_seq.nextval, 
+			#{user_id},
+			#{repository},
+			#{addrbook_name},
+			#{mailto},
+			#{mailreference},
+			to_char(sysdate, 'yyyy/mm/dd HH24:MI:SS')
+		)
+	</insert>
+	
+	
+	<select id = "selectAddress" parameterType ="java.lang.String" resultType = "AddressBook">
+	
+		select * from addressbook_tb 
+		
+		where 
+			repository = #{repository}
+	
+	</select>
 </mapper>

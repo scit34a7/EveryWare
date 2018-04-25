@@ -17,4 +17,10 @@
 		user_id = #{user_id}	
 	</select>
 	
+	<delete id="Schedule_Delete" parameterType="ScheduleVO">
+		delete schedule_tb
+		where 
+		schedule_num = #{schedule_num}
+	</delete>
+	
 </mapper>

@@ -67,6 +67,8 @@ public class MailReadController {
 		
 		fromWho = mdao.getUserFromMailInfo(mailFrom);
 		
+		mail.setMessage_name(inbox.getMessage_name());
+		
 		mail.setFrom(fromWho + "&lt;"+mailFrom+"&gt;");
 		
 		mail.setMaildate(inbox.getLast_updated());
@@ -87,8 +89,12 @@ public class MailReadController {
 		
 			mail.setRecipients(MailUtil.printAddresses(messageMime.getRecipients(Message.RecipientType.TO)));
 		
-			mail.setMailsubject("[Temporary]"+messageMime.getSubject());
-
+			if(repository.equals("temp")){	
+				mail.setMailsubject("[Temporary]"+messageMime.getSubject());
+			}else{
+				mail.setMailsubject(messageMime.getSubject());
+			}	
+			
 			Multipart multipart = (Multipart) messageMime.getContent();
 
 			if (messageMime.isMimeType("multipart/*")) {
@@ -170,7 +176,7 @@ public class MailReadController {
 		model.addAttribute("mail", mail);
 		model.addAttribute("attaches",attachList);
 		
-		return "appviews-inbox-read";
+		return "mail/appviews-inbox-read";
 	}
 
 	@ResponseBody
@@ -372,7 +378,7 @@ public class MailReadController {
 		model.addAttribute("attaches",attachList);
 		
 		
-		return "appviews-inbox-write";
+		return "mail/appviews-inbox-write";
 	}
 	
 }

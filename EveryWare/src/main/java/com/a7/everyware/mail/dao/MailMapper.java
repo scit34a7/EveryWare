@@ -3,6 +3,7 @@ package com.a7.everyware.mail.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.a7.everyware.mail.vo.AddressBook;
 import com.a7.everyware.mail.vo.BlobData;
 import com.a7.everyware.mail.vo.Inbox;
 import com.a7.everyware.mail.vo.MailInfo;
@@ -49,6 +50,9 @@ public interface MailMapper {
 
 	public int insertTemp(Inbox map);
 	
+	//주소록
+	public int insertOneAddr(AddressBook addrBook);
 	
+	public ArrayList<AddressBook> selectAddress(String repository);
 	
 }

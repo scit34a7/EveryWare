@@ -49,59 +49,109 @@
 <link href='resources/schedule/scheduler.min.css' rel='stylesheet'
 	media='print' />
 <script src='resources/schedule/scheduler.min.js'></script>
+<script src='resources/schedule/gcal.js'></script>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		$('#calendar').fullCalendar({
-			schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
-			selectable : true,
-			editable : true,
-			contentHeight: 600,
-			header : {
-				left : 'prev,next',
-				center : 'title',
-				right : 'month, agendaFourWeek'
-			},
-			monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-	        monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-	        dayNames: ['일','월','화','수','목','금','토'],
-	        dayNamesShort: ['일','월','화','수','목','금','토'],
-	        dayNamesMin: ['일','월','화','수','목','금','토'],
-			views: {
-			    agendaFourWeek: {
-			      type: 'agenda',
-			      duration: { days: 5 },
-			      buttonText: '상세보기'
-			    }
-			  },
-			defaultView : 'month',
-			groupByResource : true,
-			resources : ${MRlist},
-			events: ${RRlist},
-			select: function(startDate, endDate, event, view, resource) 
-			{
-				/* alert('selected ' + startDate.format() + ' to ' + endDate.format() + 'resource id' + resource.id ); */
-				var resource_id = document.getElementById('resource_id');
-				resource_id.value = resource.id;
-				var R_reservation_sdate = document.getElementById('R_reservation_sdate');
-				R_reservation_sdate.value = startDate.format();
-				var R_reservation_fdate = document.getElementById('R_reservation_fdate');
-				R_reservation_fdate.value = endDate.format();
-				
-				$("#dialog-message").dialog({
-		    		width : "600px"
-		    	});
-			},
-			eventClick: function(calEvent, jsEvent, view) {
-	        	
-    		    $("#dialog-message").dialog({
-		    		width : "600px"
-	    		});
-			}
-		});
-	});
-</script>
+	$(document)
+			.ready(
+					function() {
+						$("#calendar")
+								.fullCalendar(
+										{
+											schedulerLicenseKey : 'GPL-My-Project-Is-Open-Source',
+											selectable : true,
+											navLinks : true,
+											header : {
+												left : "prev",
+												center : "agendaDay, month, agendaWeek, list",
+												right : "next"
+											},
+											monthNames : [ '1월', '2월', '3월',
+													'4월', '5월', '6월', '7월',
+													'8월', '9월', '10월', '11월',
+													'12월' ],
+											monthNamesShort : [ '1월', '2월',
+													'3월', '4월', '5월', '6월',
+													'7월', '8월', '9월', '10월',
+													'11월', '12월' ],
+											dayNames : [ '일', '월', '화', '수',
+													'목', '금', '토' ],
+											dayNamesShort : [ '일', '월', '화',
+													'수', '목', '금', '토' ],
+											dayNamesMin : [ '일', '월', '화', '수',
+													'목', '금', '토' ],
+											lang : "ko",
+											contentHeight : 480,
+											/* editable : true, */
+											eventLimit : true,
+											googleCalendarApiKey : "AIzaSyDcnW6WejpTOCffshGDDb4neIrXVUA1EAE",
+											eventSources : [
+													{
+														googleCalendarId : "ko.south_korea#holiday@group.v.calendar.google.com",
+														className : "koHolidays",
+														color : "#f5f6f9",
+														textColor : "#000000"
+													},
+													{
+														googleCalendarId : "ja.japanese#holiday@group.v.calendar.google.com",
+														className : "jpHolidays",
+														color : "#f5f6f9",
+														textColor : "#000000"
+													}
+											],
+											events: ${Slist}
+											,
+											select : function(startDate,
+													endDate, event, view,
+													resource, split) {
+												/* alert('selected ' + startDate.format() + ' to ' + endDate.format() + 'resource id' + resource.id ); */
 
+												var schedule_sdate = document.getElementById('schedule_sdate');
+												schedule_sdate.value = startDate.format();
+												var schedule_fdate = document.getElementById('schedule_fdate');
+												schedule_fdate.value = endDate.format();
+													
+												("#dialog-addMessage").dialog({
+													width : "600px"
+												});
+											},
+											eventClick: function(calEvent, jsEvent, view) {
+												var curDate = new Date();
+												var curTime = curDate.getFullYear() + "-" + (curDate.getMonth() + 1) + "-" + curDate.getDate() + " " + curDate.getHours() + ":" + curDate.getMinutes();
+												
+												var schedule_num = document.getElementById('schedule_num');
+												schedule_num.value = calEvent.id;
+			
+												$("#dialog-readMessage").dialog({
+													width : "600px"
+												});
+											},
+											loading : function(bool) {
+												jQuery("#loading").toggle(bool);
+											}
+										});/* fullCalendar end */
+					});/*J end */
+
+	function scheduleChoice(num, id, distinct, color, text) {
+		if (jQuery(".swingBar").eq(num).is(":checked")) {
+			jQuery("#calendar").fullCalendar("addEventSource", {
+				googleCalendarId : id,
+				className : distinct,
+				color : color,
+				textColor : text
+			});
+		} else {
+			jQuery("#calendar").fullCalendar("removeEventSource", {
+				googleCalendarId : id
+			});
+		}
+	}
+					
+	function change_check(){
+		var change__importance = document.getElementById('change_check');
+		alert(change__importance.value);
+	}
+</script>
 </head>
 <body class="sidebar-minified">
 	<!-- WRAPPER -->
@@ -375,46 +425,144 @@
 		<!-- MAIN -->
 		<div class="main">
 			<!-- MAIN CONTENT -->
+	
 			<div class="main-content">
+				
 				<div class="content-heading clearfix">
-					<div class="heading-left">
-						<a href="resource_MeetingRoom">미팅 룸</a><br>
-						<a href="resource_NoteBook">노트북</a><br>
-						<a href="">빔 프로젝터</a><br>
-						<a href="">업무용 차량</a>
+					<div style="width: 100%; display: table-cell; float: center;">
+						<div class ="barkKategorie">
+							<label><b>일정 관리</b></label>
+						</div>
+						<!-- 
+						<div class="barKategorie"
+							style="background-color: #FFF; color: #000000;">
+							<label> <input type="checkbox" class="swingBar"
+								onChange="scheduleChoice(0, 'ko.south_korea#holiday@group.v.calendar.google.com', 'usaHolidays', '#f5f6f9', '#000000');"
+								checked /> &nbsp;대한민국 공휴일
+							</label>
+						</div>
+
+						<div class="barKategorie"
+							style="background-color: #FFF; color: #000000;">
+							<label> <input type="checkbox" class="swingBar"
+								onChange="scheduleChoice(1, 'ja.japanese#holiday@group.v.calendar.google.com', 'jpHolidays', '#f5f6f9', '#000000');"
+								checked /> &nbsp;日本の祝日
+							</label>
+						</div>
+						 -->
 					</div>
-					<ul class="breadcrumb">
-						<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-						<li><a href="#">Layouts</a></li>
-						<li class="active">Layout Minified</li>
-					</ul>
 				</div>
+				<div class="col-md-9">
+								<div class="panel">
+									<div class="panel-heading">
+										<h3 class="panel-title">Email Opens by Location</h3>
+									</div>
+									<div id="calendar"></div>
+								</div>
+							</div>
+						</div>
+				<div class="row sortable-grid">
+							<div class="col-md-3">
+								<div class="panel">
+									<div class="panel-heading">
+										<h3 class="panel-title">Last Campaign</h3>
+									</div>
+									<div class="panel-body no-padding">
+										<ul class="list-unstyled list-widget-vertical" id="last-campaign-metric">
+											<li>
+												<div class="widget-metric_2 animate">
+													<i class="fa fa-envelope-o icon"></i>
+													<div class="right">
+														<span class="title">EMAIL SENT</span>
+														<span class="value">64889</span>
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="widget-metric_2 animate">
+													<i class="fa fa-envelope-open-o icon"></i>
+													<div class="right">
+														<span class="title">OPENED</span>
+														<span class="value">28652</span>
+														<span class="percentage custom-text-orange2">44.15%</span>
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="widget-metric_2 animate">
+													<i class="fa fa-hand-pointer-o icon"></i>
+													<div class="right">
+														<span class="title">CLICKED</span>
+														<span class="value">9643</span>
+														<span class="percentage custom-text-orange2">14.86%</span>
+													</div>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
 				<div class="container-fluid">
 
-					<div id="calendar"></div>
-					<div id="dialog-message" title="예약 하기" style="display: none;">
-						<form action="MeetingRoom_add" method="post">
-							<input type="hidden" id="resource_id" name="resource_id">
+					
+					<div id="dialog-addMessage" title="일정 입력하기" style="display: none;">
+						<form action="Schedule_add" method="post">
+							<input type="hidden" name="user_id" value="${userId}">
+							<input type="hidden" name="project_id" value="${project_id}">
 							<table>
 								<tr>
-									<td>사원 명</td>
-									<td><input type="text" value="${userName}" readonly>
+									<td>일정 명 :&nbsp&nbsp</td>
+									
+									<td><input type="text" id="" name="schedule_name" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
+								
+									<td>
+										<input type="radio" name="schedule_group" value="개인" checked="checked">개인 일정<br>
+										<input type="radio" name="schedule_group" value="${userDepartment}">부서 일정<br>
+										<input type="radio" name="schedule_group" value="2">프로젝트 일정<br>
 									</td>
-									<td>부서 명</td>
-									<td><input type="text" value="${userDepartment}"
-										name="R_reservation_type" readonly></td>
+									<td style="widows: 10%">
+										<label class="switch-input"> 
+										<input type="checkbox" name="switch-checkbox" id="switch-checkbox" onchange="change_check"> 
+											<i data-swon-text="YES" data-swoff-text="NO"></i> <p style="color: black;">중요</p>
+										</label>
+									</td>	
 								</tr>
 								<tr>
-									<td>시작 날짜</td>
-									<td><input type="text" id="R_reservation_sdate"
-										name="R_reservation_sdate" readonly></td>
-									<td>종료 날짜</td>
-									<td><input type="text" id="R_reservation_fdate"
-										name="R_reservation_fdate" readonly></td>
+									<td>사원 명 :&nbsp&nbsp</td>
+									
+									<td><input type="text" name="user_name" value="${userName}" readonly style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;">
+									</td>
+									
+									<td>부서 명 :&nbsp&nbsp</td>
+								
+									<td style="width: 1%"><input type="text" value="${userDepartment}"
+										name="R_reservation_type" readonly style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
 								</tr>
 								<tr>
-									<td colspan="4" align="center"><input type="submit"
+									<td>시작  :&nbsp&nbsp</td>
+									
+									<td><input type="text" id="schedule_sdate"
+										name="schedule_sdate" readonly style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
+								
+									<td>종료  :&nbsp&nbsp</td>
+								
+									<td><input type="text" id="schedule_fdate"
+										name="schedule_fdate" readonly style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
+								</tr>
+								<tr>
+									<td colspan="7" align="center"><input type="submit"
 										value="등록하기" align="center"></td>
+								</tr>
+							</table>
+						</form>
+					</div>
+					<div id="dialog-readMessage" title="일정 상세보기" style="display: none;">
+						<form action="Schedule_delete" method="post">
+							<input type="hidden" name="schedule_num" id="schedule_num">
+							<table>
+								<tr>
+									<td colspan="7" align="center"><input type="submit"
+										value="삭제하기" align="center"></td>
 								</tr>
 							</table>
 						</form>
@@ -553,22 +701,21 @@
 	<!-- DEMO PANEL -->
 	<!-- for demo purpose only, you should remove it on your project directory -->
 	<script type="text/javascript">
-		var toggleDemoPanel = function(e)
-		{
+		var toggleDemoPanel = function(e) {
 			e.preventDefault();
 			var panel = document.getElementById('demo-panel');
-			if (panel.className) panel.className = '';
-			else panel.className = 'active';
+			if (panel.className)
+				panel.className = '';
+			else
+				panel.className = 'active';
 		}
 		// fix each iframe src when back button is clicked
-		$(function()
-		{
-			$('iframe').each(function()
-			{
+		$(function() {
+			$('iframe').each(function() {
 				this.src = this.src;
 			});
 		});
-		</script>
+	</script>
 	<div id="demo-panel">
 		<a href="#" onclick="toggleDemoPanel(event);"><i
 			class="fa fa-cog fa-spin"></i></a>

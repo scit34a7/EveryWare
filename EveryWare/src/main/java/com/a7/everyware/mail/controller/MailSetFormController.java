@@ -54,7 +54,7 @@ public class MailSetFormController {
 		
 		model.addAttribute("writeForm", writeForm);
 		
-		return "appviews-inbox-writeForm";
+		return "mail/appviews-inbox-writeForm";
 	}
 
 
@@ -78,7 +78,7 @@ public class MailSetFormController {
 		
 		System.out.println("numberHandle:"+numberHandle+"/ update Blob passed ");
 		
-		return "appviews-inbox-writeForm";
+		return "mail/appviews-inbox-writeForm";
 	}
 	
 	

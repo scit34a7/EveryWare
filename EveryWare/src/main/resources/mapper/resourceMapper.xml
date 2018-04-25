@@ -7,21 +7,24 @@
 <mapper namespace="com.a7.everyware.resource.dao.ResourceMapper">
 	<select id="readMeetingRoom" parameterType="String" resultType="ResourceVO">
 		select * from Resource_tb
-		where resource_type like '회의실%'
+		where resource_id = #{resource_id}
 	</select>
 
 	<insert id="Resource_add" parameterType="ReservationVO"> 
 		insert into R_reservation_tb
 		values
-		(R_reservation_id_seq.nextval, #{R_reservation_type},#{resource_id},#{r_reservation_sdate},#{r_reservation_fdate})
+		(R_reservation_id_seq.nextval, #{R_reservation_type},#{resource_id}
+		,#{r_reservation_sdate},#{r_reservation_fdate},#{regDate},#{userName},#{memo})
 	</insert>
+	
+	<delete id="Resource_delete" parameterType="ReservationVO">
+		delete from R_reservation_tb
+		where R_reservation_id = #{R_reservation_id}
+	</delete>
 	
 	<select id="getMeetingRoom" parameterType="String" resultType="ReservationVO">
 		select* from R_reservation_tb
+		where resource_id = #{resource_id}
 	</select>
 	
-	<select id="readNoteBook" parameterType="String" resultType="ResourceVO">
-		select * from Resource_tb
-		where resource_type like '노트북%'
-	</select>
 </mapper>

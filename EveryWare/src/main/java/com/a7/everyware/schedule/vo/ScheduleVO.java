@@ -110,7 +110,7 @@ public class ScheduleVO {
 
 	@Override
 	public String toString() {
-		return "{id: '"+user_id+"', title: '"+schedule_name+"', start: '"+schedule_sdate+"', end: '"+schedule_fdate+"' , color : '"+color+"'}";
+		return "{id: '"+schedule_num+"', title: '"+schedule_name+"', start: '"+schedule_sdate+"', end: '"+schedule_fdate+"' , color : '"+color+"'}";
 	}
 }
 

@@ -164,6 +164,11 @@
 								<li><a href="./mail/sendMail">편지쓰기</a></li>
 								<li><a href="./mail/getMail?sort=important">중요편지함</a></li>
 								
+								
+								
+								
+								
+								
 							</ul>
 						</div></li>
 					<li class="panel"><a href="#forms" data-toggle="collapse"
@@ -172,9 +177,7 @@
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="forms" class="collapse ">
 							<ul class="submenu">
-								<li><a href="schedule">일정 관리</a></li>
-								<li><a href="resource">자원 예약 관리</a></li>
-								
+								<li><a href="schedule">개인 및 부서일정 관리</a></li>
 							</ul>
 						</div></li>
 					<li class="panel"><a href="#appViews" data-toggle="collapse"
@@ -189,37 +192,14 @@
 							</ul>
 						</div></li>
 
-					<li class="panel"><a href="#uiElements" data-toggle="collapse"
-						data-parent="#sidebar-nav-menu" class="collapsed"><i
-							class="ti-panel"></i> <span class="title">프로젝트관리</span> <i
-							class="icon-submenu ti-angle-left"></i></a>
-						<div id="uiElements" class="collapse ">
-							<ul class="submenu">
-								<li><a href="ui-sweetalert">Sweet Alert</a></li>
-								<li><a href="ui-treeview">Tree View</a></li>
-								<li><a href="ui-wizard">Wizard</a></li>
-								<li><a href="ui-dragdrop-panel">Drag &amp; Drop Panel</a></li>
-								<li><a href="ui-nestable">Nestable</a></li>
-								<li><a href="ui-gauge">Gauge <span
-										class="label label-success">NEW</span></a></li>
-								<li><a href="ui-panels">Panels</a></li>
-								<li><a href="ui-progressbars">Progress Bars</a></li>
-								<li><a href="ui-tabs">Tabs</a></li>
-								<li><a href="ui-buttons">Buttons <span
-										class="label label-info">UPDATED</span></a></li>
-								<li><a href="ui-bootstrap">Bootstrap UI</a></li>
-								<li><a href="ui-social-buttons">Social Buttons</a></li>
-								<li><a href="ui-icons">Icons</a></li>
-							</ul>
-						</div></li>
 					<li class="panel"><a href="#charts" data-toggle="collapse"
 						data-parent="#sidebar-nav-menu" class="collapsed"><i
 							class="ti-pie-chart"></i> <span class="title">업무지원</span> <i
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="charts" class="collapse ">
 							<ul class="submenu">
-								<li><a href="support/supportMain">출퇴근체크</a></li>
-								<li><a href="support/attendList">출퇴근확인</a></li>
+								<li><a href="support/supportMain">근태확인</a></li>
+								<li><a href="support/attendList">근태현황</a></li>
 								<li><a href="support/boardList">업무보고</a></li>
 							</ul>
 						</div></li>
@@ -236,19 +216,12 @@
 							<ul class="submenu">
 								<li><a href="approval/myApproval">내 결재</a></li>
 								<li><a href="approval/writeApproval">결재 작성</a></li>
-								<li><a href="#">Submenu 3</a></li>
+								<li><a href="approval/approvalFormat">결재 양식 작성</a></li>
 							</ul>
 								
 						</div>
 					</li>
-					
-					
-					
-							
-							
-							
-
-					<li class="panel"><a href="#" data-toggle="collapse"
+			<li class="panel"><a href="#" data-toggle="collapse"
 						data-target="#submenuDemo" data-parent="#sidebar-nav-menu"
 						class="collapsed"><i class="ti-menu"></i> <span class="title">화상회의
 						</span><i class="icon-submenu ti-angle-left"></i></a>
@@ -266,14 +239,7 @@
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="subPages" class="collapse ">
 							<ul class="submenu">
-								<li><a href="page-profile">Profile</a></li>
-								<li><a href="page-login">Login</a></li>
-								<li><a href="page-register">Register</a></li>
-								<li><a href="page-lockscreen">Lockscreen</a></li>
-								<li><a href="page-forgot-password">Forgot Password</a></li>
-								<li><a href="page-404">Page 404</a></li>
-								<li><a href="page-500">Page 500</a></li>
-								<li><a href="page-blank">Blank Page</a></li>
+								<li><a href="resource">자원 예약 관리</a></li>
 							</ul>
 						</div></li>
 					<!-- <li><a href="typography"><i class="ti-paragraph"></i> <span

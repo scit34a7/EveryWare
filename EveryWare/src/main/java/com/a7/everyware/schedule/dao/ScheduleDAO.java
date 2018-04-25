@@ -40,5 +40,18 @@ public class ScheduleDAO {
 		return result;
 	}
 	
+	public int Schedule_Delete(String schedule_num)
+	{
+		int result = 0;
+		try{
+			ScheduleMapper mapper = sqlsession.getMapper(ScheduleMapper.class);
+			result = mapper.Schedule_Delete(schedule_num);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	
 }
