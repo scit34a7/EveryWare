@@ -75,11 +75,7 @@
 					</button>
 				</div>
 				<form class="navbar-form navbar-left search-form">
-					<input type="text" value="" class="form-control"
-						placeholder="직원검색">
-					<button type="button" class="btn btn-default">
-						<i class="fa fa-search"></i>
-					</button>
+					
 				</form>
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
@@ -163,12 +159,6 @@
 								<li><a href="./mail/getMail?sort=send">보낸메일함</a></li>
 								<li><a href="./mail/sendMail">편지쓰기</a></li>
 								<li><a href="./mail/getMail?sort=important">중요편지함</a></li>
-								
-								
-								
-								
-								
-								
 							</ul>
 						</div></li>
 					<li class="panel"><a href="#forms" data-toggle="collapse"
@@ -587,8 +577,7 @@
 		<footer>
 			<div class="container-fluid">
 				<p class="copyright">
-					&copy; 2017 <a href="https://www.themeineed.com" target="_blank">Theme
-						I Need</a>. All Rights Reserved.
+					&copy; 2018 <a href="https://www.themeineed.com" target="_blank">EveryWare</a>. All Rights Reserved.
 				</p>
 			</div>
 		</footer>

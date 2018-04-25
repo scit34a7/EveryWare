@@ -140,17 +140,11 @@ function getTextCoo1(){
 					</button>
 				</div>
 				<form class="navbar-form navbar-left search-form">
-					<input type="text" value="" class="form-control"
-						placeholder="Search dashboard...">
-					<button type="button" class="btn btn-default">
-						<i class="fa fa-search"></i>
-					</button>
+					
 				</form>
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#" class="btn-toggle-rightsidebar"> <i
-								class="ti-layout-sidebar-right"></i>
-						</a></li>
+						
 						<li class="dropdown"><a href="#"
 							class="dropdown-toggle icon-menu" data-toggle="dropdown"> <i
 								class="ti-bell"></i> <span class="badge bg-danger">5</span>
@@ -194,20 +188,9 @@ function getTextCoo1(){
 								</a></li>
 								<li><a href="#" class="more">See all notifications</a></li>
 							</ul></li>
-						<li class="dropdown"><a href="#" id="tour-help"
-							class="dropdown-toggle" data-toggle="dropdown"><i
-								class="ti-help"></i> <span class="hide">Help</span></a>
-							<ul class="dropdown-menu">
-								<li><a href="#"><i class="ti-direction"></i> Basic Use</a></li>
-								<li><a href="#"><i class="ti-server"></i> Working With
-										Data</a></li>
-								<li><a href="#"><i class="ti-lock"></i> Security</a></li>
-								<li><a href="#"><i class="ti-light-bulb"></i>
-										Troubleshooting</a></li>
-							</ul></li>
+						
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown"> <img
-								src="resources/assets/img/user.png" alt="Avatar"> <span>Samuel</span>
+							data-toggle="dropdown">  <span>${sessionScope.userName}</span>
 						</a>
 							<ul class="dropdown-menu logged-user-menu">
 								<li><a href="#"><i class="ti-user"></i> <span>My
@@ -227,163 +210,109 @@ function getTextCoo1(){
 			<nav>
 				<ul class="nav" id="sidebar-nav-menu">
 					<li class="menu-group">Main</li>
-					<li class="panel"><a href="#dashboards" data-toggle="collapse"
-						data-parent="#sidebar-nav-menu" class="collapsed"><i
-							class="ti-dashboard"></i> <span class="title">Dashboards</span> <i
-							class="icon-submenu ti-angle-left"></i></a>
-						<div id="dashboards" class="collapse ">
-							<ul class="submenu">
-								<li><a href="index">Dashboard v1 <span
-										class="label label-info">UPDATED</span></a></li>
-								<li><a href="dashboard2">Dashboard v2</a></li>
-								<li><a href="dashboard3">Dashboard v3</a></li>
-								<li><a href="dashboard4">Dashboard v4 <span
-										class="label label-success">NEW</span></a></li>
-							</ul>
-						</div></li>
-					<li class="panel"><a href="#subLayouts" data-toggle="collapse"
+					<li class="panel"><a href="index" data-toggle="collapse"
 						data-parent="#sidebar-nav-menu" class="active"><i
-							class="ti-layout"></i> <span class="title">Layouts</span> <i
+							class="ti-dashboard"></i> <span class="title">MainHome</span> <i
+							class="icon-submenu ti-angle-left"></i></a></li>
+					<li class="panel"><a href="#subLayouts" data-toggle="collapse"
+						data-parent="#sidebar-nav-menu" class="collapsed"><i
+							class="ti-layout"></i> <span class="title">e메일</span> <i
 							class="icon-submenu ti-angle-left"></i></a>
-						<div id="subLayouts" class="collapse in">
+						<div id="subLayouts" class="collapse">
 							<ul class="submenu">
-								<li><a href="layout-topnav">Top Navigation <span
+								<li><a href="./mail/getMail?sort=all">받은메일함 <span
 										class="label label-success">NEW</span></a></li>
-								<li><a href="layout-minified" class="active">Minified</a></li>
-								<li><a href="layout-fullwidth">Fullwidth</a></li>
-								<li><a href="layout-default">Default</a></li>
-								<li><a href="layout-grid">Grid</a></li>
+								<li><a href="./mail/getMail?sort=send">보낸메일함</a></li>
+								<li><a href="./mail/sendMail">편지쓰기</a></li>
+								<li><a href="./mail/getMail?sort=important">중요편지함</a></li>
 							</ul>
 						</div></li>
 					<li class="panel"><a href="#forms" data-toggle="collapse"
 						data-parent="#sidebar-nav-menu" class="collapsed"><i
-							class="ti-receipt"></i> <span class="title">Forms</span> <i
+							class="ti-receipt"></i> <span class="title">스케줄 관리</span> <i
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="forms" class="collapse ">
 							<ul class="submenu">
-								<li><a href="forms-inputs">Inputs</a></li>
-								<li><a href="forms-multiselect">Multiselect</a></li>
-								<li><a href="forms-input-pickers">Input Pickers</a></li>
-								<li><a href="forms-input-sliders">Input Sliders</a></li>
-								<li><a href="forms-select2">Select2</a></li>
-								<li><a href="forms-xeditable">In-place Editing</a></li>
-								<li><a href="forms-dragdropupload">Drag and Drop Upload</a></li>
-								<li><a href="forms-layouts">Form Layouts</a></li>
-								<li><a href="forms-validation">Form Validation</a></li>
-								<li><a href="forms-texteditor">Text Editor</a></li>
+								<li><a href="schedule">개인 및 부서일정 관리</a></li>
 							</ul>
 						</div></li>
 					<li class="panel"><a href="#appViews" data-toggle="collapse"
 						data-parent="#sidebar-nav-menu" class="collapsed"><i
-							class="ti-layout-tab-window"></i> <span class="title">App
-								Views</span> <i class="icon-submenu ti-angle-left"></i></a>
+							class="ti-layout-tab-window"></i> <span class="title">개인정보관리</span>
+							<i class="icon-submenu ti-angle-left"></i></a>
 						<div id="appViews" class="collapse ">
 							<ul class="submenu">
-								<li><a href="appviews-project-detail">Project Details</a></li>
-								<li><a href="appviews-projects">Projects</a></li>
-								<li><a href="appviews-inbox">Inbox <span class="badge">8</span></a></li>
-								<li><a href="appviews-file-manager">File Manager</a></li>
+								<li><a href="user/userInfo">내 정보</a></li>
+								<li><a href="user/update">내 정보 수정</a></li>
+								<li><a href="user/userList">주소록</a></li>
 							</ul>
 						</div></li>
-					<li class="panel"><a href="#tables" data-toggle="collapse"
-						data-parent="#sidebar-nav-menu" class="collapsed"><i
-							class="ti-layout-grid2"></i> <span class="title">Tables</span> <i
-							class="icon-submenu ti-angle-left"></i></a>
-						<div id="tables" class="collapse ">
-							<ul class="submenu">
-								<li><a href="tables-static">Static Tables</a></li>
-								<li><a href="tables-dynamic">Dynamic Tables</a></li>
-							</ul>
-						</div></li>
-					<li class="menu-group">Components</li>
-					<li class="panel"><a href="#uiElements" data-toggle="collapse"
-						data-parent="#sidebar-nav-menu" class="collapsed"><i
-							class="ti-panel"></i> <span class="title">UI Elements</span> <i
-							class="icon-submenu ti-angle-left"></i></a>
-						<div id="uiElements" class="collapse ">
-							<ul class="submenu">
-								<li><a href="ui-sweetalert">Sweet Alert</a></li>
-								<li><a href="ui-treeview">Tree View</a></li>
-								<li><a href="ui-wizard">Wizard</a></li>
-								<li><a href="ui-dragdrop-panel">Drag &amp; Drop Panel</a></li>
-								<li><a href="ui-nestable">Nestable</a></li>
-								<li><a href="ui-gauge">Gauge <span
-										class="label label-success">NEW</span></a></li>
-								<li><a href="ui-panels">Panels</a></li>
-								<li><a href="ui-progressbars">Progress Bars</a></li>
-								<li><a href="ui-tabs">Tabs</a></li>
-								<li><a href="ui-buttons">Buttons <span
-										class="label label-info">UPDATED</span></a></li>
-								<li><a href="ui-bootstrap">Bootstrap UI</a></li>
-								<li><a href="ui-social-buttons">Social Buttons</a></li>
-								<li><a href="ui-icons">Icons</a></li>
-							</ul>
-						</div></li>
+
 					<li class="panel"><a href="#charts" data-toggle="collapse"
 						data-parent="#sidebar-nav-menu" class="collapsed"><i
-							class="ti-pie-chart"></i> <span class="title">Charts</span> <i
+							class="ti-pie-chart"></i> <span class="title">업무지원</span> <i
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="charts" class="collapse ">
 							<ul class="submenu">
-								<li><a href="charts-chartjs">Chart.js</a></li>
-								<li><a href="charts-chartist">Chartist</a></li>
-								<li><a href="charts-flot">Flot Chart</a></li>
-								<li><a href="charts-sparkline">Sparkline Chart</a></li>
+								<li><a href="support/supportMain">근태확인</a></li>
+								<li><a href="support/attendList">근태현황</a></li>
+								<li><a href="support/boardList">업무보고</a></li>
 							</ul>
 						</div></li>
-					<li><a href="widgets"><i class="ti-widget"></i> <span
-							class="title">Widgets</span></a></li>
-					<li><a href="notifications"><i class="ti-bell"></i> <span
-							class="title">Notifications</span> <span class="badge">15</span></a></li>
-					<li class="panel"><a href="#maps" data-toggle="collapse"
-						data-parent="#sidebar-nav-menu" class="collapsed"><i
-							class="ti-map"></i> <span class="title">Maps</span> <i
-							class="icon-submenu ti-angle-left"></i></a>
-						<div id="maps" class="collapse ">
+						
+						<!-- collapse : 서브메뉴 닫혀있음 collapse in : 서브메뉴 열려있음 -->
+						
+					<li class="panel">
+						<a href="#approval" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed">
+							<i class="ti-widget"></i>
+							<span class="title">전자결재</span> 
+							<i class="icon-submenu ti-angle-left"></i>
+						</a>
+						<div id="approval" class="collapse">
 							<ul class="submenu">
-								<li><a href="maps-jqvmap">JQVMap</a></li>
-								<li><a href="maps-mapael">Mapael</a></li>
+								<li><a href="approval/myApproval">내 결재</a></li>
+								<li><a href="approval/writeApproval">결재 작성</a></li>
+								<li><a href="approval/approvalFormat">결재 양식 작성</a></li>
 							</ul>
-						</div></li>
-					<li class="menu-group">Extras</li>
+								
+						</div>
+					</li>
+			<li class="panel"><a href="#" data-toggle="collapse"
+						data-target="#submenuDemo" data-parent="#sidebar-nav-menu"
+						class="collapsed"><i class="ti-menu"></i> <span class="title">화상회의
+						</span><i class="icon-submenu ti-angle-left"></i></a>
+						<div id="submenuDemo" class="collapse">
+							<ul class="submenu">
+								<li><a href="meet/meetingList">회의실</a></li>
+								<li><a href="meet/minutes">회외록</a></li>
+							</ul>
+						</div>
+					</li>
+
 					<li class="panel"><a href="#subPages" data-toggle="collapse"
 						data-parent="#sidebar-nav-menu" class="collapsed"><i
-							class="ti-files"></i> <span class="title">Pages</span> <i
+							class="ti-files"></i> <span class="title">자원예약</span> <i
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="subPages" class="collapse ">
 							<ul class="submenu">
-								<li><a href="page-profile">Profile</a></li>
-								<li><a href="page-login">Login</a></li>
-								<li><a href="page-register">Register</a></li>
-								<li><a href="page-lockscreen">Lockscreen</a></li>
-								<li><a href="page-forgot-password">Forgot Password</a></li>
-								<li><a href="page-404">Page 404</a></li>
-								<li><a href="page-500">Page 500</a></li>
-								<li><a href="page-blank">Blank Page</a></li>
+								<li><a href="resource">자원 예약 관리</a></li>
 							</ul>
 						</div></li>
-					<li><a href="typography"><i class="ti-paragraph"></i> <span
-							class="title">Typography</span></a></li>
-					<li class="panel"><a href="#" data-toggle="collapse"
-						data-target="#submenuDemo" data-parent="#sidebar-nav-menu"
-						class="collapsed"><i class="ti-menu"></i> <span class="title">Multilevel
-								Menu</span><i class="icon-submenu ti-angle-left"></i></a>
-						<div id="submenuDemo" class="collapse">
+					<!-- <li><a href="typography"><i class="ti-paragraph"></i> <span
+							class="title">게시판</span></a></li> -->
+							
+							<li class="panel"><a href="#board" data-toggle="collapse"
+						data-parent="#sidebar-nav-menu" class="collapsed"><i
+							class="ti-pie-chart"></i> <span class="title">게시판</span> <i
+							class="icon-submenu ti-angle-left"></i></a>
+						<div id="board" class="collapse">
 							<ul class="submenu">
-								<li class="panel"><a href="#" data-toggle="collapse"
-									data-target="#submenuDemoLv2" class="collapsed">Submenu 1 <i
-										class="icon-submenu ti-angle-left"></i></a>
-									<div id="submenuDemoLv2" class="collapse">
-										<ul class="submenu">
-											<li><a href="#">Another menu level</a></li>
-											<li><a href="#" class="active">Another menu level</a></li>
-											<li><a href="#">Another menu level</a></li>
-										</ul>
-									</div></li>
-								<li><a href="#">Submenu 2</a></li>
-								<li><a href="#">Submenu 3</a></li>
+								<li><a href="board/boardList?boardFolder_id=1">공지사항</a></li>
+								<li><a href="board/boardList?boardFolder_id=2">부서게시판</a></li>
+								<li><a href="board/boardList?boardFolder_id=3">커뮤니티</a></li>
 							</ul>
-						</div></li>
+						</div></li>	
+							
 				</ul>
 				<button type="button" class="btn-toggle-minified"
 					title="Toggle Minified Menu">
