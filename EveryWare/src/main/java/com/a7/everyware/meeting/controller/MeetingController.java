@@ -211,7 +211,7 @@ public class MeetingController {
 		meetingDAO.saveLog(logVO);
 		return "0";
 	}
-	
+	//
 	@RequestMapping(value = "minutes", method = RequestMethod.GET)
 	public String minutes(Model model) {
 		ArrayList<MeetingLogVO> logVO = meetingDAO.searchLogList();

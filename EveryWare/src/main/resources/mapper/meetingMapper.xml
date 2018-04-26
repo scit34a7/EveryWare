@@ -62,7 +62,7 @@
 		delete from meet_tb where user_id = #{user_id}
 	</delete>
 	
-	<!-- 회의록 리스트 -->
+	<!-- 회의록 리스트. -->
 	<select id="searchLogList" resultType="MeetingLogVO">
 		select distinct meet_title, log_id, log_time from meetlog_tb order by log_id desc
 	</select>

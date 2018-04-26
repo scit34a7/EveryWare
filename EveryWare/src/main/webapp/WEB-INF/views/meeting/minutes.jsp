@@ -256,7 +256,7 @@
 							</div>
 							<div class="panel-body">
 								<table class="table table-bordered">
-									<thead>
+									<thead><!--  -->
 										<tr>
 											<th style="text-align: center">제목</th>
 											<th style="text-align: center">시간</th>
