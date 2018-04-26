@@ -7,17 +7,18 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Project Detail | Klorofil Pro - Bootstrap Admin Dashboard Template</title>
+		<title>Text Editor | Klorofil Pro - Bootstrap Admin Dashboard Template</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-		
 		<!-- VENDOR CSS -->
 		<link rel="stylesheet" href="../resources/assets/vendor/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="../resources/assets/vendor/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="../resources/assets/vendor/themify-icons/css/themify-icons.css">
 		<link rel="stylesheet" href="../resources/assets/vendor/pace/themes/orange/pace-theme-minimal.css">
-		<link rel="stylesheet" href="../resources/assets/vendor/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css">
+		<link rel="stylesheet" href="../resources/assets/vendor/summernote/summernote.css">
+		<link rel="stylesheet" href="../resources/assets/vendor/bootstrap-markdown/bootstrap-markdown.min.css">
+		<link rel="stylesheet" href="../resources/assets/vendor/summernote/summernote.css">
 		<!-- MAIN CSS -->
 		<link rel="stylesheet" href="../resources/assets/css/main.css">
 		<link rel="stylesheet" href="../resources/assets/css/skins/sidebar-nav-darkgray.css" type="text/css">
@@ -28,52 +29,23 @@
 		<!-- ICONS -->
 		<link rel="apple-touch-icon" sizes="76x76" href="../resources/assets/img/apple-icon.png">
 		<link rel="icon" type="image/png" sizes="96x96" href="../resources/assets/img/favicon.png">
+		<!-- DatePicker -->
+		<link rel="stylesheet" href="../resources/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+		<!-- DROPIFY 첨부파일 -->
+		<link rel="stylesheet" href="../resources/assets/vendor/dropify/css/dropify.min.css">
 		
+		
+		
+		<%-- Jquery --%>
+	<script src="../resources/js/jquery-3.2.1.min.js" ></script>	
 		
 		<script type="text/javascript">
-		
-		function submit(type){
-			
-			var reason = '';
-			
-			
-			if(type == 1){
-				if(confirm('해당결제를 승인 하시겠습니까?')){
-				}else{
-					return;
-				}
-			}else if(type == 2){
-				if(confirm('해당결제를 거절 하시겠습니까?')){
-					reason = prompt('거절 이유를 적어주세요.');
-				}else{
-					return;
-				}
-			}else{
-				if(confirm('해당결제를 반려 하시겠습니까?')){
-					reason = prompt('반려 이유를 적어주세요.');
-				}else{
-					return;
-				}
+
+			function openLineSet(){
+				window.open("approvalLineSet", "approvalLineSetkWin", "top=100, left=500, width=600, height=600")
 			}
 			
-				
-			$.ajax({
-				url: 'insertHistory'
-					,type: 'POST'
-					,dataType: 'text'
-					,data: {type: type, eApproval_id: ${approval.eApproval_id}, reason: reason}
-					,success: function(){
-						location.href='myApproval';
-					}		
-					,error: function(e){	
-						alert(JSON.stringify(e));
-					}		
 			
-			});	 
-				
-				
-				
-		}
 		
 		</script>
 		
@@ -82,6 +54,7 @@
 	<body>
 		<!-- WRAPPER -->
 		<div id="wrapper">
+		
 		<!-- NAVBAR -->
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
@@ -165,13 +138,12 @@
 			</div>
 		</nav>
 		<!-- END NAVBAR -->
-		
+			
 			<!-- LEFT SIDEBAR -->
 			<div id="sidebar-nav" class="sidebar">
 				<nav>
 					<ul class="nav" id="sidebar-nav-menu">
 						<li class="menu-group">Main</li>
-						
 						<li class="panel"><a href="index" data-toggle="collapse"
 							data-parent="#sidebar-nav-menu" class="collapsed"><i
 								class="ti-dashboard"></i> <span class="title">MainHome</span> <i
@@ -238,9 +210,9 @@
 							</a>
 							<div id="approval" class="collapse in"><!-- collapse : 서브메뉴 닫혀있음 collapse in : 서브메뉴 열려있음 -->
 								<ul class="submenu">
-									<li><a href="myApproval" class="active">내 결재</a></li>
+									<li><a href="myApproval">내 결재</a></li>
 									<li><a href="writeApproval">결재 작성</a></li>
-									<li><a href="approvalFormat">결재 양식 작성</a></li>
+									<li><a href="approvalFormat" class="active">결재 양식 작성</a></li>
 								</ul>
 									
 							</div>
@@ -290,301 +262,92 @@
 			</div>
 			<!-- END LEFT SIDEBAR -->
 		
+		
+		
+		
 			<!-- MAIN -->
 			<div class="main">
 				<!-- MAIN CONTENT -->
 				<div class="main-content">
 					<div class="content-heading clearfix">
 						<div class="heading-left">
-							<h1 class="page-title">결재문서 읽기</h1>
-							<p class="page-subtitle">결재문서의 상세내용과 승인,거절,반려</p>
+							<h1 class="page-title">결재 양식 작성</h1>
+							<p class="page-subtitle">미리 결재양식을 작성해 결재 작성시 바로 불러올 수 있습니다.</p>
 						</div>
 						<ul class="breadcrumb">
-							<li><a href="../index"><i class="fa fa-home"></i>홈</a></li>
-							<li><a href="myApproval">내 결재</a></li>
-							<li class="active">결재 읽기</li>
+							<li><a href="../index"><i class="fa fa-home"></i> 홈</a></li>
+							<li><a href="writeApproval">결재 작성</a></li>
+							<li class="active">결재 양식 작성</li>
 						</ul>
 					</div>
 					
 					
+					
 					<div class="container-fluid">
 						<div class="row">
-						
-							<div class="col-md-8">						
+							<div class="col-md-12">	<!-- 뒤에 숙자가 크기 조절 -->
 								<div class="panel">
-								
-									<div class="project-heading">
-										<div class="row">
-											<div class="col-md-9">
-												<div class="media">
-													<div class="media-left">
-														<img src="../resources/assets/img/project-logo.png" class="project-logo" alt="Project Logo">
-													</div>
-													<div class="media-body">
-														<h2 class="project-title">${approval.eApproval_title}</h2>
-														<c:if test="${ban eq true}">
-															<span class="label label-danger label-transparent">반려</span>
-														</c:if>
-														
-														<!-- <span class="label label-success status">진행중</span> -->
-													</div>
-												</div>
-											</div>
-											
-											<div class="col-md-3 text-right">
-												<div class="btn-group">
-													<c:if test="${isApproval eq true}">
-														<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">결재하기
-															<span class="caret"></span>
-														</button>
-														<ul class="dropdown-menu dropdown-menu-right" role="menu">
-															<li><a href="javascript:submit(1)">승인</a></li>
-															<li><a href="javascript:submit(2)">거절</a></li>
-															<li><a href="javascript:submit(3)">반려</a></li>
-														</ul>
-													</c:if>
-													<c:if test="${ban eq true}">
-														<a>
-															<button type="button" class="btn btn-primary">
-																<i class="fa fa-pencil"></i>수정하기
-															</button>
-														</a>
-													</c:if>
-												</div>
-											</div>
-										</div>
-										<div class="project-subheading">
-											<div class="layout-table project-metrics">
-												<div class="cell">
-													<div class="main-info-item">
-														<span class="title"><i class="fa fa-calendar-o icon custom-text-orange"></i>   DATE START</span>
-														<span class="value">${approval.eApproval_sDate}</span>
-													</div>
-												</div>
-												<div class="cell">
-													<div class="main-info-item">
-														<span class="title"><i class="fa fa-calendar-o icon custom-text-orange"></i>   DATE END</span>
-														<span class="value">${approval.eApproval_fDate}</span>
-													</div>
-												</div>
-												<!-- <div class="cell">
-													<div class="main-info-item">
-														<span class="title">EST. VALUE</span>
-														<span class="value">$21,847</span>
-													</div>
-												</div> -->
-												<div class="cell">
-													<div class="main-info-item">
-														<span class="title">PROGRESS</span>
-														<div id="project-progress" class="progress progress-transparent custom-color-orange2">
-															<div class="progress-bar" data-transitiongoal="${progress }"></div>
-														</div>
-													</div>
-												</div>
-												
-												
-												
-											</div>
-										</div>
-									</div><!-- #project-heading DIV -->
-									
-									
+									<div class="panel-heading">
+										<h3 class="panel-title">결재 양식 작성</h3>
+									</div>
 									<div class="panel-body">
 									
-										<c:if test="${ban eq true}">
-											
-											<div class="project-info">
-											
-											<div class="panel-group project-accordion">											
-										
-												<div class="panel project-milestone">
-													<div class="panel-heading">
-														<h4 class="panel-title">
-															<a href="#collapse2" data-toggle="collapse" data-parent="#accordion" class="collapsed">
-																<span class="milestone-title"><i class="fa fa-check icon-indicator text-success"></i>반려 이유</span>
-																
-																<i class="fa fa-plus-circle toggle-icon"></i>
-															</a>
-														</h4>
-													</div>
-													<div id="collapse2" class="panel-collapse collapse">
-														<div class="panel-body">
-															<div class="milestone-section">
-																
-																<p class="milestone-description">
-																	${reason}
-																</p>
-															</div>
-															
-														</div>
-														<div class="panel-footer">
-															<a href="editApproval">
-																<button type="button" class="btn btn-primary">
-																	
-																		<i class="fa fa-pencil"></i>수정하기
-																	
-																</button>
-															</a>
-															<!-- <a href="#" class="btn btn-default"><i class="fa fa-cloud-upload"></i> UPLOAD</a>
-															<a href="#" class="btn btn-success"><i class="fa fa-file"></i> VIEW INVOICE</a> -->
-														</div>
-													</div>
-												</div>
-												
-												
+										<!-- 폼 태그 -->
+										<form action="insertApprovalFormat" method="post">
+										<!-- <form id="insertApproval" method="post" enctype="multipart/form-data" novalidate>	 -->
+											<div class="form-group">
+												<label>저장할 양식 이름</label>
+												<input type="text" class="form-control" name="approvalFormat_name" required>
 											</div>
-										</div>
+											
+											<div class="form-group">
+												<label>결재 제목</label>
+												<input type="text" class="form-control" name="approvalFormat_title" required>
+											</div>
+											
+											<div class="form-group">
+												<label>결재 내용</label>
+												<!-- <textarea class="form-control" rows="5" cols="30" id="eApproval_content" name="eApproval_content" required></textarea> -->
+												<div class="container-fluid">
+													<textarea class="summernote" name ="approvalFormat_content2">
+														
+														<%-- ${writeForm } --%>
+														
+														
+													</textarea>
+												<div class="margin-bottom-30"></div>
+												</div>
+											
+											</div>
 											
 											
-										</c:if>
-									
-									
-										<div class="project-info">
-											<h3 class="info-heading">문서 내용</h3>
-											<p class="project-description">
-												${approval.eApproval_content2}
-											</p>
-										</div>
+											
+											<div id="submitBtAlign">
+												<button type="submit" class="btn btn-primary btn-lg">양식 저장</button>
+											</div>	
+											
 										
-									</div> 
+											
+						
+											
+											
+										</form>
+									</div>
 								</div>
 							</div>
 							
-							<!-- 오른쪽 행 -->
-							<div class="col-md-4">
-								<!-- project team -->
-								<div class="panel">
-									<div class="panel-heading">
-										<h4 class="panel-title">작성자 & 결재자</h4>
-										<div class="right">
-											<!-- <button type="button" class="btn btn-primary">
-												<span class="sr-only">Add Contact</span>
-												<i class="fa fa-user-plus"></i>
-											</button> -->
-										</div>
-									</div>
-									
-									<div class="panel-body">
-										<ul class="list-unstyled list-contacts">
-											<li>
-												<div class="media">
-													<img src="../resources/assets/img/people/female3.png" class="picture" alt="">
-													<span class="status online"></span>
-												</div>
-												<div class="info">
-													<span class="name">${approvalLine.user_id}</span>
-													<span class="title">결재 작성자</span>
-												</div>
-												<div class="controls">
-													<a href="#"><i class="fa fa-commenting-o"></i></a>
-												</div>
-											</li>
-											<li>
-												<div class="media">
-													<div class="picture custom-bg-blue3">MB</div>
-													<span class="status"></span>
-												</div>
-												<div class="info">
-													<span class="name">${approvalLine.eApprovalLine_person1}</span>
-													<span class="email">1차 결재자</span>
-												</div>
-												<div class="controls">
-													<a href="#"><i class="fa fa-commenting-o"></i></a>
-												</div>
-											</li>
-											<li>
-												<div class="media">
-													<img src="../resources/assets/img/people/male1.png" class="picture" alt="">
-													<span class="status online"></span>
-												</div>
-												<div class="info">
-													<span class="name">${approvalLine.eApprovalLine_person2}</span>
-													<span class="email">2차 결재자</span>
-												</div>
-												<div class="controls">
-													<a href="#"><i class="fa fa-commenting-o"></i></a>
-												</div>
-											</li>
-											<li>
-												<div class="media">
-													<img src="../resources/assets/img/people/female4.png" class="picture" alt="">
-													<span class="status"></span>
-												</div>
-												<div class="info">
-													<span class="name">${approvalLine.eApprovalLine_person3}</span>
-													<span class="email">최종 결재자</span>
-												</div>
-												<div class="controls">
-													<a href="#"><i class="fa fa-commenting-o"></i></a>
-												</div>
-											</li>
-											<!-- <li>
-												<div class="media">
-													<img src="../resources/assets/img/people/female5.png" class="picture" alt="">
-													<span class="status online"></span>
-												</div>
-												<div class="info">
-													<span class="name">Martha Mendoza</span>
-													<span class="email">Full-Stack Developer</span>
-												</div>
-												<div class="controls">
-													<a href="#"><i class="fa fa-commenting-o"></i></a>
-												</div>
-											</li> -->
-										</ul>
-									</div>
-								</div>
-								<!-- end project team -->
-								<!-- 첨부파일 -->
-								<div class="panel">
-									<div class="panel-heading">
-										<h4 class="panel-title">첨부파일</h4>
-									</div>
-									<div class="panel-body">
-										<ul class="list-unstyled list-justify list-file-simple">
-											<li>
-												<c:choose>
-													<c:when test="${eApproval.saved ne null}">
-														<a href="#">
-															<i class="fa fa-file-word-o"></i>
-															${eApproval.saved}
-														</a>
-														<span>4 MB</span>
-													</c:when>
-													<c:otherwise>
-														첨부파일이 없습니다.
-													</c:otherwise>
-													
-												</c:choose>
-											</li>
-											<!-- <li><a href="#"><i class="fa fa-file-pdf-o"></i>Final_Presentation.ppt</a>
-												<span>20 MB</span>
-											</li>
-											<li><a href="#"><i class="fa fa-file-zip-o"></i>Phase1_AllFiles.zip</a>
-												<span>315 MB</span>
-											</li>
-											<li><a href="#"><i class="fa fa-file-excel-o"></i>Meeting_Schedule.xls</a>
-												<span>1 MB</span>
-											</li> -->
-										</ul>
-									</div>
-									<!-- <div class="panel-footer text-right">
-										<a href="#" class="btn btn-primary btn-sm"><i class="fa fa-cloud-upload"></i> UPLOAD FILE</a>
-									</div> -->
-								</div>
-								<!-- end 첨부파일 -->
-								
-								
-							</div> <!-- 오른쪽행 -->
+							
 							
 							
 						</div>
 					</div>
+					
+					
 				</div>
 				<!-- END MAIN CONTENT -->
 				
-				<!-- RIGHT SIDEBAR -->
 				
+				<!-- RIGHT SIDEBAR -->
 				<!-- END RIGHT SIDEBAR -->
 				
 			</div>
@@ -601,11 +364,57 @@
 		<script src="../resources/assets/vendor/jquery/jquery.min.js"></script>
 		<script src="../resources/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 		<script src="../resources/assets/vendor/pace/pace.min.js"></script>
-		<script src="../resources/assets/vendor/bootstrap-progressbar/js/bootstrap-progressbar.min.js"></script>
+		<script src="../resources/assets/vendor/summernote/summernote.min.js"></script>
+		<script src="../resources/assets/vendor/markdown/markdown.js"></script>
+		<script src="../resources/assets/vendor/to-markdown/to-markdown.js"></script>
+		<script src="../resources/assets/vendor/bootstrap-markdown/bootstrap-markdown.js"></script>
 		<script src="../resources/assets/scripts/klorofilpro-common.js"></script>
+		<script src="../resources/assets/vendor/dropify/js/dropify.min.js"></script>
+		<script src="../resources/assets/vendor/summernote/summernote.min.js"></script>
+		<!-- datepicker -->
+		<script src="../resources/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+		
 		<!-- DEMO PANEL -->
 		<!-- for demo purpose only, you should remove it on your project directory -->
 		<script type="text/javascript">
+		
+		/* DROPIFY */
+		$(function()
+		{
+			
+			// summernote editor
+			$('.summernote').summernote(
+			{
+				height: 300,
+				focus: true,
+				onpaste: function()
+				{
+					alert('You have pasted something to the editor');
+				}
+			});
+			
+			$('.dropify').dropify();
+			var drEvent = $('#dropify-event').dropify();
+			drEvent.on('dropify.beforeClear', function(event, element)
+			{
+				return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
+			});
+			drEvent.on('dropify.afterClear', function(event, element)
+			{
+				alert('File deleted');
+			});
+			$('.dropify-fr').dropify(
+			{
+				messages:
+				{
+					default: 'Glissez-déposez un fichier ici ou cliquez',
+					replace: 'Glissez-déposez un fichier ou cliquez pour remplacer',
+					remove: 'Supprimer',
+					error: 'Désolé, le fichier trop volumineux'
+				}
+			});
+		});
+		
 		var toggleDemoPanel = function(e)
 		{
 			e.preventDefault();
@@ -620,24 +429,38 @@
 			{
 				this.src = this.src;
 			});
-		});
-		</script>
+			
+			
+			
+			/*-----------------------------------/
+			/*	DATE PICKER
+			/*----------------------------------*/
+			$('.inline-datepicker').datepicker(
+			{
+				todayHighlight: true
+			});
+			
+			
+			});
+		
+		
+	
+			
+		</script>	
+			
+			
+		
+		
+		
+		
+		<!-- <div id="demo-panel">
+			<a href="#" onclick="toggleDemoPanel(event);"><i class="fa fa-cog fa-spin"></i></a>
+			<iframe src="../resources/demo-panel/index.html"></iframe>
+		</div> -->
+		
+		
 		
 		<!-- END DEMO PANEL -->
-		<script>
-		$(function()
-		{
-			// project progress
-			$('#project-progress .progress-bar').progressbar(
-			{
-				display_text: 'fill'
-			});
-			// accordion toggle collapse
-			$('.project-accordion [data-toggle="collapse"]').on('click', function()
-			{
-				$(this).find('.toggle-icon').toggleClass('fa-minus-circle fa-plus-circle');
-			});
-		});
-		</script>
+		
 	</body>
 </html>

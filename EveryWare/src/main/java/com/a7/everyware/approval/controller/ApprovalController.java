@@ -1,5 +1,6 @@
 package com.a7.everyware.approval.controller;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.a7.everyware.approval.dao.ApprovalDAO;
+import com.a7.everyware.approval.vo.ApprovalFormatVO;
 import com.a7.everyware.approval.vo.ApprovalHistoryVO;
 import com.a7.everyware.approval.vo.ApprovalLineVO;
 import com.a7.everyware.approval.vo.ApprovalVO;
@@ -47,10 +49,59 @@ public class ApprovalController {
 	
 	//결제 쓰기 폼으로
 	@RequestMapping (value="writeApproval", method=RequestMethod.GET)
-	public String writeApproval() {
+	public String writeApproval(Model model, HttpSession session) {
 		logger.debug("go writeApproval");
+		//로그인 아이디 셋팅
+		String user_id = (String) session.getAttribute("userId");
+		ArrayList<ApprovalFormatVO> formatList2 = approvalDAO.findFormat(user_id);
+		
+		ArrayList<ApprovalFormatVO> formatList = new ArrayList<ApprovalFormatVO>();
+		
+		for(ApprovalFormatVO af : formatList2){
+			af.setApprovalFormat_content2(new String(af.getApprovalFormat_content(), StandardCharsets.UTF_8));
+			formatList.add(af);
+		}
+		
+		model.addAttribute("formatList", formatList);
+		
+		logger.debug("formatList : {}", formatList);
+		
 		return "approval/writeApproval";
 	}
+	
+	
+	//결제 쓰기 폼으로 (양식 ver)
+	@RequestMapping (value="loadFormat", method=RequestMethod.GET)
+	public String loadFormat(Model model, HttpSession session, 
+			@RequestParam(value="approvalFormat_id", defaultValue="0") int approvalFormat_id) {
+		logger.debug("load format para : {}", approvalFormat_id);
+		//로그인 아이디 셋팅
+		String user_id = (String) session.getAttribute("userId");
+		ArrayList<ApprovalFormatVO> formatList2 = approvalDAO.findFormat(user_id);
+		
+		ArrayList<ApprovalFormatVO> formatList = new ArrayList<ApprovalFormatVO>();
+		
+		for(ApprovalFormatVO af : formatList2){
+			af.setApprovalFormat_content2(new String(af.getApprovalFormat_content(), StandardCharsets.UTF_8));
+			if(af.getApprovalFormat_id() == approvalFormat_id){
+				logger.debug("title : {}",af.getApprovalFormat_title());
+				logger.debug("content : {}",af.getApprovalFormat_content2());
+				model.addAttribute("title", af.getApprovalFormat_title());
+				model.addAttribute("content", af.getApprovalFormat_content2());
+			}
+			formatList.add(af);
+			
+		}
+		
+		
+		
+		model.addAttribute("formatList", formatList);
+		
+		logger.debug("formatList : {}", formatList);
+		
+		return "approval/writeApproval";
+	}
+	
 	
 	
 	//결제 쓰기 폼으로
@@ -58,6 +109,13 @@ public class ApprovalController {
 	public String approvalLineSet() {
 		logger.debug("go approvalLineSet");
 		return "approval/approvalLineSet";
+	}
+	
+	//결재 양식 폼으로
+	@RequestMapping (value="approvalFormat", method=RequestMethod.GET)
+	public String approvalFormat() {
+		logger.debug("go approvalFormat");
+		return "approval/approvalFormat";
 	}
 	
 	
@@ -103,13 +161,16 @@ public class ApprovalController {
 	
 	//전자결재 등록
 	@RequestMapping (value="insertApproval", method=RequestMethod.POST)
-	public String insertApproval(MultipartFile upload, HttpSession session, ApprovalVO approval) {
+	public String insertApproval(MultipartFile upload, HttpSession session, ApprovalVO approval, String eApproval_content_string) {
 		logger.debug("insertApproval para : {}", approval);
 		logger.debug("DDD : {}", upload);
 		//로그인 아이디 세팅
 		String user_id = (String) session.getAttribute("userId");
 		approval.setUser_id(user_id);
 		logger.debug("아이디 : {}", user_id);
+		
+		//eApproval_content byte[]로 변환
+		approval.seteApproval_content(eApproval_content_string.getBytes());
 		
 		//첨부파일
 		//첨부파일이 있는 경우 지정된 경로(uploadPath)에 저장하고, 원본, 저장된 파일명 객체에 세팅
@@ -147,7 +208,8 @@ public class ApprovalController {
 		ArrayList<ApprovalVO> approvalList_now = new ArrayList<ApprovalVO>();
 		//결재 해야될 문서(아직 앞라인에서 승인이 안난 문서)
 		ArrayList<ApprovalVO> approvalList_future = new ArrayList<ApprovalVO>();
-		
+		//반려된 문서
+		ArrayList<ApprovalVO> approvalList_ban = new ArrayList<ApprovalVO>();
 		
 		//approvalList_toMe를  ( past / now / future )로 나누는 과정
 		for(ApprovalVO app : approvalList_toMe){
@@ -202,8 +264,7 @@ public class ApprovalController {
 			case 1:	//첫번째 결재자인 경우
 				//결재 문서에대한 히스토리
 				
-				//내가 이결재에대해 승인 했는지 여부
-				boolean isApproval = false;
+				
 				for(ApprovalHistoryVO history : approvalHistoryList){
 					
 					
@@ -211,22 +272,27 @@ public class ApprovalController {
 					
 					if(history.getUser_id().equals(line.geteApprovalLine_person1()) && history.geteHistory_content().equals("승인")){
 						//내가 승인 한경우
-						isApproval = true;
 						logger.debug("order:1 person1 승인!");
+						approvalList_past.add(app);
 						break;
+					}else if(history.getUser_id().equals(line.geteApprovalLine_person1()) && history.geteHistory_content().equals("반려")){
+						//내가 반려 한경우
+						approvalList_future.add(app);
+						break;
+					}else if(history.getUser_id().equals(line.geteApprovalLine_person1()) && history.geteHistory_content().equals("거절")){
+						//내가 반려 한경우
+						approvalList_past.add(app);
+						break;
+					}else{
+						approvalList_now.add(app);
 					}
-	
+					
+					
+					
 					
 				}
 			
 				
-				if(isApproval){
-					//내가 승인했다면 past에
-					approvalList_past.add(app);
-				}else{
-					//승인 안했다면 now에
-					approvalList_now.add(app);
-				}
 				
 				break;
 				
@@ -234,8 +300,8 @@ public class ApprovalController {
 				
 				//첫번째 결재자의 승인 여부
 				boolean isApproval2_1 = false;
-				//두번째 결재자의 승인 여부
-				boolean isApproval2_2 = false;
+				//두번째 결재자(나)의 승인 형태
+				String isApproval2_2 = "";
 				
 				for(ApprovalHistoryVO history : approvalHistoryList){
 					if(history.getUser_id().equals(line.geteApprovalLine_person1()) && history.geteHistory_content().equals("승인")){
@@ -247,10 +313,26 @@ public class ApprovalController {
 				
 				for(ApprovalHistoryVO history : approvalHistoryList){
 					if(history.getUser_id().equals(line.geteApprovalLine_person2()) && history.geteHistory_content().equals("승인")){
-						//첫번째 결재자 승인
-						isApproval2_2 = true;
+						//내가 승인
+						isApproval2_2 = "승인";
 						break;
 					}
+					
+					if(history.getUser_id().equals(line.geteApprovalLine_person2()) && history.geteHistory_content().equals("반려")){
+						//내가 반려
+						isApproval2_2 = "반려";
+						break;
+					}
+					
+					if(history.getUser_id().equals(line.geteApprovalLine_person2()) && history.geteHistory_content().equals("거절")){
+						//내가 거절
+						isApproval2_2 = "거절";
+						break;
+					}
+					
+					
+					
+					
 				}
 				
 				
@@ -258,12 +340,13 @@ public class ApprovalController {
 					//첫번재 결재자가 승인을 안한경우
 					approvalList_future.add(app);
 				}else{
-					if(isApproval2_2){
-						//나도 승인 한 경우
-						approvalList_past.add(app);
+					if(isApproval2_2.equals("반려")){
+						//내가 반려 한 경우
+						approvalList_future.add(app);
+						
 					}else{
-						//나는 아직 승인 안한경우
-						approvalList_now.add(app);
+						//내가 승인, 거절
+						approvalList_past.add(app);
 					}
 				}
 				
@@ -275,7 +358,7 @@ public class ApprovalController {
 				//두번째 결재자의 승인 여부
 				boolean isApproval3_2 = false;
 				//세번째 결재자의 승인 여부
-				boolean isApproval3_3 = false;
+				String isApproval3_3 = "";
 				
 				
 				
@@ -289,8 +372,20 @@ public class ApprovalController {
 				
 				for(ApprovalHistoryVO history : approvalHistoryList){
 					if(history.getUser_id().equals(line.geteApprovalLine_person3()) && history.geteHistory_content().equals("승인")){
-						//세번째 결재자 승인
-						isApproval3_3 = true;
+						//세번째(나) 결재자 승인
+						isApproval3_3 = "승인";
+						break;
+					}
+					
+					if(history.getUser_id().equals(line.geteApprovalLine_person3()) && history.geteHistory_content().equals("반려")){
+						//세번째(나) 결재자 승인
+						isApproval3_3 = "반려";
+						break;
+					}
+					
+					if(history.getUser_id().equals(line.geteApprovalLine_person3()) && history.geteHistory_content().equals("거절")){
+						//세번째(나) 결재자 승인
+						isApproval3_3 = "거절";
 						break;
 					}
 				}
@@ -301,13 +396,13 @@ public class ApprovalController {
 					approvalList_future.add(app);
 				
 				}else{
-					if(isApproval3_3){
-						//내가 승인 한 경우
-						approvalList_past.add(app);
+					if(isApproval3_3.equals("반려")){
+						//반려
+						approvalList_future.add(app);
 					
 					}else{
-						//내가 아직 승인 안한경우
-						approvalList_now.add(app);
+						//승인, 거절
+						approvalList_past.add(app);
 					}
 				}
 				
@@ -346,11 +441,25 @@ public class ApprovalController {
 		}
 		
 		
+		//반려시 
+		for(ApprovalVO app : approvalList_fromMe){
+			ArrayList<ApprovalHistoryVO> hlist = approvalDAO.findApprovalHistory(app.geteApproval_id());
+			for(ApprovalHistoryVO h : hlist){
+				if(h.geteHistory_content().equals("반려")){
+					
+					app.seteApproval_status("반려");
+					approvalList_ban.add(app);
+				}
+			}
+			
+		}
+		
+		
 		logger.debug("내가 승인한 결재 : {}", approvalList_past);
 		logger.debug("내가 봐야할 결재 : {}", approvalList_now);
 		logger.debug("내가 승인할 결재 : {}", approvalList_future);
 		logger.debug("내가 올린 결재 : {}", approvalList_fromMe);
-		
+		logger.debug("반려된 결재 : {}", approvalList_ban);
 		
 		//모델에 담은 객체들
 		model.addAttribute("approvalList_fromMe", approvalList_fromMe);
@@ -358,7 +467,7 @@ public class ApprovalController {
 		model.addAttribute("approvalList_now", approvalList_now);
 		model.addAttribute("approvalList_future", approvalList_future);
 		model.addAttribute("approvalList_past", approvalList_past);
-		
+		model.addAttribute("approvalList_ban", approvalList_ban);
 		
 		
 		
@@ -373,7 +482,8 @@ public class ApprovalController {
 	//전자결재문서 읽기 창으로
 	@RequestMapping (value="readApproval", method=RequestMethod.GET)
 	public String readApproval(Model model, int eApproval_id,
-			@RequestParam(value="isApproval", defaultValue="false") boolean isApproval) {
+			@RequestParam(value="isApproval", defaultValue="false") boolean isApproval
+			, @RequestParam(value="ban", defaultValue="false") boolean ban) {
 		
 		logger.debug("readApproval para : eApproval_id={}, isApproval={}", eApproval_id, isApproval);
 		
@@ -394,6 +504,13 @@ public class ApprovalController {
 			}
 		}
 		
+		for(ApprovalHistoryVO history : approvalHistoryList){
+			if(history.geteHistory_content().equals("반려")){
+				model.addAttribute("reason", history.geteHistory_reason());
+				
+			}
+		}
+		
 		int progress = count * 33;		//진행률
 		if(count == 3){
 			progress = 100;
@@ -401,12 +518,16 @@ public class ApprovalController {
 		//진행도 끝 (모델에 저장은 따로)
 		
 		
+		approval.byteToString();
+		
 		
 		
 		model.addAttribute("approval", approval);			//읽고자하는 전자결재 객체
 		model.addAttribute("isApproval", isApproval);		//전자결재를 현재 승인 할 수 있는지의 여부
 		model.addAttribute("approvalLine", approvalLine);	//결재라인 
 		model.addAttribute("progress", progress);			//진행률
+		model.addAttribute("ban", ban);						//반려 여부	
+		
 		
 		return "approval/readApproval";
 	}
@@ -460,6 +581,33 @@ public class ApprovalController {
 	}
 	
 	
+	
+	
+	//전자결재문서 양식 저장(insert)
+	@RequestMapping (value="insertApprovalFormat", method=RequestMethod.POST)
+	public String insertApprovalFormat(ApprovalFormatVO format, HttpSession session) {
+		logger.debug("para : {}", format);
+		
+		//String을 byte[]로 변환
+		format.setApprovalFormat_content(format.getApprovalFormat_content2().getBytes());
+		//로그인 아이디 셋팅
+		String user_id = (String) session.getAttribute("userId");
+		format.setUser_id(user_id);
+		
+		logger.debug("insert직전 : {}", format);
+		approvalDAO.insertFormat(format);
+		
+		
+		return "redirect:writeApproval";
+	}
+	
+	
+	
+	
+	
+	
+	
+	/*    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%    Ajax       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    */
 	
 	
 	//Ajax 결재선 라인 불러오기 by 결재선id

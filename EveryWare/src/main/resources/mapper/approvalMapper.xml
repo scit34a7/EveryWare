@@ -5,6 +5,31 @@
 
 <!-- 전자결재 처리 SQL -->
 <mapper namespace="com.a7.everyware.approval.dao.ApprovalMapper">
+
+	<resultMap id="approvalMap" type = "ApprovalVO">
+		<result property = "eApproval_id" javaType = "int" column = "eApproval_id" jdbcType = "NUMERIC"/>
+		<result property = "user_id" javaType = "java.lang.String" column = "user_id" jdbcType = "VARCHAR"/>
+		<result property = "eApproval_title" javaType = "java.lang.String" column = "eApproval_title" jdbcType = "VARCHAR"/>
+		<result property = "eApproval_content" javaType = "_byte[]" column = "eApproval_content" jdbcType = "BLOB"/>
+		<result property = "eApproval_sDate" javaType = "java.lang.String" column = "eApproval_sDate" jdbcType = "DATE"/>
+		<result property = "eApproval_fDate" javaType = "java.lang.String" column = "eApproval_fDate" jdbcType = "DATE"/>
+		<result property = "eApprovalLine_id" javaType = "int" column = "eApprovalLine_id" jdbcType = "NUMERIC"/>
+		<result property = "eApproval_saved" javaType = "java.lang.String" column = "eApproval_saved" jdbcType = "VARCHAR"/>
+		<result property = "eApproval_original" javaType = "java.lang.String" column = "eApproval_original" jdbcType = "VARCHAR"/>
+	</resultMap>
+
+
+
+	<resultMap id="approvalFormatMap" type = "ApprovalFormatVO">
+		<result property = "approvalFormat_id" javaType = "int" column = "approvalFormat_id" jdbcType = "NUMERIC"/>
+		<result property = "user_id" javaType = "java.lang.String" column = "user_id" jdbcType = "VARCHAR"/>
+		<result property = "approvalFormat_name" javaType = "java.lang.String" column = "approvalFormat_name" jdbcType = "VARCHAR"/>
+		<result property = "approvalFormat_title" javaType = "java.lang.String" column = "approvalFormat_title" jdbcType = "VARCHAR"/>
+		<result property = "approvalFormat_content" javaType = "_byte[]" column = "approvalFormat_content" jdbcType = "BLOB"/>
+	</resultMap>
+
+
+
 	
 	<select id="findUser" resultType="UserVO">
 		select
@@ -190,7 +215,7 @@
 	
 	
 	<!-- 내가 결재 해야할 결재문서 불러오기 -->
-	<select id="findApprovalToMe" parameterType="String" resultType="ApprovalVO">
+	<select id="findApprovalToMe" parameterType="String" resultMap="approvalMap">
 		select
 		    eApproval_id
 			,user_id
@@ -221,7 +246,7 @@
 	</select>	
 	
 	<!-- 내가 올린 결재문서 불로오기 -->
-	<select id="findApprovalFromMe" parameterType="String" resultType="ApprovalVO">
+	<select id="findApprovalFromMe" parameterType="String" resultMap="approvalMap">
 		select
 			eApproval_id
 			,user_id
@@ -251,7 +276,7 @@
 	</select>
 	
 	
-	<select id="findApprovalById" parameterType="int" resultType="ApprovalVO">
+	<select id="findApprovalById" parameterType="int" resultMap="approvalMap">
 		select
 			eApproval_id
 			,user_id
@@ -305,5 +330,36 @@
 				</if>	
 			)
 	</insert>
+	
+	
+	<!-- 결재양식 등록 -->
+	<insert id="insertFormat" parameterType="approvalFormatVO">
+		insert into
+			approvalFormat_tb(
+				approvalFormat_id
+				,user_id
+				,approvalFormat_name
+				,approvalFormat_title
+				,approvalFormat_content
+			)values(
+				approvalFormat_id_seq.nextval
+				,#{user_id}
+				,#{approvalFormat_name}
+				,#{approvalFormat_title}
+				,#{approvalFormat_content}
+			)
+			
+	</insert>
+	
+	<select id="findFormat" parameterType="String" resultMap="approvalFormatMap">
+		select
+			*
+		from
+			approvalFormat_tb
+		where
+			user_id = #{user_id}
+	</select>
+	
+	
 	
 </mapper>

@@ -2,6 +2,7 @@ package com.a7.everyware.approval.dao;
 
 import java.util.ArrayList;
 
+import com.a7.everyware.approval.vo.ApprovalFormatVO;
 import com.a7.everyware.approval.vo.ApprovalHistoryVO;
 import com.a7.everyware.approval.vo.ApprovalLineVO;
 import com.a7.everyware.approval.vo.ApprovalVO;
@@ -46,6 +47,12 @@ public interface ApprovalMapper {
 	
 	//approvalHisotry 등록
 	public void insertHistory(ApprovalHistoryVO history);
+	
+	//approvalForamt 등록
+	public void insertFormat(ApprovalFormatVO format);
+	
+	//approvalFormat 검색
+	public ArrayList<ApprovalFormatVO> findFormat(String user_id);
 	
 	
 	

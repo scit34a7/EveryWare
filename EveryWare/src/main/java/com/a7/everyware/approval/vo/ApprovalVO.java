@@ -1,24 +1,28 @@
 package com.a7.everyware.approval.vo;
 
+import java.nio.charset.StandardCharsets;
+
 public class ApprovalVO {
 	
 	int eApproval_id;			//전결제 아이디
 	String user_id;				//유저 아이디
 	String eApproval_title;		//전자결제 제목
-	String eApproval_content;	//전자결제 내용
+	byte[] eApproval_content;	//전자결재 내용 byte[]
+	String eApproval_content2;	//전자결재 내용 String
 	String eApproval_sDate;		//전자결제 시작날짜
 	String eApproval_fDate;		//전자결제 마감날짜
 	int eApprovalLine_id;		//결제선 번호
 	String eApproval_saved;		//첨부파일 저장된 파일명
 	String eApproval_original;	//첨부파일 원본 파일명
+	String eApproval_status;	//테이브에는 없고 VO에만 있는 항목, 반려or거절이 들어간다.
 	
 	public ApprovalVO() {
 		super();
 	}
 
-	public ApprovalVO(int eApproval_id, String user_id, String eApproval_title, String eApproval_content,
+	public ApprovalVO(int eApproval_id, String user_id, String eApproval_title, byte[] eApproval_content,
 			String eApproval_sDate, String eApproval_fDate, int eApprovalLine_id, String eApproval_saved,
-			String eApproval_original) {
+			String eApproval_original, String eApproval_status) {
 		super();
 		this.eApproval_id = eApproval_id;
 		this.user_id = user_id;
@@ -29,6 +33,7 @@ public class ApprovalVO {
 		this.eApprovalLine_id = eApprovalLine_id;
 		this.eApproval_saved = eApproval_saved;
 		this.eApproval_original = eApproval_original;
+		this.eApproval_status = eApproval_status;
 	}
 
 	public int geteApproval_id() {
@@ -55,11 +60,11 @@ public class ApprovalVO {
 		this.eApproval_title = eApproval_title;
 	}
 
-	public String geteApproval_content() {
+	public byte[] geteApproval_content() {
 		return eApproval_content;
 	}
 
-	public void seteApproval_content(String eApproval_content) {
+	public void seteApproval_content(byte[] eApproval_content) {
 		this.eApproval_content = eApproval_content;
 	}
 
@@ -103,12 +108,37 @@ public class ApprovalVO {
 		this.eApproval_original = eApproval_original;
 	}
 
+	public String geteApproval_status() {
+		return eApproval_status;
+	}
+
+	public void seteApproval_status(String eApproval_status) {
+		this.eApproval_status = eApproval_status;
+	}	
+
+	public String geteApproval_content2() {
+		return eApproval_content2;
+	}
+
+	public void seteApproval_content2(String eApproval_content2) {
+		this.eApproval_content2 = eApproval_content2;
+	}
+
+	
+	/**
+	 * eApproval_content를 eApproval_content2 변환해서 setting까지
+	 */
+	public void byteToString(){
+		eApproval_content2 = new String(eApproval_content, StandardCharsets.UTF_8);
+	}
+	
 	@Override
 	public String toString() {
 		return "ApprovalVO [eApproval_id=" + eApproval_id + ", user_id=" + user_id + ", eApproval_title="
-				+ eApproval_title + ", eApproval_content=" + eApproval_content + ", eApproval_sDate=" + eApproval_sDate
-				+ ", eApproval_fDate=" + eApproval_fDate + ", eApprovalLine_id=" + eApprovalLine_id
-				+ ", eApproval_saved=" + eApproval_saved + ", eApproval_original=" + eApproval_original + "]";
+				+ eApproval_title + ", eApproval_content2=" + eApproval_content2 + ", eApproval_sDate="
+				+ eApproval_sDate + ", eApproval_fDate=" + eApproval_fDate + ", eApprovalLine_id=" + eApprovalLine_id
+				+ ", eApproval_saved=" + eApproval_saved + ", eApproval_original=" + eApproval_original
+				+ ", eApproval_status=" + eApproval_status + "]";
 	}
 
 	
