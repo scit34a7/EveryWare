@@ -42,6 +42,9 @@ public interface BoardMapper {
 	/*public ArrayList<BoardVO> listBoard(HashMap<String, Object> map, RowBounds rb);*/
 	public ArrayList<BoardVO> listBoard(HashMap<String, Object> map);
 	
+	//공지사항 메인에 가져옴
+	public ArrayList<BoardVO> listBoardMain(int boardFolder_id);
+	
 	//글번호와 아이디로 해당 게시글 삭제
 	public int deleteBoard(BoardVO board);
 	

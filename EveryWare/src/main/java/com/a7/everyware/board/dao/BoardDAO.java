@@ -128,6 +128,15 @@ public class BoardDAO {
 	}
 	
 	
+	//메인 공지사항
+	public ArrayList<BoardVO> listBoardMain(int boardFolder_id){
+		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+		
+		ArrayList<BoardVO> boardlist = mapper.listBoardMain(boardFolder_id);
+		
+		return boardlist;
+	}
+	
 	
 	//게시글 삭제
 	public int deleteBoard(BoardVO board) {

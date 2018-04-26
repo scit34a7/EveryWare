@@ -31,6 +31,12 @@
 	href="resources/assets/vendor/bootstrap-tour/css/bootstrap-tour.min.css">
 <link rel="stylesheet"
 	href="resources/assets/vendor/jqvmap/jqvmap.min.css">
+
+<!-- 공지사항 -->	
+<link rel="stylesheet" href="../resources/assets/vendor/datatables/css-main/jquery.dataTables.min.css">
+<link rel="stylesheet" href="../resources/assets/vendor/datatables/css-bootstrap/dataTables.bootstrap.min.css">
+<link rel="stylesheet" href="../resources/assets/vendor/datatables-tabletools/css/dataTables.tableTools.css">
+		
 <!-- MAIN CSS -->
 <link rel="stylesheet" href="resources/assets/css/main.css">
 <link rel="stylesheet"
@@ -47,6 +53,81 @@
 <link rel="icon" type="image/png" sizes="96x96"
 	href="resources/assets/img/favicon.png">
 
+
+
+<!-- 근태관리 시간 출력 -->
+<script>
+
+	// 브라우저 종류
+      var ie4 = document.all; // Explorer
+      var ns6 = document.getElementById && !document.all; // Netscape
+   
+   // 시간 표시 방법
+   // 0 = 24, 1 = 12
+   var my12_hour = 1;
+
+   // 날짜를 출력할지 선택
+   // 0 = No, 1 = Yes
+   var DisplayDate = 1;
+   var mn = "일";
+   var yn = "년";
+
+   var daysOfWeek = ["<font color=red>일</font>", "월", "화", "수", "목", "금", "<font color=blue>토</font>"];
+   var monthsOfYear = ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"];
+
+   function showClock() {
+       var today = new Date();
+		
+       var day = today.getDay(); // 요일(0:일요일, 1:월요일, 2:화요일, 3:수요일, 4:목요일, 5:금요일, 6:토요일)
+       var mday = today.getDate(); // 일
+       var month = today.getMonth(); // 월 (0부터 시작)
+       var year = today.getFullYear(); // 년
+       
+       var hours = today.getHours(); // 시간
+       var minutes = today.getMinutes(); // 분
+       var seconds = today.getSeconds(); // 초
+
+       // 시간 표시 설정
+       var dn='';
+       if (my12_hour) {
+           dn = "AM";
+           if (hours > 12) { 
+               dn = "PM"; 
+               hours = hours - 12; 
+           }
+           if (hours == 0) {
+               hours = 12; 
+           }
+       } 
+       
+       if (minutes <= 9) { 
+           minutes = "0" + minutes; 
+       }
+       if (seconds <= 9) { 
+           seconds = "0" + seconds; 
+       }
+
+       // 화면에 출력시킬 날짜 설정
+       myclock = '';
+       if (DisplayDate) { 
+           myclock += year + yn + ' ' + monthsOfYear[month] + ' ' +  mday + mn + ' '  + '('+daysOfWeek[day]+') ' 
+       }
+       myclock += hours + ':' + minutes + ':' + seconds;
+       myclock += ' ' + dn;
+
+       // 브라우저에 따라 객체에 HTML 추가
+       if (ie4) {
+           liveClock.innerHTML = myclock;
+       } else if (ns6) {
+           document.getElementById("liveClock").innerHTML = myclock;
+               }            
+
+       setTimeout("showClock()", 1000); //1초마다 실행
+   }
+</script>
+<!-- //근태관리 시간출력 끝 -->
+
+
 <script>
 	var w;
 	function test1() {
@@ -58,7 +139,7 @@
 	}
 </script>
 </head>
-<body>
+<body onLoad="showClock()">
 	<!-- WRAPPER -->
 	<div id="wrapper" class="basic test">
 		<!-- NAVBAR -->
@@ -270,9 +351,102 @@
 					</ul>
 				</div>
 				<div class="container-fluid">
-					<!-- TOP METRICS -->
-					
+					<!-- TOP METRICS -->	
 					<!-- END TOP METRICS -->
+					
+		
+		
+				<!-- 근태확인 시작 -->	
+				<div class="row sortable-grid">
+						<div class="col-md-12 sortable-item col-sm-3">
+							<div class="panel">
+									<div class="panel-heading">
+										<h2 class="panel-title">근태확인</h2>
+									</div>
+									<div class="panel-body">
+										
+										<div class="col-md-3">
+											<div class="award-item">
+												
+												<form action="support/attendCheck" method="POST" id="attendInForm">
+												<button type="submit" class="btn btn-primary" id="attendIn">
+													<i class="ti-alarm-clock award-icon"></i>출근
+												</button>
+												</form>
+														
+											</div>
+										</div>
+										
+										<div class="col-md-6">
+											<center>
+												<!-- 시간 -->
+												
+													<h2 id="liveClock"></h2>
+													<br/><br/>
+													<p><a href="#"
+													onClick="formCheck()"></a></p>
+												
+											</center>
+										</div>
+										
+			
+										<div class="col-md-3">
+											<div class="award-item">
+												
+												<form action="support/attendOut" method="POST" id="attendOutForm">
+													<button type="submit" class="btn btn-danger" id="attendOut">
+														<i class="ti-location-arrow award-icon"></i>퇴근
+													</button>
+												</form>
+														
+											</div>
+										</div>
+										
+
+									</div>
+							</div>
+						</div>
+					</div>
+					<!-- //근태확인 출력 끝 -->
+					
+					
+					
+					
+					<!-- 공지사항 시작 -->
+					<div class="panel">
+						<div class="panel-heading">공지사항</div>
+						<div class="panel-body">
+						<p style="text-align:right"><input type="button" value="공지사항" class="btn btn-info" onClick="location.href='board/boardList?boardFolder_id=1';">
+						<table id="featured-datatable" class="table table-striped table-hover">
+							<thead>
+								<tr>
+									<th>번호</th>
+									<th>제목</th>
+									<th>작성자</th>
+									<th>조회수</th>
+									<th>등록일</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="board" items="${boardlist}">
+						<tr>
+							<td class="center">${board.board_id}</td>
+							<td>
+								<a href="board/read?board_id=${board.board_id}">${board.board_title}</a>
+							</td>
+							<td class="center">${board.user_id}</td>
+							<td class="center">${board.board_hits}</td>
+							<td>${board.board_date}</td>
+						</tr>
+						
+						</c:forEach>        
+						<!-- 반복 끝 -->
+							</tbody>
+						</table>
+					</div>
+				</div> 
+				<!-- //공지사항 끝 -->
+					
 					
 					<div class="row sortable-grid">
 						<!-- CHAT SUPPORT -->
@@ -610,6 +784,7 @@
 	<script src="resources/assets/vendor/jquery-ui/ui/widgets/sortable.js"></script>
 	<script
 		src="resources/assets/vendor/datatables/js-main/jquery.dataTables.min.js"></script>
+	<script src="resources/assets/vendor/datatables/js-main/jquery.dataTablesBoard.min.js"></script>
 	<script
 		src="resources/assets/vendor/datatables/js-bootstrap/dataTables.bootstrap.min.js"></script>
 	<script
@@ -621,6 +796,11 @@
 	<script src="resources/assets/vendor/raphael/raphael.min.js"></script>
 	<script src="resources/assets/vendor/justgage-toorshia/justgage.js"></script>
 	<script src="resources/assets/scripts/klorofilpro-common.js"></script>
+	
+	<!-- 공지사항 -->
+	<script src="../resources/assets/vendor/datatables-colreorder/dataTables.colReorder.js"></script>
+	<script src="../resources/assets/vendor/datatables-tabletools/js/dataTables.tableTools.js"></script>
+	
 	<!-- DEMO PANEL -->
 	<!-- for demo purpose only, you should remove it on your project directory -->
 	<script type="text/javascript">
@@ -1049,5 +1229,66 @@
 		
 		});//end of all script
 	</script>
+	
+	
+	<!-- 공지사항 -->
+	<script>
+	$(function()
+		{
+			// datatable column with reorder extension
+			$('#datatable-column-reorder').dataTable(
+			{
+				pagingType: "full_numbers",
+				sDom: "RC" +
+					"t" +
+					"<'row'<'col-sm-6'i><'col-sm-6'p>>",
+				colReorder: true,
+			});
+			// datatable with column filter enabled
+			var dtTable = $('#datatable-column-filter').DataTable(
+			{ // use DataTable, not dataTable
+				sDom: // redefine sDom without lengthChange and default search box
+					"t" +
+					"<'row'<'col-sm-6'i><'col-sm-6'p>>"
+			});
+			$('#datatable-column-filter thead').append('<tr class="row-filter"><th></th><th></th><th></th><th></th><th></th></tr>');
+			$('#datatable-column-filter thead .row-filter th').each(function()
+			{
+				$(this).html('<input type="text" class="form-control input-sm" placeholder="Search...">');
+			});
+			$('#datatable-column-filter .row-filter input').on('keyup change', function()
+			{
+				dtTable
+					.column($(this).parent().index() + ':visible')
+					.search(this.value)
+					.draw();
+			});
+			// datatable with paging options and live search
+			$('#featured-datatable').dataTable(
+			{
+				sDom: "<'row'<'col-sm-6'l><'col-sm-6'f>r>t<'row'<'col-sm-6'i><'col-sm-6'p>>",
+			});
+			// datatable with export feature
+			var exportTable = $('#datatable-data-export').DataTable(
+			{
+				sDom: "T<'clearfix'>" +
+					"<'row'<'col-sm-6'l><'col-sm-6'f>r>" +
+					"t" +
+					"<'row'<'col-sm-6'i><'col-sm-6'p>>",
+				"tableTools":
+				{
+					"sSwfPath": "resources/assets/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf"
+				}
+			});
+			// datatable with scrolling
+			$('#datatable-basic-scrolling').dataTable(
+			{
+				scrollY: "300px",
+				scrollCollapse: true,
+				paging: false
+			});
+		});
+		</script>				
+	
 </body>
 </html>

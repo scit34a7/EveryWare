@@ -182,6 +182,34 @@
 	</select>
 	
 	
+	
+	<!-- 현재 페이지 목록(메인 공지사항 출력용) -->
+	<select id="listBoardMain" parameterType="int" resultType="BoardVO">
+		select 
+			b.board_id
+			, (select 
+					u.user_name || '(' || d.dept_name || ')'
+				from
+					user_tb u
+					, dept_tb d
+				where
+					u.dept_id = d.dept_id
+					and b.user_id = u.user_id
+				) as user_id
+				, b.board_title
+				, to_char(b.board_date, 'YYYY-MM-DD') board_date
+				, b.board_hits
+		from 
+			board_tb b
+	
+		where 
+			b.boardFolder_id = #{1}
+	
+		order by board_id desc
+	</select>
+	
+	 
+	
 	<!-- 글 삭제 -->
 	<delete id="deleteBoard" parameterType="BoardVO">
 		delete
