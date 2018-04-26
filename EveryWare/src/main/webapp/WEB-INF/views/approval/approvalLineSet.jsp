@@ -118,72 +118,7 @@
 								
 								<button type="button" class="btn btn-primary btn-lg" id="setBt">결재선 확정</button>
 						
-								<!-- 폼태그내 인풋 태그 
 								
-								<div class="form-group">
-									<label class="control-label">Text Input</label>
-									<input type="text" class="form-control" required>
-								</div>
-								
-								<div class="form-group">
-									<label class="control-label">Email Input</label>
-									<input type="email" class="form-control" required>
-								</div>
-								
-								<div class="form-group">
-									<label class="control-label">Text Area</label>
-									<textarea class="form-control" rows="5" cols="30" required></textarea>
-								</div>
-								
-								<div class="form-group">
-									<label class="control-label">Checkbox</label>
-									<br/>
-									<label class="fancy-checkbox">
-										<input type="checkbox" name="checkbox" required data-parsley-errors-container="#error-checkbox">
-										<span>Option 1</span>
-									</label>
-									<label class="fancy-checkbox">
-										<input type="checkbox" name="checkbox">
-										<span>Option 2</span>
-									</label>
-									<label class="fancy-checkbox">
-										<input type="checkbox" name="checkbox">
-										<span>Option 3</span>
-									</label>
-									<p id="error-checkbox"></p>
-								</div>
-								
-								<div class="form-group">
-									<label class="control-label">Radio Button</label>
-									<br />
-									<label class="fancy-radio">
-										<input type="radio" name="gender" value="male" required data-parsley-errors-container="#error-radio">
-										<span><i></i>Male</span>
-									</label>
-									<label class="fancy-radio">
-										<input type="radio" name="gender" value="female">
-										<span><i></i>Female</span>
-									</label>
-									<p id="error-radio"></p>
-								</div>
-								
-								<div class="form-group">
-									<label class="control-label" for="food">Multiselect</label>
-									<br/>
-									<select id="food" name="food[]" class="multiselect multiselect-custom" multiple="multiple" data-parsley-required data-parsley-trigger-after-failure="change" data-parsley-errors-container="#error-multiselect">
-										<option value="cheese">Cheese</option>
-										<option value="tomatoes">Tomatoes</option>
-										<option value="mozarella">Mozzarella</option>
-										<option value="mushrooms">Mushrooms</option>
-										<option value="pepperoni">Pepperoni</option>
-										<option value="onions">Onions</option>
-									</select>
-									<p id="error-multiselect"></p>
-								</div>
-								
-								<br>
-								<button type="submit" class="btn btn-primary">Validate</button>
-							 -->
 							</form>
 						</div>
 					</div>

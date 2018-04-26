@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.a7.everyware.approval.vo.ApprovalFormatVO;
 import com.a7.everyware.approval.vo.ApprovalHistoryVO;
 import com.a7.everyware.approval.vo.ApprovalLineVO;
 import com.a7.everyware.approval.vo.ApprovalVO;
@@ -164,5 +165,28 @@ public class ApprovalDAO {
 		ApprovalMapper mapper = sqlSession.getMapper(ApprovalMapper.class);
 		mapper.insertHistory(history);
 	}
+	
+	
+	/**
+	 * ApprovalFormatVO 객체 등록
+	 * @param format
+	 */
+	public void insertFormat(ApprovalFormatVO format){
+		ApprovalMapper mapper = sqlSession.getMapper(ApprovalMapper.class);
+		mapper.insertFormat(format);
+	}
+	
+	
+	/**
+	 * ApprovalFormatVO 검색 (user_id로)
+	 * @param user_id
+	 * @return ArrayList<ApprovalFormatVO>
+	 */
+	public ArrayList<ApprovalFormatVO> findFormat(String user_id){
+		ApprovalMapper mapper = sqlSession.getMapper(ApprovalMapper.class);
+		ArrayList<ApprovalFormatVO> list = mapper.findFormat(user_id);
+		return list;
+	}
+	
 
 }
