@@ -7,8 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Layout Minified | Klorofil Pro - Bootstrap Admin
-	Dashboard Template</title>
+<title>Everyware | Resource</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <meta name="viewport"
@@ -193,12 +192,10 @@ function getTextCoo1(){
 							data-toggle="dropdown">  <span>${sessionScope.userName}</span>
 						</a>
 							<ul class="dropdown-menu logged-user-menu">
-								<li><a href="#"><i class="ti-user"></i> <span>My
-											Profile</span></a></li>
-								<li><a href="appviews-inbox"><i class="ti-email"></i> <span>Message</span></a></li>
-								<li><a href="#"><i class="ti-settings"></i> <span>Settings</span></a></li>
-								<li><a href="page-lockscreen"><i class="ti-power-off"></i>
-										<span>Logout</span></a></li>
+								<li><a href="<c:url value ='/user/userInfo'/>" ><i class="ti-user"></i> <span>개인정보</span></a></li>
+								<li><a href="<c:url value ='/mail/getMail?sort=all'/>" ><i class="ti-email"></i> <span>Mail</span></a></li>
+								<li><a href="<c:url value ='/user/logout'/>" ><i class="ti-power-off"></i>
+										<span>로그아웃</span></a></li>
 							</ul></li>
 					</ul>
 				</div>
@@ -747,8 +744,7 @@ function getTextCoo1(){
 	<footer>
 		<div class="container-fluid">
 			<p class="copyright">
-				&copy; 2017 <a href="https://www.themeineed.com" target="_blank">Theme
-					I Need</a>. All Rights Reserved.
+				&copy; 2018 <a href="https://www.themeineed.com" target="_blank">EveryWare</a>. All Rights Reserved.
 			</p>
 		</div>
 	</footer>
