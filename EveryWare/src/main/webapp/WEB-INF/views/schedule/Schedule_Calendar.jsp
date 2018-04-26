@@ -519,29 +519,6 @@
 		<script src="resources/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 		<script src="resources/assets/vendor/pace/pace.min.js"></script>
 		<script src="resources/assets/scripts/klorofilpro-common.js"></script>
-		<!-- DEMO PANEL -->
-		<!-- for demo purpose only, you should remove it on your project directory -->
-		<script type="text/javascript">
-		var toggleDemoPanel = function(e) {
-			e.preventDefault();
-			var panel = document.getElementById('demo-panel');
-			if (panel.className)
-				panel.className = '';
-			else
-				panel.className = 'active';
-		}
-		// fix each iframe src when back button is clicked
-		$(function() {
-			$('iframe').each(function() {
-				this.src = this.src;
-			});
-		});
-	</script>
-		<div id="demo-panel">
-			<a href="#" onclick="toggleDemoPanel(event);"><i
-				class="fa fa-cog fa-spin"></i></a>
-			<iframe src="resources/demo-panel/index.html"></iframe>
-		</div>
-		<!-- END DEMO PANEL -->
+
 </body>
 </html>
