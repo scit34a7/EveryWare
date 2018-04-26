@@ -222,12 +222,13 @@ public class MeetingController {
 			if (logVO.get(i).getmeet_title().equals(title)) {
 				continue;
 			} else {
+				System.out.println(logVO.get(i).toString());
 				logVO2.add(logVO.get(i));
 				title = logVO.get(i).getmeet_title();
 			}
 		}
 		
-		System.out.println(logVO2.toString());
+	//	System.out.println(logVO2.toString());
 		
 		model.addAttribute("logList", logVO2);
 		return "meeting/minutes";

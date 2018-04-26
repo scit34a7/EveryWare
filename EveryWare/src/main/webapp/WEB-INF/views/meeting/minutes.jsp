@@ -258,14 +258,16 @@
 								<table class="table table-bordered">
 									<thead>
 										<tr>
-											<th>제목</th>
+											<th style="text-align: center">제목</th>
+											<th style="text-align: center">시간</th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:if test="${logList != null}">
 											<c:forEach var="i" items="${logList}">
 											<tr>
-												<td><a href='javascript:meetingLog("${i.meet_title}")'>${i.meet_title}</a></td>
+												<td style="width: 80%; text-align: center""><a href='javascript:meetingLog("${i.meet_title}")'>${i.meet_title}</a></td>
+												<td style="width: 20%; text-align: center">${i.log_time}</td>
 											</tr>
 											</c:forEach>
 										</c:if>
