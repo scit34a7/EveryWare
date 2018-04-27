@@ -32,11 +32,14 @@
 <link rel="stylesheet"
 	href="resources/assets/vendor/jqvmap/jqvmap.min.css">
 
-<!-- 공지사항 -->	
-<link rel="stylesheet" href="../resources/assets/vendor/datatables/css-main/jquery.dataTables.min.css">
-<link rel="stylesheet" href="../resources/assets/vendor/datatables/css-bootstrap/dataTables.bootstrap.min.css">
-<link rel="stylesheet" href="../resources/assets/vendor/datatables-tabletools/css/dataTables.tableTools.css">
-		
+<!-- 공지사항 -->
+<link rel="stylesheet"
+	href="../resources/assets/vendor/datatables/css-main/jquery.dataTables.min.css">
+<link rel="stylesheet"
+	href="../resources/assets/vendor/datatables/css-bootstrap/dataTables.bootstrap.min.css">
+<link rel="stylesheet"
+	href="../resources/assets/vendor/datatables-tabletools/css/dataTables.tableTools.css">
+
 <!-- MAIN CSS -->
 <link rel="stylesheet" href="resources/assets/css/main.css">
 <link rel="stylesheet"
@@ -53,9 +56,171 @@
 <link rel="icon" type="image/png" sizes="96x96"
 	href="resources/assets/img/favicon.png">
 
-
-
+<!-- 스케줄 시작 -->
+<script src="resources/assets/vendor/jquery/jquery.min.js"></script>
+<link href='resources/schedule/fullcalendar.css' rel='stylesheet' />
+<link href='resources/schedule/fullcalendar.print.css' rel='stylesheet'
+	media='print' />
+	<script src="resources/assets/vendor/moment/min/moment.min.js"></script>
+<script src='resources/schedule/fullcalendar.js'></script>
+<script src='resources/schedule/jquery-ui.js'></script>
+<link href='resources/schedule/jquery-ui.css' rel='stylesheet' />
+<link href='resources/schedule/scheduler.min.css' rel='stylesheet'
+	media='print' />
+<script src='resources/schedule/scheduler.min.js'></script>
+<script src='resources/schedule/gcal.js'></script>
+<!-- 스케줄 끝 -->
 <!-- 근태관리 시간 출력 -->
+<script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
+						
+						$("#calendar_Month")
+								.fullCalendar(
+										{
+											schedulerLicenseKey : 'GPL-My-Project-Is-Open-Source',
+											selectable : true,
+											navLinks : true,
+											header : {
+												left : "prev, next",
+												center : "title",
+												right : "agendaWeek, month"
+											},
+											
+											monthNames : [ '1월', '2월', '3월',
+													'4월', '5월', '6월', '7월',
+													'8월', '9월', '10월', '11월',
+													'12월' ],
+											monthNamesShort : [ '1월', '2월',
+													'3월', '4월', '5월', '6월',
+													'7월', '8월', '9월', '10월',
+													'11월', '12월' ],
+											dayNames : [ '일', '월', '화', '수',
+													'목', '금', '토' ],
+											dayNamesShort : [ '일', '월', '화',
+													'수', '목', '금', '토' ],
+											dayNamesMin : [ '일', '월', '화', '수',
+													'목', '금', '토' ],
+											lang : "ko",
+											contentHeight : 455,
+											/* editable : true, */
+											eventLimit : true,
+											googleCalendarApiKey : "AIzaSyDcnW6WejpTOCffshGDDb4neIrXVUA1EAE",
+											eventSources : [
+													{
+														googleCalendarId : "ko.south_korea#holiday@group.v.calendar.google.com",
+														className : "koHolidays",
+														color : "#ffffff",
+														textColor : "#000000"
+													},
+													{
+														googleCalendarId : "ja.japanese#holiday@group.v.calendar.google.com",
+														className : "jpHolidays",
+														color : "#ffffff",
+														textColor : "#000000"
+													}
+											],
+											/* events: ${Slist}
+											, */
+											select : function(startDate,
+													endDate, event, view,
+													resource, split) {
+												/* alert('selected ' + startDate.format() + ' to ' + endDate.format() + 'resource id' + resource.id ); */
+
+												var schedule_sdate = document.getElementById('schedule_sdate');
+												schedule_sdate.value = startDate.format();
+												var schedule_fdate = document.getElementById('schedule_fdate');
+												schedule_fdate.value = endDate.format();
+												$("#dialog-addMessage").dialog({
+													width : "600px"
+												});
+											},
+											eventClick: function(calEvent, jsEvent, view) {
+												var curDate = new Date();
+												var curTime = curDate.getFullYear() + "-" + (curDate.getMonth() + 1) + "-" + curDate.getDate() + " " + curDate.getHours() + ":" + curDate.getMinutes();
+												
+												var schedule_num = document.getElementById('schedule_num');
+												schedule_num.value = calEvent.id;
+			
+												$("#dialog-readMessage").dialog({
+													width : "600px"
+												});
+											},
+											loading : function(bool) {
+												jQuery("#loading").toggle(bool);
+											}
+										});/* fullCalendar end */
+										
+						$("#calendar_Day")
+						.fullCalendar(
+								{
+									schedulerLicenseKey : 'GPL-My-Project-Is-Open-Source',
+									header : {	
+										left : " ",
+										center : "prev, next",
+										right : " "
+									},
+									defaultView:"list",
+									monthNames : [ '1월', '2월', '3월',
+											'4월', '5월', '6월', '7월',
+											'8월', '9월', '10월', '11월',
+											'12월' ],
+									monthNamesShort : [ '1월', '2월',
+											'3월', '4월', '5월', '6월',
+											'7월', '8월', '9월', '10월',
+											'11월', '12월' ],
+									dayNames : [ '일', '월', '화', '수',
+											'목', '금', '토' ],
+									dayNamesShort : [ '일', '월', '화',
+											'수', '목', '금', '토' ],
+									dayNamesMin : [ '일', '월', '화', '수',
+											'목', '금', '토' ],
+									lang : "ko",
+									contentHeight : 455,
+									eventLimit : true,
+									googleCalendarApiKey : "AIzaSyDcnW6WejpTOCffshGDDb4neIrXVUA1EAE",
+									eventSources : [
+											{
+												googleCalendarId : "ko.south_korea#holiday@group.v.calendar.google.com",
+												className : "koHolidays",
+												color : "#f5f6f9",
+												textColor : "#000000"
+											},
+											{
+												googleCalendarId : "ja.japanese#holiday@group.v.calendar.google.com",
+												className : "jpHolidays",
+												color : "#f5f6f9",
+												textColor : "#000000"
+											}
+									],
+									/* events: ${Slist}, */
+									loading : function(bool) {
+										jQuery("#loading").toggle(bool);
+									}
+								});
+					});
+
+	function scheduleChoice(num, id, distinct, color, text) {
+		if (jQuery(".swingBar").eq(num).is(":checked")) {
+			jQuery("#calendar").fullCalendar("addEventSource", {
+				googleCalendarId : id,
+				className : distinct,
+				color : color,
+				textColor : text
+			});
+		} else {
+			jQuery("#calendar").fullCalendar("removeEventSource", {
+				googleCalendarId : id
+			});
+		}
+	}
+					
+	function change_check(){
+		var change__importance = document.getElementById('change_check');
+		alert(change__importance.value);
+	}
+</script>
 <script>
 
 	// 브라우저 종류
@@ -155,12 +320,10 @@
 						<i class="ti-arrow-circle-left"></i>
 					</button>
 				</div>
-				<form class="navbar-form navbar-left search-form">
-					
-				</form>
+				<form class="navbar-form navbar-left search-form"></form>
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
-					
+
 						<li class="dropdown"><a href="#"
 							class="dropdown-toggle icon-menu" data-toggle="dropdown"> <i
 								class="ti-bell"></i> <span class="badge bg-danger">5</span>
@@ -204,15 +367,17 @@
 								</a></li>
 								<li><a href="#" class="more">전체 알람 보러 가기</a></li>
 							</ul></li>
-						
+
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">  <span>${sessionScope.userName}</span>
+							data-toggle="dropdown"> <span>${sessionScope.userName}</span>
 						</a>
 							<ul class="dropdown-menu logged-user-menu">
-								<li><a href="<c:url value ='/user/userInfo'/>" ><i class="ti-user"></i> <span>개인정보</span></a></li>
-								<li><a href="<c:url value ='/mail/getMail?sort=all'/>" ><i class="ti-email"></i> <span>Mail</span></a></li>
-								<li><a href="<c:url value ='/user/logout'/>" ><i class="ti-power-off"></i>
-										<span>로그아웃</span></a></li>
+								<li><a href="<c:url value ='/user/userInfo'/>"><i
+										class="ti-user"></i> <span>개인정보</span></a></li>
+								<li><a href="<c:url value ='/mail/getMail?sort=all'/>"><i
+										class="ti-email"></i> <span>Mail</span></a></li>
+								<li><a href="<c:url value ='/user/logout'/>"><i
+										class="ti-power-off"></i> <span>로그아웃</span></a></li>
 							</ul></li>
 					</ul>
 				</div>
@@ -273,24 +438,22 @@
 								<li><a href="support/boardList">업무보고</a></li>
 							</ul>
 						</div></li>
-						
-						<!-- collapse : 서브메뉴 닫혀있음 collapse in : 서브메뉴 열려있음 -->
-						
-					<li class="panel">
-						<a href="#approval" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed">
-							<i class="ti-widget"></i>
-							<span class="title">전자결재</span> 
-							<i class="icon-submenu ti-angle-left"></i>
-						</a>
+
+					<!-- collapse : 서브메뉴 닫혀있음 collapse in : 서브메뉴 열려있음 -->
+
+					<li class="panel"><a href="#approval" data-toggle="collapse"
+						data-parent="#sidebar-nav-menu" class="collapsed"> <i
+							class="ti-widget"></i> <span class="title">전자결재</span> <i
+							class="icon-submenu ti-angle-left"></i>
+					</a>
 						<div id="approval" class="collapse">
 							<ul class="submenu">
 								<li><a href="approval/myApproval">내 결재</a></li>
 								<li><a href="approval/writeApproval">결재 작성</a></li>
 								<li><a href="approval/approvalFormat">결재 양식 작성</a></li>
 							</ul>
-								
-						</div>
-					</li>
+
+						</div></li>
 					<li class="panel"><a href="#" data-toggle="collapse"
 						data-target="#submenuDemo" data-parent="#sidebar-nav-menu"
 						class="collapsed"><i class="ti-menu"></i> <span class="title">화상회의
@@ -300,8 +463,7 @@
 								<li><a href="meet/meetingList">회의실</a></li>
 								<li><a href="meet/minutes">회외록</a></li>
 							</ul>
-						</div>
-					</li>
+						</div></li>
 
 					<li class="panel"><a href="#subPages" data-toggle="collapse"
 						data-parent="#sidebar-nav-menu" class="collapsed"><i
@@ -314,8 +476,8 @@
 						</div></li>
 					<!-- <li><a href="typography"><i class="ti-paragraph"></i> <span
 							class="title">게시판</span></a></li> -->
-							
-							<li class="panel"><a href="#board" data-toggle="collapse"
+
+					<li class="panel"><a href="#board" data-toggle="collapse"
 						data-parent="#sidebar-nav-menu" class="collapsed"><i
 							class="ti-pie-chart"></i> <span class="title">게시판</span> <i
 							class="icon-submenu ti-angle-left"></i></a>
@@ -325,8 +487,8 @@
 								<li><a href="board/boardList?boardFolder_id=2">부서게시판</a></li>
 								<li><a href="board/boardList?boardFolder_id=3">커뮤니티</a></li>
 							</ul>
-						</div></li>	
-							
+						</div></li>
+
 				</ul>
 				<button type="button" class="btn-toggle-minified"
 					title="Toggle Minified Menu">
@@ -342,7 +504,8 @@
 				<div class="content-heading clearfix">
 					<div class="heading-left">
 						<h1 class="page-title">Welcome to EveryWare</h1>
-						<p class="page-subtitle">Giving you a Smart Work Experience_only by A7.corp</p>
+						<p class="page-subtitle">Giving you a Smart Work
+							Experience_only by A7.corp</p>
 					</div>
 					<ul class="breadcrumb">
 						<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
@@ -351,103 +514,138 @@
 					</ul>
 				</div>
 				<div class="container-fluid">
-					<!-- TOP METRICS -->	
+					<!-- TOP METRICS -->
 					<!-- END TOP METRICS -->
-					
-		
-		
-				<!-- 근태확인 시작 -->	
-				<div class="row sortable-grid">
+
+
+
+					<!-- 근태확인 시작 -->
+					<div class="row sortable-grid">
 						<div class="col-md-12 sortable-item col-sm-3">
 							<div class="panel">
-									<div class="panel-heading">
-										<h2 class="panel-title">근태확인</h2>
-									</div>
-									<div class="panel-body">
-										
-										<div class="col-md-3">
-											<div class="award-item">
-												
-												<form action="support/attendCheck" method="POST" id="attendInForm">
+								<div class="panel-heading">
+									<h2 class="panel-title">근태확인</h2>
+								</div>
+								<div class="panel-body">
+
+									<div class="col-md-3">
+										<div class="award-item">
+
+											<form action="support/attendCheck" method="POST"
+												id="attendInForm">
 												<button type="submit" class="btn btn-primary" id="attendIn">
 													<i class="ti-alarm-clock award-icon"></i>출근
 												</button>
-												</form>
-														
-											</div>
-										</div>
-										
-										<div class="col-md-6">
-											<center>
-												<!-- 시간 -->
-												
-													<h2 id="liveClock"></h2>
-													<br/><br/>
-													<p><a href="#"
-													onClick="formCheck()"></a></p>
-												
-											</center>
-										</div>
-										
-			
-										<div class="col-md-3">
-											<div class="award-item">
-												
-												<form action="support/attendOut" method="POST" id="attendOutForm">
-													<button type="submit" class="btn btn-danger" id="attendOut">
-														<i class="ti-location-arrow award-icon"></i>퇴근
-													</button>
-												</form>
-														
-											</div>
-										</div>
-										
+											</form>
 
+										</div>
 									</div>
+
+									<div class="col-md-6">
+										<center>
+											<!-- 시간 -->
+
+											<h2 id="liveClock"></h2>
+											<br />
+											<br />
+											<p>
+												<a href="#" onClick="formCheck()"></a>
+											</p>
+
+										</center>
+									</div>
+
+
+									<div class="col-md-3">
+										<div class="award-item">
+
+											<form action="support/attendOut" method="POST"
+												id="attendOutForm">
+												<button type="submit" class="btn btn-danger" id="attendOut">
+													<i class="ti-location-arrow award-icon"></i>퇴근
+												</button>
+											</form>
+
+										</div>
+									</div>
+
+
+								</div>
 							</div>
 						</div>
 					</div>
 					<!-- //근태확인 출력 끝 -->
-					
-					
-					
-					
+
+
+
+
 					<!-- 공지사항 시작 -->
 					<div class="panel">
 						<div class="panel-heading">공지사항</div>
 						<div class="panel-body">
-						<p style="text-align:right"><input type="button" value="공지사항" class="btn btn-info" onClick="location.href='board/boardList?boardFolder_id=1';">
-						<table id="featured-datatable" class="table table-striped table-hover">
-							<thead>
-								<tr>
-									<th>번호</th>
-									<th>제목</th>
-									<th>작성자</th>
-									<th>조회수</th>
-									<th>등록일</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="board" items="${boardlist}">
-						<tr>
-							<td class="center">${board.board_id}</td>
-							<td>
-								<a href="board/read?board_id=${board.board_id}">${board.board_title}</a>
-							</td>
-							<td class="center">${board.user_id}</td>
-							<td class="center">${board.board_hits}</td>
-							<td>${board.board_date}</td>
-						</tr>
-						
-						</c:forEach>        
-						<!-- 반복 끝 -->
-							</tbody>
-						</table>
+							<p style="text-align: right">
+								<input type="button" value="공지사항" class="btn btn-info"
+									onClick="location.href='board/boardList?boardFolder_id=1';">
+							<table id="featured-datatable"
+								class="table table-striped table-hover">
+								<thead>
+									<tr>
+										<th>번호</th>
+										<th>제목</th>
+										<th>작성자</th>
+										<th>조회수</th>
+										<th>등록일</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="board" items="${boardlist}">
+										<tr>
+											<td class="center">${board.board_id}</td>
+											<td><a href="board/read?board_id=${board.board_id}">${board.board_title}</a>
+											</td>
+											<td class="center">${board.user_id}</td>
+											<td class="center">${board.board_hits}</td>
+											<td>${board.board_date}</td>
+										</tr>
+
+									</c:forEach>
+									<!-- 반복 끝 -->
+								</tbody>
+							</table>
+						</div>
 					</div>
-				</div> 
-				<!-- //공지사항 끝 -->
-					
-					
+					<!-- //공지사항 끝 -->
+					<!-- 스케줄 시작 -->
+					<div class="row sortable-grid">
+						<!-- CHAT SUPPORT -->
+						<div class="col-md-12 sortable-item">
+							<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title">일정 관리</h3>
+								</div>
+								<div class="panel-body">
+
+									<div class="col-md-9">
+										<div class="panel">
+											<div class="panel-body no-padding">
+												<div id="calendar_Month"></div>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-3">
+										<div class="panel">
+											<div class="panel-body no-padding">
+												<div id="calendar_Day"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 스케줄 끝 -->
+
 					<div class="row sortable-grid">
 						<!-- CHAT SUPPORT -->
 						<div class="col-md-12 sortable-item">
@@ -456,308 +654,317 @@
 									<h3 class="panel-title">Everware Board</h3>
 								</div>
 								<div class="panel-body">
-									
-										<div class="col-md-12">
-											<table
-												class="table table-minimal table-chat-support datatable">
-												<thead>
-													<tr>
-														<th>게시글번호</th>
-														<th>글제목</th>
-														<th>DEVICE</th>
-														<th>글날짜</th>
-														<th>상태</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td><span class="popover-profile"
-															data-toggle="popover" data-visitor-name="Bruce Evans"
-															data-visitor-img="resources/assets/img/people/male1.png"><i
-																class="fa fa-vcard-o"></i></span> 안원용</td>
-														<td><span class="page-tooltip"
-															data-title="https://myonlineshop.com/men/shoes">
-															게시글 제목 (예시)
-															</span></td>
-														<td><i class="fa fa-desktop"></i></td>
-														<td><i class="fa fa-firefox firefox-color"></i>
-															2018/04/03</td>
-														<td>
-															<button class="btn btn-success btn-xs">RESPOND
-																CHAT</button>
-														</td>
-													</tr>
-													<tr>
-														<td><span class="popover-profile"
-															data-toggle="popover"><i class="fa fa-vcard-o"></i></span>
-															이슬기</td>
-														<td><span class="page-tooltip"
-															data-title="https://myonlineshop.com/how-to/shop">게시글 제목 (예시)</span></td>
-														<td><i class="fa fa-desktop"></i></td>
-														<td><i class="fa fa-edge edge-color"></i> 2018/04/03</td>
-														<td>
-															<button class="btn btn-default btn-xs">INITIALIZE
-																CHAT</button>
-														</td>
-													</tr>
-													<tr>
-														<td><span class="popover-profile"
-															data-toggle="popover" data-visitor-name="Joey Felicia"
-															data-visitor-img="resources/assets/img/people/female1.png"><i
-																class="fa fa-vcard-o"></i></span> 안원용</td>
-														<td><span class="page-tooltip"
-															data-title="https://myonlineshop.com/men/dress">게시글 제목 (예시)</span></td>
-														<td><i class="fa fa-mobile"></i></td>
-														<td><i class="fa fa-chrome chrome-color"></i> 2018/04/03</td>
-														<td>
-															<button class="btn btn-danger btn-xs">CLOSE CHAT</button>
-														</td>
-													</tr>
-													<tr>
-														<td><span class="popover-profile"
-															data-toggle="popover"><i class="fa fa-vcard-o"></i></span>
-															안원용</td>
-														<td><span class="page-tooltip"
-															data-title="https://myonlineshop.com/men/shoes">게시글 제목 (예시)</span></td>
-														<td><i class="fa fa-desktop"></i></td>
-														<td><i class="fa fa-safari safari-color"></i> 2018/04/03</td>
-														<td>
-															<button class="btn btn-success btn-xs">RESPOND
-																CHAT</button>
-														</td>
-													</tr>
-													<tr>
-														<td><span class="popover-profile"
-															data-toggle="popover"><i class="fa fa-vcard-o"></i></span>
-															Guest</td>
-														<td><span class="page-tooltip"
-															data-title="https://myonlineshop.com/checkout">게시글 제목 (예시)</span></td>
-														<td><i class="fa fa-mobile"></i></td>
-														<td><i class="fa fa-window-maximize"></i> 2018/04/03
-															</td>
-														<td>
-															<button class="btn btn-danger btn-xs">CLOSE CHAT</button>
-														</td>
-													</tr>
-													<tr>
-														<td><span class="popover-profile"
-															data-toggle="popover"><i class="fa fa-vcard-o"></i></span>
-															안원용</td>
-														<td><span class="page-tooltip"
-															data-title="https://myonlineshop.com/how-to/pay">게시글 제목 (예시)</span></td>
-														<td><i class="fa fa-desktop"></i></td>
-														<td><i class="fa fa-edge edge-color"></i> 2018/04/03</td>
-														<td>
-															<button class="btn btn-default btn-xs">INITIALIZE
-																CHAT</button>
-														</td>
-													</tr>
-													<tr>
-														<td><span class="popover-profile"
-															data-toggle="popover"><i class="fa fa-vcard-o"></i></span>
-															안원용</td>
-														<td><span class="page-tooltip"
-															data-title="https://myonlineshop.com/checkout">게시글 제목 (예시)</span></td>
-														<td><i class="fa fa-mobile"></i></td>
-														<td><i class="fa fa-firefox firefox-color"></i>
-															2018/04/03</td>
-														<td>
-															<button class="btn btn-default btn-xs">INITIALIZE
-																CHAT</button>
-														</td>
-													</tr>
-													<tr>
-														<td><span class="popover-profile"
-															data-toggle="popover"><i class="fa fa-vcard-o"></i></span>
-															안원용</td>
-														<td><span class="page-tooltip"
-															data-title="https://myonlineshop.com/checkout">게시글 제목 (예시)</span></td>
-														<td><i class="fa fa-mobile"></i></td>
-														<td><i class="fa fa-firefox firefox-color"></i>
-															2018/04/03</td>
-														<td>
-															<button class="btn btn-default btn-xs">INITIALIZE
-																CHAT</button>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</div> <!-- end of board we will use -->
+
+									<div class="col-md-12">
+										<table
+											class="table table-minimal table-chat-support datatable">
+											<thead>
+												<tr>
+													<th>게시글번호</th>
+													<th>글제목</th>
+													<th>DEVICE</th>
+													<th>글날짜</th>
+													<th>상태</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td><span class="popover-profile"
+														data-toggle="popover" data-visitor-name="Bruce Evans"
+														data-visitor-img="resources/assets/img/people/male1.png"><i
+															class="fa fa-vcard-o"></i></span> 안원용</td>
+													<td><span class="page-tooltip"
+														data-title="https://myonlineshop.com/men/shoes">
+															게시글 제목 (예시) </span></td>
+													<td><i class="fa fa-desktop"></i></td>
+													<td><i class="fa fa-firefox firefox-color"></i>
+														2018/04/03</td>
+													<td>
+														<button class="btn btn-success btn-xs">RESPOND
+															CHAT</button>
+													</td>
+												</tr>
+												<tr>
+													<td><span class="popover-profile"
+														data-toggle="popover"><i class="fa fa-vcard-o"></i></span>
+														이슬기</td>
+													<td><span class="page-tooltip"
+														data-title="https://myonlineshop.com/how-to/shop">게시글
+															제목 (예시)</span></td>
+													<td><i class="fa fa-desktop"></i></td>
+													<td><i class="fa fa-edge edge-color"></i> 2018/04/03</td>
+													<td>
+														<button class="btn btn-default btn-xs">INITIALIZE
+															CHAT</button>
+													</td>
+												</tr>
+												<tr>
+													<td><span class="popover-profile"
+														data-toggle="popover" data-visitor-name="Joey Felicia"
+														data-visitor-img="resources/assets/img/people/female1.png"><i
+															class="fa fa-vcard-o"></i></span> 안원용</td>
+													<td><span class="page-tooltip"
+														data-title="https://myonlineshop.com/men/dress">게시글
+															제목 (예시)</span></td>
+													<td><i class="fa fa-mobile"></i></td>
+													<td><i class="fa fa-chrome chrome-color"></i>
+														2018/04/03</td>
+													<td>
+														<button class="btn btn-danger btn-xs">CLOSE CHAT</button>
+													</td>
+												</tr>
+												<tr>
+													<td><span class="popover-profile"
+														data-toggle="popover"><i class="fa fa-vcard-o"></i></span>
+														안원용</td>
+													<td><span class="page-tooltip"
+														data-title="https://myonlineshop.com/men/shoes">게시글
+															제목 (예시)</span></td>
+													<td><i class="fa fa-desktop"></i></td>
+													<td><i class="fa fa-safari safari-color"></i>
+														2018/04/03</td>
+													<td>
+														<button class="btn btn-success btn-xs">RESPOND
+															CHAT</button>
+													</td>
+												</tr>
+												<tr>
+													<td><span class="popover-profile"
+														data-toggle="popover"><i class="fa fa-vcard-o"></i></span>
+														Guest</td>
+													<td><span class="page-tooltip"
+														data-title="https://myonlineshop.com/checkout">게시글
+															제목 (예시)</span></td>
+													<td><i class="fa fa-mobile"></i></td>
+													<td><i class="fa fa-window-maximize"></i> 2018/04/03</td>
+													<td>
+														<button class="btn btn-danger btn-xs">CLOSE CHAT</button>
+													</td>
+												</tr>
+												<tr>
+													<td><span class="popover-profile"
+														data-toggle="popover"><i class="fa fa-vcard-o"></i></span>
+														안원용</td>
+													<td><span class="page-tooltip"
+														data-title="https://myonlineshop.com/how-to/pay">게시글
+															제목 (예시)</span></td>
+													<td><i class="fa fa-desktop"></i></td>
+													<td><i class="fa fa-edge edge-color"></i> 2018/04/03</td>
+													<td>
+														<button class="btn btn-default btn-xs">INITIALIZE
+															CHAT</button>
+													</td>
+												</tr>
+												<tr>
+													<td><span class="popover-profile"
+														data-toggle="popover"><i class="fa fa-vcard-o"></i></span>
+														안원용</td>
+													<td><span class="page-tooltip"
+														data-title="https://myonlineshop.com/checkout">게시글
+															제목 (예시)</span></td>
+													<td><i class="fa fa-mobile"></i></td>
+													<td><i class="fa fa-firefox firefox-color"></i>
+														2018/04/03</td>
+													<td>
+														<button class="btn btn-default btn-xs">INITIALIZE
+															CHAT</button>
+													</td>
+												</tr>
+												<tr>
+													<td><span class="popover-profile"
+														data-toggle="popover"><i class="fa fa-vcard-o"></i></span>
+														안원용</td>
+													<td><span class="page-tooltip"
+														data-title="https://myonlineshop.com/checkout">게시글
+															제목 (예시)</span></td>
+													<td><i class="fa fa-mobile"></i></td>
+													<td><i class="fa fa-firefox firefox-color"></i>
+														2018/04/03</td>
+													<td>
+														<button class="btn btn-default btn-xs">INITIALIZE
+															CHAT</button>
+													</td>
+												</tr>
+											</tbody>
+										</table>
 									</div>
+									<!-- end of board we will use -->
 								</div>
-							</div>
-						</div>
-						<!-- END CHAT SUPPORT -->
-					</div>
-					<div class="row sortable-grid">
-						<div class="col-md-6 sortable-item">
-							<div class="panel">
-									<div class="panel-heading">
-										<h2 class="panel-title">Div for Gantt Chart</h2>
-									</div>
-									<div class="panel-body">
-										<canvas id="horizontalbar-chart" height="150"></canvas>
-									</div>
 							</div>
 						</div>
 					</div>
-					
-					<div class="row sortable-grid">
-						<div class="col-md-6 sortable-item">
-							<!-- SALES STATISTIC -->
-							<div class="panel" id="tour-sales-stat">
-								<div class="panel-heading">
-									<h3 class="panel-title">Sales Statistic</h3>
-								</div>
-								<div class="panel-body">
-									<div class="layout-table margin-bottom-30">
-										<div class="cell">
-											<div class="chart-metric">
-												<span class="title"> <span
-													class="data-legend custom-bg-orange2"></span> Earnings
-												</span> <span class="value">$5,423</span> <span class="change up"><i
-													class="ti-arrow-up"></i> 16%</span>
-											</div>
-										</div>
-										<div class="cell">
-											<div class="chart-metric">
-												<span class="title"> <span
-													class="data-legend custom-bg-blue3"></span> Sales
-												</span> <span class="value">1563</span> <span class="change down"><i
-													class="ti-arrow-down"></i> 7%</span>
-											</div>
-										</div>
-										<div class="cell valign-bottom text-right">
-											<div class="btn-group">
-												<button type="button" class="btn btn-default btn-sm">Day</button>
-												<button type="button" class="btn btn-default btn-sm active">Week</button>
-												<button type="button" class="btn btn-default btn-sm">Month</button>
-											</div>
-										</div>
-									</div>
-									<div style="height: 250px;" id="sales-stat"></div>
-								</div>
+					<!-- END CHAT SUPPORT -->
+				</div>
+				<div class="row sortable-grid">
+					<div class="col-md-6 sortable-item">
+						<div class="panel">
+							<div class="panel-heading">
+								<h2 class="panel-title">Div for Gantt Chart</h2>
 							</div>
-							<!-- END SALES STATISTIC -->
-						</div>
-						<div class="col-md-6 sortable-item">
-							<!-- SHARES GOAL -->
-							<div class="panel">
-								<div class="panel-heading">
-									<h3 class="panel-title">Shares Goal</h3>
-								</div>
-								<div class="panel-body">
-									<div id="progress-share" class="progress-semicircle"
-										data-max="500">
-										<div class="bar-overflow">
-											<div class="bar"></div>
-										</div>
-										<span class="content"> <i class="fa fa-share-alt icon"></i>
-											<span class="value">380</span>
-											<h4 class="heading">Share more products!</h4>
-											<p class="text-muted">Get free product if you reach 500
-												shares goal</p>
-											<button type="button" class="btn btn-primary">Share
-												Now</button>
-										</span>
-									</div>
-								</div>
-							</div>
-							<!-- END SHARES GOAL -->
-						</div>
-					</div>
-					
-					
-					<!-- MINI BAR CHARTS -->
-					<div class="row">
-						<div class="col-md-3 col-sm-6">
-							<div class="widget widget-mini-bar">
-								<div id="mini-bar-chart1" class="mini-bar-chart">38,28,45,30,42,70,100</div>
-								<span>5323 LIKES</span>
+							<div class="panel-body">
+								<canvas id="horizontalbar-chart" height="150"></canvas>
 							</div>
 						</div>
-						<div class="col-md-3 col-sm-6">
-							<div class="widget widget-mini-bar">
-								<div id="mini-bar-chart2" class="mini-bar-chart">43,45,78,23,80,100,90</div>
-								<span>65K FOLLOWERS</span>
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-6">
-							<div class="widget widget-mini-bar">
-								<div id="mini-bar-chart3" class="mini-bar-chart">22,42,65,53,77,44,80</div>
-								<span>20K SUBSCRIBERS</span>
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-6">
-							<div class="widget widget-mini-bar">
-								<div id="mini-bar-chart4" class="mini-bar-chart">43,76,34,55,86,45,77</div>
-								<span>500K USERS</span>
-							</div>
-						</div>
-					</div>
-					<!-- END MINI BAR CHARTS -->
-					<div class="widget">
-						<ul class="list-unstyled list-widget-horizontal row">
-							<li class="col-md-3">
-								<div class="widget-metric_3">
-									<span class="title text-muted">Your Performance Index</span> <span
-										class="value">8.73</span> <span class="note"> <span
-										class="text-indicator-green">+13.42%</span> since last month
-									</span>
-								</div>
-							</li>
-							<li class="col-md-3">
-								<div class="widget-metric_4">
-									<span class="title text-muted">Sales Performance</span> <span
-										class="chart inlinesparkline" id="sales-performance">20,70,100,55,80,40,64,90,150</span>
-									<span class="note"> <span class="text-indicator-red">-3.74%</span>
-										since last month
-									</span>
-								</div>
-							</li>
-							<li class="col-md-3">
-								<div class="widget-metric_5">
-									<span class="title text-muted">Customer Satisfaction</span>
-									<ul class="list-inline list-value">
-										<li><i class="fa fa-frown-o"></i> <span
-											class="percentage text-indicator-red">10%</span></li>
-										<li><i class="fa fa-meh-o"></i> <span class="percentage">13%</span>
-										</li>
-										<li><i class="fa fa-smile-o"></i> <span
-											class="percentage text-indicator-green">77%</span></li>
-									</ul>
-									<span class="note">See detailed scoring <a href="#">here</a></span>
-								</div>
-							</li>
-							<li class="col-md-3">
-								<div class="widget-metric_3">
-									<span class="title text-muted">Avg. Handle Time</span> <span
-										class="value">1m:24s</span> <span class="note">Min: 30s
-										&nbsp; Max: 2m:15s</span>
-								</div>
-							</li>
-						</ul>
 					</div>
 				</div>
+
+				<div class="row sortable-grid">
+					<div class="col-md-6 sortable-item">
+						<!-- SALES STATISTIC -->
+						<div class="panel" id="tour-sales-stat">
+							<div class="panel-heading">
+								<h3 class="panel-title">Sales Statistic</h3>
+							</div>
+							<div class="panel-body">
+								<div class="layout-table margin-bottom-30">
+									<div class="cell">
+										<div class="chart-metric">
+											<span class="title"> <span
+												class="data-legend custom-bg-orange2"></span> Earnings
+											</span> <span class="value">$5,423</span> <span class="change up"><i
+												class="ti-arrow-up"></i> 16%</span>
+										</div>
+									</div>
+									<div class="cell">
+										<div class="chart-metric">
+											<span class="title"> <span
+												class="data-legend custom-bg-blue3"></span> Sales
+											</span> <span class="value">1563</span> <span class="change down"><i
+												class="ti-arrow-down"></i> 7%</span>
+										</div>
+									</div>
+									<div class="cell valign-bottom text-right">
+										<div class="btn-group">
+											<button type="button" class="btn btn-default btn-sm">Day</button>
+											<button type="button" class="btn btn-default btn-sm active">Week</button>
+											<button type="button" class="btn btn-default btn-sm">Month</button>
+										</div>
+									</div>
+								</div>
+								<div style="height: 250px;" id="sales-stat"></div>
+							</div>
+						</div>
+						<!-- END SALES STATISTIC -->
+					</div>
+					<div class="col-md-6 sortable-item">
+						<!-- SHARES GOAL -->
+						<div class="panel">
+							<div class="panel-heading">
+								<h3 class="panel-title">Shares Goal</h3>
+							</div>
+							<div class="panel-body">
+								<div id="progress-share" class="progress-semicircle"
+									data-max="500">
+									<div class="bar-overflow">
+										<div class="bar"></div>
+									</div>
+									<span class="content"> <i class="fa fa-share-alt icon"></i>
+										<span class="value">380</span>
+										<h4 class="heading">Share more products!</h4>
+										<p class="text-muted">Get free product if you reach 500
+											shares goal</p>
+										<button type="button" class="btn btn-primary">Share
+											Now</button>
+									</span>
+								</div>
+							</div>
+						</div>
+						<!-- END SHARES GOAL -->
+					</div>
+				</div>
+
+
+				<!-- MINI BAR CHARTS -->
+				<div class="row">
+					<div class="col-md-3 col-sm-6">
+						<div class="widget widget-mini-bar">
+							<div id="mini-bar-chart1" class="mini-bar-chart">38,28,45,30,42,70,100</div>
+							<span>5323 LIKES</span>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-6">
+						<div class="widget widget-mini-bar">
+							<div id="mini-bar-chart2" class="mini-bar-chart">43,45,78,23,80,100,90</div>
+							<span>65K FOLLOWERS</span>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-6">
+						<div class="widget widget-mini-bar">
+							<div id="mini-bar-chart3" class="mini-bar-chart">22,42,65,53,77,44,80</div>
+							<span>20K SUBSCRIBERS</span>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-6">
+						<div class="widget widget-mini-bar">
+							<div id="mini-bar-chart4" class="mini-bar-chart">43,76,34,55,86,45,77</div>
+							<span>500K USERS</span>
+						</div>
+					</div>
+				</div>
+				<!-- END MINI BAR CHARTS -->
+				<div class="widget">
+					<ul class="list-unstyled list-widget-horizontal row">
+						<li class="col-md-3">
+							<div class="widget-metric_3">
+								<span class="title text-muted">Your Performance Index</span> <span
+									class="value">8.73</span> <span class="note"> <span
+									class="text-indicator-green">+13.42%</span> since last month
+								</span>
+							</div>
+						</li>
+						<li class="col-md-3">
+							<div class="widget-metric_4">
+								<span class="title text-muted">Sales Performance</span> <span
+									class="chart inlinesparkline" id="sales-performance">20,70,100,55,80,40,64,90,150</span>
+								<span class="note"> <span class="text-indicator-red">-3.74%</span>
+									since last month
+								</span>
+							</div>
+						</li>
+						<li class="col-md-3">
+							<div class="widget-metric_5">
+								<span class="title text-muted">Customer Satisfaction</span>
+								<ul class="list-inline list-value">
+									<li><i class="fa fa-frown-o"></i> <span
+										class="percentage text-indicator-red">10%</span></li>
+									<li><i class="fa fa-meh-o"></i> <span class="percentage">13%</span>
+									</li>
+									<li><i class="fa fa-smile-o"></i> <span
+										class="percentage text-indicator-green">77%</span></li>
+								</ul>
+								<span class="note">See detailed scoring <a href="#">here</a></span>
+							</div>
+						</li>
+						<li class="col-md-3">
+							<div class="widget-metric_3">
+								<span class="title text-muted">Avg. Handle Time</span> <span
+									class="value">1m:24s</span> <span class="note">Min: 30s
+									&nbsp; Max: 2m:15s</span>
+							</div>
+						</li>
+					</ul>
+				</div>
 			</div>
-			<!-- END MAIN CONTENT -->
-			<!-- RIGHT SIDEBAR -->
-			
-			<!-- END RIGHT SIDEBAR -->
 		</div>
-		<!-- END MAIN -->
-		<div class="clearfix"></div>
-		<footer>
-			<div class="container-fluid">
-				<p class="copyright">
-					&copy; 2018 <a href="https://www.themeineed.com" target="_blank">EveryWare</a>. All Rights Reserved.
-				</p>
-			</div>
-		</footer>
+		<!-- END MAIN CONTENT -->
+		<!-- RIGHT SIDEBAR -->
+
+		<!-- END RIGHT SIDEBAR -->
+	</div>
+	<!-- END MAIN -->
+	<div class="clearfix"></div>
+	<footer>
+		<div class="container-fluid">
+			<p class="copyright">
+				&copy; 2018 <a href="https://www.themeineed.com" target="_blank">EveryWare</a>.
+				All Rights Reserved.
+			</p>
+		</div>
+	</footer>
 	</div>
 	<!-- END WRAPPER -->
 	<!-- Javascript -->
-	<script src="resources/assets/vendor/jquery/jquery.min.js"></script>
+	
 	<script src="resources/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 	<script src="resources/assets/vendor/pace/pace.min.js"></script>
 	<script
@@ -771,7 +978,7 @@
 		src="resources/assets/vendor/x-editable/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 	<script
 		src="resources/assets/vendor/jquery.maskedinput/jquery.maskedinput.min.js"></script>
-	<script src="resources/assets/vendor/moment/min/moment.min.js"></script>
+
 	<script
 		src="resources/assets/vendor/jquery-sparkline/js/jquery.sparkline.min.js"></script>
 	<script
@@ -784,7 +991,8 @@
 	<script src="resources/assets/vendor/jquery-ui/ui/widgets/sortable.js"></script>
 	<script
 		src="resources/assets/vendor/datatables/js-main/jquery.dataTables.min.js"></script>
-	<script src="resources/assets/vendor/datatables/js-main/jquery.dataTablesBoard.min.js"></script>
+	<script
+		src="resources/assets/vendor/datatables/js-main/jquery.dataTablesBoard.min.js"></script>
 	<script
 		src="resources/assets/vendor/datatables/js-bootstrap/dataTables.bootstrap.min.js"></script>
 	<script
@@ -796,11 +1004,14 @@
 	<script src="resources/assets/vendor/raphael/raphael.min.js"></script>
 	<script src="resources/assets/vendor/justgage-toorshia/justgage.js"></script>
 	<script src="resources/assets/scripts/klorofilpro-common.js"></script>
-	
+
 	<!-- 공지사항 -->
-	<script src="../resources/assets/vendor/datatables-colreorder/dataTables.colReorder.js"></script>
-	<script src="../resources/assets/vendor/datatables-tabletools/js/dataTables.tableTools.js"></script>
-	
+	<script
+		src="../resources/assets/vendor/datatables-colreorder/dataTables.colReorder.js"></script>
+	<script
+		src="../resources/assets/vendor/datatables-tabletools/js/dataTables.tableTools.js"></script>
+
+
 	<!-- DEMO PANEL -->
 	<!-- for demo purpose only, you should remove it on your project directory -->
 	<script type="text/javascript">
@@ -819,7 +1030,7 @@
 			});
 		});
 	</script>
-	
+
 	<!-- END DEMO PANEL -->
 	<script>
 		$(function() {
@@ -1226,11 +1437,11 @@
 					responsive: true,
 				}
 			});
-		
+			
 		});//end of all script
 	</script>
-	
-	
+
+
 	<!-- 공지사항 -->
 	<script>
 	$(function()
@@ -1288,7 +1499,7 @@
 				paging: false
 			});
 		});
-		</script>				
-	
+		</script>
+
 </body>
 </html>

@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.a7.everyware.HomeController;
 import com.a7.everyware.board.util.PageNavigator;
+import com.a7.everyware.schedule.dao.ScheduleDAO;
+import com.a7.everyware.schedule.vo.ScheduleVO;
 import com.a7.everyware.user.dao.UserDAO;
 import com.a7.everyware.user.vo.UserVO;
 
@@ -28,6 +30,7 @@ public class UserController {
 	
 	@Autowired
 	UserDAO userDAO;
+	ScheduleDAO scheduledao;
 
 	//사원 수 관련 상수값들
 	final int countPerPage = 10;				//페이지 당 수
@@ -58,9 +61,33 @@ public class UserController {
 				session.setAttribute("userName", vo.getUser_name());
 				session.setAttribute("userDepartment", vo.getDept_name());
 				session.setAttribute("userPosition", vo.getPosition_name());
+				
+				/*
+				 * schedule부분 추가 할게요
+				*/
+		/*
+				ArrayList<ScheduleVO> Mlist = new ArrayList<ScheduleVO>();
+				Mlist = scheduledao.Read_Schedule(id);
+				for (int i = 0; i < Mlist.size(); i++) {
+					if(Mlist.get(i).getSchedule_group().equals("개인"))
+					{
+						Mlist.get(i).setColor("#62bbf1");
+					}
+					else if(Mlist.get(i).getSchedule_group().equals("총무"))
+					{
+						Mlist.get(i).setColor("#f26363");
+					}
+				}
+				session.setAttribute("Mlist", Mlist);
+				System.out.println("m->" + Mlist);*/
+				/*
+				 * 여기까지 schedule
+				*/
+				
 				return "1";
 			}
 		}
+		
 		return "0";
 	}
 	

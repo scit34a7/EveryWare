@@ -14,7 +14,7 @@
 		insert into R_reservation_tb
 		values
 		(R_reservation_id_seq.nextval, #{R_reservation_type},#{resource_id}
-		,#{r_reservation_sdate},#{r_reservation_fdate},#{regDate},#{userName},#{memo})
+		,#{r_reservation_sdate},#{r_reservation_fdate},#{r_reservation_regDate},#{r_reservation_userName},#{r_reservation_memo})
 	</insert>
 	
 	<delete id="Resource_delete" parameterType="ReservationVO">
