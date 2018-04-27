@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.a7.everyware.HomeController;
 import com.a7.everyware.board.util.PageNavigator;
+import com.a7.everyware.mail.dao.MailDAO;
 import com.a7.everyware.schedule.dao.ScheduleDAO;
 import com.a7.everyware.schedule.vo.ScheduleVO;
 import com.a7.everyware.user.dao.UserDAO;
@@ -29,7 +30,12 @@ import com.a7.everyware.user.vo.UserVO;
 public class UserController {
 	
 	@Autowired
+	MailDAO mdao;
+	
+	@Autowired
 	UserDAO userDAO;
+	
+	@Autowired
 	ScheduleDAO scheduledao;
 
 	//사원 수 관련 상수값들
@@ -62,10 +68,20 @@ public class UserController {
 				session.setAttribute("userDepartment", vo.getDept_name());
 				session.setAttribute("userPosition", vo.getPosition_name());
 				
+				
+				/*
+				 * 메일 부분
+				 * */
+				String repository = mdao.getRepositoryFormMailInfo(vo.getUser_id());
+				
+				int mailRead = mdao.countUnread(repository);
+				
+				session.setAttribute("mailRead",mailRead);
+				
 				/*
 				 * schedule부분 추가 할게요
 				*/
-		/*
+		
 				ArrayList<ScheduleVO> Mlist = new ArrayList<ScheduleVO>();
 				Mlist = scheduledao.Read_Schedule(id);
 				for (int i = 0; i < Mlist.size(); i++) {
@@ -79,7 +95,7 @@ public class UserController {
 					}
 				}
 				session.setAttribute("Mlist", Mlist);
-				System.out.println("m->" + Mlist);*/
+				System.out.println("m->" + Mlist);
 				/*
 				 * 여기까지 schedule
 				*/

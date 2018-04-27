@@ -5193,7 +5193,7 @@ ul.activity-list > li .timestamp {
   margin-bottom: 0;
 }
 
-.online-visitors .traffic-sources .progress-bar {
+.online-visitors .traffic-sources . {
   line-height: 26px;
 }
 
@@ -9406,7 +9406,7 @@ ul.inbox-list-message li.unread .title, ul.inbox-list-message li.unread .sender 
 }
 
 ul.inbox-list-message li.active {
-  background-color: #f6f8fb;
+  background-color: #a0aeba; <!--#f6f8fb -->
 }
 
 ul.inbox-list-message img {

@@ -38,17 +38,19 @@
 <script src="../resources/js/jquery-3.2.1.min.js"></script>
 
 <script >
+	
+	
+	
 	$(document).ready(function() {
 		
 		<c:forEach var='a' items='${addrBook}'>
-		
-		// doesn't work
-		//document.getElementById('mailto${a.addrbook_num}').html = deleteHtmlTag('${a.mailto}'); 
-		
+	
 		var modified = deleteHtmlTag('${a.mailto}');
-		
 		$('#mailto${a.addrbook_num}').html(modified);
 				
+		var modifiedCc = deleteHtmlTag('${a.mailreference}');
+		$('#mailreference${a.addrbook_num}').html(modifiedCc);
+		
 		</c:forEach>
 		
 	
@@ -56,24 +58,31 @@
 		$('div[name = click]').on('click', function() {
 
 			var addrnum = $(this).attr('addr1');
-			alert(addrnum);
+			var attrto = $(this).attr('attr2');
+			var attrcc = $(this).attr('attr3');
 			
-			var mailto = document.getElementById('mailto'+addrnum).html;
-			var mailto = $('#mailto'+).val();
-			var mailreference = document.getElementById('mailreference'+addrnum).html;
-
-			alert('mailto'+addrnum+', mailreference'+addrnum);
-			alert(mailto+','+mailreference);
+			//var mailto = document.getElementById('mailto'+addrnum).html;
+			var mailto = $('#mailto'+addrnum).html();
+			var mailreference = $('#mailreference'+addrnum).html();
 			
-			var mailtoModified = deleteHtmlTag(mailto);
-			var mailreferenceModified = deleteHtmlTag(mailreference);
+			alert(mailto+':'+mailreference);
 			
 			//받는 사람에 세팅하기 
-			opener.document.getElementById('blankForSending').value = mailtoModified;
-			opener.document.getElementById('mailRecipients').value =mailto;
+			/* opener.document.getElementById('blankForSending').value = mailtoModified;
+			opener.document.getElementById('mailRecipients').value = mailto; */
 			
-			//참조 세팅하기
+			$("#blankForSending", opener.document).append('<span>' + mailto
+																+ '<i class ="fa fa-times" onclick="deleteAddress();"></i></span>');
+		
+			$('mailRecipients').val(attrto);
+				
+			$("#blankForCC", opener.document).append('<span>' + mailreference
+																+ '<i class ="fa fa-times" onclick="deleteAddress();"></i></span>');
 			
+			$('mailCCs').val(attrcc);
+
+			$('i[class= "fa fa-times"]',opener.document).click(deleteAddress);
+					
 			self.close();
 
 		}); //이벤트 처리
@@ -91,6 +100,11 @@
 	    return content;
 	}
 	
+
+	function deleteAddress() {
+		//지우기 ; 상위요소의 
+		$(this).closest('span').html('');
+	}
 </script>
 </head>
 <body>
@@ -110,11 +124,12 @@
 									<table>
 										<tr>
 											<td width="100%">
-													<div class="text" style = "cursor:pointer;" name = "click" addr1 ="${a.addrbook_num }">
+													<div class="text" style = "cursor:pointer;" name = "click" addr1 ="${a.addrbook_num }"
+														attr2 ="${a.mailto }" attr3 = "${a.mailreference }">
 														<span class="sender">${a.addrbook_name}</span> <span
 															class="timestamp"></span>
-														<h3 class="title" id = "mailto${a.addrbook_num }">${a.mailto }</h3>
-														<span name = "mailreference" class="timestamp" id = "mailreference${a.addrbook_num }">${a.mailreference }</span>
+														<h3 class="title" id = "mailto${a.addrbook_num }" ></h3>
+														<span name = "mailreference" class="timestamp" id = "mailreference${a.addrbook_num }"></span>
 														<p class="preview"></p>			
 													</div>
 											</td>

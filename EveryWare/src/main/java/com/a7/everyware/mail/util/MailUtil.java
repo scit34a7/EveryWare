@@ -92,6 +92,32 @@ public class MailUtil {
 		return result;
 	}
 	
+	public static String printCC(Address[] addresses){
+		if(addresses == null)
+			return null; 
+		
+		String result = "";
+		
+		for(int i = 1 ; i < addresses.length;i++){ //length -1 : 보낸편지함을 위해서 자신에게 보내는 주소는 생략 ; 
+			
+			String name = addresses[i].toString();
+			try{
+				name = MimeUtility.decodeText(name);
+			}catch(UnsupportedEncodingException e){
+				
+			}
+			
+			name = name.replaceAll("<", "&lt;");
+			name = name.replaceAll(">", "&gt;");
+			
+			if(i==0)
+				result += name;
+			else
+				result += ","+name;
+		}
+		return result;
+	}
+	
 	public static Boolean isSelfMail(Address[] address, String repositoryOfUser){
 		
 		boolean checkSelf= false;

@@ -59,6 +59,24 @@
 			last_updated desc
 	</select>
 	
+	<select id = "countUnread" parameterType = "java.lang.String" resultType = "int">
+		select 
+			count(message_name)
+		from  
+			inbox
+		where 
+			message_deleted is null
+		and
+			repository_name = #{userName}
+		and 
+			message_state != 'temp'
+		and 
+			sender != #{userName}||'@everywareit.com'
+		and 
+			message_receiving is null
+	
+	</select>
+	
 	<!--  List of mail deleted  -->
 	<select id = "getMailList_trash" parameterType= "java.lang.String" resultMap = "responseMap">
 		select 

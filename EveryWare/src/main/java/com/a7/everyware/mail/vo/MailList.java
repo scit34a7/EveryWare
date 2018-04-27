@@ -5,6 +5,7 @@ public class MailList {
 	String message_name;
 	String from;
 	String recipients;
+	String cc;
 	String mailsubject;
 	String contentpreview;
 	String maildate;
@@ -12,12 +13,13 @@ public class MailList {
 	String mailimportance;
 	String mailreaded;
 
-	public MailList(String message_name, String from, String recipients, String mailsubject, String contentpreview,
-			String maildate, String mailattached, String mailimportance, String mailreaded) {
+	public MailList(String message_name, String from, String recipients, String cc, String mailsubject,
+			String contentpreview, String maildate, String mailattached, String mailimportance, String mailreaded) {
 		super();
 		this.message_name = message_name;
 		this.from = from;
 		this.recipients = recipients;
+		this.cc = cc;
 		this.mailsubject = mailsubject;
 		this.contentpreview = contentpreview;
 		this.maildate = maildate;
@@ -52,6 +54,14 @@ public class MailList {
 
 	public void setRecipients(String recipients) {
 		this.recipients = recipients;
+	}
+
+	public String getCc() {
+		return cc;
+	}
+
+	public void setCc(String cc) {
+		this.cc = cc;
 	}
 
 	public String getMailsubject() {
@@ -104,9 +114,10 @@ public class MailList {
 
 	@Override
 	public String toString() {
-		return "MailList [message_name=" + message_name + ", from=" + from + ", recipients=" + recipients
+		return "MailList [message_name=" + message_name + ", from=" + from + ", recipients=" + recipients + ", cc=" + cc
 				+ ", mailsubject=" + mailsubject + ", contentpreview=" + contentpreview + ", maildate=" + maildate
 				+ ", mailattached=" + mailattached + ", mailimportance=" + mailimportance + ", mailreaded=" + mailreaded
 				+ "]";
 	}
+
 }

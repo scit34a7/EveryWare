@@ -59,6 +59,10 @@ public class MailReadController {
 		//update read; 
 		int checkRead = mdao.checkReadMail(map);
 		
+		int mailRead = mdao.countUnread(repository);
+		
+		session.setAttribute("mailRead", mailRead);
+		
 		//출력물을 위한 메일리스트 객체; 
 		MailList mail = new MailList();
 		
@@ -72,13 +76,7 @@ public class MailReadController {
 		mail.setFrom(fromWho + "&lt;"+mailFrom+"&gt;");
 		
 		mail.setMaildate(inbox.getLast_updated());
-		
-		// 필요가 없어심
-		/*String mailTo = inbox.getRecipients();
-		String toWho = mdao.getUserFromMailInfo(mailTo);
-		mail.setRecipients(toWho +"&lt"+mailTo+"&gt");
-		*/
-		
+			
 		byte[] messageBody = inbox.getMessage_body();
 		
 		Message messageMime = null;
@@ -88,7 +86,9 @@ public class MailReadController {
 			messageMime = new MimeMessage(null, bis);
 		
 			mail.setRecipients(MailUtil.printAddresses(messageMime.getRecipients(Message.RecipientType.TO)));
-		
+			
+			mail.setCc(MailUtil.printCC(messageMime.getRecipients(Message.RecipientType.CC)));
+			
 			if(repository.equals("temp")){	
 				mail.setMailsubject("[Temporary]"+messageMime.getSubject());
 			}else{
@@ -278,11 +278,6 @@ public class MailReadController {
 		
 		mail.setMaildate(inbox.getLast_updated());
 		
-		// 필요가 없어심
-		/*String mailTo = inbox.getRecipients();
-		String toWho = mdao.getUserFromMailInfo(mailTo);
-		mail.setRecipients(toWho +"&lt"+mailTo+"&gt");
-		*/
 		
 		byte[] messageBody = inbox.getMessage_body();
 		
@@ -380,5 +375,22 @@ public class MailReadController {
 		
 		return "mail/appviews-inbox-write";
 	}
+	
+	@RequestMapping(value = "deleteOneMail" , method = RequestMethod.GET)
+	public String deleteOneMail(String message_name, Model model){
+		
+		int deleteHandler = mdao.deleteOneMail(message_name);
+		
+		if(deleteHandler == 1){
+			
+		}else{
+			System.out.println("have problem in deleting"); 
+		}
+		
+		
+		return "redirect:./getMail?sort=all";
+	}
+	
+	
 	
 }

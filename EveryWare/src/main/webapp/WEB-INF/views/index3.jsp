@@ -36,11 +36,11 @@
 
 <!-- 공지사항 -->
 <link rel="stylesheet"
-	href="resources/assets/vendor/datatables/css-main/jquery.dataTables.min.css">
+	href="../resources/assets/vendor/datatables/css-main/jquery.dataTables.min.css">
 <link rel="stylesheet"
-	href="resources/assets/vendor/datatables/css-bootstrap/dataTables.bootstrap.min.css">
+	href="../resources/assets/vendor/datatables/css-bootstrap/dataTables.bootstrap.min.css">
 <link rel="stylesheet"
-	href="resources/assets/vendor/datatables-tabletools/css/dataTables.tableTools.css">
+	href="../resources/assets/vendor/datatables-tabletools/css/dataTables.tableTools.css">
 
 <!-- MAIN CSS -->
 <link rel="stylesheet" href="resources/assets/css/main.css">
@@ -466,12 +466,8 @@ ul.inbox-list-message{
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="subLayouts" class="collapse">
 							<ul class="submenu">
-								<li><a href="./mail/getMail?sort=all">받은메일함
-								
-								<c:if test="${mailRead>0}">
-								 <span class="label label-success">NEW</span></a></li>
-								</c:if>
-								
+								<li><a href="./mail/getMail?sort=all">받은메일함 <span
+										class="label label-success">NEW</span></a></li>
 								<li><a href="./mail/getMail?sort=send">보낸메일함</a></li>
 								<li><a href="./mail/sendMail">편지쓰기</a></li>
 								<li><a href="./mail/getMail?sort=important">중요편지함</a></li>
@@ -584,7 +580,6 @@ ul.inbox-list-message{
 						<li class="active">Dashboard v1</li>
 					</ul>
 				</div>
-				
 				<div class="container-fluid">
 					<!-- TOP METRICS -->
 					<!-- END TOP METRICS -->
@@ -673,8 +668,120 @@ ul.inbox-list-message{
 							</table>
 						</div>
 					</div>
+					</div>
+								<div class="col-md-4">
+									<div class="widget widget-metric_8">
+											<div class="heading clearfix">
+												<span class="title">목표 매출액</span>
+												<div class="dropdown">
+													<a href="#" class="toggle-dropdown" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
+													<ul class="dropdown-menu dropdown-menu-right">
+														<li><a href="#"><i class="fa fa-refresh"></i> Refresh</a></li>
+														<li><a href="#"><i class="fa fa-pencil"></i> Modify</a></li>
+													</ul>
+												</div>
+											</div>
+											<i class="ti-settings custom-text-green3"></i>
+											<span class="value">250/500</span>
+											<div class="progress progress-xs progress-transparent custom-color-green3">
+												<div class="progress-bar" data-transitiongoal="50"></div>
+											</div>
+											<p class="info"><i class="ti-arrow-up icon-change"></i> +15% than last month</p>
+										</div>
 					
-					<div class="panel">
+								<div class="col-md-4 right">
+										<div class="content-menu-right1">
+											<div class="content-menu-header clearfix">
+												<h2 class="heading">부서 공지</h2>
+											</div>
+											<div id="list-message-scrollable">
+												<ul class="inbox-list-message">
+													<li>
+														<a href="#">
+															<div class="text">
+																<span class="sender">Robby</span>
+																<span class="timestamp">13:45</span>
+																<h3 class="title">Weekly Meeting</h3>
+																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
+															</div>
+														</a>
+													</li>
+													<li class="unread">
+														<a href="#">
+															
+															<div class="text">
+																<span class="sender">Robby</span>
+																<span class="timestamp">13:45</span>
+																<h3 class="title">Weekly Meeting</h3>
+																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
+																<span class="attachment"><i class="fa fa-paperclip"></i></span>
+															</div>
+														</a>
+													</li>
+													<li class="unread">
+														<a href="#">
+															<div class="text">
+																<span class="sender">Jessie Monica</span>
+																<span class="timestamp">13:45</span>
+																<h3 class="title">Weekly Meeting</h3>
+																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
+																<span class="attachment"><i class="fa fa-paperclip"></i></span>
+															</div>
+														</a>
+													</li>
+													<li>
+														<a href="#">
+															<div class="text">
+																<span class="sender">Robby</span>
+																<span class="timestamp">13:45</span>
+																<h3 class="title">Weekly Meeting</h3>
+																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
+															</div>
+														</a>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>	
+					</div>
+						
+					</div>
+					<!-- //공지사항 끝 -->
+					<!-- 스케줄 시작 -->
+					<div class="row sortable-grid">
+						<!-- CHAT SUPPORT -->
+						<div class="col-md-12 sortable-item">
+							<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title">일정 관리</h3>
+								</div>
+								<div class="panel-body">
+
+									<div class="col-md-9">
+										<div class="panel">
+											<div class="panel-body no-padding">
+												<div id="calendar_Month"></div>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-3">
+										<div class="panel">
+											<div class="panel-body no-padding">
+												<div id="calendar_Day"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 스케줄 끝 -->
+
+					<!-- 결재 by 병호 -->
+						<div class="row sortable-grid">	
+							<div class="col-md-12">
+							<div class="panel">
 								<div class="panel-heading">
 									<h3 class="panel-title">처리해야할 결재</h3>
 								</div>
@@ -767,131 +874,10 @@ ul.inbox-list-message{
 										</table>
 										</div>
 							</div>
-					
-					</div>
-						
-							
-								<div class="col-md-4 sortable-item">
-									<div class="widget widget-metric_8">
-											<div class="heading clearfix">
-												<span class="title">목표 매출액</span>
-												<div class="dropdown">
-													<a href="#" class="toggle-dropdown" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
-													<ul class="dropdown-menu dropdown-menu-right">
-														<li><a href="#"><i class="fa fa-refresh"></i> Refresh</a></li>
-														<li><a href="#"><i class="fa fa-pencil"></i> Modify</a></li>
-													</ul>
-												</div>
-											</div>
-											<i class="ti-settings custom-text-green3"></i>
-											<span class="value">1,895,556/10,000,000</span><span>($/원)</span>
-											<div class="progress progress-xs progress-transparent custom-color-green3">
-												<div class="progress-bar" data-transitiongoal="50"></div>
-											</div>
-											<p class="info"><i class="ti-arrow-up icon-change"></i> +15% than last month</p>
-										</div>
-					
-								<div class="col-md-4 right sortable-item">
-										<div class="content-menu-right">
-											<div class="content-menu-header clearfix">
-												<h2 class="heading">부서 공지</h2>
-											</div>
-											<div id="list-message-scrollable">
-												<ul class="inbox-list-message">
-													<li>
-														<a href="#">
-															<div class="text">
-																<span class="sender">Robby</span>
-																<span class="timestamp">13:45</span>
-																<h3 class="title">Weekly Meeting</h3>
-																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
-															</div>
-														</a>
-													</li>
-													<li class="unread">
-														<a href="#">
-															
-															<div class="text">
-																<span class="sender">Robby</span>
-																<span class="timestamp">13:45</span>
-																<h3 class="title">Weekly Meeting</h3>
-																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
-																<span class="attachment"><i class="fa fa-paperclip"></i></span>
-															</div>
-														</a>
-													</li>
-													<li class="unread">
-														<a href="#">
-															<div class="text">
-																<span class="sender">Jessie Monica</span>
-																<span class="timestamp">13:45</span>
-																<h3 class="title">Weekly Meeting</h3>
-																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
-																<span class="attachment"><i class="fa fa-paperclip"></i></span>
-															</div>
-														</a>
-													</li>
-													<li>
-														<a href="#">
-															<div class="text">
-																<span class="sender">Robby</span>
-																<span class="timestamp">13:45</span>
-																<h3 class="title">Weekly Meeting</h3>
-																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
-															</div>
-														</a>
-													</li>
-												</ul>
-											</div>
-										</div>
-									</div>	
-							</div>
-						
-			
-							<div class="col-md-8 sortable-item">
-							
-			
+				</div>
 					<!-- /결재 by 병호 -->
 					<!-- END CHAT SUPPORT -->
-				</div>		
-						
-						
-						
-					</div>
-					<!-- //공지사항 끝 -->
-					<!-- 스케줄 시작 -->
-					<div class="row sortable-grid">
-						<!-- CHAT SUPPORT -->
-						<div class="col-md-12 sortable-item">
-							<div class="panel">
-								<div class="panel-heading">
-									<h3 class="panel-title">일정 관리</h3>
-								</div>
-								<div class="panel-body">
-
-									<div class="col-md-9">
-										<div class="panel">
-											<div class="panel-body no-padding">
-												<div id="calendar_Month"></div>
-											</div>
-										</div>
-									</div>
-
-									<div class="col-md-3">
-										<div class="panel">
-											<div class="panel-body no-padding">
-												<div id="calendar_Day"></div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- 스케줄 끝 -->
-
-					<!-- 결재 by 병호 -->
-						
+				</div>	
 				<!-- MINI BAR CHARTS -->	
 				<!-- END MINI BAR CHARTS -->
 			</div>
@@ -957,9 +943,9 @@ ul.inbox-list-message{
 
 	<!-- 공지사항 -->
 	<script
-		src="resources/assets/vendor/datatables-colreorder/dataTables.colReorder.js"></script>
+		src="../resources/assets/vendor/datatables-colreorder/dataTables.colReorder.js"></script>
 	<script
-		src="resources/assets/vendor/datatables-tabletools/js/dataTables.tableTools.js"></script>
+		src="../resources/assets/vendor/datatables-tabletools/js/dataTables.tableTools.js"></script>
 
 
 	<!-- DEMO PANEL -->
@@ -984,7 +970,409 @@ ul.inbox-list-message{
 	<!-- END DEMO PANEL -->
 	<script>
 		$(function() {
+			// sales statistic chart
+			var plot, sales, earnings;
+			sales = [ [ gt(2013, 1, 1), 54 ], [ gt(2013, 2, 1), 75 ],
+					[ gt(2013, 3, 1), 66 ], [ gt(2013, 4, 1), 80 ],
+					[ gt(2013, 5, 1), 75 ], [ gt(2013, 6, 1), 85 ],
+					[ gt(2013, 7, 1), 90 ] ];
+			earnings = [ [ gt(2013, 1, 1), 200 ], [ gt(2013, 2, 1), 600 ],
+					[ gt(2013, 3, 1), 360 ], [ gt(2013, 4, 1), 550 ],
+					[ gt(2013, 5, 1), 300 ], [ gt(2013, 6, 1), 800 ],
+					[ gt(2013, 7, 1), 900 ] ];
+			plot = $.plot($('#sales-stat'),
+			// data
+			[ {
+				data : sales,
+				label : "Sales"
+			}, {
+				data : earnings,
+				label : "Earnings",
+				yaxis : 2
+			} ],
+			// options
+			{
+				series : {
+					lines : {
+						show : true,
+						lineWidth : 2,
+						fill : false
+					},
+					points : {
+						show : true,
+						lineWidth : 1,
+						fill : true,
+						fillColor : "#fff"
+					},
+					shadowSize : 0
+				},
+				grid : {
+					hoverable : true,
+					clickable : true,
+					borderWidth : 0,
+					tickColor : "#EFF1F5",
+				},
+				colors : [ "#45AEEF", "#F89B03" ],
+				xaxis : {
+					mode : "time",
+					timezone : "browser",
+					minTickSize : [ 1, "day" ],
+					timeformat : "%a",
+					font : {
+						color : "#a0aeba"
+					},
+					tickColor : "transparent",
+					autoscaleMargin : 0.02
+				},
+				yaxis : {
+					font : {
+						color : "#a0aeba"
+					},
+				},
+				yaxes : [ {}, {
+					position : "right",
+					tickFormatter : function(val, axis) {
+						return '$' + val;
+					}
+				} ],
+				legend : {
+					show : false
+				},
+				tooltip : {
+					show : true,
+					cssClass : 'flotTip-black',
+					content : '%s: %y'
+				}
+			});
+			// get day function
+			function gt(y, m, d) {
+				return new Date(y, m - 1, d).getTime();
+			}
+			// profile completeness meter
+			var cPbar = $('.completeness-progress');
+			cPbar
+					.progressbar({
+						display_text : 'fill',
+						update : function(current_percentage) {
+							if (current_percentage == 100) {
+								$('.complete-info')
+										.addClass('text-success')
+										.html(
+												'<i class="fa fa-check-circle"></i> Hooray, it\'s done!');
+								cPbar.removeClass('progress-bar-info')
+										.addClass('progress-bar-success');
+								$('.completeness-meter .editable').editable(
+										'disable');
+							}
+						}
+					});
+			$.fn.editable.defaults.mode = 'inline';
+			$('#complete-phone-number').on('shown', function(e, editable) {
+				editable.input.$input.mask('(999) 999-9999');
+			}).on('hidden', function(e, reason) {
+				if (reason == 'save') {
+					$(this).parent().prepend('Phone: ');
+					updateProfileMeter($(this), cPbar, 10);
+				}
+			});
+			$('#complete-sex').on('hidden', function(e, reason) {
+				if (reason == 'save') {
+					$(this).parent().prepend('Sex: ');
+					updateProfileMeter($(this), cPbar, 10);
+				}
+			});
+			$('#complete-birthdate').on('hidden', function(e, reason) {
+				if (reason == 'save') {
+					$(this).parent().prepend('Birthdate: ');
+					updateProfileMeter($(this), cPbar, 10);
+				}
+			});
+			$('#complete-nickname').on('shown', function(e, editable) {
+				editable.input.$input.val('');
+			}).on('hidden', function(e, reason) {
+				if (reason == 'save') {
+					$(this).parent().prepend('Nickname: ');
+					updateProfileMeter($(this), cPbar, 10);
+				}
+			});
+			$('.completeness-meter #complete-phone-number').editable();
+			$('#complete-sex').editable({
+				source : [ {
+					value : 1,
+					text : 'Male'
+				}, {
+					value : 2,
+					text : 'Female'
+				} ]
+			});
+			$('#complete-birthdate').editable();
+			$('#complete-nickname').editable();
+			function updateProfileMeter(el, pbar, valueAdded) {
+				// update progress bar
+				pbar
+						.attr(
+								'data-transitiongoal',
+								parseInt(pbar.attr('data-transitiongoal'))
+										+ valueAdded).progressbar();
+				// update element
+				$(el).parent().find('i').removeClass('fa-circle-o').addClass(
+						'fa-check-circle');
+				$(el).parent().addClass('done');
+			}
+			// mini bar charts
+			$('#mini-bar-chart1').sparkline('html', {
+				type : 'bar',
+				barWidth : 8,
+				height : 45,
+				barColor : '#00B9EB',
+				chartRangeMin : 0,
+				chartRangeMax : 100
+			});
+			$('#mini-bar-chart2').sparkline('html', {
+				type : 'bar',
+				barWidth : 8,
+				height : 45,
+				barColor : '#EB9700',
+				chartRangeMin : 0,
+				chartRangeMax : 100
+			});
+			$('#mini-bar-chart3').sparkline('html', {
+				type : 'bar',
+				barWidth : 8,
+				height : 45,
+				barColor : '#72BB23',
+				chartRangeMin : 0,
+				chartRangeMax : 100
+			});
+			$('#mini-bar-chart4').sparkline('html', {
+				type : 'bar',
+				barWidth : 8,
+				height : 45,
+				barColor : '#FB5021',
+				chartRangeMin : 0,
+				chartRangeMax : 100
+			});
 			
+			$('.sortable-grid .sortable-item').sortable({
+				connectWith : '.sortable-grid .sortable-item',
+				handle : '.panel-heading',
+				forcePlaceholderSize : true,
+			}).disableSelection();
+			// online visitor, demo purpose
+			setInterval(function() {
+				$('.online-visitors .number').text(
+						Math.floor(Math.random() * 100));
+			}, 3000);
+			// live chat support
+			$('.table-chat-support').dataTable({
+				scrollX : false,
+				scrollY : "300px",
+				ordering : false,
+				searching : false,
+				info : false,
+				scrollCollapse : true,
+				paging : false,
+			});
+			$('.table-chat-support .page-tooltip').tooltip({
+				placement : 'bottom',
+			});
+			$('[data-toggle="popover"]')
+					.popover(
+							{
+								trigger : 'hover',
+								container : 'body',
+								html : true,
+								content : function() {
+									var visitorContent, visitorImgPath;
+									var visitorName = 'Guest';
+									if ($(this).attr('data-visitor-img') === undefined) {
+										visitorContent = '<i class="fa fa-user picture guest-avatar"></i>';
+									} else {
+										visitorName = $(this).attr(
+												'data-visitor-name');
+										visitorImgPath = $(this).attr(
+												'data-visitor-img');
+										visitorContent = '<img src="' + visitorImgPath + '" class="picture img-circle">';
+									}
+									console.log($(this).attr('data-visitor'));
+									return '<div class="online-visitor-data">'
+											+ '<div class="left">'
+											+ visitorContent
+											+ '<a href="#">Details</a>'
+											+ '</div>'
+											+ '<div class="right">'
+											+ '<div class="data">'
+											+ '<span class="label-data">Name :</span>'
+											+ '<span>'
+											+ visitorName
+											+ '</span>'
+											+ '</div>'
+											+ '<div class="data">'
+											+ '<span class="label-data">IP :</span>'
+											+ '<span><a href="#">123.111.101.76</a></span>'
+											+ '</div>'
+											+ '<div class="data">'
+											+ '<span class="label-data">Type :</span>'
+											+ '<span>Returning</span>'
+											+ '</div>' + '</div>' + '</div>';
+								}
+							});
+			var runProgressShareOnce = false;
+			$('#progress-share')
+					.bind(
+							'appear',
+							function() {
+								if (runProgressShareOnce)
+									return false;
+								$(this)
+										.each(
+												function() {
+													var $bar = $(this).find(
+															".bar");
+													var $val = $(this).find(
+															".value");
+													var perc = parseInt($val
+															.text(), 10);
+													var scale = 180 / parseInt($(
+															this).attr(
+															'data-max'));
+													$({
+														p : 0
+													})
+															.animate(
+																	{
+																		p : perc
+																	},
+																	{
+																		duration : 3000,
+																		easing : "swing",
+																		step : function(
+																				p) {
+																			$bar
+																					.css({
+																						transform : "rotate("
+																								+ (45 + (p * scale))
+																								+ "deg)",
+																					});
+																			$val
+																					.text(p | 0);
+																		}
+																	});
+												});
+								runProgressShareOnce = true;
+							});
+			var mapData = {
+				"us" : "2936",
+				"dz" : "2812",
+				"ru" : "2735",
+				"fr" : "2674",
+				"mx" : "2584",
+				"de" : "1986",
+				"br" : "1921",
+				"ca" : "1865",
+				"id" : "1352",
+				"cn" : "1322"
+			}
+			$('#map-email-opens').vectorMap({
+				map : 'world_en',
+				backgroundColor : 'transparent',
+				color : '#f2f4f6',
+				borderColor : '#D1D4D7',
+				borderOpacity : 0.5,
+				values : mapData,
+				scaleColors : [ "#E7F5FF", "#9AA9B4" ],
+				normalizeFunction : 'polynomial'
+			});
+			$('#sales-performance').sparkline('html', {
+				width : '70%',
+				height : '40px',
+				lineWidth : '2',
+				lineColor : '#00aaff',
+				fillColor : false,
+				spotRadius : '2',
+				highlightLineColor : '#aedaff',
+				highlightSpotColor : '#71aadb',
+				spotColor : false,
+				minSpotColor : false,
+				maxSpotColor : false,
+				disableInteraction : false
+			});
+			// US customer locations
+			var usMapData = {
+				"al" : "2936",
+				"ca" : "2812",
+				"fl" : "2735",
+				"ga" : "2674",
+				"il" : "2584",
+				"ma" : "1986",
+				"nv" : "1921",
+				"ny" : "1865",
+				"ok" : "1352",
+				"tx" : "1322"
+			}
+			$('#us-customers-map').vectorMap({
+				map : 'usa_en',
+				backgroundColor : '#FAFBFC',
+				color : '#f2f4f6',
+				borderColor : '#D1D4D7',
+				borderOpacity : 0.7,
+				values : usMapData,
+				scaleColors : [ "#4671E0", "#5AA6F0" ],
+				normalizeFunction : 'polynomial'
+			});
+			// age bar chart
+			Chart.defaults.global.defaultFontSize = 11;
+			
+			// gauge chart
+			
+			// sales chart
+			
+			// general config and options
+			Chart.defaults.global.defaultFontColor = '#a0aeba';
+			var chartLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+			var chartData = [123, 129, 124, 130, 132, 139, 140];
+			var chartData2 = [125, 127, 123, 132, 129, 138, 144];
+			var chartData3 = [-90, -70, -40, 35, 50, 70, 90];
+			var chartData4 = [-20, -50, -20, 15, 30, 50, 70];
+			var scalesOptions = {
+				xAxes: [
+				{
+					gridLines:
+					{
+						display: false
+					}
+				}],
+				yAxes: [
+				{
+					gridLines:
+					{
+						color: '#eff3f6',
+						drawBorder: false,
+					},
+				}]
+			};
+			
+			// horizontal bar chart
+			var ctxHorizontalBarChart = document.getElementById("horizontalbar-chart").getContext("2d");
+			var horizontalBarChart = new Chart(ctxHorizontalBarChart,
+			{
+				type: 'horizontalBar',
+				data:
+				{
+					labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+					datasets: [
+					{
+						data: [-90, -70, -40, 35, 50, 70, 90],
+						label: 'Data',
+						borderColor: 'transparent',
+						backgroundColor: 'rgba(29,187,142,.5)'
+					}]
+				},
+				options:
+				{
+					responsive: true,
+				}
+			});
 			
 		});//end of all script
 	</script>
@@ -1046,14 +1434,6 @@ ul.inbox-list-message{
 				scrollCollapse: true,
 				paging: false
 			});
-			
-			// metric's progress bar
-			$('.progress-bar').progressbar(
-			{
-				display_text: 'fill'
-			});
-			
-			
 		});
 		</script>
 

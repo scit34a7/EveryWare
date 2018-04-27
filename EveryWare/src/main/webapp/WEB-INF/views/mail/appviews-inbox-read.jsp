@@ -280,7 +280,11 @@
 														<br>
 													</span>
 													<span class="text-muted">TO: </span>&nbsp;&nbsp;
-													<span class="receiver" data-toggle="tooltip" data-title="samuel@yourdomain">${mail.recipients }</span>,
+													<span class="receiver" data-toggle="tooltip" data-title="samuel@yourdomain">${mail.recipients }</span>
+													<br>
+													<span class="text-muted">CC: </span>&nbsp;&nbsp;
+													<span class="receiver" data-toggle="tooltip" data-title="samuel@yourdomain">${mail.cc }</span>
+													
 													<!-- <span class="receiver" data-toggle="tooltip" data-title="robby@yourdomain">Robby</span> -->
 												</div>
 												<div class="btn-group">
@@ -294,7 +298,7 @@
 													<ul class="dropdown-menu pull-right" role="menu">
 														<li><a href="./forwardMail?message_name=${mail.message_name}&check=reply"><i class="fa fa-mail-reply"></i> Reply</a></li>
 														<li><a href="./forwardMail?message_name=${mail.message_name}&check=forward"><i class="fa fa-mail-forward"></i> Forward</a></li>
-														<li><a href="#"><i class="fa fa-trash"></i> Delete this message</a></li>
+														<li><a href="./deleteOneMail?message_name=${mail.message_name}"><i class="fa fa-trash"></i> Delete this message</a></li>
 													</ul>
 												</div>
 											</div>

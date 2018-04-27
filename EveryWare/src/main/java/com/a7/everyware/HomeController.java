@@ -1,6 +1,7 @@
 package com.a7.everyware;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
@@ -44,7 +45,9 @@ public class HomeController {
 			@RequestParam(value="boardFolder_id", defaultValue="1") int boardFolder_id
 			, Model model, HttpSession session) {
 		
-		ArrayList<BoardVO> boardlist = boardDAO.listBoardMain(boardFolder_id);
+		List<BoardVO> boardlist = boardDAO.listBoardMain(boardFolder_id);
+		
+		boardlist =  boardlist.subList(0, 9);
 		
 		model.addAttribute("boardlist", boardlist);
 		

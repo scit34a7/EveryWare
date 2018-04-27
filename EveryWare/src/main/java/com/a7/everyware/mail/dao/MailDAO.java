@@ -242,4 +242,13 @@ public class MailDAO {
 		return addressBook ; 
 	}
 
+	public int countUnread(String repository){
+		
+		int intHandler = 0;
+		
+		MailMapper mapper = sqlSession.getMapper(MailMapper.class);
+		intHandler = mapper.countUnread(repository);
+		
+		return intHandler;
+	}
 }

@@ -125,11 +125,11 @@
 				<ul class="nav" id="sidebar-nav-menu">
 					<li class="menu-group">Main</li>
 					<li class="panel"><a href="index" data-toggle="collapse"
-						data-parent="#sidebar-nav-menu" class="active"><i
+						data-parent="#sidebar-nav-menu" class="collapsed"><i
 							class="ti-dashboard"></i> <span class="title">MainHome</span> <i
 							class="icon-submenu ti-angle-left"></i></a></li>
 					<li class="panel"><a href="#subLayouts" data-toggle="collapse"
-						data-parent="#sidebar-nav-menu" class="collapsed"><i
+						data-	="#sidebar-nav-menu" class="collapsed"><i
 							class="ti-layout"></i> <span class="title">e메일</span> <i
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="subLayouts" class="collapse">

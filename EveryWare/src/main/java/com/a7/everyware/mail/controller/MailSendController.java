@@ -80,10 +80,13 @@ public class MailSendController {
 		
 		String to = req.getParameter("mailRecipients");
 		
-		// for mailbox for sending 
+		// for mailbox for sending 보낸편지함에 대한 설정 
 		to += sessionUser.getAttribute("userName")+"<"+from+">";
 		
-		String cc = req.getParameter("mailRecipients_refer");
+		String cc = req.getParameter("mailCCs");
+		
+		System.out.println("cc 확인: "+cc);
+		
 		String subject = req.getParameter("mailSubject");
 		String body = req.getParameter("mailContent_summer");
 		String importance = req.getParameter("mailImportance");
@@ -123,14 +126,19 @@ public class MailSendController {
 			
 			message.setFrom(new InternetAddress(from));
 			
-			
 			//Groupe Mail Sending 일 경우에, 그룹으로 전송된 것을 InternetAddress로 파싱 
 			
 			InternetAddress[] tos = MailUtil.parse(to);
 			//InternetAddress[] tos = InternetAddress.parse(to);
-
 			
 			message.setRecipients(Message.RecipientType.TO, tos);
+
+			//For reference
+			InternetAddress[] refers = MailUtil.parse(cc);
+			
+			message.setRecipients(Message.RecipientType.CC, refers);
+			
+			System.out.println("refers: "+refers);
 			
 			System.out.println("====================================================");
 			

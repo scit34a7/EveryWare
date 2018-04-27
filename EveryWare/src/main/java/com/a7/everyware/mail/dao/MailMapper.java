@@ -55,4 +55,6 @@ public interface MailMapper {
 	
 	public ArrayList<AddressBook> selectAddress(String repository);
 	
+	public int countUnread(String repository);
+	
 }
