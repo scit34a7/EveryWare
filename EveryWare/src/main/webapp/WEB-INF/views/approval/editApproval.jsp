@@ -205,8 +205,8 @@
 							</a>
 							<div id="approval" class="collapse in"><!-- collapse : 서브메뉴 닫혀있음 collapse in : 서브메뉴 열려있음 -->
 								<ul class="submenu">
-									<li><a href="myApproval">내 결재</a></li>
-									<li ><a href="writeApproval" class="active">결재 작성</a></li>
+									<li><a href="myApproval" class="active">내 결재</a></li>
+									<li ><a href="writeApproval">결재 작성</a></li>
 									<li><a href="approvalFormat">결재 양식 작성</a></li>
 								</ul>
 									
@@ -268,7 +268,8 @@
 						</div>
 						<ul class="breadcrumb">
 							<li><a href="../index"><i class="fa fa-home"></i>홈</a></li>
-							<li><a href="#">결재 작성</a></li>
+							<li><a href="myApproval">내 결재</a></li>
+							<li><a href="#">반려된 결재 수정</a></li>
 						</ul>
 					</div>
 					
@@ -284,7 +285,7 @@
 									<div class="panel-body">
 									
 										<!-- 폼 태그 -->
-										<form action="insertApproval" method="post" enctype="multipart/form-data">
+										<form action="editApproval" method="post" enctype="multipart/form-data">
 										<!-- <form id="insertApproval" method="post" enctype="multipart/form-data" novalidate>	 -->
 											<div class="form-group">
 												<!-- <label class="control-label">결재 제목</label> -->
@@ -292,35 +293,12 @@
 												
 												
 												
-												<div class="btn-group">
-													<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-														양식 불러오기<span class="caret"></span>
-													</button>
-													
-													<ul class="dropdown-menu dropdown-menu-right" role="menu">
-														<c:choose>
-															<c:when test="${formatList != null}">
-																<c:forEach var="format" items="${formatList}">
-																
-																	<li>
-																		<a href="loadFormat?approvalFormat_id=${format.approvalFormat_id}">
-																			${format.approvalFormat_name}
-																		</a>
-																	</li>
-																</c:forEach>
-															</c:when>
-															<c:otherwise>
-																<li>저장된 양식이 없습니다.</li>
-															</c:otherwise>
-														</c:choose>
-														
-													</ul>
-												</div>
+												
 												
 												<br><br>
 												
 												<label>결재 제목</label>
-												<input type="text" class="form-control" id="eApproval_title" name="eApproval_title" value="${title}" required>
+												<input type="text" class="form-control" id="eApproval_title" name="eApproval_title" value="${approval.eApproval_title}" required>
 											</div>
 											
 											<div class="form-group">
@@ -329,9 +307,7 @@
 												<div class="container-fluid">
 													<textarea class="summernote" name ="eApproval_content_string" id="eApproval_content_string">
 														
-														<c:if test="${content != null}">
-															${content}
-														</c:if>
+														${approval.eApproval_content2}
 														
 														
 													</textarea>
@@ -375,19 +351,19 @@
 																		
 																			<td>
 																				<div class="form-group">																					
-																					<input type="text" id="eApprovalLine_person1" readonly="readonly">
+																					<input type="text" id="eApprovalLine_person1" readonly="readonly" value="${line.eApprovalLine_person1}" required>
 																				</div>																			
 																			</td>
 																			
 																			<td>
 																				<div class="form-group">																					
-																					<input type="text" id="eApprovalLine_person2" readonly="readonly">
+																					<input type="text" id="eApprovalLine_person2" readonly="readonly" value="${line.eApprovalLine_person2}" required>
 																				</div>																			
 																			</td>
 																			
 																			<td>
 																				<div class="form-group">																					
-																					<input type="text" id="eApprovalLine_person3" readonly="readonly">
+																					<input type="text" id="eApprovalLine_person3" readonly="readonly" value="${line.eApprovalLine_person3}" required>
 																				</div>																			
 																			</td>																			
 																			
@@ -413,9 +389,9 @@
 												<div class="col-md-6">
 													<div class="form-group">
 														<div class="input-daterange input-group" data-provide="datepicker">
-															<input type="text" class="input-sm form-control" name="eApproval_sDate" required>
+															<input type="text" class="input-sm form-control" name="eApproval_sDate" value="${approval.eApproval_sDate}" required>
 															<span class="input-group-addon">to</span>
-															<input type="text" class="input-sm form-control" name="eApproval_fDate" required>
+															<input type="text" class="input-sm form-control" name="eApproval_fDate" value="${approval.eApproval_fDate}" required>
 														</div>
 													</div>
 												</div>
@@ -428,7 +404,7 @@
 												<label>첨부파일</label>
 												<br>
 												<div class="col-md-6">
-													<input type="file" class="dropify" name="upload">
+													<input type="file" class="dropify" name="upload" value="${approval.eApproval_original}">
 												</div>
 											</div>
 											

@@ -646,17 +646,200 @@
 					</div>
 					<!-- 스케줄 끝 -->
 
-					<div class="row sortable-grid">
-						<!-- CHAT SUPPORT -->
-						<div class="col-md-12 sortable-item">
+
+					<!-- 결재 by 병호 -->
+					
+					<div class="col-md-6">
+										<table class="table table-striped">
+									
+											<thead>
+												<tr>
+													<th>결재번호</th>
+													<th>제목</th>
+													<!-- <th>내용</th> -->
+													<th>등록날짜</th>
+													<th>마감날짜</th>
+													<th>첨부파일</th>
+													<th>진행률</th>
+													<th>비고</th>
+												</tr>
+											</thead>
+											<tbody>						
+											
+										
+												<c:if test="${approvalList_now != null}">
+													<c:forEach var="eApp" items="${approvalList_now}">
+														<tr>
+															<td>${eApp.eApproval_id}		</td>
+															<td>
+																<a href="readApproval?eApproval_id=${eApp.eApproval_id}&isApproval=true">
+																	${eApp.eApproval_title}
+																</a>
+															</td>
+															<%-- <td>${eApp.eApproval_content}	</td> --%>
+															<td>${eApp.eApproval_sDate}		</td>
+															<td>${eApp.eApproval_fDate}		</td>
+															<td>
+															<c:choose>
+																<c:when test="${eApp.eApproval_original != null}">
+																	${eApp.eApproval_original}
+																</c:when>
+																<c:otherwise>
+																	-
+																</c:otherwise>
+															</c:choose>
+															</td>
+															<td>
+																<div id="project-progress" class="progress progress-transparent custom-color-orange2">
+																	<div class="progress-bar" data-transitiongoal="${eApp.eApproval_saved}"></div>
+																</div>
+															</td>
+															<td>${eApp.eApproval_status}</td>
+														
+														</tr>
+													</c:forEach>		
+												</c:if>
+												
+												<c:if test="${approvalList_ban != null}">
+												
+													<!-- 반려 -->
+													<c:forEach var="eApp" items="${approvalList_ban}">
+														<tr>
+															<td>${eApp.eApproval_id}		</td>
+															<td>
+																<a href="readApproval?eApproval_id=${eApp.eApproval_id}&ban=true">
+																	${eApp.eApproval_title}
+																</a>
+															</td>
+															<td>${eApp.eApproval_sDate}		</td>
+															<td>${eApp.eApproval_fDate}		</td>
+															<td>
+															<c:choose>
+																<c:when test="${eApp.eApproval_original != null}">
+																	${eApp.eApproval_original}
+																</c:when>
+																<c:otherwise>
+																	-
+																</c:otherwise>
+															</c:choose>
+															</td>
+															<td>
+																<div id="project-progress" class="progress progress-transparent custom-color-orange2">
+																	<div class="progress-bar" data-transitiongoal="${eApp.eApproval_saved}"></div>
+																</div>
+															</td>
+															<td>${eApp.eApproval_status}</td>
+														
+														</tr>
+													</c:forEach>
+												</c:if>
+												
+									
+											
+											
+										</tbody>
+										</table>
+					
+					
+					
 							<div class="panel">
 								<div class="panel-heading">
-									<h3 class="panel-title">Everware Board</h3>
+									<h3 class="panel-title">처리해야할 결재</h3>
 								</div>
-								<div class="panel-body">
+								
 
-									<div class="col-md-12">
-										<table
+									
+										<table class="table table-striped">
+									
+											<thead>
+												<tr>
+													<th>결재번호</th>
+													<th>제목</th>
+													<!-- <th>내용</th> -->
+													<th>등록날짜</th>
+													<th>마감날짜</th>
+													<th>첨부파일</th>
+													<th>진행률</th>
+													<th>비고</th>
+												</tr>
+											</thead>
+											<tbody>						
+											
+										
+												<c:if test="${approvalList_now != null}">
+													<c:forEach var="eApp" items="${approvalList_now}">
+														<tr>
+															<td>${eApp.eApproval_id}		</td>
+															<td>
+																<a href="readApproval?eApproval_id=${eApp.eApproval_id}&isApproval=true">
+																	${eApp.eApproval_title}
+																</a>
+															</td>
+															<%-- <td>${eApp.eApproval_content}	</td> --%>
+															<td>${eApp.eApproval_sDate}		</td>
+															<td>${eApp.eApproval_fDate}		</td>
+															<td>
+															<c:choose>
+																<c:when test="${eApp.eApproval_original != null}">
+																	${eApp.eApproval_original}
+																</c:when>
+																<c:otherwise>
+																	-
+																</c:otherwise>
+															</c:choose>
+															</td>
+															<td>
+																<div id="project-progress" class="progress progress-transparent custom-color-orange2">
+																	<div class="progress-bar" data-transitiongoal="${eApp.eApproval_saved}"></div>
+																</div>
+															</td>
+															<td>${eApp.eApproval_status}</td>
+														
+														</tr>
+													</c:forEach>		
+												</c:if>
+												
+												<c:if test="${approvalList_ban != null}">
+												
+													<!-- 반려 -->
+													<c:forEach var="eApp" items="${approvalList_ban}">
+														<tr>
+															<td>${eApp.eApproval_id}		</td>
+															<td>
+																<a href="readApproval?eApproval_id=${eApp.eApproval_id}&ban=true">
+																	${eApp.eApproval_title}
+																</a>
+															</td>
+															<td>${eApp.eApproval_sDate}		</td>
+															<td>${eApp.eApproval_fDate}		</td>
+															<td>
+															<c:choose>
+																<c:when test="${eApp.eApproval_original != null}">
+																	${eApp.eApproval_original}
+																</c:when>
+																<c:otherwise>
+																	-
+																</c:otherwise>
+															</c:choose>
+															</td>
+															<td>
+																<div id="project-progress" class="progress progress-transparent custom-color-orange2">
+																	<div class="progress-bar" data-transitiongoal="${eApp.eApproval_saved}"></div>
+																</div>
+															</td>
+															<td>${eApp.eApproval_status}</td>
+														
+														</tr>
+													</c:forEach>
+												</c:if>
+												
+									
+											
+											
+										</tbody>
+										</table>
+									
+										<!-- <table
 											class="table table-minimal table-chat-support datatable">
 											<thead>
 												<tr>
@@ -786,13 +969,20 @@
 													</td>
 												</tr>
 											</tbody>
-										</table>
-									</div>
+										</table> -->
+										
+										
+									
 									<!-- end of board we will use -->
-								</div>
+								
 							</div>
-						</div>
-					</div>
+						
+					
+					
+					<!-- /결재 by 병호 -->
+					
+					
+					
 					<!-- END CHAT SUPPORT -->
 				</div>
 				<div class="row sortable-grid">

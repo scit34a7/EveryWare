@@ -344,7 +344,7 @@
 														</ul>
 													</c:if>
 													<c:if test="${ban eq true}">
-														<a>
+														<a href="editApproval?eApproval_id=${approval.eApproval_id}">
 															<button type="button" class="btn btn-primary">
 																<i class="fa fa-pencil"></i>수정하기
 															</button>
@@ -418,7 +418,7 @@
 															
 														</div>
 														<div class="panel-footer">
-															<a href="editApproval">
+															<a href="editApproval?eApproval_id=${approval.eApproval_id}">
 																<button type="button" class="btn btn-primary">
 																	
 																		<i class="fa fa-pencil"></i>수정하기
