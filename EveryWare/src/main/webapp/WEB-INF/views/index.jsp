@@ -598,28 +598,41 @@ ul.inbox-list-message{
 								<div class="panel-body" >
 
 									<div class="col-md-2" style = "text-align:center;">
+											<c:choose>
+											<c:when test="${attendCheck == true}">
 											<form action="support/attendCheck" method="POST"
 												id="attendInForm">
 												<button type="submit" class="btn btn-primary" id="attendIn">
 													<i class="ti-alarm-clock award-icon" style = "font-size:15px;"></i>출근
 												</button>
 											</form>
-									</div>
-
-									<div class="col-md-8">
+											</c:when>
+									
+											<c:otherwise>
+												<form action="support/attendOut" method="POST"
+												id="attendOutForm">
+												<button type="submit" class="btn btn-danger" id="attendOut">
+													<i class="ti-location-arrow award-icon" style = "font-size:15px;"></i>퇴근
+												</button>
+												</form>
+											</c:otherwise>
+											</c:choose>
+									</div>	
+									<div class="col-md-7">
 										<center>
 											<h4 id="liveClock"></h4>
 										</center>
 									</div>
 
-									<div class="col-md-2">
-										<div >
-											<form action="support/attendOut" method="POST"
-												id="attendOutForm">
-												<button type="submit" class="btn btn-danger" id="attendOut">
-													<i class="ti-location-arrow award-icon" style = "font-size:15px;"></i>퇴근
-												</button>
-											</form>
+									<div class="col-md-3">
+										<div>
+											<c:choose>
+												<c:when test="${attendCheck == true}">
+										
+													${userName}님.<br>출근하세요.
+											
+												</c:when>
+											</c:choose>	
 										</div>
 									</div>
 								</div>

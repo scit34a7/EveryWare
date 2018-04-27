@@ -28,6 +28,15 @@ public class SupportDAO {
 	SqlSession sqlSession;
 	
 
+	//메인용 근태
+	public ArrayList<AttendVO> attendCheckMain(String user_id){
+		SupportMapper mapper = sqlSession.getMapper(SupportMapper.class);
+		
+		ArrayList<AttendVO> attendListMain = mapper.attendCheckMain(user_id);
+		return attendListMain;
+		
+	}
+	
 	//출근 체크
 	public int attendCheck(AttendVO attend){
 		

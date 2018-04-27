@@ -13,6 +13,9 @@ import com.a7.everyware.support.vo.AttendVO;
 //업무지원
 public interface SupportMapper {
 
+	//메인용 근태
+	public ArrayList<AttendVO> attendCheckMain(String user_id);
+	
 	//출근 체크
 	public int attendCheck(AttendVO attend);
 	

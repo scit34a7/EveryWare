@@ -21,6 +21,8 @@ import com.a7.everyware.approval.vo.ApprovalLineVO;
 import com.a7.everyware.approval.vo.ApprovalVO;
 import com.a7.everyware.board.dao.BoardDAO;
 import com.a7.everyware.board.vo.BoardVO;
+import com.a7.everyware.support.dao.SupportDAO;
+import com.a7.everyware.support.vo.AttendVO;
 
 @Controller
 public class HomeController {
@@ -32,6 +34,8 @@ public class HomeController {
 	BoardDAO boardDAO;
 	@Autowired
 	ApprovalDAO approvalDAO;
+	@Autowired
+	SupportDAO supportDAO;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -45,6 +49,7 @@ public class HomeController {
 			@RequestParam(value="boardFolder_id", defaultValue="1") int boardFolder_id
 			, Model model, HttpSession session) {
 		
+		//공지사항
 		List<BoardVO> boardlist = boardDAO.listBoardMain(boardFolder_id);
 		
 		boardlist =  boardlist.subList(0, 9);
@@ -52,10 +57,29 @@ public class HomeController {
 		model.addAttribute("boardlist", boardlist);
 		
 		
-		
-		/*결재 관련 시작*/
 		//로그인 아이디 세팅
 		String user_id = (String) session.getAttribute("userId");
+		ArrayList<AttendVO> attendMainList = supportDAO.attendCheckMain(user_id);
+				
+		
+		//근태
+		//출근여부 판단
+		boolean attendCheck;
+		
+		if(attendMainList == null || attendMainList.isEmpty()){
+			attendCheck = true;
+		}else{
+			attendCheck = false;
+		}
+		
+		model.addAttribute("attendCheck", attendCheck);
+			
+				
+		
+		
+		/*결재 관련 시작*/
+		//로그인 아이디 세팅: 위 근태위에서 세팅
+		
 		
 		//내가 결재라인에 올라와 있는 결재
 		ArrayList<ApprovalVO> approvalList_toMe = approvalDAO.findApprovalToMe(user_id);

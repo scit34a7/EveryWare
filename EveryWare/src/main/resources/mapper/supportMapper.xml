@@ -70,6 +70,21 @@
 		
 	</insert>
 
+
+	<!-- 메인용 근태 -->
+	<select id="attendCheckMain" parameterType="String" resultType="AttendVO">
+	select
+			*
+		from
+			attend_tb
+		where
+			attend_check = '출근'
+			and user_id = #{user_id}
+			and to_char(attend_time, 'YY-MM-DD') = to_char(sysdate, 'YY-MM-DD')
+	
+	</select>
+
+
 	<!-- 근태 읽기 user_id로 ** 근태 현황 출력시 이용-->
 	<select id="attendListGet" parameterType="String" resultType="AttendVO">
 		            
