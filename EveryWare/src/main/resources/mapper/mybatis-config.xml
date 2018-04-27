@@ -13,7 +13,7 @@
 		<typeAlias type="com.a7.everyware.approval.vo.ApprovalVO" alias="ApprovalVO" />
 		<typeAlias type="com.a7.everyware.approval.vo.ApprovalLineVO" alias="ApprovalLineVO" />
 		<typeAlias type="com.a7.everyware.approval.vo.ApprovalHistoryVO" alias="ApprovalHistoryVO" />
-		<typeAlias type="com.a7.everyware.approval.vo.ApprovalFormatVO" alias="approvalFormatVO" />
+		<typeAlias type="com.a7.everyware.approval.vo.ApprovalFormatVO" alias="ApprovalFormatVO" />
 		<typeAlias type="com.a7.everyware.support.vo.AttendVO" alias="AttendVO" />
 		
 		

@@ -82,262 +82,304 @@ public class HomeController {
 		
 		
 		//내가 결재라인에 올라와 있는 결재
-		ArrayList<ApprovalVO> approvalList_toMe = approvalDAO.findApprovalToMe(user_id);
-		
-	
-		//지금 내가 결재 해야될 문서
-		ArrayList<ApprovalVO> approvalList_now = new ArrayList<ApprovalVO>();
-		
-		//반려된 문서
-		ArrayList<ApprovalVO> approvalList_ban = new ArrayList<ApprovalVO>();
-		
-		//approvalList_toMe를  ( past / now / future )로 나누는 과정
-		for(ApprovalVO app : approvalList_toMe){
-			
-			//진행도
-			//진행도를 체크하기위해 히스토리 가져오기
-			ArrayList<ApprovalHistoryVO> approvalHistoryList2 = approvalDAO.findApprovalHistory(app.geteApproval_id());
-			int count = 0;		//진행도 계산을위해 승인 받은 기록 확인
-			for(ApprovalHistoryVO history : approvalHistoryList2){
-				if(history.geteHistory_content().equals("승인")){
-					count ++;
-				}
-			}
-			
-			int progress = count * 33;		//진행률
-			if(count == 3){
-				progress = 100;
-			}
-			app.seteApproval_saved(Integer.toString(progress));
-			//진행도 끝
-			
-			
-			
-			
-			//결재 문서에 결재라인 불러오기
-			ApprovalLineVO line = approvalDAO.findApprovalLineById2(app.geteApprovalLine_id());
-			
-			logger.debug("Line : {}", line);
-			
-			//결재 문서의 히스토리 불러오기
-			ArrayList<ApprovalHistoryVO> approvalHistoryList = approvalDAO.findApprovalHistory(app.geteApproval_id());
-			
-			//내가 몇번째 결재자인지에 대한 정보 담는 변수
-			int order = 0;
-			if(line.geteApprovalLine_person1().equals(user_id)){
+				ArrayList<ApprovalVO> approvalList_toMe = approvalDAO.findApprovalToMe(user_id);
 				
-				order = 1;
-			}else if(line.geteApprovalLine_person2().equals(user_id)){
+				//내가 이미 결재한 문서
+				ArrayList<ApprovalVO> approvalList_past = new ArrayList<ApprovalVO>();
+				//지금 내가 결재 해야될 문서
+				ArrayList<ApprovalVO> approvalList_now = new ArrayList<ApprovalVO>();
+				//결재 해야될 문서(아직 앞라인에서 승인이 안난 문서)
+				ArrayList<ApprovalVO> approvalList_future = new ArrayList<ApprovalVO>();
+				//반려된 문서
+				ArrayList<ApprovalVO> approvalList_ban = new ArrayList<ApprovalVO>();
 				
-				order = 2;
-			}else{
-				
-				order = 3;
-			}
-			logger.debug("person1{}", line.geteApprovalLine_person1());
-			logger.debug("person2{}", line.geteApprovalLine_person2());
-			logger.debug("person3{}", line.geteApprovalLine_person3());
-			logger.debug("login_id{}", user_id);
-			
-			logger.debug("order:{}", order);
-			
-			
-		
-			switch (order) {
-			
-				case 1:	
-					//첫번째 결재자인 경우
-					//결재 문서에대한 히스토리
-					logger.debug("order:1");
+				//approvalList_toMe를  ( past / now / future )로 나누는 과정
+				for(ApprovalVO app : approvalList_toMe){
 					
-					for(ApprovalHistoryVO history : approvalHistoryList){
+					//진행도
+					//진행도를 체크하기위해 히스토리 가져오기
+					ArrayList<ApprovalHistoryVO> approvalHistoryList2 = approvalDAO.findApprovalHistory(app.geteApproval_id());
+					int count = 0;		//진행도 계산을위해 승인 받은 기록 확인
+					for(ApprovalHistoryVO history : approvalHistoryList2){
+						if(history.geteHistory_content().equals("승인")){
+							count ++;
+						}
+					}
+					
+					int progress = count * 33;		//진행률
+					if(count == 3){
+						progress = 100;
+					}
+					app.seteApproval_saved(Integer.toString(progress));
+					//진행도 끝
+					
+					
+					
+					
+					//결재 문서에 결재라인 불러오기
+					ApprovalLineVO line = approvalDAO.findApprovalLineById2(app.geteApprovalLine_id());
+					
+					//결재 문서의 히스토리 불러오기
+					ArrayList<ApprovalHistoryVO> approvalHistoryList = approvalDAO.findApprovalHistory(app.geteApproval_id());
+					
+					//내가 몇번째 결재자인지에 대한 정보 담는 변수
+					int order = 0;
+					if(line.geteApprovalLine_person1().equals(user_id)){
 						
+						order = 1;
+					}else if(line.geteApprovalLine_person2().equals(user_id)){
 						
-						logger.debug("history : {}", history);
+						order = 2;
+					}else{
 						
-						if(history.getUser_id().equals(line.geteApprovalLine_person1()) && history.geteHistory_content().equals("승인")){
-							//내가 승인 한경우
-							logger.debug("1111111111111111111111111111111111111111111111");
-							
-
-						}else if(history.getUser_id().equals(line.geteApprovalLine_person1()) && history.geteHistory_content().equals("반려")){
-							//내가 반려 한경우
-							logger.debug("222222222222222222222222222222222222222222222222222222222222222222");
-							
-							
-						}else if(history.getUser_id().equals(line.geteApprovalLine_person1()) && history.geteHistory_content().equals("거절")){
-							//내가 거절 한경우
-							logger.debug("333333333333333333333333333333333333333333333333333333333333333333");
+						order = 3;
+					}
+					logger.debug("person1{}", line.geteApprovalLine_person1());
+					logger.debug("person2{}", line.geteApprovalLine_person2());
+					logger.debug("person3{}", line.geteApprovalLine_person3());
+					logger.debug("login_id{}", user_id);
+					
+					logger.debug("order:{}", order);
+					
+					switch (order) {
 						
-							
-						}else{
-							logger.debug("444444444444444444444444444444444444444444444444444444444");
+					case 1:
+						
+						//첫번째 결재자인 경우
+						//결재 문서에대한 히스토리
+						logger.debug("order:{}", order);
+						if(approvalHistoryList == null || approvalHistoryList.isEmpty()){
+							logger.debug("111111111111111111111111111");
 							approvalList_now.add(app);
+							break;
+						}
+						
+						for(ApprovalHistoryVO history : approvalHistoryList){
+							
+							if(!user_id.equals(history.getUser_id()) && history.geteHistory_content().equals("반려")){
+								continue;
+							}
+							
+							
+							logger.debug("history : {}", history);
+							
+							
+							
+							if(history.getUser_id().equals(line.geteApprovalLine_person1()) && history.geteHistory_content().equals("승인")){
+								//내가 승인 한경우
+								logger.debug("order:1 person1 승인!");
+								approvalList_past.add(app);
+								break;
+							}else if(history.getUser_id().equals(line.geteApprovalLine_person1()) && history.geteHistory_content().equals("반려")){
+								//내가 반려 한경우
+								approvalList_future.add(app);
+								break;
+							}else if(history.getUser_id().equals(line.geteApprovalLine_person1()) && history.geteHistory_content().equals("거절")){
+								//내가 반려 한경우
+								approvalList_past.add(app);
+								break;
+							}else{
+								logger.debug("2222222222222222222222222222222222");
+								approvalList_now.add(app);
+							}
+							
+							
+							
+							
+						}
+					
+						
+						
+						break;
+						
+					case 2:
+						
+						//첫번째 결재자의 승인 여부
+						boolean isApproval2_1 = false;
+						//두번째 결재자(나)의 승인 형태
+						String isApproval2_2 = "";
+						
+						for(ApprovalHistoryVO history : approvalHistoryList){
+							
+							if(!user_id.equals(history.getUser_id()) && history.geteHistory_content().equals("반려")){
+								continue;
+							}
+							
+							
+							if(history.getUser_id().equals(line.geteApprovalLine_person1()) && history.geteHistory_content().equals("승인")){
+								//첫번째 결재자 승인
+								isApproval2_1 = true;
+								break;
+							}
+						}
+						
+						for(ApprovalHistoryVO history : approvalHistoryList){
+							
+							if(!user_id.equals(history.getUser_id()) && history.geteHistory_content().equals("반려")){
+								continue;
+							}
+							
+							
+							if(history.getUser_id().equals(line.geteApprovalLine_person2()) && history.geteHistory_content().equals("승인")){
+								//내가 승인
+								isApproval2_2 = "승인";
+								break;
+							}
+							
+							if(history.getUser_id().equals(line.geteApprovalLine_person2()) && history.geteHistory_content().equals("반려")){
+								//내가 반려
+								isApproval2_2 = "반려";
+								break;
+							}
+							
+							if(history.getUser_id().equals(line.geteApprovalLine_person2()) && history.geteHistory_content().equals("거절")){
+								//내가 거절
+								isApproval2_2 = "거절";
+								break;
+							}
+							
+							
+							
+							
 						}
 						
 						
-					}
-				
-					
-					break;
-				
-			case 2:
-				logger.debug("order:2");
-				//첫번째 결재자의 승인 여부
-				boolean isApproval2_1 = false;
-				//두번째 결재자(나)의 승인 형태
-				String isApproval2_2 = "";
-				
-				for(ApprovalHistoryVO history : approvalHistoryList){
-					if(history.getUser_id().equals(line.geteApprovalLine_person1()) && history.geteHistory_content().equals("승인")){
-						//첫번째 결재자 승인
-						isApproval2_1 = true;
+						if(!isApproval2_1){
+							//첫번재 결재자가 승인을 안한경우
+							approvalList_future.add(app);
+						}else{
+							if(isApproval2_2.equals("반려")){
+								//내가 반려 한 경우
+								approvalList_future.add(app);
+								
+							}else if(isApproval2_2.equals("거절") || isApproval2_2.equals("승인")){
+								//내가 승인, 거절
+								
+								approvalList_past.add(app);
+							}else{
+								
+								approvalList_now.add(app);
+							}
+						}
+						
+								
 						break;
-					}
-				}
-				
-				for(ApprovalHistoryVO history : approvalHistoryList){
-					if(history.getUser_id().equals(line.geteApprovalLine_person2()) && history.geteHistory_content().equals("승인")){
-						//내가 승인
-						isApproval2_2 = "승인";
-						break;
-					}else if(history.getUser_id().equals(line.geteApprovalLine_person2()) && history.geteHistory_content().equals("반려")){
-						//내가 반려
-						isApproval2_2 = "반려";
-						break;
-					}else if(history.getUser_id().equals(line.geteApprovalLine_person2()) && history.geteHistory_content().equals("거절")){
-						//내가 거절
-						isApproval2_2 = "거절";
-						break;
-					}
-					
-					
-					
-					
-				}
-				
-				
-				if(!isApproval2_1){
-					//첫번재 결재자가 승인을 안한경우
-					
-				}else{
-					if(isApproval2_2.equals("반려")){
-						//내가 반려 한 경우
+									
+					case 3:
+						
+						//두번째 결재자의 승인 여부
+						boolean isApproval3_2 = false;
+						//세번째 결재자의 승인 여부
+						String isApproval3_3 = "";
 						
 						
-					}else if(isApproval2_2.equals("거절")){
-						//거절
 						
-					}else{
-						//내가 결제할 차례
-						approvalList_now.add(app);
-					}
-				}
-				
-						
-				break;
+						for(ApprovalHistoryVO history : approvalHistoryList){
 							
-			case 3:
-				logger.debug("order:3");
-				//두번째 결재자의 승인 여부
-				boolean isApproval3_2 = false;
-				//세번째 결재자의 승인 여부
-				String isApproval3_3 = "";
-				
-				
-				
-				for(ApprovalHistoryVO history : approvalHistoryList){
-					if(history.getUser_id().equals(line.geteApprovalLine_person2()) && history.geteHistory_content().equals("승인")){
-						//두번째 결재자 승인
-						isApproval3_2 = true;
-						break;
-					}
-				}
-				
-				for(ApprovalHistoryVO history : approvalHistoryList){
-					if(history.getUser_id().equals(line.geteApprovalLine_person3()) && history.geteHistory_content().equals("승인")){
-						//세번째(나) 결재자 승인
-						isApproval3_3 = "승인";
-						break;
-					}else if(history.getUser_id().equals(line.geteApprovalLine_person3()) && history.geteHistory_content().equals("반려")){
-						//세번째(나) 결재자 승인
-						isApproval3_3 = "반려";
-						break;
-					}else if(history.getUser_id().equals(line.geteApprovalLine_person3()) && history.geteHistory_content().equals("거절")){
-						//세번째(나) 결재자 승인
-						isApproval3_3 = "거절";
-						break;
-					}
-				}
-				
-				
-				if(!isApproval3_2){
-					//전 결재자가 승인 안한경우
-					
-				
-				}else{
-					if(isApproval3_3.equals("반려")){
-						//반려
+							if(!user_id.equals(history.getUser_id()) && history.geteHistory_content().equals("반려")){
+								continue;
+							}
+							
+							
+							if(history.getUser_id().equals(line.geteApprovalLine_person2()) && history.geteHistory_content().equals("승인")){
+								//두번째 결재자 승인
+								isApproval3_2 = true;
+								break;
+							}
+						}
 						
+						for(ApprovalHistoryVO history : approvalHistoryList){
+							
+							
+							if(!user_id.equals(history.getUser_id()) && history.geteHistory_content().equals("반려")){
+								continue;
+							}
+							
+							if(history.getUser_id().equals(line.geteApprovalLine_person3()) && history.geteHistory_content().equals("승인")){
+								//세번째(나) 결재자 승인
+								isApproval3_3 = "승인";
+								break;
+							}
+							
+							if(history.getUser_id().equals(line.geteApprovalLine_person3()) && history.geteHistory_content().equals("반려")){
+								//세번째(나) 결재자 승인
+								isApproval3_3 = "반려";
+								break;
+							}
+							
+							if(history.getUser_id().equals(line.geteApprovalLine_person3()) && history.geteHistory_content().equals("거절")){
+								//세번째(나) 결재자 승인
+								isApproval3_3 = "거절";
+								break;
+							}
+						}
+						
+						
+						if(!isApproval3_2){
+							//전 결재자가 승인 안한경우
+							approvalList_future.add(app);
+						
+						}else{
+							if(isApproval3_3.equals("반려")){
+								//반려
+								approvalList_future.add(app);
+							
+							}else if(isApproval3_3.equals("승인") || isApproval3_3.equals("거절")){
+								//승인, 거절
+								approvalList_past.add(app);
+							}else{
+								approvalList_now.add(app);
+							}
+						}
+						
+						break;
 					
-					}else if(isApproval3_3.equals("거절")){
-						//거절
+					}//switch
 					
-					}else{
-						approvalList_now.add(app);
+					
+					
+					
+					
+					
+				}//for
+				
+				
+				ArrayList<ApprovalVO> approvalList_fromMe = approvalDAO.findApprovalFromMe(user_id);
+				
+				
+				for(ApprovalVO app : approvalList_fromMe){
+					//진행도
+					//진행도를 체크하기위해 히스토리 가져오기
+					ArrayList<ApprovalHistoryVO> approvalHistoryList3 = approvalDAO.findApprovalHistory(app.geteApproval_id());
+					int count = 0;		//진행도 계산을위해 승인 받은 기록 확인
+					for(ApprovalHistoryVO history : approvalHistoryList3){
+						if(history.geteHistory_content().equals("승인")){
+							count ++;
+						}
 					}
+					
+					int progress = count * 33;		//진행률
+					if(count == 3){
+						progress = 100;
+					}
+					app.seteApproval_saved(Integer.toString(progress));
+					//진행도 끝
 				}
 				
-				break;
-			
-			default:
-				logger.debug("switch 디폴트");
-			
-			}//switch
-			
-			
-			
-			
-			
-			
-		}//for
-		
-		
-		ArrayList<ApprovalVO> approvalList_fromMe = approvalDAO.findApprovalFromMe(user_id);
-		
-		
-		for(ApprovalVO app : approvalList_fromMe){
-			//진행도
-			//진행도를 체크하기위해 히스토리 가져오기
-			ArrayList<ApprovalHistoryVO> approvalHistoryList3 = approvalDAO.findApprovalHistory(app.geteApproval_id());
-			int count = 0;		//진행도 계산을위해 승인 받은 기록 확인
-			for(ApprovalHistoryVO history : approvalHistoryList3){
-				if(history.geteHistory_content().equals("승인")){
-					count ++;
-				}
-			}
-			
-			int progress = count * 33;		//진행률
-			if(count == 3){
-				progress = 100;
-			}
-			app.seteApproval_saved(Integer.toString(progress));
-			//진행도 끝
-		}
-		
-		
-		//반려시 
-		for(ApprovalVO app : approvalList_fromMe){
-			ArrayList<ApprovalHistoryVO> hlist = approvalDAO.findApprovalHistory(app.geteApproval_id());
-			for(ApprovalHistoryVO h : hlist){
-				if(h.geteHistory_content().equals("반려")){
+				
+				//반려시 
+				for(ApprovalVO app : approvalList_fromMe){
+					ArrayList<ApprovalHistoryVO> hlist = approvalDAO.findApprovalHistory(app.geteApproval_id());
+					for(ApprovalHistoryVO h : hlist){
+						
+						if(h.geteHistory_content().equals("반려")){
+							
+							app.seteApproval_status("반려");
+							approvalList_ban.add(app);
+						}
+					}
 					
-					app.seteApproval_status("반려");
-					approvalList_ban.add(app);
 				}
-			}
-			
-		}
 		
 		
 		

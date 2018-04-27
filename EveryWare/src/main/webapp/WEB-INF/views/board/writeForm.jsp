@@ -405,7 +405,7 @@
 		<script src="../resources/assets/vendor/summernote/summernote.min.js"></script>
 		<script src="../resources/assets/vendor/to-markdown/to-markdown.js"></script>
 		<script src="../resources/assets/vendor/bootstrap-markdown/bootstrap-markdown.js"></script>
-	
+		
 
 		<script>
 		$(function()

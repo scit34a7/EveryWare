@@ -15,6 +15,7 @@
 		<link rel="stylesheet" href="../resources/assets/vendor/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="../resources/assets/vendor/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="../resources/assets/vendor/themify-icons/css/themify-icons.css">
+		<link rel="stylesheet" href="../resources/assets/vendor/sweetalert2/sweetalert2.css">
 		<!-- MAIN CSS -->
 		<link rel="stylesheet" href="../resources/assets/css/main.css">
 		<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
@@ -25,6 +26,10 @@
 		<link rel="apple-touch-icon" sizes="76x76" href="../resources/assets/img/apple-icon.png">
 		<link rel="icon" type="image/png" sizes="96x96" href="../resources/assets/img/favicon.png">
 	
+	
+	
+		<!-- JavaScript -->
+		<script src="../resources/assets/vendor/sweetalert2/sweetalert2.js"></script>
 	
 		<%-- Jquery --%>
 		<script src="../resources/js/jquery-3.2.1.min.js" ></script>
@@ -51,27 +56,71 @@
 				$('#submitBt').on('click', function(){
 					
 					var name = '';
-					name = prompt('결재선의 이름을 입력해주세요.');
+					//prompt
+					swal(
+						{
+							title: '결재선의 이름을 입력해주세요.',
+							text: '저장될 결재선의 이름을 입력',
+							input: 'text',
+							showCancelButton: true,
+							inputValidator: function(value)
+							{
+								return new Promise(function(resolve, reject)
+								{
+									if (value)
+									{
+										resolve();
+									}
+									else
+									{
+										reject('결재선의 이름을 입력해주세요.');
+									}
+								});
+							}
+						}).then(function(result)
+						{
+							
+							
+							name = result;
+							
+							document.getElementById('eApprovalLine_name').value = name;
+							
+							
+							$.ajax({
+								url: 'insertApprovalLine_aj'
+								,type: 'POST'
+								,data: $('#submitForm').serialize()
+								,dataType: 'text'	//!중요 dataType는 소문자로 쳐야한다.
+								,success: function(ob){
+									
+									swal(
+											'저장 완료',
+											'결재선이 저장되었습니다.',
+											'success'
+										).then(function(){
+											self.close();
+											
+										}).catch(swal.noop);
+									
+									
+									
+									
+									
+									//self.close();
+									
+								}	
+								,error: function(e){	
+										alert(JSON.stringify(e));
+								}
+							});//ajax
+							
+						}).catch(swal.noop);
+					
+					//prompt 끝
+					
+					
 				
-					document.getElementById('eApprovalLine_name').value = name;
 					
-					
-					$.ajax({
-						url: 'insertApprovalLine_aj'
-						,type: 'POST'
-						,data: $('#submitForm').serialize()
-						,dataType: 'text'	//!중요 dataType는 소문자로 쳐야한다.
-						,success: function(ob){
-							
-							alert('성공');
-							
-							self.close();
-							
-						}	
-						,error: function(e){	
-								alert(JSON.stringify(e));
-						}
-					});//ajax
 					
 				});	//이벤트 처리
 			});// doc reaedy
@@ -105,98 +154,36 @@
 									<br>
 									<button type="button" class="btn btn-info" onclick="openSelectApprovaler('1')">찾기</button>
 									<input type="text" class="form-control" readonly="readonly" id="approvalerName1" required>
-									<input type="text" class="form-control" id="eApprovalLine_person1" name="eApprovalLine_person1" required>
+									
 								</div>
+								
+								<input type="hidden" class="form-control" id="eApprovalLine_person1" name="eApprovalLine_person1">
 								
 								<div class="form-group">
 									<label class="control-label">결재자2</label>
 									<br>
 									<button type="button" class="btn btn-info" onclick="openSelectApprovaler('2')">찾기</button>
 									<input type="text" class="form-control" readonly="readonly" id="approvalerName2" required>
-									<input type="text" class="form-control" id="eApprovalLine_person2" name="eApprovalLine_person2" required>
+									
 								</div>
+								
+								<input type="hidden" class="form-control" id="eApprovalLine_person2" name="eApprovalLine_person2">
 								
 								<div class="form-group">
 									<label class="control-label">결재자3</label>
 									<br>
 									<button type="button" class="btn btn-info" onclick="openSelectApprovaler('3')">찾기</button>
 									<input type="text" class="form-control" readonly="readonly" id="approvalerName3" required>
-									<input type="text" class="form-control" id="eApprovalLine_person3" name="eApprovalLine_person3" required>
+									
 								</div>
+								<input type="hidden" class="form-control" id="eApprovalLine_person3" name="eApprovalLine_person3">
 								
 								<input type="hidden" id="eApprovalLine_name" name="eApprovalLine_name">
 							
 								
-								<button type="button" class="btn btn-primary btn-lg" id="submitBt">결재선 저장</button>
+								<input type="button" class="btn btn-primary btn-lg" id="submitBt" value="결재선 저장"> 
 								
-						
-						
-								<!-- 폼태그내 인풋 태그 
 								
-								<div class="form-group">
-									<label class="control-label">Text Input</label>
-									<input type="text" class="form-control" required>
-								</div>
-								
-								<div class="form-group">
-									<label class="control-label">Email Input</label>
-									<input type="email" class="form-control" required>
-								</div>
-								
-								<div class="form-group">
-									<label class="control-label">Text Area</label>
-									<textarea class="form-control" rows="5" cols="30" required></textarea>
-								</div>
-								
-								<div class="form-group">
-									<label class="control-label">Checkbox</label>
-									<br/>
-									<label class="fancy-checkbox">
-										<input type="checkbox" name="checkbox" required data-parsley-errors-container="#error-checkbox">
-										<span>Option 1</span>
-									</label>
-									<label class="fancy-checkbox">
-										<input type="checkbox" name="checkbox">
-										<span>Option 2</span>
-									</label>
-									<label class="fancy-checkbox">
-										<input type="checkbox" name="checkbox">
-										<span>Option 3</span>
-									</label>
-									<p id="error-checkbox"></p>
-								</div>
-								
-								<div class="form-group">
-									<label class="control-label">Radio Button</label>
-									<br />
-									<label class="fancy-radio">
-										<input type="radio" name="gender" value="male" required data-parsley-errors-container="#error-radio">
-										<span><i></i>Male</span>
-									</label>
-									<label class="fancy-radio">
-										<input type="radio" name="gender" value="female">
-										<span><i></i>Female</span>
-									</label>
-									<p id="error-radio"></p>
-								</div>
-								
-								<div class="form-group">
-									<label class="control-label" for="food">Multiselect</label>
-									<br/>
-									<select id="food" name="food[]" class="multiselect multiselect-custom" multiple="multiple" data-parsley-required data-parsley-trigger-after-failure="change" data-parsley-errors-container="#error-multiselect">
-										<option value="cheese">Cheese</option>
-										<option value="tomatoes">Tomatoes</option>
-										<option value="mozarella">Mozzarella</option>
-										<option value="mushrooms">Mushrooms</option>
-										<option value="pepperoni">Pepperoni</option>
-										<option value="onions">Onions</option>
-									</select>
-									<p id="error-multiselect"></p>
-								</div>
-								
-								<br>
-								<button type="submit" class="btn btn-primary">Validate</button>
-							 -->
 							</form>
 						</div>
 					</div>

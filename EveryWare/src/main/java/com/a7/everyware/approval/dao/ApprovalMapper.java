@@ -54,6 +54,12 @@ public interface ApprovalMapper {
 	//approvalFormat 검색
 	public ArrayList<ApprovalFormatVO> findFormat(String user_id);
 	
+	//approval 수정 (반려된 결재 수정)
+	public void editApproval(ApprovalVO approval);
+	
+	//approvalHistory 수정 (반려)
+	public void updateHistory(ApprovalHistoryVO history);
+	
 	
 	
 }

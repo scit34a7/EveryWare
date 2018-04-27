@@ -267,14 +267,21 @@ public class ApprovalController {
 				//결재 문서에대한 히스토리
 				logger.debug("order:{}", order);
 				if(approvalHistoryList == null || approvalHistoryList.isEmpty()){
+					logger.debug("111111111111111111111111111");
 					approvalList_now.add(app);
 					break;
 				}
 				
 				for(ApprovalHistoryVO history : approvalHistoryList){
 					
+					if(!user_id.equals(history.getUser_id()) && history.geteHistory_content().equals("반려")){
+						continue;
+					}
+					
 					
 					logger.debug("history : {}", history);
+					
+					
 					
 					if(history.getUser_id().equals(line.geteApprovalLine_person1()) && history.geteHistory_content().equals("승인")){
 						//내가 승인 한경우
@@ -290,6 +297,7 @@ public class ApprovalController {
 						approvalList_past.add(app);
 						break;
 					}else{
+						logger.debug("2222222222222222222222222222222222");
 						approvalList_now.add(app);
 					}
 					
@@ -310,6 +318,12 @@ public class ApprovalController {
 				String isApproval2_2 = "";
 				
 				for(ApprovalHistoryVO history : approvalHistoryList){
+					
+					if(!user_id.equals(history.getUser_id()) && history.geteHistory_content().equals("반려")){
+						continue;
+					}
+					
+					
 					if(history.getUser_id().equals(line.geteApprovalLine_person1()) && history.geteHistory_content().equals("승인")){
 						//첫번째 결재자 승인
 						isApproval2_1 = true;
@@ -318,6 +332,12 @@ public class ApprovalController {
 				}
 				
 				for(ApprovalHistoryVO history : approvalHistoryList){
+					
+					if(!user_id.equals(history.getUser_id()) && history.geteHistory_content().equals("반려")){
+						continue;
+					}
+					
+					
 					if(history.getUser_id().equals(line.geteApprovalLine_person2()) && history.geteHistory_content().equals("승인")){
 						//내가 승인
 						isApproval2_2 = "승인";
@@ -350,9 +370,13 @@ public class ApprovalController {
 						//내가 반려 한 경우
 						approvalList_future.add(app);
 						
-					}else{
+					}else if(isApproval2_2.equals("거절") || isApproval2_2.equals("승인")){
 						//내가 승인, 거절
+						
 						approvalList_past.add(app);
+					}else{
+						
+						approvalList_now.add(app);
 					}
 				}
 				
@@ -369,6 +393,12 @@ public class ApprovalController {
 				
 				
 				for(ApprovalHistoryVO history : approvalHistoryList){
+					
+					if(!user_id.equals(history.getUser_id()) && history.geteHistory_content().equals("반려")){
+						continue;
+					}
+					
+					
 					if(history.getUser_id().equals(line.geteApprovalLine_person2()) && history.geteHistory_content().equals("승인")){
 						//두번째 결재자 승인
 						isApproval3_2 = true;
@@ -377,6 +407,12 @@ public class ApprovalController {
 				}
 				
 				for(ApprovalHistoryVO history : approvalHistoryList){
+					
+					
+					if(!user_id.equals(history.getUser_id()) && history.geteHistory_content().equals("반려")){
+						continue;
+					}
+					
 					if(history.getUser_id().equals(line.geteApprovalLine_person3()) && history.geteHistory_content().equals("승인")){
 						//세번째(나) 결재자 승인
 						isApproval3_3 = "승인";
@@ -406,9 +442,11 @@ public class ApprovalController {
 						//반려
 						approvalList_future.add(app);
 					
-					}else{
+					}else if(isApproval3_3.equals("승인") || isApproval3_3.equals("거절")){
 						//승인, 거절
 						approvalList_past.add(app);
+					}else{
+						approvalList_now.add(app);
 					}
 				}
 				
@@ -451,6 +489,7 @@ public class ApprovalController {
 		for(ApprovalVO app : approvalList_fromMe){
 			ArrayList<ApprovalHistoryVO> hlist = approvalDAO.findApprovalHistory(app.geteApproval_id());
 			for(ApprovalHistoryVO h : hlist){
+				
 				if(h.geteHistory_content().equals("반려")){
 					
 					app.seteApproval_status("반려");
@@ -832,7 +871,8 @@ public class ApprovalController {
 	@RequestMapping (value="insertHistory", method=RequestMethod.POST)
 	public String insertHistory(HttpSession session
 			, @RequestParam(value="type", defaultValue="0") int type
-			, @RequestParam(value="eApproval_id", defaultValue="0") int eApproval_id) {
+			, @RequestParam(value="eApproval_id", defaultValue="0") int eApproval_id
+			, String reason) {
 		
 		logger.debug("insertHistory para : type={}, eApproval_id={}", type, eApproval_id);
 		
@@ -845,6 +885,7 @@ public class ApprovalController {
 		//속성 셋팅
 		history.setUser_id(user_id);
 		history.seteApproval_id(eApproval_id);
+		history.seteHistory_reason(reason);
 		
 		//eApproval_content 셋팅
 		switch (type) {
@@ -896,39 +937,57 @@ public class ApprovalController {
 	}
 	
 	
-
+	
 	//반려된 결재 수정 페이지로
 	@RequestMapping (value="editApproval", method=RequestMethod.GET)
-	public String editApproval(int eApproval_id, Model model) {
-		logger.debug("eApproval_id : {}", eApproval_id);
+	public String editApproval2(int eApproval_id, Model model) {
+		logger.debug("go editApproval , para : eApproval_id = {}", eApproval_id);
+		ApprovalVO approval = approvalDAO.findApprovalById(eApproval_id);
+		logger.debug("approval 객체 : {}", approval);
 		
-		ApprovalVO app = approvalDAO.findApprovalById(eApproval_id);
-		app.byteToString();
+		approval.byteToString();
 		
-		logger.debug("바이트 변환한 결재 : {}", app);
+		logger.debug("editApproval para : {} ", approval);
 		
-		ApprovalLineVO line = approvalDAO.findApprovalLineById(app.geteApprovalLine_id());
-		
-		model.addAttribute("approval", app);
+		ApprovalLineVO line = approvalDAO.findApprovalLineById(approval.geteApprovalLine_id());
+		model.addAttribute("approval", approval);
 		model.addAttribute("line", line);
+		
 		
 		return "approval/editApproval";
 	}
 	
-	
-	
-	//반려된 결재 수정 페이지로
+
+	//반려된 결재 수정
 	@RequestMapping (value="editApproval", method=RequestMethod.POST)
-	public String editApproval2(ApprovalVO approval) {
+	public String editApproval(ApprovalVO approval, HttpSession session) {
+		logger.debug("결재 수정 들어옴 approval : {}", approval);
 		
 		
 		approval.seteApproval_content(approval.geteApproval_content2().getBytes());
-		logger.debug("editApproval para : {} ", approval);
+		//로그인 아이디 셋팅
+		String user_id = (String) session.getAttribute("userId");
+		approval.setUser_id(user_id);
+		logger.debug("editApproval 직전 : {}", approval);
+		//결재문서 수정
+		logger.debug("바이트 확인 {}", approval.geteApproval_content());
+		approvalDAO.editApproval(approval);
 		
+		//히스토리
+		ApprovalHistoryVO history = new ApprovalHistoryVO();
 		
+		history.setUser_id(user_id);
+		history.seteApproval_id(approval.geteApproval_id());
+		history.seteHistory_content("상신");
 		
-		return "approval/editApproval";
+		approvalDAO.updateHistory(history);
+		
+		return "redirect:myApproval";
 	}
+	
+	
+	
+	
 	
 	
 	

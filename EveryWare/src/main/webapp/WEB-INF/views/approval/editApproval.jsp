@@ -291,7 +291,7 @@
 												<!-- <label class="control-label">결재 제목</label> -->
 												
 												
-												
+												<input type="hidden" name="eApproval_id" value="${approval.eApproval_id}">
 												
 												
 												
@@ -305,7 +305,7 @@
 												<label>결재 내용</label>
 												<!-- <textarea class="form-control" rows="5" cols="30" id="eApproval_content" name="eApproval_content" required></textarea> -->
 												<div class="container-fluid">
-													<textarea class="summernote" name ="eApproval_content_string" id="eApproval_content_string">
+													<textarea class="summernote" name ="eApproval_content2" id="eApproval_content_string">
 														
 														${approval.eApproval_content2}
 														
@@ -343,7 +343,7 @@
 																		<tr>
 																			<td>
 																				<div class="form-group">																					
-																					<input type="hidden" id="eApprovalLine_id" name="eApprovalLine_id" readonly="readonly">
+																					<input type="hidden" id="eApprovalLine_id" name="eApprovalLine_id" readonly="readonly" value="${line.eApprovalLine_id}">
 																					<input type="text" id="loginId" readonly="readonly" value="${userName} / ${userDepartment} / ${userPosition}">
 																				</div>																			
 																			</td>
@@ -410,7 +410,7 @@
 											
 											<br><br><br><br><br><br><br><br><br><br>
 											<div id="submitBtAlign">
-												<button type="submit" class="btn btn-primary btn-lg">작성</button>
+												<button type="submit" class="btn btn-primary btn-lg">수정</button>
 											</div>
 								<!-- END DATE PICKER -->
 						

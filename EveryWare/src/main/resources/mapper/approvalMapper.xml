@@ -263,14 +263,21 @@
 			user_id = #{user_id}
 	</select>
 	
-	<!-- eApproval_id로 history 가져오기 -->
+	<!-- eApproval_id로 history(수정,상신은 제외) 가져오기 -->
 	<select id="findApprovalHistory" parameterType="int" resultType="ApprovalHistoryVO">
 		select
-			*
+			eHistory_id
+			,eApproval_id
+			,user_id
+			,eHistory_content
+			,eHistory_date
+			,eHistory_reason
 		from
 			approvalHistory_tb
 		where
 			eApproval_id = #{eApproval_id}
+			and eHistory_content != '수정'
+			and eHistory_content != '상신'
 		order by
 			eHistory_date desc
 	</select>
@@ -333,7 +340,7 @@
 	
 	
 	<!-- 결재양식 등록 -->
-	<insert id="insertFormat" parameterType="approvalFormatVO">
+	<insert id="insertFormat" parameterType="ApprovalFormatVO">
 		insert into
 			approvalFormat_tb(
 				approvalFormat_id
@@ -360,6 +367,36 @@
 			user_id = #{user_id}
 	</select>
 	
+	
+	<!-- 반려된 결재 수정 -->
+	<update id="editApproval" parameterType="ApprovalVO">
+		update
+			electronicApproval_tb
+		set
+			eApproval_title = #{eApproval_title}
+			,eApproval_content = #{eApproval_content}
+			,eApproval_sDate = #{eApproval_sDate}
+			,eApproval_fDate = #{eApproval_fDate}
+			,eApprovalLine_id = #{eApprovalLine_id}
+			<if test="eApproval_saved != null">
+				,eApproval_saved = #{eApproval_saved}
+				,eApproval_original = #{eApproval_original}
+			</if>
+		where
+			eApproval_id = #{eApproval_id}
+	</update>
+	
+	
+	<!-- 반려고 완료된 히스토리 수정 -->
+	<update id="updateHistory" parameterType="ApprovalHistoryVO">
+		update
+			approvalHistory_tb
+		set
+			eHistory_content = '수정'
+		where
+			eApproval_id = #{eApproval_id}
+			and eHistory_content = '반려'
+	</update>
 	
 	
 </mapper>

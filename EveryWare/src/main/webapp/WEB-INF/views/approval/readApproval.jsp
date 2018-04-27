@@ -18,6 +18,7 @@
 		<link rel="stylesheet" href="../resources/assets/vendor/themify-icons/css/themify-icons.css">
 		<link rel="stylesheet" href="../resources/assets/vendor/pace/themes/orange/pace-theme-minimal.css">
 		<link rel="stylesheet" href="../resources/assets/vendor/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css">
+		<link rel="stylesheet" href="../resources/assets/vendor/sweetalert2/sweetalert2.css">
 		<!-- MAIN CSS -->
 		<link rel="stylesheet" href="../resources/assets/css/main.css">
 		<link rel="stylesheet" href="../resources/assets/css/skins/sidebar-nav-darkgray.css" type="text/css">
@@ -34,29 +35,193 @@
 		
 		function submit(type){
 			
+			
+			
+			
+			
 			var reason = '';
 			
 			
 			if(type == 1){
-				if(confirm('해당결제를 승인 하시겠습니까?')){
-				}else{
-					return;
-				}
+				
+				swal(
+					{
+						title: '결재를 승인 하시겠습니까?',
+						text: "승인하신 후에는 취소할 수 없습니다.",
+						type: 'success',
+						allowOutsideClick: false,
+						showCancelButton: true,
+						confirmButtonColor: '#41B314',
+						cancelButtonColor: '#F9354C',
+						confirmButtonText: '승인',
+						cancelButtonText: '취소'
+					}).then(function()
+					{
+						swal(
+							'승인 완료',
+							'해당결제가 승인되었습니다.',
+							'success'
+						).catch(swal.noop);
+						
+						ajaxSubmit(1,'');
+						
+					}, function(dismiss)
+					{
+						if (dismiss === 'cancel')
+						{
+							swal(
+								'취소',
+								'정상적으로 취소되었습니다.',
+								'info'
+							).catch(swal.noop);
+						}
+					});
+				
+			
 			}else if(type == 2){
-				if(confirm('해당결제를 거절 하시겠습니까?')){
-					reason = prompt('거절 이유를 적어주세요.');
-				}else{
-					return;
-				}
+				
+				swal({
+					title: '결재를 거절 하시겠습니까?',
+					text: "거절하신 결재는 폐기됩니다.",
+					type: 'warning',
+					allowOutsideClick: false,
+					showCancelButton: true,
+					confirmButtonColor: '#F9354C',
+					cancelButtonColor: '#41B314',
+					confirmButtonText: '거절',
+					cancelButtonText: '취소'
+					}).then(function(){
+						//prompt
+						swal(
+							{
+								title: '거절 이유',
+								text: '거절 이유를 적어주세요',
+								input: 'text',
+								showCancelButton: true,
+								inputValidator: function(value)
+								{
+									return new Promise(function(resolve, reject)
+									{
+										if (value)
+										{
+											resolve();
+										}
+										else
+										{
+											reject('거절 이유를 적어주세요.');
+										}
+									});
+								}
+							}).then(function(result)
+							{
+								swal(
+								{
+									type: 'success',
+									html: '결재가 거절되었습니다.' 
+								});
+								
+								ajaxSubmit(2, result);
+								
+							}).catch(swal.noop);
+						
+						//prompt 끝
+						
+							
+					}, function(dismiss)
+					{
+						if (dismiss === 'cancel')
+						{
+							swal(
+								'취소',
+								'정상적으로 취소되었습니다.',
+								'info'
+							).catch(swal.noop);
+						}
+					});
+				
+				
+				
+				
+				
+				
+				
 			}else{
-				if(confirm('해당결제를 반려 하시겠습니까?')){
-					reason = prompt('반려 이유를 적어주세요.');
-				}else{
-					return;
-				}
+				
+				swal({
+					title: '결재를 반려 하시겠습니까?',
+					text: "반려한 결재는 작성자에게 상신됩니다.",
+					type: 'warning',
+					allowOutsideClick: false,
+					showCancelButton: true,
+					confirmButtonColor: '#F9354C',
+					cancelButtonColor: '#41B314',
+					confirmButtonText: '반려',
+					cancelButtonText: '취소'
+					}).then(function(){
+						//prompt
+						swal(
+							{
+								title: '반려 이유',
+								text: '반려 이유를 적어주세요',
+								input: 'text',
+								showCancelButton: true,
+								inputValidator: function(value)
+								{
+									return new Promise(function(resolve, reject)
+									{
+										if (value)
+										{
+											resolve();
+										}
+										else
+										{
+											reject('반려 이유를 적어주세요.');
+										}
+									});
+								}
+							}).then(function(result)
+							{
+								swal(
+								{
+									type: 'success',
+									html: '결재가 반려되었습니다.' 
+								});
+								
+								ajaxSubmit(3, result);
+								
+							}).catch(swal.noop);
+						
+						//prompt 끝
+						
+							
+					}, function(dismiss)
+					{
+						if (dismiss === 'cancel')
+						{
+							swal(
+								'취소',
+								'정상적으로 취소되었습니다.',
+								'info'
+							).catch(swal.noop);
+						}
+					});
+				
+				
+				
 			}
 			
 				
+			
+				
+				
+				
+		}
+		
+		
+		function ajaxSubmit(type, reason){
+			
+			
+			
 			$.ajax({
 				url: 'insertHistory'
 					,type: 'POST'
@@ -70,9 +235,6 @@
 					}		
 			
 			});	 
-				
-				
-				
 		}
 		
 		</script>
@@ -603,6 +765,7 @@
 		<script src="../resources/assets/vendor/pace/pace.min.js"></script>
 		<script src="../resources/assets/vendor/bootstrap-progressbar/js/bootstrap-progressbar.min.js"></script>
 		<script src="../resources/assets/scripts/klorofilpro-common.js"></script>
+		<script src="../resources/assets/vendor/sweetalert2/sweetalert2.js"></script>
 		<!-- DEMO PANEL -->
 		<!-- for demo purpose only, you should remove it on your project directory -->
 		<script type="text/javascript">

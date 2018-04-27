@@ -188,5 +188,24 @@ public class ApprovalDAO {
 		return list;
 	}
 	
+	/**
+	 * ApprovalVO 수정 (반려된 결재 수정)
+	 * @param approval
+	 */
+	public void editApproval(ApprovalVO approval){
+		ApprovalMapper mapper = sqlSession.getMapper(ApprovalMapper.class);
+		mapper.editApproval(approval);
+	}
+	
+	/**
+	 * ApprovalHistoryVO 수정  + 등록 (반려기록 수정 + 재상신)
+	 * @param history
+	 */
+	public void updateHistory(ApprovalHistoryVO history){
+		ApprovalMapper mapper = sqlSession.getMapper(ApprovalMapper.class);
+		mapper.updateHistory(history);
+		mapper.insertHistory(history);
+	}
+	
 
 }

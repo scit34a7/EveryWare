@@ -555,7 +555,7 @@
 															${eApp.eApproval_title}
 														</a>
 													</td>
-													<td>${eApp.eApproval_content}	</td>
+													<%-- <td>${eApp.eApproval_content}	</td> --%>
 													<td>${eApp.eApproval_sDate}		</td>
 													<td>${eApp.eApproval_fDate}		</td>
 													<td>
