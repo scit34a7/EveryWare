@@ -44,6 +44,7 @@
 		
 		var text;
 		var countTest = 0;
+		var isOpen = false;
 		
 		// 음성인식 활성화 비활성화 (두 개 이상의 인스턴스가 존재할 때 루한루프 방지)
 		function handleVisibilityChange() {
@@ -115,7 +116,10 @@
 				}, 
 		     voice_start: function() {
 		    	 console.log('voice_start');
-		    	 handleVisibilityChange();
+		    	 
+		    	 if(isOpen) {
+			    	 handleVisibilityChange();
+		    	 }
 		    	}
 		    }; 
 		    
@@ -563,6 +567,7 @@ connection.onopen = function() {
     document.getElementById('share-file').disabled = false;
     document.getElementById('input-text-chat').disabled = false;
     document.getElementById('btn-leave-room').disabled = false;
+    isOpen = true;
 };
 
 connection.onclose = function() {
@@ -577,6 +582,7 @@ connection.onEntireSessionClosed = function(event) {
     document.getElementById('share-file').disabled = true;
     document.getElementById('input-text-chat').disabled = true;
     document.getElementById('btn-leave-room').disabled = true;
+    isOpen = false;
     connection.attachStreams.forEach(function(stream) {
         stream.stop();
     });

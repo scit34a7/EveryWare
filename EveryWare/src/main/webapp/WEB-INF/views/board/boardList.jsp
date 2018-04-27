@@ -199,8 +199,8 @@
 						</span><i class="icon-submenu ti-angle-left"></i></a>
 						<div id="submenuDemo" class="collapse">
 							<ul class="submenu">
-								<li><a href="./meetingList">회의실</a></li>
-								<li><a href="./minutes">회외록</a></li>
+								<li><a href="../meet/meetingList">회의실</a></li>
+								<li><a href="../meet/minutes">회외록</a></li>
 							</ul>
 						</div></li>
 
