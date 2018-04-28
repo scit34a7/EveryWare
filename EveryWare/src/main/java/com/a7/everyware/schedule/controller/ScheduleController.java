@@ -32,8 +32,14 @@ public class ScheduleController {
 	public String schedule(HttpSession session) {
 		
 		String user_id = (String) session.getAttribute("userId");	
+		String schedule_group = (String) session.getAttribute("userDepartment");
+		
+		HashMap hm = new HashMap<>();
+		hm.put("user_id", user_id);
+		hm.put("schedule_group", schedule_group);
+		
 		ArrayList<ScheduleVO> Slist = new ArrayList<ScheduleVO>();
-		Slist = scheduledao.Read_Schedule(user_id);
+		Slist = scheduledao.Read_Schedule(hm);
 			
 		for (int i = 0; i < Slist.size(); i++) {
 			if(Slist.get(i).getSchedule_group().equals("개인"))

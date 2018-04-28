@@ -11,10 +11,10 @@
 		(schedule_num_seq.nextval, #{schedule_name},#{user_id},#{user_name},#{schedule_group},#{schedule_sdate},#{schedule_fdate},#{project_id})
 	</insert>
 	
-	<select id="Read_Schedule" parameterType="String" resultType="ScheduleVO">
-		select * from schedule_tb
+	<select id="Read_Schedule" parameterType="Map" resultType="ScheduleVO">
+		select distinct * from schedule_tb
 		where
-		user_id = #{user_id}	
+		user_id = #{user_id} or schedule_group = #{schedule_group}	
 	</select>
 	
 	<delete id="Schedule_Delete" parameterType="ScheduleVO">

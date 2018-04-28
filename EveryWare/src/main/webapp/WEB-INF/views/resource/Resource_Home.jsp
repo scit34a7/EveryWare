@@ -401,7 +401,7 @@ function getTextCoo1(){
 											<div class="right">
 											<span class="value"><a href="resource_Resource_Form?resource_id=41">Laptop001</a>
 												</span>
-												<span class="title">최대 인원 12명</span>
+												<span class="title">Window7, HDMI 단자 고장</span>
 											</div>
 										</div>
 									</div>
@@ -412,7 +412,7 @@ function getTextCoo1(){
 											<div class="right">
 												<span class="value"><a href="resource_Resource_Form?resource_id=61">Laptop002</a>
 												</span>
-												<span class="title">최대 인원 12명</span>
+												<span class="title">Window7, 태블릿모드, S펜 지원</span>
 											</div>
 										</div>
 									</div>
@@ -423,7 +423,7 @@ function getTextCoo1(){
 											<div class="right">
 												<span class="value"><a href="resource_Resource_Form?resource_id=62">Laptop003</a>
 												</span>
-												<span class="title">최대 인원 12명</span>
+												<span class="title">Window7, 어댑더 연결 필요합니다. </span>
 											</div>
 										</div>
 									</div>
@@ -434,7 +434,7 @@ function getTextCoo1(){
 											<div class="right">
 												<span class="value"><a href="resource_Resource_Form?resource_id=63">Laptop004</a>
 												</span>
-												<span class="title">최대 인원 12명</span>
+												<span class="title">Mac OS, Pro기종</span>
 											</div>
 										</div>
 									</div>
@@ -445,7 +445,7 @@ function getTextCoo1(){
 											<div class="right">
 												<span class="value"><a href="resource_Resource_Form?resource_id=64">Laptop005</a>
 												</span>
-												<span class="title">최대 인원 12명</span>
+												<span class="title">Mac OS, Pro기종</span>
 											</div>
 										</div>
 									</div>
@@ -456,7 +456,7 @@ function getTextCoo1(){
 											<div class="right">
 												<span class="value"><a href="resource_Resource_Form?resource_id=65">Laptop006</a>
 												</span>
-												<span class="title">최대 인원 12명</span>
+												<span class="title">Mac OS, Pro기종</span>
 											</div>
 										</div>
 									</div>
@@ -467,7 +467,7 @@ function getTextCoo1(){
 											<div class="right">
 												<span class="value"><a href="resource_Resource_Form?resource_id=66">Laptop007</a>
 												</span>
-												<span class="title">최대 인원 12명</span>
+												<span class="title">Mac OS, Pro기종</span>
 											</div>
 										</div>
 									</div>
@@ -478,7 +478,7 @@ function getTextCoo1(){
 											<div class="right">
 												<span class="value"><a href="resource_Resource_Form?resource_id=67">Laptop008</a>
 												</span>
-												<span class="title">최대 인원 12명</span>
+												<span class="title">Mac OS, Air기종</span>
 											</div>
 										</div>
 									</div>
@@ -489,7 +489,7 @@ function getTextCoo1(){
 											<div class="right">
 												<span class="value"><a href="resource_Resource_Form?resource_id=68">Laptop009</a>
 												</span>
-												<span class="title">최대 인원 12명</span>
+												<span class="title">Mac OS, Air기종</span>
 											</div>
 										</div>
 									</div>
@@ -500,7 +500,7 @@ function getTextCoo1(){
 											<div class="right">
 												<span class="value"><a href="resource_Resource_Form?resource_id=69">Laptop010</a>
 												</span>
-												<span class="title">최대 인원 12명</span>
+												<span class="title">Mac OS, Air기종</span>
 											</div>
 										</div>
 									</div>
@@ -536,7 +536,7 @@ function getTextCoo1(){
 											<div class="right">
 												<span class="value"><a href="resource_Resource_Form?resource_id=72">Beam Projector002</a>
 												</span>
-												<span class="title">&nbsp HDMI 지원, WIFI 지원</span>
+												<span class="title">&nbsp HDMI 지원</span>
 											</div>
 										</div>
 									</div>
@@ -559,7 +559,7 @@ function getTextCoo1(){
 											<div class="right">
 												<span class="value"><a href="resource_Resource_Form?resource_id=74">Beam Projector004</a>
 												</span>
-												<span class="title">conperenceroom</span>
+												<span class="title">WIFI 연결 가능</span>
 											</div>
 										</div>
 									</div>

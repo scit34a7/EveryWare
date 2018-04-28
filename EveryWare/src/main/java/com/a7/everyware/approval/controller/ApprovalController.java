@@ -205,7 +205,7 @@ public class ApprovalController {
 		//user_id
 		push.setUser_id(line.geteApprovalLine_person1());
 		//dept_name
-		push.setDept_name(person1.getDept_name());
+		push.setDept_name("");
 		
 		pushDAO.addPush(push);
 		
@@ -954,7 +954,7 @@ public class ApprovalController {
 		
 		push.setUser_id(id);
 		push.setPush_type("결재");
-		push.setDept_name(u.getDept_name());
+		push.setDept_name("");
 		
 		
 		
@@ -962,7 +962,7 @@ public class ApprovalController {
 		switch (type) {
 		case 1:
 			//승인
-			push.setPush_title("결재가 승인되었습니다.");
+			push.setPush_title("확인해야할 결재가 있습니다.");
 			
 			//승인일 경우는 push의 user_id가 다르다.
 			
@@ -974,6 +974,11 @@ public class ApprovalController {
 				//person2가 승인
 				push.setUser_id(line.geteApprovalLine_person3());
 			
+			}else{
+				//최종 결재
+				push.setUser_id(u.getUser_id());
+				push.setPush_title("결재가 최종 승인 되었습니다.");
+				
 			}
 			
 			//person3이 승인, 완료 되었으므로 결재글 쓴 사람에게  는 위에 default로 설정 되있다.

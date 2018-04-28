@@ -1,12 +1,13 @@
 package com.a7.everyware.schedule.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.a7.everyware.schedule.vo.GetScheduleVO;
+
 import com.a7.everyware.schedule.vo.ScheduleVO;
 
 @Repository
@@ -27,11 +28,13 @@ public class ScheduleDAO {
 		return result;
 	}	
 	
-	public ArrayList<ScheduleVO> Read_Schedule(String user_id){
+	public ArrayList<ScheduleVO> Read_Schedule(HashMap hm){
+		
+		System.out.println("DAO" + hm);
 		ArrayList<ScheduleVO> result = new ArrayList<ScheduleVO>();
 		try{
 			ScheduleMapper mapper = sqlsession.getMapper(ScheduleMapper.class);
-			result = mapper.Read_Schedule(user_id);
+			result = mapper.Read_Schedule(hm);
 		}
 		catch(Exception e)
 		{
