@@ -333,9 +333,6 @@
 									<label>게시판 선택</label>
 									<!-- <div class="col-md-10"> -->
 										<select class="form-control" name="boardFolder_id">
-											<option value="1">공지사항</option>
-											<option value="2">부서게시판</option>
-											<option value="3">커뮤니티</option>
 											<option value="4">업무보고</option>
 										</select>
 								</div>

@@ -321,8 +321,11 @@
 						</ul>
 					</div>
 				<!-- RIGHT COLUMN -->
+				<div class="panel">
 				<div class="profile-center">
-					<h4 class="heading">근태확인</h4>
+					<div class="panel-heading">
+						<h3 class="panel-title">근태확인</h3>
+					</div>
 					
 					<center>
 						<!-- 시간 -->
@@ -391,6 +394,7 @@
 						<br>
 						<div class="text-center"><a href="attendList" class="btn btn-info">근태 현황 조회</a></div>
 					</div>
+				</div></div>
 					<!-- END AWARDS -->
 
 

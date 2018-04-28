@@ -224,8 +224,9 @@ public class SupportController {
 	
 	//업무보고 폼 보기
 	@RequestMapping (value="write", method=RequestMethod.GET)
-	public String writeForm() {
+	public String writeForm(int boardFolder_id, Model model) {
 		
+		model.addAttribute("boardFolder_id", boardFolder_id);
 		
 		return "support/writeForm";
 	}
@@ -410,11 +411,12 @@ public class SupportController {
 	@RequestMapping (value="delete", method=RequestMethod.GET)
 	public String delete(int board_id, HttpSession session) {
 		String id = (String) session.getAttribute("userId");
+		String name = (String) session.getAttribute("userName");
 		
 		//삭제할 글 번호와 본인 글인지 확인할 로그인아이디
 		BoardVO board = new BoardVO();
 		board.setBoard_id(board_id);
-		board.setUser_id(id);
+		
 		
 		
 		board = supportDAO.get(board_id);
@@ -430,7 +432,7 @@ public class SupportController {
 			
 		}
 		
-	
+		board.setUser_id(id);
 		//글 삭제
 		int result = supportDAO.deleteBoard(board);
 		
@@ -463,12 +465,11 @@ public class SupportController {
 		
 		//수정할 글이 로그인한 본인 글인지 확인
 		String id = (String) session.getAttribute("userId");
+		String name = (String) session.getAttribute("userName");
 		BoardVO oldBoard = supportDAO.get(board.getBoard_id());
 
-		//보드 폴더 아이디 1 : 공지사항.. 나중에 폴더 처리 해야됨-------------
-		board.setBoardFolder_id(1);
-
-		if (oldBoard == null || !oldBoard.getUser_id().equals(id)) {
+	
+		if (oldBoard == null || !oldBoard.getUser_id().equals(name)) {
 			return "redirect:boardList?boardFolder_id=" + board.getBoardFolder_id();
 		}
 		

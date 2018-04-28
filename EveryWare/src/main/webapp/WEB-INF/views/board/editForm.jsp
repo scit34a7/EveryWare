@@ -326,16 +326,17 @@
 				enctype="multipart/form-data" onsubmit="return formCheck();">
 				<!-- 폼 전송 시 글번호도 전달 -->
 				<input type="hidden" name="board_id" value="${board.board_id }">
-						<div class="form-group">
-						<label>게시판 선택</label>
+				<input type="hidden" name="boardFolder_id" value="${board.boardFolder_id }">
+					
+						<!-- <div class="form-group"> -->
+						<%-- 	<label>게시판 선택</label>
 						<!-- <div class="col-md-10"> -->
 							<select class="form-control" name="boardFolder_id">
-								<option value="1">공지사항</option>
-								<option value="2">부서게시판</option>
-								<option value="3">커뮤니티</option>
-								<option value="4">업무보고</option>
+								<option value="1" <c:if test="${boardFolder_id == 1}">selected</c:if> >공지사항</option>
+								<option value="2" <c:if test="${boardFolder_id == 2}">selected</c:if> >부서게시판</option>
+								<option value="3" <c:if test="${boardFolder_id == 3}">selected</c:if> >커뮤니티</option>
 							</select>
-						</div>			
+						</div>	 --%>		
 	
 						<div class="form-group">
 						<label>제목</label>

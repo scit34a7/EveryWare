@@ -49,8 +49,9 @@ public class BoardController {
 	
 	//글쓰기 폼 보기
 	@RequestMapping (value="write", method=RequestMethod.GET)
-	public String writeForm() {
+	public String writeForm(int boardFolder_id, Model model) {
 		
+		model.addAttribute("boardFolder_id", boardFolder_id);
 		
 		return "board/writeForm";
 	}
@@ -230,12 +231,16 @@ public class BoardController {
 	 */
 	@RequestMapping (value="delete", method=RequestMethod.GET)
 	public String delete(int board_id, HttpSession session) {
+		
+		logger.debug("글 삭제 들어옴 : {}", board_id);
+		
 		String id = (String) session.getAttribute("userId");
+		String name = (String) session.getAttribute("userName");
 		
 		//삭제할 글 번호와 본인 글인지 확인할 로그인아이디
 		BoardVO board = new BoardVO();
 		board.setBoard_id(board_id);
-		board.setUser_id(id);
+		
 		
 		
 		board = boardDAO.get(board_id);
@@ -250,7 +255,8 @@ public class BoardController {
 			}
 			
 		}
-		
+		board.setUser_id(id);
+		logger.debug("BoardController 삭제 직전 : {} ", board);
 	
 		//글 삭제
 		int result = boardDAO.deleteBoard(board);
@@ -269,6 +275,7 @@ public class BoardController {
 		
 		BoardVO board = boardDAO.get(board_id);
 		model.addAttribute("board", board);
+		
 		return "board/editForm";
 	}
 	
@@ -280,16 +287,23 @@ public class BoardController {
 			ArrayList<MultipartFile> upload,
 			HttpSession session) {
 		
+		logger.debug("edit para : {}", board);
+		
 		board.setBoard_attached("F");
 		
 		//수정할 글이 로그인한 본인 글인지 확인
 		String id = (String) session.getAttribute("userId");
+		String name = (String) session.getAttribute("userName");
 		BoardVO oldBoard = boardDAO.get(board.getBoard_id());
 
-		//보드 폴더 아이디 1 : 공지사항.. 나중에 폴더 처리 해야됨-------------
-		board.setBoardFolder_id(1);
+		logger.debug("oldBoard : {}", oldBoard);
+		
+		
+		
 
-		if (oldBoard == null || !oldBoard.getUser_id().equals(id)) {
+		if (oldBoard == null || !oldBoard.getUser_id().equals(name)) {
+			
+			logger.debug("나가");
 			return "redirect:boardList?boardFolder_id=" + board.getBoardFolder_id();
 		}
 		
@@ -335,6 +349,7 @@ public class BoardController {
 		}*/
 		
 		//글 수정 처리
+		logger.debug("글 수정 직전 : {}", board);
 		boardDAO.modifyBoard(board);
 		//원래의 글읽기 화면으로 이동 
 		return "redirect:read?board_id=" + board.getBoard_id();

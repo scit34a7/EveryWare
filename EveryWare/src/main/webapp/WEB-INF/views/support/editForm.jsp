@@ -343,6 +343,7 @@
 				enctype="multipart/form-data" onsubmit="return formCheck();">
 				<!-- 폼 전송 시 글번호도 전달 -->
 				<input type="hidden" name="board_id" value="${board.board_id }">
+				<input type="hidden" name="boardFolder_id" value="${board.boardFolder_id }">
 				
 						<div class="form-group">
 						<label>제목</label>

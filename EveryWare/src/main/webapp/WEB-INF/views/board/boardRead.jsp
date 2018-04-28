@@ -328,19 +328,19 @@
 							
 							<c:choose>
 			
-							<c:when test="${boardFolder_id==1}">
+							<c:when test="${board.boardFolder_id==1}">
 							<h3 class="panel-title">공지사항 </h3>
 							</c:when>
 							
-							<c:when test="${boardFolder_id==2}">
+							<c:when test="${board.boardFolder_id==2}">
 							<h3 class="panel-title">부서게시판 </h3>
 							</c:when>
 							
-							<c:when test="${boardFolder_id==3}">
+							<c:when test="${board.boardFolder_id==3}">
 							<h3 class="panel-title">커뮤니티 </h3>
 							</c:when>
 						
-							<c:when test="${boardFolder_id==4}">
+							<c:when test="${board.boardFolder_id==4}">
 							<h3 class="panel-title">업무보고</h3>
 							</c:when>
 						
