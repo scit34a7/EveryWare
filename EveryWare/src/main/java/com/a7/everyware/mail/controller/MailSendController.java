@@ -109,10 +109,11 @@ public class MailSendController {
 		}
 				
 		//String host = "localhost";
-		String host = "203.233.199.200";
+		String host = "203.233.199.201";
 		Properties properties = System.getProperties();
 		// Setup mail server
 		properties.setProperty("mail.smtp.host", host);
+		properties.put("mail.smtp.auth", "true");
 
 		// Get the default Session object.
 		Session session = Session.getDefaultInstance(properties);
