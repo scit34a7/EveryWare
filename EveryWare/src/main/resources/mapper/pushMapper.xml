@@ -26,7 +26,7 @@
 		]]>
 	</select>
 	
-	<update id = "updatePush" parameterType = "int">
+	<update id = "updatePush" parameterType = "int" >
 		update push_tb set
 			push_isRead = 1
 		where push_id = #{push_id}

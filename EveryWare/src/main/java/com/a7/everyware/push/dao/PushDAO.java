@@ -1,6 +1,7 @@
 package com.a7.everyware.push.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,10 @@ public class PushDAO {
 	@Autowired
 	SqlSession sqlSession;
 
-	public void addPush(PushVO vo) {
+	public void addPush(PushVO push) {
 		PushMapper mapper = sqlSession.getMapper(PushMapper.class);
-		System.out.println(vo.toString());
-		mapper.addPush(vo);
+		System.out.println(push.toString());
+		mapper.addPush(push);
 	}
 	
 	public ArrayList<PushVO> selectPush(UserVO userVO) {

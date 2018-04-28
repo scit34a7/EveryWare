@@ -74,6 +74,7 @@ public class ScheduleController {
 			
 			ArrayList<UserVO> vo = userDAO.selectUserDept(schedule_vo.getSchedule_group());
 
+			// 임시
 			push.setDept_name(schedule_vo.getSchedule_group());
 			for (int i = 0; i < vo.size(); i++) {
 				push.setUser_id(vo.get(i).getUser_id());
