@@ -66,7 +66,7 @@
 												center : "title",
 												right : "next"
 											},
-											
+											/* 
 											monthNames : [ '1월', '2월', '3월',
 													'4월', '5월', '6월', '7월',
 													'8월', '9월', '10월', '11월',
@@ -80,7 +80,7 @@
 											dayNamesShort : [ '일', '월', '화',
 													'수', '목', '금', '토' ],
 											dayNamesMin : [ '일', '월', '화', '수',
-													'목', '금', '토' ],
+													'목', '금', '토' ], */
 											lang : "ko",
 											contentHeight : 445,
 											/* editable : true, */
