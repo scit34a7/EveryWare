@@ -24,4 +24,9 @@ public class PushDAO {
 		PushMapper mapper = sqlSession.getMapper(PushMapper.class);
 		return mapper.selectPush(userVO);
 	}
+
+	public void updatePush(int push_id) {
+		PushMapper mapper = sqlSession.getMapper(PushMapper.class);
+		mapper.updatePush(push_id);
+	}
 }

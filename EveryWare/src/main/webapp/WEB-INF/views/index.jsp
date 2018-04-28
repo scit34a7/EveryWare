@@ -294,6 +294,23 @@
 </script>
 <!-- //근태관리 시간출력 끝 -->
 
+<script>
+function isPush(pushNum) {
+	$.ajax({
+		url: 'pushCheck',
+		type: 'post',
+		data: {isPush: true, push_id: pushNum},
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",  
+		datatype: 'json',
+		success: function(isCorrect) {
+		},
+		error: function (e) {
+			alert('실패');
+		}
+	});
+}
+</script>
+
 
 <script>
 	var w;
@@ -398,10 +415,18 @@ ul.inbox-list-message{
 							<ul class="dropdown-menu notifications">
 								<li>알림이 있습니다.</li>
 									<c:forEach var="push" items="${pushList}">
-										<li><a href="#" class="notification-item"> <i
-												class="fa fa-hdd-o custom-bg-red"></i>
+										<li><a href='javascript:void(0)' onclick="isPush(${push.push_id})" class="notification-item"> 
+										
+											<c:if test="${push.push_type eq '일정'}">
+												<i class="fa fa-bullhorn custom-bg-purple"></i>
+											</c:if>
+											
+											<c:if test="${push.push_type eq '결재'}">
+												<i class="fa fa-hdd-o custom-bg-red"></i>
+											</c:if>
+										
 												<p>
-													<span class="text">${push.push_title }</span> <span
+													<span class="text">${push.push_title}</span> <span
 														class="timestamp">${push.push_time}</span>
 												</p>
 										</a></li>

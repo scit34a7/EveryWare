@@ -9,4 +9,6 @@ public interface PushMapper {
 	public void addPush(PushVO vo);
 	
 	public ArrayList<PushVO> selectPush(UserVO userVO);
+
+	public void updatePush(int push_id);
 }
