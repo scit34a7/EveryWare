@@ -63,18 +63,7 @@
 				</a>
 			</div>
 			<div class="container-fluid">
-				<div id="tour-fullwidth" class="navbar-btn">
-					<button type="button" class="btn-toggle-fullwidth">
-						<i class="ti-arrow-circle-left"></i>
-					</button>
-				</div>
-				<form class="navbar-form navbar-left search-form">
-					<input type="text" value="" class="form-control"
-						placeholder="직원검색">
-					<button type="button" class="btn btn-default">
-						<i class="fa fa-search"></i>
-					</button>
-				</form>
+				
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
 					
@@ -144,7 +133,7 @@
 				<nav>
 					<ul class="nav" id="sidebar-nav-menu">
 						<li class="menu-group">Main</li>
-						<li class="panel"><a href="index" data-toggle="collapse"
+						<li class="panel"><a href="../index" data-toggle="collapse"
 							data-parent="#sidebar-nav-menu" class="collapsed"><i
 								class="ti-dashboard"></i> <span class="title">MainHome</span> <i
 								class="icon-submenu ti-angle-left"></i></a></li>
@@ -250,9 +239,9 @@
 								class="icon-submenu ti-angle-left"></i></a>
 							<div id="board" class="collapse">
 								<ul class="submenu">
-									<li><a href="board/boardList?boardFolder_id=1">공지사항</a></li>
-									<li><a href="board/boardList?boardFolder_id=2">부서게시판</a></li>
-									<li><a href="board/boardList?boardFolder_id=3">커뮤니티</a></li>
+									<li><a href="../board/boardList?boardFolder_id=1">공지사항</a></li>
+									<li><a href="../board/boardList?boardFolder_id=2">부서게시판</a></li>
+									<li><a href="../board/boardList?boardFolder_id=3">커뮤니티</a></li>
 								</ul>
 							</div></li>	
 								
@@ -356,7 +345,10 @@
 			<div class="clearfix"></div>
 			<footer>
 				<div class="container-fluid">
-					<p class="copyright">&copy; 2017 <a href="https://www.themeineed.com" target="_blank">Theme I Need</a>. All Rights Reserved.</p>
+					<p class="copyright">
+						&copy; 2018 <a href="../index" target="_blank">EveryWare</a>.
+						All Rights Reserved.
+					</p>
 				</div>
 			</footer>
 		</div>

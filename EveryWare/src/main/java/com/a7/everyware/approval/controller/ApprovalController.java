@@ -22,6 +22,8 @@ import com.a7.everyware.approval.vo.ApprovalHistoryVO;
 import com.a7.everyware.approval.vo.ApprovalLineVO;
 import com.a7.everyware.approval.vo.ApprovalVO;
 import com.a7.everyware.board.util.FileService;
+import com.a7.everyware.push.dao.PushDAO;
+import com.a7.everyware.push.vo.PushVO;
 import com.a7.everyware.user.vo.UserVO;
 
 
@@ -37,6 +39,8 @@ public class ApprovalController {
 	
 	@Autowired
 	ApprovalDAO approvalDAO;
+	@Autowired
+	PushDAO pushDAO;
 	
 	
 	
@@ -186,6 +190,26 @@ public class ApprovalController {
 		
 		//DAO이용해서 전자결재 등록하기!!!!!
 		approvalDAO.insertApproval(approval);
+		
+		
+		//첫 번째 결재자에게 푸쉬 보내기
+		ApprovalLineVO line = approvalDAO.findApprovalLineById2(approval.geteApprovalLine_id());
+		UserVO person1 = approvalDAO.findUserById2(line.geteApprovalLine_person1());
+		
+		PushVO push = new PushVO();
+		
+		//push_type
+		push.setPush_type("결재");
+		//push_title
+		push.setPush_title("확인해야할 결재가 있습니다.");
+		//user_id
+		push.setUser_id(line.geteApprovalLine_person1());
+		//dept_name
+		push.setDept_name(person1.getDept_name());
+		
+		pushDAO.addPush(push);
+		
+		//푸쉬 끝
 		
 		return "redirect:myApproval";
 	}
@@ -887,11 +911,14 @@ public class ApprovalController {
 		history.seteApproval_id(eApproval_id);
 		history.seteHistory_reason(reason);
 		
-		//eApproval_content 셋팅
+		
+		
+		//eHistory_content 셋팅
 		switch (type) {
 		case 1:
 			//승인
 			history.seteHistory_content("승인");
+			
 			break;
 			
 		case 2:
@@ -911,6 +938,65 @@ public class ApprovalController {
 		logger.debug("insert 직전 history객체 : {}", history);
 		
 		approvalDAO.insertHistory(history);
+		
+		
+		ApprovalVO approval = approvalDAO.findApprovalById(eApproval_id);
+		
+		ApprovalLineVO line = approvalDAO.findApprovalLineById2(approval.geteApprovalLine_id());
+		
+		
+		PushVO push = new PushVO();
+		
+		//알람 받을 사람의 id
+		String id = approval.getUser_id();
+		logger.debug("2222222222222222222222222222222222222222222", id);
+		UserVO u = approvalDAO.findUserById2(id);
+		
+		push.setUser_id(id);
+		push.setPush_type("결재");
+		push.setDept_name(u.getDept_name());
+		
+		
+		
+		//푸쉬 알람
+		switch (type) {
+		case 1:
+			//승인
+			push.setPush_title("결재가 승인되었습니다.");
+			
+			//승인일 경우는 push의 user_id가 다르다.
+			
+			//결재한사람(로그인아이디)가 person1이면 person2가 push의 user_id
+			if(user_id.equals(line.geteApprovalLine_person1())){
+				push.setUser_id(line.geteApprovalLine_person2());
+			
+			}else if(user_id.equals(line.geteApprovalLine_person2())){
+				//person2가 승인
+				push.setUser_id(line.geteApprovalLine_person3());
+			
+			}
+			
+			//person3이 승인, 완료 되었으므로 결재글 쓴 사람에게  는 위에 default로 설정 되있다.
+	
+			break;
+
+		case 2:
+			//거절
+			push.setPush_title("결재가 거절되었습니다.");
+			break;
+			
+		case 3:
+			//반려
+			push.setPush_title("결재가 반려되었습니다.");
+			
+		}
+		
+		logger.debug("push 등록 직전 : {}", push);
+		pushDAO.addPush(push);
+		
+		
+		//푸쉬 끝
+		
 		
 		return "redirect:myApproval";
 	}
@@ -973,6 +1059,7 @@ public class ApprovalController {
 		logger.debug("바이트 확인 {}", approval.geteApproval_content());
 		approvalDAO.editApproval(approval);
 		
+		
 		//히스토리
 		ApprovalHistoryVO history = new ApprovalHistoryVO();
 		
@@ -981,6 +1068,40 @@ public class ApprovalController {
 		history.seteHistory_content("상신");
 		
 		approvalDAO.updateHistory(history);
+		
+		
+		//반려자에게 결재 다시 알림 (push)
+		PushVO push = new PushVO();
+		
+		ApprovalLineVO line = approvalDAO.findApprovalLineById2(approval.geteApprovalLine_id());
+		
+		ArrayList<ApprovalHistoryVO> historyList = approvalDAO.findApprovalHistory(approval.geteApproval_id());
+		int count = 1;	//몇번 결재자까지 갔는지 세는 변수(person1, 2 ,3)
+		for(ApprovalHistoryVO h : historyList){
+			if(h.geteHistory_content().equals("승인")){
+				count ++;
+			}
+		}
+		
+		switch (count) {
+		case 1:
+			push.setUser_id(line.geteApprovalLine_person1());
+			
+			break;
+		case 2:
+			push.setUser_id(line.geteApprovalLine_person2());
+			break;
+		case 3:
+			push.setUser_id(line.geteApprovalLine_person3());
+			break;
+		}
+		
+		push.setPush_type("결재");
+		push.setPush_title("결재가 재상신 되었습니다");
+		push.setDept_name("");
+		
+		logger.debug("push 등록 직전 : {}", push);
+		pushDAO.addPush(push);
 		
 		return "redirect:myApproval";
 	}

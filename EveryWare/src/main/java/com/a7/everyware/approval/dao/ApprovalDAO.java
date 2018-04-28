@@ -66,6 +66,22 @@ public class ApprovalDAO {
 	}
 	
 	/**
+	 * dept_id 대신 dept_name 등등
+	 * @param user_id
+	 * @return
+	 */
+	public UserVO findUserById2(String user_id){
+		ApprovalMapper mapper = sqlSession.getMapper(ApprovalMapper.class);
+		UserVO user = mapper.findUserById2(user_id);
+		return user;
+	}
+	
+	
+	
+
+	
+	
+	/**
 	 * eApprovalLine_id로 ApprovalLineVO 불러오기 (person이 이름 / 부서 / 직책)
 	 * @param eApprovalLine_id
 	 * @return	ApprovalLineVO

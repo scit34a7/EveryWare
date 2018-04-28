@@ -21,6 +21,7 @@ public interface ApprovalMapper {
 	
 	//user_id로 user객체 검색
 	public UserVO findUserById(String user_id);		//user_id가 진짜 user_id
+	public UserVO findUserById2(String user_id);	//id대신 name
 	
 	//user_id로  이름 / 부서  / 직책 의 형태
 	public String findStatusById(String user_id);

@@ -122,6 +122,26 @@
 			user_id = #{user_id}
 	</select>
 	
+	<select id="findUserById2" parameterType="String" resultType="UserVO">
+		select
+				u.user_id
+				,u.user_name
+				,d.dept_name
+				,p.position_name
+			from
+				user_tb u
+				, dept_tb d
+				, position_tb p
+			where
+				u.dept_id = d.dept_id
+				and u.position_id = p.position_id
+				and u.user_id = #{user_id}
+	</select>
+	
+	
+	
+	
+	
 	<!-- 결재선 아이디로 결재선 불러오기 -->
 	<select id="findApprovalLineById" parameterType="int" resultType="ApprovalLineVO">
 		select
