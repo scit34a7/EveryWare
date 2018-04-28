@@ -781,7 +781,6 @@ ul.inbox-list-message{
 										</table>
 										</div>
 							</div>
-					
 					</div>
 						
 							
@@ -805,7 +804,7 @@ ul.inbox-list-message{
 								<div class="col-md-4 right sortable-item">
 										<div class="content-menu-right">
 											<div class="content-menu-header clearfix">
-												<h2 class="heading">부서 공지</h2>
+												<a href ="./board/boardList?boardFolder_id=2"><h2 class="heading">부서 공지</h2></a>
 											</div>
 											<div id="list-message-scrollable">
 												<ul class="inbox-list-message">
@@ -888,7 +887,7 @@ ul.inbox-list-message{
 	<footer>
 		<div class="container-fluid">
 			<p class="copyright">
-				&copy; 2018 <a href="https://www.themeineed.com" target="_blank">EveryWare</a>.
+				&copy; 2018 <a href="index" target="_blank">EveryWare</a>.
 				All Rights Reserved.
 			</p>
 		</div>
