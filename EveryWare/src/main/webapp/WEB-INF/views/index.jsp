@@ -422,7 +422,7 @@ ul.inbox-list-message{
 											</c:if>
 											
 											<c:if test="${push.push_type eq '결재'}">
-												<i class="fa fa-hdd-o custom-bg-red"></i>
+												<i class="fa fa-book custom-bg-green2"></i>
 											</c:if>
 										
 												<p>
