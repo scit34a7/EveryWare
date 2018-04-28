@@ -48,6 +48,7 @@ public class MailSendController {
 	public String goTosendMail(Model model, HttpSession session){
 		
 		String userId = (String)session.getAttribute("userId");
+	
 		
 		String writeForm = null;
 	
