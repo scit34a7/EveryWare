@@ -39,12 +39,12 @@ public class ResourceDAO {
 		return result;
 	}
 	
-	public int Resource_add(R_reservationVO resevatin_vo)
+	public int Resource_add(R_reservationVO reservation_vo)
 	{
 		int result = 0;
 		try{
 			ResourceMapper mapper = sqlsession.getMapper(ResourceMapper.class);
-			result = mapper.Resource_add(resevatin_vo);
+			result = mapper.Resource_add(reservation_vo);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

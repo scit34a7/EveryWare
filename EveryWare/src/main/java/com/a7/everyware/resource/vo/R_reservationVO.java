@@ -105,7 +105,7 @@ public class R_reservationVO {
 
 	@Override
 	public String toString() {
-		return "{resourceId: '"+resource_id+"', id : '"+R_reservation_id+"',title : '"+R_reservation_type+ "' + '"+ "     등록사원:" +"'  +  '"+r_reservation_userName+"' , start: '"+ r_reservation_sdate +"', end: '"+ r_reservation_fdate +"', color : '"+ color +"'}";
+		return "{resourceId: '"+resource_id+"', id : '"+R_reservation_id+"',title : '"+R_reservation_type+ "' + '"+ ":" +"'  +  '"+r_reservation_userName+"' , start: '"+ r_reservation_sdate +"', end: '"+ r_reservation_fdate +"', color : '"+ color +"'}";
 	}
 	
 	

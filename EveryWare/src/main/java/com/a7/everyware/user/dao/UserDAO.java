@@ -23,6 +23,10 @@ public class UserDAO {
 		return mapper.findUser(user_id);
 	}
 
+	public ArrayList<UserVO> selectUserDept(String dept_name) {
+		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		return mapper.selectUserDept(dept_name);
+	}
 	
 	//사원정보 수정 처리
 	public int modifyUser(UserVO user) {

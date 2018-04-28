@@ -268,7 +268,7 @@
 
 			<div class="panel">
 			<div class="panel-heading">
-			<h3 class="panel-title">[ 사원 주소록 ]</h3>
+			<h3 class="panel-title">사원 주소록 </h3>
 			</div>
 			
 			<div class="panel-body">

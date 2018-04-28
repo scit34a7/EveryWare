@@ -26,7 +26,18 @@
 			and u.position_id = p.position_id
 	</select>
 	
-	
+	<!-- 유저 정보 select -->
+	<select id="selectUserDept" parameterType="String" resultType="UserVO">
+   		select
+			u.user_id
+			,d.dept_name
+		from
+			user_tb u
+			, dept_tb d
+		where
+			d.dept_name = #{dept_name}
+			and u.dept_id = d.dept_id
+	</select>
 	
 	<!-- 회원 정보 수정 -->
 	<update id="modifyUser" parameterType="UserVO">

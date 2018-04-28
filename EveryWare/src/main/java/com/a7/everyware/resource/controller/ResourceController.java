@@ -62,12 +62,10 @@ public class ResourceController {
 
 	// 예약
 	@RequestMapping(value = "/Resource_add", method = RequestMethod.POST)
-	public String Resource_add(R_reservationVO reservatin_vo ,String resource_type,HttpSession session) {
+	public String Resource_add(R_reservationVO reservation_vo ,String resource_type,HttpSession session) {
 
-		System.out.println(reservatin_vo);
-		
 		int result = 0;
-		result = resourcedao.Resource_add(reservatin_vo);
+		result = resourcedao.Resource_add(reservation_vo);
 		if (result == 0) {
 
 		}

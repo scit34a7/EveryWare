@@ -2,6 +2,7 @@ package com.a7.everyware.user.controller;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -82,20 +83,27 @@ public class UserController {
 				 * schedule부분 추가 할게요
 				*/
 		
-				ArrayList<ScheduleVO> Mlist = new ArrayList<ScheduleVO>();
-				Mlist = scheduledao.Read_Schedule(id);
-				for (int i = 0; i < Mlist.size(); i++) {
-					if(Mlist.get(i).getSchedule_group().equals("개인"))
+				String user_id = vo.getUser_id();	
+				String schedule_group = vo.getDept_name();
+				
+				HashMap hm = new HashMap<>();
+				hm.put("user_id ", user_id );
+				hm.put("schedule_group", schedule_group);
+				System.out.println("HM" + hm);
+				ArrayList<ScheduleVO> Slist = new ArrayList<ScheduleVO>();
+				Slist = scheduledao.Read_Schedule(hm);
+				for (int i = 0; i < Slist.size(); i++) {
+					if(Slist.get(i).getSchedule_group().equals("개인"))
 					{
-						Mlist.get(i).setColor("#62bbf1");
+						Slist.get(i).setColor("#62bbf1");
 					}
-					else if(Mlist.get(i).getSchedule_group().equals("총무"))
+					else if(Slist.get(i).getSchedule_group().equals("총무"))
 					{
-						Mlist.get(i).setColor("#f26363");
+						Slist.get(i).setColor("#f26363");
 					}
 				}
-				session.setAttribute("Mlist", Mlist);
-				System.out.println("m->" + Mlist);
+				session.setAttribute("Slist", Slist);
+		
 				/*
 				 * 여기까지 schedule
 				*/
