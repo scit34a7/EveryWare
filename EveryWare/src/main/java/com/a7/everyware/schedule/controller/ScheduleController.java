@@ -13,6 +13,7 @@ import com.a7.everyware.push.dao.PushDAO;
 import com.a7.everyware.push.vo.PushVO;
 import com.a7.everyware.schedule.dao.ScheduleDAO;
 import com.a7.everyware.schedule.vo.ScheduleVO;
+import com.a7.everyware.user.dao.UserDAO;
 
 @Controller
 public class ScheduleController {
@@ -21,6 +22,9 @@ public class ScheduleController {
 	
 	@Autowired
 	PushDAO pushDAO;
+	
+	@Autowired
+	UserDAO userDAO;
 	
 	@RequestMapping(value = "schedule", method = RequestMethod.GET)
 	public String schedule(HttpSession session) {
@@ -46,7 +50,7 @@ public class ScheduleController {
 	}
 
 	@RequestMapping(value = "/Schedule_add", method = RequestMethod.POST)
-	public String Schedule_add(ScheduleVO schedule_vo) {
+	public String Schedule_add(ScheduleVO schedule_vo, HttpSession session) {
 	
 		System.out.println(schedule_vo);
 		int result = 0;
@@ -55,12 +59,15 @@ public class ScheduleController {
 		}
 
 		if (!schedule_vo.getSchedule_group().equals("개인") || !schedule_vo.getSchedule_group().equals("2")) {
+			String user_id = (String) session.getAttribute("userId");
 			PushVO push = new PushVO();
 			push.setPush_type("일정");
 			push.setPush_title("부서일정이 등록되었습니다.");
 			push.setUser_id(schedule_vo.getUser_id());
 			push.setDept_name(schedule_vo.getSchedule_group());
 			pushDAO.addPush(push);
+			
+			session.setAttribute("pushList", pushDAO.selectPush(userDAO.findUser(user_id)));
 		}
 		
 		return "redirect:/schedule";

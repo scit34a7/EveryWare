@@ -22,8 +22,10 @@ import com.a7.everyware.approval.vo.ApprovalVO;
 import com.a7.everyware.board.dao.BoardDAO;
 import com.a7.everyware.board.util.PageNavigator;
 import com.a7.everyware.board.vo.BoardVO;
+import com.a7.everyware.push.dao.PushDAO;
 import com.a7.everyware.support.dao.SupportDAO;
 import com.a7.everyware.support.vo.AttendVO;
+import com.a7.everyware.user.dao.UserDAO;
 
 @Controller
 public class HomeController {
@@ -42,6 +44,10 @@ public class HomeController {
 	ApprovalDAO approvalDAO;
 	@Autowired
 	SupportDAO supportDAO;
+	@Autowired
+	PushDAO pushDAO;
+	@Autowired
+	UserDAO userDAO;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -389,6 +395,10 @@ public class HomeController {
 		model.addAttribute("approvalList_now", approvalList_now);
 		
 		model.addAttribute("approvalList_ban", approvalList_ban);
+
+		
+		session.setAttribute("pushList", pushDAO.selectPush(userDAO.findUser(user_id)));
+
 		
 		/* 결재 관련 끝 */		
 		return "index";
