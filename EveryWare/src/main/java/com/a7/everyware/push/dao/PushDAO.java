@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.a7.everyware.push.vo.PushVO;
+import com.a7.everyware.user.vo.UserVO;
 
 @Repository
 public class PushDAO {
@@ -19,8 +20,8 @@ public class PushDAO {
 		mapper.addPush(vo);
 	}
 	
-	public ArrayList<PushVO> selectPush() {
+	public ArrayList<PushVO> selectPush(UserVO userVO) {
 		PushMapper mapper = sqlSession.getMapper(PushMapper.class);
-		return mapper.selectPush();
+		return mapper.selectPush(userVO);
 	}
 }
