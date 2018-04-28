@@ -195,12 +195,12 @@
 						</div></li>
 					<li class="panel"><a href="#" data-toggle="collapse"
 						data-target="#submenuDemo" data-parent="#sidebar-nav-menu"
-						class="collapsed"><i class="ti-menu"></i> <span class="title">화상회의
+						class="active"><i class="ti-menu"></i> <span class="title">화상회의
 						</span><i class="icon-submenu ti-angle-left"></i></a>
-						<div id="submenuDemo" class="collapse">
+						<div id="submenuDemo" class="collapse in">
 							<ul class="submenu">
 								<li><a href="./meetingList">회의실</a></li>
-								<li><a href="./minutes">회외록</a></li>
+								<li><a href="./minutes" class = "active">회외록</a></li>
 							</ul>
 						</div></li>
 
@@ -241,8 +241,12 @@
 				<!-- MAIN CONTENT -->
 				<div class="main-content">
 					<div class="content-heading clearfix">
+						<div class="content-heading clearfix">
 						<div class="heading-left">
-							<h1 class="page-title">화상 회의실</h1>
+							<h1 class="page-title">화상회의</h1>
+						<p class="page-subtitle">
+							위 기능에서는<strong>화상회의 ,채팅, 파일 교환 등</strong>이 가능합니다. 
+						</p>
 						</div>
 						<ul class="breadcrumb">
 						

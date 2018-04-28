@@ -217,18 +217,34 @@
 								<li><a href="../resource">자원 예약 관리</a></li>
 							</ul>
 						</div></li>
-					<!-- <li><a href="typography"><i class="ti-paragraph"></i> <span
-							class="title">게시판</span></a></li> -->
-
+					
 					<li class="panel"><a href="#board" data-toggle="collapse"
-						data-parent="#sidebar-nav-menu" class="collapsed"><i
+						data-parent="#sidebar-nav-menu" class="active"><i
 							class="ti-pie-chart"></i> <span class="title">게시판</span> <i
 							class="icon-submenu ti-angle-left"></i></a>
-						<div id="board" class="collapse">
+						<div id="board" class="collapse in">
 							<ul class="submenu">
-								<li><a href="../board/boardList?boardFolder_id=1">공지사항</a></li>
-								<li><a href="../board/boardList?boardFolder_id=2">부서게시판</a></li>
-								<li><a href="../board/boardList?boardFolder_id=3">커뮤니티</a></li>
+								<c:choose>
+			
+									<c:when test="${boardFolder_id==1}">
+										<li><a href="../board/boardList?boardFolder_id=1" class = "active">공지사항</a></li>
+										<li><a href="../board/boardList?boardFolder_id=2">부서게시판</a></li>
+										<li><a href="../board/boardList?boardFolder_id=3">커뮤니티</a></li>
+									</c:when>
+							
+									<c:when test="${boardFolder_id==2}">
+										<li><a href="../board/boardList?boardFolder_id=1">공지사항</a></li>
+										<li><a href="../board/boardList?boardFolder_id=2" class = "active">부서게시판</a></li>
+										<li><a href="../board/boardList?boardFolder_id=3">커뮤니티</a></li>
+									</c:when>
+							
+									<c:when test="${boardFolder_id==3}">
+										<li><a href="../board/boardList?boardFolder_id=1">공지사항</a></li>
+										<li><a href="../board/boardList?boardFolder_id=2">부서게시판</a></li>
+										<li><a href="../board/boardList?boardFolder_id=3" class = "active">커뮤니티</a></li>
+									</c:when>
+									
+								</c:choose>
 							</ul>
 						</div></li>
 
@@ -248,19 +264,15 @@
 					<div class="content-heading clearfix">
 						<div class="heading-left">
 							<h1 class="page-title">게시판</h1>
+						<p class="page-subtitle">
+							<strong>사내 전체 공지사항, 부서게시판, 커뮤니티</strong>의 구분으로 게시글의 확인/수정/삭제 등을 할수 있습니다. 
+						</p>
 						</div>
 						<ul class="breadcrumb">
 							
 						</ul>
 					</div>
-				
-	
-	
-	
-	
-	
-	
-	
+			
 			<div class="container-fluid">
 			<!-- FEATURED DATATABLE / 본문 시작-->
 

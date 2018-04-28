@@ -291,16 +291,15 @@ function getTextCoo1(){
 					</li>
 
 					<li class="panel"><a href="#subPages" data-toggle="collapse"
-						data-parent="#sidebar-nav-menu" class="collapsed"><i
+						data-parent="#sidebar-nav-menu" class="active"><i
 							class="ti-files"></i> <span class="title">자원예약</span> <i
 							class="icon-submenu ti-angle-left"></i></a>
-						<div id="subPages" class="collapse ">
+						<div id="subPages" class="collapse in">
 							<ul class="submenu">
-								<li><a href="resource">자원 예약 관리</a></li>
+								<li><a href="resource" class ="active">자원 예약 관리</a></li>
 							</ul>
 						</div></li>
-					<!-- <li><a href="typography"><i class="ti-paragraph"></i> <span
-							class="title">게시판</span></a></li> -->
+					
 							
 							<li class="panel"><a href="#board" data-toggle="collapse"
 						data-parent="#sidebar-nav-menu" class="collapsed"><i
@@ -328,9 +327,9 @@ function getTextCoo1(){
 			<!-- CHAT SUPPORT -->
 			<div class="content-heading clearfix">
 					<div class="heading-left">
-						<h1 class="page-title">자원예약 관리</h1>
+							<h1 class="page-title">자원예약관리</h1>
 						<p class="page-subtitle">
-							
+							<strong>회사자원(회의실,노트북,업무용 차량 등)에 대한 예약 및 관리 </strong>가 가능합니다. 
 						</p>
 					</div>
 					<ul class="breadcrumb">

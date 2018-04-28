@@ -162,14 +162,14 @@
 							</ul>
 						</div></li>
 					<li class="panel"><a href="#appViews" data-toggle="collapse"
-						data-parent="#sidebar-nav-menu" class="collapsed"><i
+						data-parent="#sidebar-nav-menu" class="active"><i
 							class="ti-layout-tab-window"></i> <span class="title">개인정보관리</span>
 							<i class="icon-submenu ti-angle-left"></i></a>
-						<div id="appViews" class="collapse ">
+						<div id="appViews" class="collapse in">
 							<ul class="submenu">
 								<li><a href="./userInfo">내 정보</a></li>
 								<li><a href="./update">내 정보 수정</a></li>
-								<li><a href="./userList">주소록</a></li>
+								<li><a href="./userList" class ="active">주소록</a></li>
 							</ul>
 						</div></li>
 
@@ -249,7 +249,10 @@
 				<div class="main-content">
 					<div class="content-heading clearfix">
 						<div class="heading-left">
-							<h1 class="page-title">개인정보관리</h1>
+							<h1 class="page-title">개인정보</h1>
+						<p class="page-subtitle">
+							개인정보를 <strong>확인, 수정</strong>할 수 있습니다. 
+						</p>
 						</div>
 						<ul class="breadcrumb">
 							

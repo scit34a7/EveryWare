@@ -176,14 +176,14 @@
 						</div></li>
 
 					<li class="panel"><a href="#charts" data-toggle="collapse"
-						data-parent="#sidebar-nav-menu" class="collapsed"><i
+						data-parent="#sidebar-nav-menu" class="active"><i
 							class="ti-pie-chart"></i> <span class="title">업무지원</span> <i
 							class="icon-submenu ti-angle-left"></i></a>
-						<div id="charts" class="collapse ">
+						<div id="charts" class="collapse in">
 							<ul class="submenu">
 								<li><a href="./supportMain">근태확인</a></li>
 								<li><a href="./attendList">근태현황</a></li>
-								<li><a href="./boardList">업무보고</a></li>
+								<li><a href="./boardList" class = "active">업무보고</a></li>
 							</ul>
 						</div></li>
 
@@ -254,6 +254,9 @@
 					<div class="content-heading clearfix">
 						<div class="heading-left">
 							<h1 class="page-title">업무지원</h1>
+						<p class="page-subtitle">
+							부서/개인업무에 대한 <strong>보고, 정보공유</strong>의 기능을 담당합니다. 
+						</p>
 						</div>
 						<ul class="breadcrumb">
 							

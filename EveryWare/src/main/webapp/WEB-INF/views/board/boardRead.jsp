@@ -277,10 +277,10 @@
 							class="title">게시판</span></a></li> -->
 
 					<li class="panel"><a href="#board" data-toggle="collapse"
-						data-parent="#sidebar-nav-menu" class="collapsed"><i
+						data-parent="#sidebar-nav-menu" class="active"><i
 							class="ti-pie-chart"></i> <span class="title">게시판</span> <i
 							class="icon-submenu ti-angle-left"></i></a>
-						<div id="board" class="collapse">
+						<div id="board" class="collapse in">
 							<ul class="submenu">
 								<li><a href="../board/boardList?boardFolder_id=1">공지사항</a></li>
 								<li><a href="../board/boardList?boardFolder_id=2">부서게시판</a></li>
@@ -302,8 +302,13 @@
 				<!-- MAIN CONTENT -->
 				<div class="main-content">
 					<div class="content-heading clearfix">
+						<div class="content-heading clearfix">
+						
 						<div class="heading-left">
 							<h1 class="page-title">게시판</h1>
+						<p class="page-subtitle">
+							<strong>사내 전체 공지사항, 부서게시판, 커뮤니티</strong>의 구분으로 게시글의 확인/수정/삭제 등을 할수 있습니다. 
+						</p>
 						</div>
 						<ul class="breadcrumb">
 							

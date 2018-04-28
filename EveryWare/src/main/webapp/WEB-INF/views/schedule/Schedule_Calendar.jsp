@@ -307,12 +307,12 @@
 							</ul>
 						</div></li>
 					<li class="panel"><a href="#forms" data-toggle="collapse"
-						data-parent="#sidebar-nav-menu" class="collapsed"><i
+						data-parent="#sidebar-nav-menu" class="active"><i
 							class="ti-receipt"></i> <span class="title">스케줄 관리</span> <i
 							class="icon-submenu ti-angle-left"></i></a>
-						<div id="forms" class="collapse ">
+						<div id="forms" class="collapse in">
 							<ul class="submenu">
-								<li><a href="schedule">개인 및 부서일정 관리</a></li>
+								<li><a href="schedule" class = "active">개인 및 부서일정 관리</a></li>
 							</ul>
 						</div></li>
 					<li class="panel"><a href="#appViews" data-toggle="collapse"
@@ -409,21 +409,15 @@
 			<div class="main-content">
 
 				<div class="content-heading clearfix">
-					<div style="width: 100%; display: table-cell; float: center;">
-						<div class="barkKategorie">
-							<label><b>일정 관리</b></label>
-							
-						
-							
+					<div class="heading-left">
+							<h1 class="page-title">일정 관리</h1>
+						<p class="page-subtitle">
+							 <strong>일정을  등록, 삭제, 관리</strong>할 수 있습니다. 
+						</p>
 						</div>
-						<div>
-							<ul class="breadcrumb">
+						<ul class="breadcrumb">
 							
-							</ul>
-							</div>
-					
-					
-					</div>
+						</ul>
 				</div>
 				<div class="col-md-9">
 					<div class="panel">
