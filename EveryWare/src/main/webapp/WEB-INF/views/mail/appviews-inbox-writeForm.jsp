@@ -127,8 +127,11 @@
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="subLayouts" class="collapse">
 							<ul class="submenu">
-								<li><a href="./getMail?sort=all">받은메일함 <span
-										class="label label-success">NEW</span></a></li>
+								<li><a href="./getMail?sort=all">받은메일함 
+								<c:if test="${mailRead>0}">
+								 <span class="label label-success">NEW</span>
+								</c:if>
+								</a></li>
 								<li><a href="./getMail?sort=send">보낸메일함</a></li>
 								<li><a href="./sendMail">편지쓰기</a></li>
 								<li><a href="./getMail?sort=important">중요편지함</a></li>
@@ -238,9 +241,7 @@
 						</p>
 					</div>
 					<ul class="breadcrumb">
-						<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-						<li><a href="#">App Views</a></li>
-						<li class="active">Inbox</li>
+						
 					</ul>
 				</div>
 				<div class="container-fluid">
@@ -292,14 +293,7 @@
 											</div>
 										</div>
 												<div class="btn-group">
-													<div class="form-group">
-														<button type="submit" class="btn btn-primary btn-replyx">주소록</button>
-														<br>
-													</div>
-													<div class="form-group">
-														<button type="submit" class="btn btn-primary btn-replyx">미리보기</button>
-														<br>
-													</div>
+													
 												</div> <!--  end of the button division -->
 											</div>
 										</div>
@@ -310,7 +304,7 @@
 										<form action ="./saveMailForm" id = "saveMailForm" method = "post" enctype ="multipart/form-data">
 										<textarea class="summernote" id ="summernote"  name ="mailContent_summer">
 											
-												 "${writeForm}"
+												 ${writeForm}
 											
 											<!--  c:if writeForm != null tag 지 움  -->
 										</textarea>

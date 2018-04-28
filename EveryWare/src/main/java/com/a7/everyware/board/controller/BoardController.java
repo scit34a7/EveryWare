@@ -113,7 +113,6 @@ public class BoardController {
 		
 		}
 		
-		
 		return "redirect:boardList?boardFolder_id=" + boardVO.getBoardFolder_id();
 	}
 

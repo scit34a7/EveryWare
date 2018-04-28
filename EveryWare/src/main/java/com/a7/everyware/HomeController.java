@@ -20,6 +20,7 @@ import com.a7.everyware.approval.vo.ApprovalHistoryVO;
 import com.a7.everyware.approval.vo.ApprovalLineVO;
 import com.a7.everyware.approval.vo.ApprovalVO;
 import com.a7.everyware.board.dao.BoardDAO;
+import com.a7.everyware.board.util.PageNavigator;
 import com.a7.everyware.board.vo.BoardVO;
 import com.a7.everyware.support.dao.SupportDAO;
 import com.a7.everyware.support.vo.AttendVO;
@@ -28,6 +29,11 @@ import com.a7.everyware.support.vo.AttendVO;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	//사원 수 관련 상수값들
+		final int countPerPage = 10;				//페이지 당 수
+		final int pagePerGroup = 5;					//페이지 이동 그룹 당 표시할 페이지 수
+
 	
 	//공지사항 읽을 때
 	@Autowired
@@ -52,15 +58,27 @@ public class HomeController {
 		//공지사항
 		List<BoardVO> boardlist = boardDAO.listBoardMain(boardFolder_id);
 		
+		//10개만 추출
 		boardlist =  boardlist.subList(0, 9);
 		
 		model.addAttribute("boardlist", boardlist);
 		
 		
+		//부서 공지 함 
+		int total = boardDAO.getTotal("", boardFolder_id);			//전체 글 개수
+		
+		PageNavigator navi = new PageNavigator(countPerPage, pagePerGroup, 1, total); 
+		
+		List<BoardVO> deptBoardList = boardDAO.listBoard("", 2, navi.getStartRecord(), navi.getCountPerPage());	
+		
+		//5개만 추출
+		deptBoardList =  deptBoardList.subList(0, 4);
+		
+		model.addAttribute("deptBoardList",deptBoardList);
+		
 		//로그인 아이디 세팅
 		String user_id = (String) session.getAttribute("userId");
 		ArrayList<AttendVO> attendMainList = supportDAO.attendCheckMain(user_id);
-				
 		
 		//근태
 		//출근여부 판단
@@ -73,13 +91,9 @@ public class HomeController {
 		}
 		
 		model.addAttribute("attendCheck", attendCheck);
-			
-				
-		
 		
 		/*결재 관련 시작*/
 		//로그인 아이디 세팅: 위 근태위에서 세팅
-		
 		
 		//내가 결재라인에 올라와 있는 결재
 				ArrayList<ApprovalVO> approvalList_toMe = approvalDAO.findApprovalToMe(user_id);
@@ -113,10 +127,7 @@ public class HomeController {
 					app.seteApproval_saved(Integer.toString(progress));
 					//진행도 끝
 					
-					
-					
-					
-					//결재 문서에 결재라인 불러오기
+						//결재 문서에 결재라인 불러오기
 					ApprovalLineVO line = approvalDAO.findApprovalLineById2(app.geteApprovalLine_id());
 					
 					//결재 문서의 히스토리 불러오기
@@ -182,13 +193,7 @@ public class HomeController {
 								logger.debug("2222222222222222222222222222222222");
 								approvalList_now.add(app);
 							}
-							
-							
-							
-							
 						}
-					
-						
 						
 						break;
 						
@@ -237,12 +242,8 @@ public class HomeController {
 								isApproval2_2 = "거절";
 								break;
 							}
-							
-							
-							
-							
-						}
 						
+						}
 						
 						if(!isApproval2_1){
 							//첫번재 결재자가 승인을 안한경우
@@ -335,12 +336,6 @@ public class HomeController {
 						break;
 					
 					}//switch
-					
-					
-					
-					
-					
-					
 				}//for
 				
 				
@@ -381,8 +376,6 @@ public class HomeController {
 					
 				}
 		
-		
-		
 		logger.debug("내가 봐야할 결재 : {}", approvalList_now);
 		
 		logger.debug("반려된 결재 : {}", approvalList_ban);
@@ -394,10 +387,14 @@ public class HomeController {
 		
 		model.addAttribute("approvalList_ban", approvalList_ban);
 		
+	
+		
+		
+		
+		
+		
+		
 		/* 결재 관련 끝 */		
-		
-		
-		
 		return "index";
 	}
 	

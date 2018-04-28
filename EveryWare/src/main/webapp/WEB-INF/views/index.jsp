@@ -306,7 +306,7 @@
 	}
 </script>
 
-<!--  광고  -->
+<!--  광고 /  -->
 <style>
 
  .right {
@@ -359,7 +359,7 @@
 }
 
 
-ul.inbox-list-message li.active{
+li.active{
  background-color: #00aaff;
 }
 
@@ -469,8 +469,11 @@ ul.inbox-list-message{
 								<li><a href="./mail/getMail?sort=all">받은메일함
 								
 								<c:if test="${mailRead>0}">
-								 <span class="label label-success">NEW</span></a></li>
+								 <span class="label label-success">NEW</span>
 								</c:if>
+								
+								</a>
+								</li>
 								
 								<li><a href="./mail/getMail?sort=send">보낸메일함</a></li>
 								<li><a href="./mail/sendMail">편지쓰기</a></li>
@@ -579,9 +582,7 @@ ul.inbox-list-message{
 							Experience_only by A7.corp</p>
 					</div>
 					<ul class="breadcrumb">
-						<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-						<li><a href="#">Dashboards</a></li>
-						<li class="active">Dashboard v1</li>
+						
 					</ul>
 				</div>
 				
@@ -658,8 +659,8 @@ ul.inbox-list-message{
 							<p style="text-align: right">
 								<input type="button" value="공지사항" class="btn btn-info"
 									onClick="location.href='board/boardList?boardFolder_id=1';">
-							<table id="featured-datatable"
-								class="table table-striped table-hover">
+							<table 
+								class="table table-striped table-hover"><!-- featured-datatable -->
 								<thead>
 									<tr>
 										<th>번호</th>
@@ -691,7 +692,7 @@ ul.inbox-list-message{
 								<div class="panel-heading">
 									<h3 class="panel-title">처리해야할 결재</h3>
 								</div>
-										<div class="panel-body">
+										<div class="panel-body" style="overflow-y: scroll; ">
 										<table class="table table-striped">
 									
 											<thead>
@@ -775,7 +776,6 @@ ul.inbox-list-message{
 														</tr>
 													</c:forEach>
 												</c:if>
-											
 										</tbody>
 										</table>
 										</div>
@@ -790,10 +790,7 @@ ul.inbox-list-message{
 												<span class="title">목표 매출액</span>
 												<div class="dropdown">
 													<a href="#" class="toggle-dropdown" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
-													<ul class="dropdown-menu dropdown-menu-right">
-														<li><a href="#"><i class="fa fa-refresh"></i> Refresh</a></li>
-														<li><a href="#"><i class="fa fa-pencil"></i> Modify</a></li>
-													</ul>
+													
 												</div>
 											</div>
 											<i class="ti-settings custom-text-green3"></i>
@@ -811,49 +808,20 @@ ul.inbox-list-message{
 											</div>
 											<div id="list-message-scrollable">
 												<ul class="inbox-list-message">
+													
+													<c:forEach var = "deptBoard" items ="${deptBoardList}">
 													<li>
-														<a href="#">
-															<div class="text">
-																<span class="sender">Robby</span>
-																<span class="timestamp">13:45</span>
-																<h3 class="title">Weekly Meeting</h3>
-																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
+														<a href="board/read?board_id=${deptBoard.board_id}">
+															<div class="detBoardList">
+																<span class="sender">${deptBoard.user_id  }</span>
+																<span class="timestamp">${deptBoard.board_date }</span>
+																<h3 class="title">${deptBoard.board_title }</h3>
+																<p class="preview">...</p>
 															</div>
 														</a>
 													</li>
-													<li class="unread">
-														<a href="#">
-															
-															<div class="text">
-																<span class="sender">Robby</span>
-																<span class="timestamp">13:45</span>
-																<h3 class="title">Weekly Meeting</h3>
-																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
-																<span class="attachment"><i class="fa fa-paperclip"></i></span>
-															</div>
-														</a>
-													</li>
-													<li class="unread">
-														<a href="#">
-															<div class="text">
-																<span class="sender">Jessie Monica</span>
-																<span class="timestamp">13:45</span>
-																<h3 class="title">Weekly Meeting</h3>
-																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
-																<span class="attachment"><i class="fa fa-paperclip"></i></span>
-															</div>
-														</a>
-													</li>
-													<li>
-														<a href="#">
-															<div class="text">
-																<span class="sender">Robby</span>
-																<span class="timestamp">13:45</span>
-																<h3 class="title">Weekly Meeting</h3>
-																<p class="preview">Hi Andrew, As your last message about user activation procedures ...</p>
-															</div>
-														</a>
-													</li>
+													</c:forEach>
+											
 												</ul>
 											</div>
 										</div>

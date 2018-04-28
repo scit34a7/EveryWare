@@ -127,8 +127,12 @@
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="subLayouts" class="collapse">
 							<ul class="submenu">
-								<li><a href="../mail/getMail?sort=all">받은메일함 <span
-										class="label label-success">NEW</span></a></li>
+								<li><a href="../mail/getMail?sort=all">받은메일함
+								<c:if test="${mailRead>0}">
+								 <span class="label label-success">NEW</span>
+								</c:if>
+								
+								</a></li>
 								<li><a href="../mail/getMail?sort=send">보낸메일함</a></li>
 								<li><a href="../mail/sendMail">편지쓰기</a></li>
 								<li><a href="../mail/getMail?sort=important">중요편지함</a></li>
