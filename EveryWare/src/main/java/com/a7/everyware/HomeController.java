@@ -59,7 +59,10 @@ public class HomeController {
 		List<BoardVO> boardlist = boardDAO.listBoardMain(boardFolder_id);
 		
 		//10개만 추출
+		
+		if(boardlist.size()>9){
 		boardlist =  boardlist.subList(0, 9);
+		}
 		
 		model.addAttribute("boardlist", boardlist);
 		
@@ -72,7 +75,9 @@ public class HomeController {
 		List<BoardVO> deptBoardList = boardDAO.listBoard("", 2, navi.getStartRecord(), navi.getCountPerPage());	
 		
 		//5개만 추출
-		deptBoardList =  deptBoardList.subList(0, 4);
+		if(deptBoardList.size()>4){
+			deptBoardList =  deptBoardList.subList(0, 4);
+		}
 		
 		model.addAttribute("deptBoardList",deptBoardList);
 		
@@ -361,7 +366,6 @@ public class HomeController {
 					//진행도 끝
 				}
 				
-				
 				//반려시 
 				for(ApprovalVO app : approvalList_fromMe){
 					ArrayList<ApprovalHistoryVO> hlist = approvalDAO.findApprovalHistory(app.geteApproval_id());
@@ -382,17 +386,9 @@ public class HomeController {
 		
 		//모델에 담은 객체들
 		
-		
 		model.addAttribute("approvalList_now", approvalList_now);
 		
 		model.addAttribute("approvalList_ban", approvalList_ban);
-		
-	
-		
-		
-		
-		
-		
 		
 		/* 결재 관련 끝 */		
 		return "index";

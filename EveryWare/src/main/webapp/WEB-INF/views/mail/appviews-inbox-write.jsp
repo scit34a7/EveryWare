@@ -127,14 +127,14 @@
 					<ul class="nav" id="sidebar-nav-menu">
 						<li class="menu-group">Main</li>
 						<li class="panel"><a href="index" data-toggle="collapse"
-							data-parent="#sidebar-nav-menu" class="active"><i
+							data-parent="#sidebar-nav-menu" class="collapsed"><i
 								class="ti-dashboard"></i> <span class="title">MainHome</span> <i
 								class="icon-submenu ti-angle-left"></i></a></li>
 						<li class="panel"><a href="#subLayouts"
 							data-toggle="collapse" data-parent="#sidebar-nav-menu"
-							class="collapsed"><i class="ti-layout"></i> <span
+							class="active"><i class="ti-layout"></i> <span
 								class="title">e메일</span> <i class="icon-submenu ti-angle-left"></i></a>
-							<div id="subLayouts" class="collapse">
+							<div id="subLayouts" class="collapse in">
 								<ul class="submenu">
 									<li><a href="./getMail?sort=all">받은메일함 
 									<c:if test="${mailRead>0}">
@@ -142,7 +142,7 @@
 								</c:if>
 									</a></li>
 									<li><a href="./getMail?sort=send">보낸메일함</a></li>
-									<li><a href="./sendMail">편지쓰기</a></li>
+									<li><a href="./sendMail" class = "active">편지쓰기</a></li>
 									<li><a href="./getMail?sort=important">중요편지함</a></li>
 								</ul>
 							</div></li>
@@ -243,10 +243,9 @@
 			<div class="main-content">
 				<div class="content-heading clearfix">
 					<div class="heading-left">
-						<h1 class="page-title">e메일</h1>
+						<h1 class="page-title">전자우편</h1>
 						<p class="page-subtitle">
-							<span style="font-size: 15px;">${sessionScope.userName}</span>You
-							have <strong>118 unread messages</strong>
+							메일을 <strong>수신, 발신, 관리</strong>할 수 있습니다. 
 						</p>
 					</div>
 					<ul class="breadcrumb">
@@ -265,7 +264,7 @@
 										<nav>
 											<span>Mail Service</span>
 											<ul class="nav-content-menu">
-												<li><a href="./sendMail"><i class="fa fa-pencil"></i>
+												<li><a href="./sendMail" style = "color : blue; font-weight:bold"><i class="fa fa-pencil"></i>
 														편지쓰기</a></li>
 												<li><a href="./getMail?sort=all"
 													<c:if test ="${sort== 0}">style = "color : blue; font-weight:bold"</c:if>><i

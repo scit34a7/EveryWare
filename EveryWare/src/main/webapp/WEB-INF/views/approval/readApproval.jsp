@@ -353,11 +353,6 @@
 									<li><a href="../mail/sendMail">편지쓰기</a></li>
 									<li><a href="../mail/getMail?sort=important">중요편지함</a></li>
 									
-									
-									
-									
-									
-									
 								</ul>
 							</div></li>
 						<li class="panel"><a href="#forms" data-toggle="collapse"
@@ -393,8 +388,6 @@
 								</ul>
 							</div></li>
 							
-							
-							
 						<li class="panel">
 							<a href="#approval" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="active">
 								<i class="ti-widget"></i>
@@ -410,7 +403,7 @@
 									
 							</div>
 						</li>
-				<li class="panel"><a href="#" data-toggle="collapse"
+						<li class="panel"><a href="#" data-toggle="collapse"
 							data-target="#submenuDemo" data-parent="#sidebar-nav-menu"
 							class="collapsed"><i class="ti-menu"></i> <span class="title">화상회의
 							</span><i class="icon-submenu ti-angle-left"></i></a>

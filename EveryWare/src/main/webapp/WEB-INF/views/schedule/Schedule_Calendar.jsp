@@ -286,7 +286,7 @@
 				<ul class="nav" id="sidebar-nav-menu">
 					<li class="menu-group">Main</li>
 					<li class="panel"><a href="index" data-toggle="collapse"
-						data-parent="#sidebar-nav-menu" class="active"><i
+						data-parent="#sidebar-nav-menu" class="collapsed"><i
 							class="ti-dashboard"></i> <span class="title">MainHome</span> <i
 							class="icon-submenu ti-angle-left"></i></a></li>
 					<li class="panel"><a href="#subLayouts" data-toggle="collapse"
@@ -356,7 +356,8 @@
 								
 						</div>
 					</li>
-			<li class="panel"><a href="#" data-toggle="collapse"
+					
+					<li class="panel"><a href="#" data-toggle="collapse"
 						data-target="#submenuDemo" data-parent="#sidebar-nav-menu"
 						class="collapsed"><i class="ti-menu"></i> <span class="title">화상회의
 						</span><i class="icon-submenu ti-angle-left"></i></a>
@@ -397,6 +398,7 @@
 					title="Toggle Minified Menu">
 					<i class="ti-arrows-horizontal"></i>
 				</button>
+				
 			</nav>
 		</div>
 		<!-- END LEFT SIDEBAR -->
