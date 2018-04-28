@@ -410,10 +410,13 @@ ul.inbox-list-message{
 
 						<li class="dropdown"><a href="#"
 							class="dropdown-toggle icon-menu" data-toggle="dropdown"> <i
-								class="ti-bell"></i> <span class="badge bg-danger">5</span>
+								class="ti-bell"></i> 
+								
+							<c:if test="${empty pushList == false}">
+								<span class="badge bg-danger">NEW</span>
+							</c:if>
 						</a>
 							<ul class="dropdown-menu notifications">
-								<li>알림이 있습니다.</li>
 									<c:forEach var="push" items="${pushList}">
 										<li><a href='javascript:void(0)' onclick="isPush(${push.push_id})" class="notification-item"> 
 										
@@ -431,7 +434,6 @@ ul.inbox-list-message{
 												</p>
 										</a></li>
 									</c:forEach>
-								<li><a href="#" class="more">전체 알람 보러 가기</a></li>
 							</ul></li>
 
 						<li class="dropdown"><a href="#" class="dropdown-toggle"

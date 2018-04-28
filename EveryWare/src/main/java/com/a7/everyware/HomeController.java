@@ -23,6 +23,7 @@ import com.a7.everyware.board.dao.BoardDAO;
 import com.a7.everyware.board.util.PageNavigator;
 import com.a7.everyware.board.vo.BoardVO;
 import com.a7.everyware.push.dao.PushDAO;
+import com.a7.everyware.push.vo.PushVO;
 import com.a7.everyware.support.dao.SupportDAO;
 import com.a7.everyware.support.vo.AttendVO;
 import com.a7.everyware.user.dao.UserDAO;
@@ -397,7 +398,9 @@ public class HomeController {
 		model.addAttribute("approvalList_ban", approvalList_ban);
 
 		
-		session.setAttribute("pushList", pushDAO.selectPush(userDAO.findUser(user_id)));
+		ArrayList<PushVO> pushList = pushDAO.selectPush(userDAO.findUser(user_id));
+		System.out.println(pushList.toString());
+		session.setAttribute("pushList", pushList);
 
 		
 		/* 결재 관련 끝 */		
