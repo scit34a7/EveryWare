@@ -436,10 +436,11 @@
 					<div id="dialog-addMessage" title="예약 하기" style="display: none;">
 						<form action="Resource_add" method="post">
 							<input type="hidden" id="resource_id" name="resource_id">
+						
 							<table>
 								<tr>
 									<td>사원 명</td>
-									<td><input type="text" name="userName" value="${userName}" readonly>
+									<td><input type="text" name="r_reservation_userName" value="${userName}" readonly>
 									</td>
 									<td>부서 명</td>
 									<td><input type="text" value="${userDepartment}"
@@ -455,9 +456,9 @@
 								</tr>
 								<tr>
 									<td>등록 날짜</td>
-									<td><input type="text" id="regDate" name="regDate" readonly="readonly"></td>
+									<td><input type="text" id="regDate" name="r_reservation_regDate" readonly="readonly"></td>
 									<td>메 모</td>
-									<td><input type="text" id="memo" name="memo" required="required"></td>
+									<td><input type="text" id="memo" name="r_reservation_memo" required="required"></td>
 								</tr>
 								<tr>
 									<td colspan="4" align="center"><input type="submit"

@@ -9,6 +9,6 @@ interface ResourceMapper {
 	ArrayList<ResourceVO> readMeetingRoom(String resource_id);
 	ArrayList<R_reservationVO> getMeetingRoom(String resource_id);
 	
-	int Resource_add(R_reservationVO reservationvo);
+	int Resource_add(R_reservationVO reservation_vo);
 	int Resource_delete(String R_reservation_id);
 }

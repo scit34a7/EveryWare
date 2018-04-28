@@ -123,7 +123,7 @@
 														textColor : "#000000"
 													}
 											],
-											 events: ${Mlist}
+											 events: ${Slist}
 											, 
 											select : function(startDate,
 													endDate, event, view,
@@ -196,7 +196,7 @@
 												textColor : "#000000"
 											}
 									],
-									events: ${Mlist},
+									events: ${Slist},
 									loading : function(bool) {
 										jQuery("#loading").toggle(bool);
 									}
