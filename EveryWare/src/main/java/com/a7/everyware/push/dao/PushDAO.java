@@ -1,5 +1,7 @@
 package com.a7.everyware.push.dao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,5 +17,10 @@ public class PushDAO {
 		PushMapper mapper = sqlSession.getMapper(PushMapper.class);
 		System.out.println(vo.toString());
 		mapper.addPush(vo);
+	}
+	
+	public ArrayList<PushVO> selectPush() {
+		PushMapper mapper = sqlSession.getMapper(PushMapper.class);
+		return mapper.selectPush();
 	}
 }
