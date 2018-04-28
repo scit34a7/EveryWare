@@ -887,7 +887,7 @@ ul.inbox-list-message{
 	<footer>
 		<div class="container-fluid">
 			<p class="copyright">
-				&copy; 2018 <a href="index" target="_blank">EveryWare</a>.
+				&copy; 2018 <a href="index" target="_blank">EveryWare(Inc)</a>.
 				All Rights Reserved.
 			</p>
 		</div>
