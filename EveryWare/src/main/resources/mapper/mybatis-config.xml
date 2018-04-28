@@ -16,7 +16,6 @@
 		<typeAlias type="com.a7.everyware.approval.vo.ApprovalFormatVO" alias="ApprovalFormatVO" />
 		<typeAlias type="com.a7.everyware.support.vo.AttendVO" alias="AttendVO" />
 		
-		
 		<typeAlias type="com.a7.everyware.mail.vo.Inbox" alias ="Inbox" />
 		<typeAlias type="com.a7.everyware.mail.vo.MailInfo" alias ="MailInfo" />
 		<typeAlias type="com.a7.everyware.mail.vo.BlobData" alias ="BlobData" />
@@ -26,6 +25,9 @@
 		<typeAlias type="com.a7.everyware.resource.vo.ResourceVO" alias="ResourceVO" />
 		<typeAlias type="com.a7.everyware.resource.vo.R_reservationVO" alias="ReservationVO" />
 		<typeAlias type="com.a7.everyware.schedule.vo.ScheduleVO" alias="ScheduleVO" />
+		
+		<typeAlias type="com.a7.everyware.push.vo.PushVO" alias="PushVO"/>
+		
 	</typeAliases>
 	
 	<mappers>
@@ -40,5 +42,6 @@
 		<mapper resource="mapper/resourceMapper.xml" />	
 		<mapper resource="mapper/scheduleMapper.xml" />
 
+		<mapper resource="mapper/pushMapper.xml" />
 	</mappers>
 </configuration>

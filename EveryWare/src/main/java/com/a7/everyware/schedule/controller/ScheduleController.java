@@ -9,8 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.a7.everyware.push.dao.PushDAO;
+import com.a7.everyware.push.vo.PushVO;
 import com.a7.everyware.schedule.dao.ScheduleDAO;
-import com.a7.everyware.schedule.vo.GetScheduleVO;
 import com.a7.everyware.schedule.vo.ScheduleVO;
 
 @Controller
@@ -18,6 +19,8 @@ public class ScheduleController {
 	@Autowired
 	ScheduleDAO scheduledao;
 	
+	@Autowired
+	PushDAO pushDAO;
 	
 	@RequestMapping(value = "schedule", method = RequestMethod.GET)
 	public String schedule(HttpSession session) {
@@ -50,6 +53,16 @@ public class ScheduleController {
 		result = scheduledao.Schedule_add(schedule_vo);
 		if(result == 0){
 		}
+
+		if (!schedule_vo.getSchedule_group().equals("개인") || !schedule_vo.getSchedule_group().equals("2")) {
+			PushVO push = new PushVO();
+			push.setPush_type("일정");
+			push.setPush_title("부서일정이 등록되었습니다.");
+			push.setUser_id(schedule_vo.getUser_id());
+			push.setDept_name(schedule_vo.getSchedule_group());
+			pushDAO.addPush(push);
+		}
+		
 		return "redirect:/schedule";
 	}
 	

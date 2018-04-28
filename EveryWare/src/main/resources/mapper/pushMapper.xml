@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.a7.everyware.push.dao.PushMapper">
+	<insert id="addPush" parameterType="PushVO">
+	insert into push_tb (
+		push_id
+		, push_type
+		, push_title
+		, user_id
+		, dept_name
+	)
+	values (
+		push_id_seq.nextval
+		, #{push_type}
+		, #{push_title}
+		, #{user_id}
+		, #{dept_name}
+	)
+	</insert>
+	
+</mapper>
