@@ -22,7 +22,7 @@
 	
 	<select id="selectPush" parameterType="UserVO" resultType="PushVO">
 		<![CDATA[
-		select * from push_tb where (rownum <= 5 and push_isRead = 0) and (dept_name = #{dept_name} or user_id = #{user_id})
+		select * from push_tb where (rownum <= 5 and push_isRead = 0) and (user_id = #{user_id}) order by push_id desc
 		]]>
 	</select>
 	

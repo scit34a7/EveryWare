@@ -416,6 +416,7 @@ public class HomeController {
 
 		
 		ArrayList<PushVO> pushList = pushDAO.selectPush(userDAO.findUser(user_id));
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		System.out.println(pushList.toString());
 		session.setAttribute("pushList", pushList);
 
