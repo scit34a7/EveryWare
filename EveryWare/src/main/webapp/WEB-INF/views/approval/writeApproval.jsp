@@ -59,11 +59,21 @@
 				</a>
 			</div>
 			<div class="container-fluid">
-				
+				<div id="tour-fullwidth" class="navbar-btn">
+					<button type="button" class="btn-toggle-fullwidth">
+						<i class="ti-arrow-circle-left"></i>
+					</button>
+				</div>
+				<form class="navbar-form navbar-left search-form">
+					<input type="text" value="" class="form-control"
+						placeholder="직원검색">
+					<button type="button" class="btn btn-default">
+						<i class="fa fa-search"></i>
+					</button>
+				</form>
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
-					
-						</a></li>
+						
 						<li class="dropdown"><a href="#"
 							class="dropdown-toggle icon-menu" data-toggle="dropdown"> <i
 								class="ti-bell"></i> <span class="badge bg-danger">5</span>
@@ -109,13 +119,12 @@
 							</ul></li>
 						
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">  <span>${sessionScope.userName}</span>
+							data-toggle="dropdown">  <span>${sessionScope.userName }</span>
 						</a>
 							<ul class="dropdown-menu logged-user-menu">
-								<li><a href="#"><i class="ti-user"></i> <span>개인정보</span></a></li>
-								<li><a href="appviews-inbox"><i class="ti-email"></i> <span>Message</span></a></li>
-								<li><a href="#"><i class="ti-settings"></i> <span>Settings</span></a></li>
-								<li><a href="page-lockscreen"><i class="ti-power-off"></i>
+								<li><a href="<c:url value ='/user/userInfo'/>" ><i class="ti-user"></i> <span>개인정보</span></a></li>
+								<li><a href="<c:url value ='/mail/getMail?sort=all'/>" ><i class="ti-email"></i> <span>Mail</span></a></li>
+								<li><a href="<c:url value ='/user/logout'/>" ><i class="ti-power-off"></i>
 										<span>로그아웃</span></a></li>
 							</ul></li>
 					</ul>
@@ -123,12 +132,14 @@
 			</div>
 		</nav>
 		<!-- END NAVBAR -->
+		
+		
 			<!-- LEFT SIDEBAR -->
 			<div id="sidebar-nav" class="sidebar">
 				<nav>
 					<ul class="nav" id="sidebar-nav-menu">
 						<li class="menu-group">Main</li>
-						<li class="panel"><a href="../index" data-toggle="collapse"
+						<li class="panel"><a href="index" data-toggle="collapse"
 							data-parent="#sidebar-nav-menu" class="collapsed"><i
 								class="ti-dashboard"></i> <span class="title">MainHome</span> <i
 								class="icon-submenu ti-angle-left"></i></a></li>
@@ -189,21 +200,19 @@
 							
 							
 							
-						<li class="panel">
-							<a href="#approval" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="active">
-								<i class="ti-widget"></i>
-								<span class="title">전자결재</span> 
-								<i class="icon-submenu ti-angle-left"></i>
-							</a>
-							<div id="approval" class="collapse in"><!-- collapse : 서브메뉴 닫혀있음 collapse in : 서브메뉴 열려있음 -->
-								<ul class="submenu">
-									<li><a href="myApproval">내 결재</a></li>
-									<li ><a href="writeApproval" class="active">결재 작성</a></li>
-									<li><a href="approvalFormat">결재 양식 작성</a></li>
-								</ul>
-									
-							</div>
-						</li>
+						<li class="panel"><a href="#approval" data-toggle="collapse"
+						data-parent="#sidebar-nav-menu" class="active"> <i
+							class="ti-widget"></i> <span class="title">전자결재</span> <i
+							class="icon-submenu ti-angle-left"></i>
+					</a>
+						<div id="approval" class="collapse in"><!-- collapse : 서브메뉴 닫혀있음 collapse in : 서브메뉴 열려있음 -->
+							<ul class="submenu">
+								<li><a href="../approval/myApproval">내 결재</a></li>
+								<li><a href="../approval/writeApproval" class="active">결재 작성</a></li>
+								<li><a href="../approval/approvalFormat">결재 양식 작성</a></li>
+							</ul>
+
+						</div></li>
 				<li class="panel"><a href="#" data-toggle="collapse"
 							data-target="#submenuDemo" data-parent="#sidebar-nav-menu"
 							class="collapsed"><i class="ti-menu"></i> <span class="title">화상회의

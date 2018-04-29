@@ -981,7 +981,7 @@ public class ApprovalController {
 				
 			}
 			
-			//person3이 승인, 완료 되었으므로 결재글 쓴 사람에게  는 위에 default로 설정 되있다.
+			
 	
 			break;
 
