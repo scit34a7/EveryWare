@@ -90,19 +90,36 @@ public class HomeController {
 		
 		//로그인 아이디 세팅
 		String user_id = (String) session.getAttribute("userId");
+		
+		//메인용 근태: 출근
 		ArrayList<AttendVO> attendMainList = supportDAO.attendCheckMain(user_id);
+		//메인용 근태: 퇴근
+		ArrayList<AttendVO> attendMainList2 = supportDAO.attendOutMain(user_id);
 		
 		//근태
 		//출근여부 판단
 		boolean attendCheck;
+		//퇴근여부 판단
+		boolean attendCheck2;
 		
+		//출근
 		if(attendMainList == null || attendMainList.isEmpty()){
 			attendCheck = true;
 		}else{
 			attendCheck = false;
 		}
 		
+		//퇴근
+		if(attendMainList2 == null || attendMainList2.isEmpty()){
+			attendCheck2 = true;
+		}else{
+			attendCheck2 = false;
+		}
+		
+		//출퇴근
 		model.addAttribute("attendCheck", attendCheck);
+		model.addAttribute("attendCheck2", attendCheck2);
+		
 		
 		/*결재 관련 시작*/
 		//로그인 아이디 세팅: 위 근태위에서 세팅

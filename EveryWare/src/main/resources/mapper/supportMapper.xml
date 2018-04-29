@@ -71,7 +71,7 @@
 	</insert>
 
 
-	<!-- 메인용 근태 -->
+	<!-- 메인용 근태: 출근 -->
 	<select id="attendCheckMain" parameterType="String" resultType="AttendVO">
 	select
 			*
@@ -84,6 +84,18 @@
 	
 	</select>
 
+	<!-- 메인용 근태: 퇴근 -->
+	<select id="attendOutMain" parameterType="String" resultType="AttendVO">
+	select
+			*
+		from
+			attend_tb
+		where
+			attend_check = '퇴근'
+			and user_id = #{user_id}
+			and to_char(attend_time, 'YY-MM-DD') = to_char(sysdate, 'YY-MM-DD')
+	
+	</select>
 
 	<!-- 근태 읽기 user_id로 ** 근태 현황 출력시 이용-->
 	<select id="attendListGet" parameterType="String" resultType="AttendVO">
@@ -251,7 +263,7 @@
 			and </if>
 			boardFolder_id = #{boardFolder_id}
 	
-		order by board_id desc
+		order by board_date desc
 	</select>
 	
 	

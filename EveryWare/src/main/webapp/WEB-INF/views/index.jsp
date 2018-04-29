@@ -34,6 +34,7 @@
 <link rel="stylesheet" href="resources/assets/vendor/slick/slick.css">
 <link rel="stylesheet" href="resources/assets/vendor/slick/slick-theme.css">
 
+
 <!-- 공지사항 -->
 <link rel="stylesheet"
 	href="resources/assets/vendor/datatables/css-main/jquery.dataTables.min.css">
@@ -602,21 +603,24 @@ ul.inbox-list-message{
 									<div class="col-md-2" style = "text-align:center;">
 											<c:choose>
 											<c:when test="${attendCheck == true}">
-											<form action="support/attendCheck" method="POST"
-												id="attendInForm">
-												<button type="submit" class="btn btn-primary" id="attendIn">
-													<i class="ti-alarm-clock award-icon" style = "font-size:15px;"></i>출근
-												</button>
-											</form>
+												<form action="support/attendCheck" method="POST"
+													id="attendInForm">
+													<button type="submit" class="btn btn-primary" id="attendIn">
+														<i class="ti-alarm-clock award-icon" style = "font-size:15px;"></i>출근
+													</button>
+												</form>
 											</c:when>
-									
+										
 											<c:otherwise>
+												<c:if test="${attendCheck2 == true }">
 												<form action="support/attendOut" method="POST"
 												id="attendOutForm">
 												<button type="submit" class="btn btn-danger" id="attendOut">
 													<i class="ti-location-arrow award-icon" style = "font-size:15px;"></i>퇴근
 												</button>
 												</form>
+												</c:if>
+												<c:if test="${attendCheck2 == false }"><b>퇴근<br>완료</b></c:if>
 											</c:otherwise>
 											</c:choose>
 									</div>	
@@ -962,6 +966,7 @@ ul.inbox-list-message{
 		});
 	</script>
 
+	
 	<!-- END DEMO PANEL -->
 	<script>
 		$(function() {
@@ -1038,5 +1043,6 @@ ul.inbox-list-message{
 		});
 		</script>
 
+		
 </body>
 </html>
