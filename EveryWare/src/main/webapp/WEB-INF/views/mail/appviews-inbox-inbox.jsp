@@ -419,14 +419,17 @@
 																					</c:otherwise>
 																				</c:choose>
 																		</label></td>
-																		<td width="100%"><c:choose>
+																		
+																	
+																		<td width="100%">
+																		<c:choose>
 																				<c:when test="${sort == 5}">
 																					<a href="./readTemp?message_name=${a.message_name}">
 																						<div class="text">
 																							<span class="sender">${a.from }</span> <span
 																								class="timestamp">${a.maildate }</span>
 																							<h3 class="title">${a.mailsubject }</h3>
-																							<span class="timestamp">${a.mailreaded }</span>
+																						
 																							<p class="preview"></p>
 
 																							<c:if
@@ -444,14 +447,14 @@
 																							<span class="sender">${a.from }</span> <span
 																								class="timestamp">${a.maildate }</span>
 																							<h4 class="title">${a.mailsubject }</h4>
-																							<span class="timestamp">${a.mailreaded }</span>
-																							<p class="preview"></p>
-
+																							
 																							<c:if
 																								test="${a.mailattached!=''&&a.mailattached!=null}">
-																								<span class="attachment"><i
+																								<span class="timestamp"><i
 																									class="fa fa-paperclip"></i></span>
 																							</c:if>
+																							<p class="preview"></p>
+																							
 																						</div>
 																					</a>
 																				</c:otherwise>

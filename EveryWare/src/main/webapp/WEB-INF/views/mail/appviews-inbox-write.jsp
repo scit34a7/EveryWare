@@ -310,14 +310,15 @@
 														<table>
 															<tr>
 																<td><h4>받는 사람&nbsp;&nbsp;&nbsp;&nbsp;</h4></td>
-																<td style="position: absolute;" width="50%";><label
+																<td style="position: absolute; " width="50%";><label
 																	for="contact-email" class="control-label sr-only">Email</label>
 
-																	<span class="form-control"> <span
+																	<div style = "overflow-x :scroll;">
+																	<span class="form-control" > <span
 																		id="blankForSending"> <!-- reply 또는 forward -->
 																	</span> <input type="text" id="mailSearcher">
 																</span>
-
+																	</div>
 																	<ul class="list-group" id="mailResult"
 																		style="position: relative; z-index: 100;"></ul> <input
 																	type="hidden" id="mailRecipients" name="mailRecipients">
@@ -326,7 +327,7 @@
 															<tr>
 																<td><h4>참조&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h4></td>
 																
-																<td>
+																<td >
 																	<label for="contact-email"
 																		class="control-label sr-only">Reference</label> 
 																		
