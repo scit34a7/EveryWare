@@ -205,7 +205,7 @@
 		where 
 			b.boardFolder_id = #{1}
 	
-		order by board_id desc
+		order by board_date desc
 	</select>
 	
 	 

@@ -13,8 +13,11 @@ import com.a7.everyware.support.vo.AttendVO;
 //업무지원
 public interface SupportMapper {
 
-	//메인용 근태
+	//메인용 근태: 출근
 	public ArrayList<AttendVO> attendCheckMain(String user_id);
+	
+	//메인용 근태: 퇴근
+	public ArrayList<AttendVO> attendOutMain(String user_id);
 	
 	//출근 체크
 	public int attendCheck(AttendVO attend);
