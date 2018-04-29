@@ -697,7 +697,7 @@
 											<li>
 												<c:choose>
 													<c:when test="${approval.eApproval_original ne null}">
-														<a href="download?${approval.eApproval_id}">
+														<a href="download?eApproval_id=${approval.eApproval_id}">
 															<i class="fa fa-file-word-o"></i>
 															${approval.eApproval_original}
 														</a>
