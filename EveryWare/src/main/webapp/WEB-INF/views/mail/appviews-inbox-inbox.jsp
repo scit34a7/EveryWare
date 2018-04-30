@@ -328,7 +328,7 @@
 																		data-position="top-right">임시 메일 삭제</button>
 																</td>
 															</c:when>
-<!--  -->
+
 															<c:otherwise>
 																<td>
 																	<button type="button" id="mailDeleteBt"
