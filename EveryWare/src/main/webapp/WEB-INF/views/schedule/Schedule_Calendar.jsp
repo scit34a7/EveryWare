@@ -113,13 +113,15 @@
 												schedule_sdate.value = startDate.format();
 												var schedule_fdate = document.getElementById('schedule_fdate');
 												schedule_fdate.value = endDate.format();
-														
+												
+												var startDateCheck = startDate.format();
+												var endDateCheckMonth = curTimeMonth;
+												var endDateCheckWeek = curTimeWeek;	
+												
 												if(view.name == 'month')
 												{
 													$("#search").click(function(){
-														var startDateCheck = startDate.format();
-														var endDateCheckMonth = curTimeMonth;
-														var endDateCheckWeek = curTimeWeek;	
+														
 														
 														var startDateArr = startDateCheck.split('-');						        
 												        var endDateArr = endDateCheckMonth.split('-');
