@@ -102,7 +102,7 @@ public class UserController {
 					{
 						Slist.get(i).setColor("#f26363");
 					}
-				}
+				}//
 				
 				System.out.println("Slist->" + Slist);
 				session.setAttribute("Slist", Slist);

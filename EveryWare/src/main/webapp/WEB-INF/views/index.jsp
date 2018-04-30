@@ -1023,7 +1023,7 @@ ul.inbox-list-message{
 				"tableTools":
 				{
 					"sSwfPath": "resources/assets/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf"
-				}
+				}//
 			});
 			// datatable with scrolling
 			$('#datatable-basic-scrolling').dataTable(
