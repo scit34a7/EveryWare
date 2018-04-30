@@ -38,6 +38,8 @@
 			<mvc:mapping path="/support/**" />
 			<mvc:mapping path="/user/**" />
 			<mvc:mapping path="/index" />
+			<mvc:mapping path="/mail/**" />
+			
 			
 			<mvc:exclude-mapping path="/user/loginUser"/>
 			<mvc:exclude-mapping path="/home"/>

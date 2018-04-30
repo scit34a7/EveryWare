@@ -545,6 +545,15 @@
 
 			var deleteArray = [];
 
+			var sort; 
+			<c:if test="${sort != 5}">
+			sort = "normal";
+			</c:if>
+			
+			<c:if test="${sort==5}">
+			sort="temp";
+			</c:if>
+			
 			$('input:checkbox[name= "mailSelectBt"]').each(function(i) {
 
 				if ($(this).is(':checked')) {
@@ -560,7 +569,7 @@
 				type : 'POST',
 				data : {
 					deleteArray : JSON.stringify(deleteArray),
-					sort : "normal"
+					sort : sort
 				},
 				dataType : 'text',
 				success : function(txt) {
