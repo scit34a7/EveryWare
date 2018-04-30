@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>게시판</title>
+<title>Everyware | eApproval</title>
 
 <link rel="stylesheet" type="text/css" href="../resources/board/css/default.css" />
 

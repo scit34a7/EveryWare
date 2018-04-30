@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Text Editor | Klorofil Pro - Bootstrap Admin Dashboard Template</title>
+		<title>Everyware | eApproval</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -63,63 +63,55 @@
 				</a>
 			</div>
 			<div class="container-fluid">
-				
+				<div id="tour-fullwidth" class="navbar-btn">
+					<button type="button" class="btn-toggle-fullwidth">
+						<i class="ti-arrow-circle-left"></i>
+					</button>
+				</div>
+				<form class="navbar-form navbar-left search-form">
+					<input type="text" value="" class="form-control"
+						placeholder="직원검색">
+					<button type="button" class="btn btn-default">
+						<i class="fa fa-search"></i>
+					</button>
+				</form>
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
-					
-						</a></li>
+						
 						<li class="dropdown"><a href="#"
 							class="dropdown-toggle icon-menu" data-toggle="dropdown"> <i
 								class="ti-bell"></i> <span class="badge bg-danger">5</span>
 						</a>
 							<ul class="dropdown-menu notifications">
-								<li>알림이 있습니다.</li>
-								<li><a href="#" class="notification-item"> <i
-										class="fa fa-hdd-o custom-bg-red"></i>
-										<p>
-											<span class="text">(예)14프로젝트 회의에 초대되었습니다.</span> <span
-												class="timestamp">(예)11 minutes ago</span>
-										</p>
-								</a></li>
-								<li><a href="#" class="notification-item"> <i
-										class="fa fa-tasks custom-bg-yellow"></i>
-										<p>
-											<span class="text">[양식]알림이 있습니다.회의/결제</span> <span
-												class="timestamp">[양식]현재 - 보낸시간</span>
-										</p>
-								</a></li>
-								<li><a href="#" class="notification-item"> <i
-										class="fa fa-book custom-bg-green2"></i>
-										<p>
-											<span class="text">[양식]알림이 있습니다.회의/결제</span> <span
-												class="timestamp">[양식]현재 - 보낸시간</span>
-										</p>
-								</a></li>
-								<li><a href="#" class="notification-item"> <i
-										class="fa fa-bullhorn custom-bg-purple"></i>
-										<p>
-											<span class="text">[양식]알림이 있습니다.회의/결제</span> <span
-												class="timestamp">[양식]현재 - 보낸시간</span>
-										</p>
-								</a></li>
-								<li><a href="#" class="notification-item"> <i
-										class="fa fa-check custom-bg-green"></i>
-										<p>
-											<span class="text">[양식]알림이 있습니다.회의/결제</span> <span
-												class="timestamp">[양식]단위는 일수/ 시간수/ 분수</span>
-										</p>
-								</a></li>
-								<li><a href="#" class="more">전체 알람 보러 가기</a></li>
+								<c:if test="${pushList!= null }">
+									<li>알림이 있습니다.</li>
+									<c:forEach var="push" items="${pushList}">
+										<li><a href='javascript:void(0)' onclick="isPush(${push.push_id})" class="notification-item"> 
+										
+											<c:if test="${push.push_type eq '일정'}">
+												<i class="fa fa-bullhorn custom-bg-purple"></i>
+											</c:if>
+											
+											<c:if test="${push.push_type eq '결재'}">
+												<i class="fa fa-book custom-bg-green2"></i>
+											</c:if>
+											
+												<p>
+													<span class="text">${push.push_title}</span> <span
+														class="timestamp">${push.push_time}</span>
+												</p>
+										</a></li>
+									</c:forEach>
+									</c:if>
 							</ul></li>
 						
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">  <span>${sessionScope.userName}</span>
+							data-toggle="dropdown">  <span>${sessionScope.userName }</span>
 						</a>
 							<ul class="dropdown-menu logged-user-menu">
-								<li><a href="#"><i class="ti-user"></i> <span>개인정보</span></a></li>
-								<li><a href="appviews-inbox"><i class="ti-email"></i> <span>Message</span></a></li>
-								<li><a href="#"><i class="ti-settings"></i> <span>Settings</span></a></li>
-								<li><a href="page-lockscreen"><i class="ti-power-off"></i>
+								<li><a href="<c:url value ='/user/userInfo'/>" ><i class="ti-user"></i> <span>개인정보</span></a></li>
+								<li><a href="<c:url value ='/mail/getMail?sort=all'/>" ><i class="ti-email"></i> <span>Mail</span></a></li>
+								<li><a href="<c:url value ='/user/logout'/>" ><i class="ti-power-off"></i>
 										<span>로그아웃</span></a></li>
 							</ul></li>
 					</ul>
@@ -129,130 +121,139 @@
 		<!-- END NAVBAR -->
 			
 			<!-- LEFT SIDEBAR -->
-			<div id="sidebar-nav" class="sidebar">
-				<nav>
-					<ul class="nav" id="sidebar-nav-menu">
-						<li class="menu-group">Main</li>
-						<li class="panel"><a href="../index" data-toggle="collapse"
-							data-parent="#sidebar-nav-menu" class="collapsed"><i
-								class="ti-dashboard"></i> <span class="title">MainHome</span> <i
-								class="icon-submenu ti-angle-left"></i></a></li>
-						<li class="panel"><a href="#subLayouts" data-toggle="collapse"
-							data-parent="#sidebar-nav-menu" class="collapsed"><i
-								class="ti-layout"></i> <span class="title">e메일</span> <i
-								class="icon-submenu ti-angle-left"></i></a>
-							<div id="subLayouts" class="collapse">
-								<ul class="submenu">
-									<li><a href="../mail/getMail?sort=all">받은메일함 
-										<c:if test="${mailRead>0}">
-											 <span class="label label-success">NEW</span>
-										</c:if>
-									</a></li>
-									<li><a href="../mail/getMail?sort=send">보낸메일함</a></li>
-									<li><a href="../mail/sendMail">편지쓰기</a></li>
-									<li><a href="../mail/getMail?sort=important">중요편지함</a></li>
-									
-									
-									
-									
-									
-									
-								</ul>
-							</div></li>
-						<li class="panel"><a href="#forms" data-toggle="collapse"
-							data-parent="#sidebar-nav-menu" class="collapsed"><i
-								class="ti-receipt"></i> <span class="title">스케줄 관리</span> <i
-								class="icon-submenu ti-angle-left"></i></a>
-							<div id="forms" class="collapse ">
-								<ul class="submenu">
-									<li><a href="../schedule">개인 및 부서일정 관리</a></li>
-								</ul>
-							</div></li>
-						<li class="panel"><a href="#appViews" data-toggle="collapse"
-							data-parent="#sidebar-nav-menu" class="collapsed"><i
-								class="ti-layout-tab-window"></i> <span class="title">개인정보관리</span>
-								<i class="icon-submenu ti-angle-left"></i></a>
-							<div id="appViews" class="collapse ">
-								<ul class="submenu">
-									<li><a href="../user/userInfo">내 정보</a></li>
-									<li><a href="../user/update">내 정보 수정</a></li>
-									<li><a href="../user/userList">주소록</a></li>
-								</ul>
-							</div></li>
-	
-						<li class="panel"><a href="#charts" data-toggle="collapse"
-							data-parent="#sidebar-nav-menu" class="collapsed"><i
-								class="ti-pie-chart"></i> <span class="title">업무지원</span> <i
-								class="icon-submenu ti-angle-left"></i></a>
-							<div id="charts" class="collapse ">
-								<ul class="submenu">
-									<li><a href="../support/supportMain">출퇴근체크</a></li>
-									<li><a href="../support/attendList">출퇴근확인</a></li>
-									<li><a href="../support/boardList">업무보고</a></li>
-								</ul>
-							</div></li>
-							
-							
-							
-						<li class="panel">
-							<a href="#approval" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="active">
-								<i class="ti-widget"></i>
-								<span class="title">전자결재</span> 
-								<i class="icon-submenu ti-angle-left"></i>
-							</a>
-							<div id="approval" class="collapse in"><!-- collapse : 서브메뉴 닫혀있음 collapse in : 서브메뉴 열려있음 -->
-								<ul class="submenu">
-									<li><a href="myApproval">내 결재</a></li>
-									<li><a href="writeApproval">결재 작성</a></li>
-									<li><a href="approvalFormat" class="active">결재 양식 작성</a></li>
-								</ul>
-									
-							</div>
-						</li>
-				<li class="panel"><a href="#" data-toggle="collapse"
-							data-target="#submenuDemo" data-parent="#sidebar-nav-menu"
-							class="collapsed"><i class="ti-menu"></i> <span class="title">화상회의
-							</span><i class="icon-submenu ti-angle-left"></i></a>
-							<div id="submenuDemo" class="collapse">
-								<ul class="submenu">
-									<li><a href="../meet/meetingList">회의실</a></li>
-									<li><a href="../meet/minutes">회외록</a></li>
-								</ul>
-							</div>
-						</li>
-	
-						<li class="panel"><a href="#subPages" data-toggle="collapse"
-							data-parent="#sidebar-nav-menu" class="collapsed"><i
-								class="ti-files"></i> <span class="title">자원예약</span> <i
-								class="icon-submenu ti-angle-left"></i></a>
-							<div id="subPages" class="collapse ">
-								<ul class="submenu">
-									<li><a href="../resource">자원 예약 관리</a></li>
-								</ul>
-							</div></li>
-						<!-- <li><a href="typography"><i class="ti-paragraph"></i> <span
-								class="title">게시판</span></a></li> -->
+		<div id="sidebar-nav" class="sidebar">
+			<nav>
+				<ul class="nav" id="sidebar-nav-menu">
+					<li class="menu-group">Main</li>
+					<li class="panel"><a href="index" data-toggle="collapse in"
+						data-parent="#sidebar-nav-menu" class="collapsed"><i
+							class="ti-dashboard"></i> <span class="title">MainHome</span> <i
+							class="icon-submenu ti-angle-left"></i></a></li>
+					<li class="panel"><a href="#subLayouts" data-toggle="collapse in"
+						data-parent="#sidebar-nav-menu" class="collapsed"><i
+							class="ti-layout"></i> <span class="title">e메일</span> <i
+							class="icon-submenu ti-angle-left"></i></a>
+						<div id="subLayouts" class="collapse">
+							<ul class="submenu">
+								<li><a href="../mail/getMail?sort=all">받은메일함 
+								<c:if test="${mailRead>0}">
+								 	<span class="label label-success">NEW</span>
+								</c:if>
 								
-								<li class="panel"><a href="#board" data-toggle="collapse"
-							data-parent="#sidebar-nav-menu" class="collapsed"><i
-								class="ti-pie-chart"></i> <span class="title">게시판</span> <i
-								class="icon-submenu ti-angle-left"></i></a>
-							<div id="board" class="collapse">
-								<ul class="submenu">
-									<li><a href="../board/boardList?boardFolder_id=1">공지사항</a></li>
-									<li><a href="../board/boardList?boardFolder_id=2">부서게시판</a></li>
-									<li><a href="../board/boardList?boardFolder_id=3">커뮤니티</a></li>
-								</ul>
-							</div></li>	
-								
-					</ul>
-					<button type="button" class="btn-toggle-minified"
-						title="Toggle Minified Menu">
-						<i class="ti-arrows-horizontal"></i>
-					</button>
-				</nav>
-			</div>
-			<!-- END LEFT SIDEBAR -->
+								</a></li>
+								<li><a href="../mail/getMail?sort=send">보낸메일함</a></li>
+								<li><a href="../mail/sendMail">편지쓰기</a></li>
+								<li><a href="../mail/getMail?sort=important">중요편지함</a></li>
+							</ul>
+						</div></li>
+					<li class="panel"><a href="#forms" data-toggle="collapse"
+						data-parent="#sidebar-nav-menu" class="collapsed"><i
+							class="ti-receipt"></i> <span class="title">스케줄 관리</span> <i
+							class="icon-submenu ti-angle-left"></i></a>
+						<div id="forms" class="collapse ">
+							<ul class="submenu">
+								<li><a href="../schedule">개인 및 부서일정 관리</a></li>
+							</ul>
+						</div></li>
+					<li class="panel"><a href="#appViews" data-toggle="collapse"
+						data-parent="#sidebar-nav-menu" class="collapsed"><i
+							class="ti-layout-tab-window"></i> <span class="title">개인정보관리</span>
+							<i class="icon-submenu ti-angle-left"></i></a>
+						<div id="appViews" class="collapse ">
+							<ul class="submenu">
+								<li><a href="../user/userInfo">내 정보</a></li>
+								<li><a href="../user/update">내 정보 수정</a></li>
+								<li><a href="../user/userList">주소록</a></li>
+							</ul>
+						</div></li>
+
+					<li class="panel"><a href="#charts" data-toggle="collapse"
+						data-parent="#sidebar-nav-menu" class="collapsed"><i
+							class="ti-pie-chart"></i> <span class="title">업무지원</span> <i
+							class="icon-submenu ti-angle-left"></i></a>
+						<div id="charts" class="collapse ">
+							<ul class="submenu">
+								<li><a href="../support/supportMain">근태확인</a></li>
+								<li><a href="../support/attendList">근태현황</a></li>
+								<li><a href="../support/boardList">업무보고</a></li>
+							</ul>
+						</div></li>
+
+					
+
+					<li class="panel"><a href="#approval" data-toggle="collapse"
+						data-parent="#sidebar-nav-menu" class="active"> <i
+							class="ti-widget"></i> <span class="title">전자결재</span> <i
+							class="icon-submenu ti-angle-left"></i>
+					</a>
+						<div id="approval" class="collapse in"><!-- collapse : 서브메뉴 닫혀있음 collapse in : 서브메뉴 열려있음 -->
+							<ul class="submenu">
+								<li><a href="../approval/myApproval">내 결재</a></li>
+								<li><a href="../approval/writeApproval">결재 작성</a></li>
+								<li><a href="../approval/approvalFormat" class="active">결재 양식 작성</a></li>
+							</ul>
+
+						</div></li>
+					<li class="panel"><a href="#" data-toggle="collapse"
+						data-target="#submenuDemo" data-parent="#sidebar-nav-menu"
+						class="collapsed"><i class="ti-menu"></i> <span class="title">화상회의
+						</span><i class="icon-submenu ti-angle-left"></i></a>
+						<div id="submenuDemo" class="collapse">
+							<ul class="submenu">
+								<li><a href="../meet/meetingList">회의실</a></li>
+								<li><a href="../meet/minutes">회외록</a></li>
+							</ul>
+						</div></li>
+
+					<li class="panel"><a href="#subPages" data-toggle="collapse"
+						data-parent="#sidebar-nav-menu" class="collapsed"><i
+							class="ti-files"></i> <span class="title">자원예약</span> <i
+							class="icon-submenu ti-angle-left"></i></a>
+						<div id="subPages" class="collapse ">
+							<ul class="submenu">
+								<li><a href="../resource">자원 예약 관리</a></li>
+							</ul>
+						</div></li>
+					
+					<li class="panel"><a href="#board" data-toggle="collapse"
+						data-parent="#sidebar-nav-menu" class="collapsed"><i
+							class="ti-pie-chart"></i> <span class="title">게시판</span> <i
+							class="icon-submenu ti-angle-left"></i></a>
+						<div id="board" class="collapse in">
+							<ul class="submenu">
+								<c:choose>
+			
+									<c:when test="${boardFolder_id==1}">
+										<li><a href="../board/boardList?boardFolder_id=1" class = "active">공지사항</a></li>
+										<li><a href="../board/boardList?boardFolder_id=2">부서게시판</a></li>
+										<li><a href="../board/boardList?boardFolder_id=3">커뮤니티</a></li>
+									</c:when>
+							
+									<c:when test="${boardFolder_id==2}">
+										<li><a href="../board/boardList?boardFolder_id=1">공지사항</a></li>
+										<li><a href="../board/boardList?boardFolder_id=2" class = "active">부서게시판</a></li>
+										<li><a href="../board/boardList?boardFolder_id=3">커뮤니티</a></li>
+									</c:when>
+							
+									<c:when test="${boardFolder_id==3}">
+										<li><a href="../board/boardList?boardFolder_id=1">공지사항</a></li>
+										<li><a href="../board/boardList?boardFolder_id=2">부서게시판</a></li>
+										<li><a href="../board/boardList?boardFolder_id=3" class = "active">커뮤니티</a></li>
+									</c:when>
+									
+								</c:choose>
+							</ul>
+						</div></li>
+
+				</ul>
+				<button type="button" class="btn-toggle-minified"
+					title="Toggle Minified Menu">
+					<i class="ti-arrows-horizontal"></i>
+				</button>
+			</nav>
+			
+		</div>
+		<!-- END LEFT SIDEBAR -->
 		
 		
 		

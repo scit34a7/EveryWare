@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Project Detail | Klorofil Pro - Bootstrap Admin Dashboard Template</title>
+		<title>Everyware | eApproval</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -252,11 +252,21 @@
 				</a>
 			</div>
 			<div class="container-fluid">
-				
+				<div id="tour-fullwidth" class="navbar-btn">
+					<button type="button" class="btn-toggle-fullwidth">
+						<i class="ti-arrow-circle-left"></i>
+					</button>
+				</div>
+				<form class="navbar-form navbar-left search-form">
+					<input type="text" value="" class="form-control"
+						placeholder="직원검색">
+					<button type="button" class="btn btn-default">
+						<i class="fa fa-search"></i>
+					</button>
+				</form>
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
-					
-						</a></li>
+						
 						<li class="dropdown"><a href="#"
 							class="dropdown-toggle icon-menu" data-toggle="dropdown"> <i
 								class="ti-bell"></i> <span class="badge bg-danger">5</span>
@@ -302,13 +312,12 @@
 							</ul></li>
 						
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">  <span>${sessionScope.userName}</span>
+							data-toggle="dropdown">  <span>${sessionScope.userName }</span>
 						</a>
 							<ul class="dropdown-menu logged-user-menu">
-								<li><a href="#"><i class="ti-user"></i> <span>개인정보</span></a></li>
-								<li><a href="appviews-inbox"><i class="ti-email"></i> <span>Message</span></a></li>
-								<li><a href="#"><i class="ti-settings"></i> <span>Settings</span></a></li>
-								<li><a href="page-lockscreen"><i class="ti-power-off"></i>
+								<li><a href="<c:url value ='/user/userInfo'/>" ><i class="ti-user"></i> <span>개인정보</span></a></li>
+								<li><a href="<c:url value ='/mail/getMail?sort=all'/>" ><i class="ti-email"></i> <span>Mail</span></a></li>
+								<li><a href="<c:url value ='/user/logout'/>" ><i class="ti-power-off"></i>
 										<span>로그아웃</span></a></li>
 							</ul></li>
 					</ul>
@@ -323,7 +332,7 @@
 					<ul class="nav" id="sidebar-nav-menu">
 						<li class="menu-group">Main</li>
 						
-						<li class="panel"><a href="../index" data-toggle="collapse"
+						<li class="panel"><a href="index" data-toggle="collapse"
 							data-parent="#sidebar-nav-menu" class="collapsed"><i
 								class="ti-dashboard"></i> <span class="title">MainHome</span> <i
 								class="icon-submenu ti-angle-left"></i></a></li>
@@ -377,21 +386,19 @@
 								</ul>
 							</div></li>
 							
-						<li class="panel">
-							<a href="#approval" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="active">
-								<i class="ti-widget"></i>
-								<span class="title">전자결재</span> 
-								<i class="icon-submenu ti-angle-left"></i>
-							</a>
-							<div id="approval" class="collapse in"><!-- collapse : 서브메뉴 닫혀있음 collapse in : 서브메뉴 열려있음 -->
-								<ul class="submenu">
-									<li><a href="myApproval" class="active">내 결재</a></li>
-									<li><a href="writeApproval">결재 작성</a></li>
-									<li><a href="approvalFormat">결재 양식 작성</a></li>
-								</ul>
-									
-							</div>
-						</li>
+						<li class="panel"><a href="#approval" data-toggle="collapse"
+						data-parent="#sidebar-nav-menu" class="active"> <i
+							class="ti-widget"></i> <span class="title">전자결재</span> <i
+							class="icon-submenu ti-angle-left"></i>
+					</a>
+						<div id="approval" class="collapse in"><!-- collapse : 서브메뉴 닫혀있음 collapse in : 서브메뉴 열려있음 -->
+							<ul class="submenu">
+								<li><a href="../approval/myApproval" class="active">내 결재</a></li>
+								<li><a href="../approval/writeApproval">결재 작성</a></li>
+								<li><a href="../approval/approvalFormat">결재 양식 작성</a></li>
+							</ul>
+
+						</div></li>
 						<li class="panel"><a href="#" data-toggle="collapse"
 							data-target="#submenuDemo" data-parent="#sidebar-nav-menu"
 							class="collapsed"><i class="ti-menu"></i> <span class="title">화상회의
@@ -612,10 +619,7 @@
 									<div class="panel-body">
 										<ul class="list-unstyled list-contacts">
 											<li>
-												<div class="media">
-													<img src="../resources/assets/img/people/female3.png" class="picture" alt="">
-													<span class="status online"></span>
-												</div>
+												
 												<div class="info">
 													<span class="name">${approvalLine.user_id}</span>
 													<span class="title">결재 작성자</span>
@@ -625,10 +629,7 @@
 												</div>
 											</li>
 											<li>
-												<div class="media">
-													<div class="picture custom-bg-blue3">MB</div>
-													<span class="status"></span>
-												</div>
+												
 												<div class="info">
 													<span class="name">${approvalLine.eApprovalLine_person1}</span>
 													<span class="email">1차 결재자</span>
@@ -638,10 +639,7 @@
 												</div>
 											</li>
 											<li>
-												<div class="media">
-													<img src="../resources/assets/img/people/male1.png" class="picture" alt="">
-													<span class="status online"></span>
-												</div>
+												
 												<div class="info">
 													<span class="name">${approvalLine.eApprovalLine_person2}</span>
 													<span class="email">2차 결재자</span>
@@ -651,10 +649,7 @@
 												</div>
 											</li>
 											<li>
-												<div class="media">
-													<img src="../resources/assets/img/people/female4.png" class="picture" alt="">
-													<span class="status"></span>
-												</div>
+												
 												<div class="info">
 													<span class="name">${approvalLine.eApprovalLine_person3}</span>
 													<span class="email">최종 결재자</span>
@@ -689,12 +684,12 @@
 										<ul class="list-unstyled list-justify list-file-simple">
 											<li>
 												<c:choose>
-													<c:when test="${eApproval.saved ne null}">
-														<a href="#">
-															<i class="fa fa-file-word-o"></i>
-															${eApproval.saved}
+													<c:when test="${approval.eApproval_original ne null}">
+														<a href="download?eApproval_id=${approval.eApproval_id}">
+															<i class="${attachedType}"></i>
+															${approval.eApproval_original}
 														</a>
-														<span>4 MB</span>
+														<span>${approval.eApproval_fileSize} MB</span>
 													</c:when>
 													<c:otherwise>
 														첨부파일이 없습니다.

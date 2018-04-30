@@ -12,6 +12,7 @@ public interface UserMapper {
 	//유저 정보 select
 	public UserVO findUser(String user_id);
 	
+	public ArrayList<UserVO> selectUserDept(String dept_name);
 	
 	//회원 정보 수정
 	public int modifyUser(UserVO user);

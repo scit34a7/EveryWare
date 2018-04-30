@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Text Editor | Klorofil Pro - Bootstrap Admin Dashboard Template</title>
+		<title>Everyware | eApproval</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -47,11 +47,7 @@
 		
 	</head>
 	<body>
-		<!-- WRAPPER -->
-		<div id="wrapper">
-		
-		
-			<!-- NAVBAR -->
+		<!-- NAVBAR -->
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
 				<a href="../index"> <img src="../resources/assets/img/logo-white.png"
@@ -59,63 +55,55 @@
 				</a>
 			</div>
 			<div class="container-fluid">
-				
+				<div id="tour-fullwidth" class="navbar-btn">
+					<button type="button" class="btn-toggle-fullwidth">
+						<i class="ti-arrow-circle-left"></i>
+					</button>
+				</div>
+				<form class="navbar-form navbar-left search-form">
+					<input type="text" value="" class="form-control"
+						placeholder="직원검색">
+					<button type="button" class="btn btn-default">
+						<i class="fa fa-search"></i>
+					</button>
+				</form>
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
-					
-						</a></li>
+						
 						<li class="dropdown"><a href="#"
 							class="dropdown-toggle icon-menu" data-toggle="dropdown"> <i
 								class="ti-bell"></i> <span class="badge bg-danger">5</span>
 						</a>
 							<ul class="dropdown-menu notifications">
-								<li>알림이 있습니다.</li>
-								<li><a href="#" class="notification-item"> <i
-										class="fa fa-hdd-o custom-bg-red"></i>
-										<p>
-											<span class="text">(예)14프로젝트 회의에 초대되었습니다.</span> <span
-												class="timestamp">(예)11 minutes ago</span>
-										</p>
-								</a></li>
-								<li><a href="#" class="notification-item"> <i
-										class="fa fa-tasks custom-bg-yellow"></i>
-										<p>
-											<span class="text">[양식]알림이 있습니다.회의/결제</span> <span
-												class="timestamp">[양식]현재 - 보낸시간</span>
-										</p>
-								</a></li>
-								<li><a href="#" class="notification-item"> <i
-										class="fa fa-book custom-bg-green2"></i>
-										<p>
-											<span class="text">[양식]알림이 있습니다.회의/결제</span> <span
-												class="timestamp">[양식]현재 - 보낸시간</span>
-										</p>
-								</a></li>
-								<li><a href="#" class="notification-item"> <i
-										class="fa fa-bullhorn custom-bg-purple"></i>
-										<p>
-											<span class="text">[양식]알림이 있습니다.회의/결제</span> <span
-												class="timestamp">[양식]현재 - 보낸시간</span>
-										</p>
-								</a></li>
-								<li><a href="#" class="notification-item"> <i
-										class="fa fa-check custom-bg-green"></i>
-										<p>
-											<span class="text">[양식]알림이 있습니다.회의/결제</span> <span
-												class="timestamp">[양식]단위는 일수/ 시간수/ 분수</span>
-										</p>
-								</a></li>
-								<li><a href="#" class="more">전체 알람 보러 가기</a></li>
+								<c:if test="${pushList!= null }">
+									<li>알림이 있습니다.</li>
+									<c:forEach var="push" items="${pushList}">
+										<li><a href='javascript:void(0)' onclick="isPush(${push.push_id})" class="notification-item"> 
+										
+											<c:if test="${push.push_type eq '일정'}">
+												<i class="fa fa-bullhorn custom-bg-purple"></i>
+											</c:if>
+											
+											<c:if test="${push.push_type eq '결재'}">
+												<i class="fa fa-book custom-bg-green2"></i>
+											</c:if>
+											
+												<p>
+													<span class="text">${push.push_title}</span> <span
+														class="timestamp">${push.push_time}</span>
+												</p>
+										</a></li>
+									</c:forEach>
+									</c:if>
 							</ul></li>
 						
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">  <span>${sessionScope.userName}</span>
+							data-toggle="dropdown">  <span>${sessionScope.userName }</span>
 						</a>
 							<ul class="dropdown-menu logged-user-menu">
-								<li><a href="#"><i class="ti-user"></i> <span>개인정보</span></a></li>
-								<li><a href="appviews-inbox"><i class="ti-email"></i> <span>Message</span></a></li>
-								<li><a href="#"><i class="ti-settings"></i> <span>Settings</span></a></li>
-								<li><a href="page-lockscreen"><i class="ti-power-off"></i>
+								<li><a href="<c:url value ='/user/userInfo'/>" ><i class="ti-user"></i> <span>개인정보</span></a></li>
+								<li><a href="<c:url value ='/mail/getMail?sort=all'/>" ><i class="ti-email"></i> <span>Mail</span></a></li>
+								<li><a href="<c:url value ='/user/logout'/>" ><i class="ti-power-off"></i>
 										<span>로그아웃</span></a></li>
 							</ul></li>
 					</ul>
@@ -123,6 +111,9 @@
 			</div>
 		</nav>
 		<!-- END NAVBAR -->
+		
+		
+		
 			<!-- LEFT SIDEBAR -->
 			<div id="sidebar-nav" class="sidebar">
 				<nav>
@@ -190,21 +181,19 @@
 							
 							
 							
-						<li class="panel">
-							<a href="#approval" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="active">
-								<i class="ti-widget"></i>
-								<span class="title">전자결재</span> 
-								<i class="icon-submenu ti-angle-left"></i>
-							</a>
-							<div id="approval" class="collapse in"><!-- collapse : 서브메뉴 닫혀있음 collapse in : 서브메뉴 열려있음 -->
-								<ul class="submenu">
-									<li><a href="myApproval" class="active">내 결재</a></li>
-									<li ><a href="writeApproval">결재 작성</a></li>
-									<li><a href="approvalFormat">결재 양식 작성</a></li>
-								</ul>
-									
-							</div>
-						</li>
+						<li class="panel"><a href="#approval" data-toggle="collapse"
+						data-parent="#sidebar-nav-menu" class="active"> <i
+							class="ti-widget"></i> <span class="title">전자결재</span> <i
+							class="icon-submenu ti-angle-left"></i>
+					</a>
+						<div id="approval" class="collapse in"><!-- collapse : 서브메뉴 닫혀있음 collapse in : 서브메뉴 열려있음 -->
+							<ul class="submenu">
+								<li><a href="../approval/myApproval" class="active">내 결재</a></li>
+								<li><a href="../approval/writeApproval">결재 작성</a></li>
+								<li><a href="../approval/approvalFormat">결재 양식 작성</a></li>
+							</ul>
+
+						</div></li>
 				<li class="panel"><a href="#" data-toggle="collapse"
 							data-target="#submenuDemo" data-parent="#sidebar-nav-menu"
 							class="collapsed"><i class="ti-menu"></i> <span class="title">화상회의

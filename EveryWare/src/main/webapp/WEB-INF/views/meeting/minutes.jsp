@@ -59,51 +59,32 @@
 				</form>
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#" class="btn-toggle-rightsidebar"> <i
-								class="ti-layout-sidebar-right"></i>
-						</a></li>
+						
 						<li class="dropdown"><a href="#"
 							class="dropdown-toggle icon-menu" data-toggle="dropdown"> <i
 								class="ti-bell"></i> <span class="badge bg-danger">5</span>
 						</a>
 							<ul class="dropdown-menu notifications">
-								<li>알림이 있습니다.</li>
-								<li><a href="#" class="notification-item"> <i
-										class="fa fa-hdd-o custom-bg-red"></i>
-										<p>
-											<span class="text">(예)14프로젝트 회의에 초대되었습니다.</span> <span
-												class="timestamp">(예)11 minutes ago</span>
-										</p>
-								</a></li>
-								<li><a href="#" class="notification-item"> <i
-										class="fa fa-tasks custom-bg-yellow"></i>
-										<p>
-											<span class="text">[양식]알림이 있습니다.회의/결제</span> <span
-												class="timestamp">[양식]현재 - 보낸시간</span>
-										</p>
-								</a></li>
-								<li><a href="#" class="notification-item"> <i
-										class="fa fa-book custom-bg-green2"></i>
-										<p>
-											<span class="text">[양식]알림이 있습니다.회의/결제</span> <span
-												class="timestamp">[양식]현재 - 보낸시간</span>
-										</p>
-								</a></li>
-								<li><a href="#" class="notification-item"> <i
-										class="fa fa-bullhorn custom-bg-purple"></i>
-										<p>
-											<span class="text">[양식]알림이 있습니다.회의/결제</span> <span
-												class="timestamp">[양식]현재 - 보낸시간</span>
-										</p>
-								</a></li>
-								<li><a href="#" class="notification-item"> <i
-										class="fa fa-check custom-bg-green"></i>
-										<p>
-											<span class="text">[양식]알림이 있습니다.회의/결제</span> <span
-												class="timestamp">[양식]단위는 일수/ 시간수/ 분수</span>
-										</p>
-								</a></li>
-								<li><a href="#" class="more">전체 알람 보러 가기</a></li>
+								<c:if test="${pushList!= null }">
+									<li>알림이 있습니다.</li>
+									<c:forEach var="push" items="${pushList}">
+										<li><a href='javascript:void(0)' onclick="isPush(${push.push_id})" class="notification-item"> 
+										
+											<c:if test="${push.push_type eq '일정'}">
+												<i class="fa fa-bullhorn custom-bg-purple"></i>
+											</c:if>
+											
+											<c:if test="${push.push_type eq '결재'}">
+												<i class="fa fa-book custom-bg-green2"></i>
+											</c:if>
+											
+												<p>
+													<span class="text">${push.push_title}</span> <span
+														class="timestamp">${push.push_time}</span>
+												</p>
+										</a></li>
+									</c:forEach>
+									</c:if>
 							</ul></li>
 						
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -285,126 +266,14 @@
 				</div>
 				<!-- END MAIN CONTENT -->
 				<!-- RIGHT SIDEBAR -->
-				<div id="sidebar-right" class="right-sidebar">
-					<div class="sidebar-widget">
-						<h4 class="widget-heading"><i class="fa fa-calendar"></i> TODAY</h4>
-						<p class="date">Wednesday, 22 December</p>
-						<div class="row margin-top-30">
-							<div class="col-xs-4">
-								<a href="#">
-									<div class="icon-transparent-area custom-color-blue first">
-										<i class="fa fa-tasks"></i>
-										<span>Tasks</span>
-										<span class="badge">5</span>
-									</div>
-								</a>
-							</div>
-							<div class="col-xs-4">
-								<a href="#">
-									<div class="icon-transparent-area custom-color-green">
-										<i class="fa fa-envelope"></i>
-										<span>Mail</span>
-										<span class="badge">12</span>
-									</div>
-								</a>
-							</div>
-							<div class="col-xs-4">
-								<a href="#">
-									<div class="icon-transparent-area custom-color-orange last">
-										<i class="fa fa-user-plus"></i>
-										<span>Users</span>
-										<span class="badge">24</span>
-									</div>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="sidebar-widget">
-						<div class="widget-header">
-							<h4 class="widget-heading">YOUR APPS</h4>
-							<a href="#" class="show-all">Show all</a>
-						</div>
-						<div class="row">
-							<div class="col-xs-3">
-								<a href="#" class="icon-app" title="Dropbox" data-toggle="tooltip" data-placement="top">
-									<i class="fa fa-dropbox dropbox-color"></i>
-								</a>
-							</div>
-							<div class="col-xs-3">
-								<a href="#" class="icon-app" title="WordPress" data-toggle="tooltip" data-placement="top">
-									<i class="fa fa-wordpress wordpress-color"></i>
-								</a>
-							</div>
-							<div class="col-xs-3">
-								<a href="#" class="icon-app" title="Drupal" data-toggle="tooltip" data-placement="top">
-									<i class="fa fa-drupal drupal-color"></i>
-								</a>
-							</div>
-							<div class="col-xs-3">
-								<a href="#" class="icon-app" title="Github" data-toggle="tooltip" data-placement="top">
-									<i class="fa fa-github github-color"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="sidebar-widget">
-						<div class="widget-header">
-							<h4 class="widget-heading">MY PROJECTS</h4>
-							<a href="#" class="show-all">Show all</a>
-						</div>
-						<ul class="list-unstyled list-project-progress">
-							<li>
-								<a href="#" class="project-name">Project XY</a>
-								<div class="progress progress-xs progress-transparent custom-color-orange">
-									<div class="progress-bar" role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="width:67%"></div>
-								</div>
-								<span class="percentage">67%</span>
-							</li>
-							<li>
-								<a href="#" class="project-name">Growth Campaign</a>
-								<div class="progress progress-xs progress-transparent custom-color-blue">
-									<div class="progress-bar" role="progressbar" aria-valuenow="23" aria-valuemin="0" aria-valuemax="100" style="width:23%"></div>
-								</div>
-								<span class="percentage">23%</span>
-							</li>
-							<li>
-								<a href="#" class="project-name">Website Redesign</a>
-								<div class="progress progress-xs progress-transparent custom-color-green">
-									<div class="progress-bar" role="progressbar" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100" style="width:87%"></div>
-								</div>
-								<span class="percentage">87%</span>
-							</li>
-						</ul>
-					</div>
-					<div class="sidebar-widget">
-						<div class="widget-header">
-							<h4 class="widget-heading">MY FILES</h4>
-							<a href="#" class="show-all">Show all</a>
-						</div>
-						<ul class="list-unstyled list-justify list-file-simple">
-							<li><a href="#"><i class="fa fa-file-word-o"></i>Proposal_draft.docx</a>
-								<span>4 MB</span>
-							</li>
-							<li><a href="#"><i class="fa fa-file-pdf-o"></i>Manual_Guide.pdf</a>
-								<span>20 MB</span>
-							</li>
-							<li><a href="#"><i class="fa fa-file-zip-o"></i>all-project-files.zip</a>
-								<span>315 MB</span>
-							</li>
-							<li><a href="#"><i class="fa fa-file-excel-o"></i>budget_estimate.xls</a>
-								<span>1 MB</span>
-							</li>
-						</ul>
-					</div>
-					<p class="text-center"><a href="#" class="btn btn-default btn-xs">More Widgets</a></p>
-				</div>
+				
 				<!-- END RIGHT SIDEBAR -->
 			</div>
 			<!-- END MAIN -->
 			<div class="clearfix"></div>
 			<footer>
 				<div class="container-fluid">
-					<p class="copyright">&copy; 2018 <a href="https://www.themeineed.com" target="_blank">EveryWare</a>. All Rights Reserved.</p>
+					<p class="copyright">&copy; 2018 <a href="../index" target="_blank">EveryWare</a>. All Rights Reserved.</p>
 				</div>
 			</footer>
 		</div>

@@ -83,15 +83,16 @@ public class UserController {
 				 * schedule부분 추가 할게요
 				*/
 		
-				String user_id = vo.getUser_id();	
-				String schedule_group = vo.getDept_name();
+				String user_id = (String) session.getAttribute("userId");	
+				String schedule_group = (String) session.getAttribute("userDepartment");
 				
 				HashMap hm = new HashMap<>();
-				hm.put("user_id ", user_id );
+				hm.put("user_id", user_id);
 				hm.put("schedule_group", schedule_group);
-				System.out.println("HM" + hm);
+				
 				ArrayList<ScheduleVO> Slist = new ArrayList<ScheduleVO>();
 				Slist = scheduledao.Read_Schedule(hm);
+					
 				for (int i = 0; i < Slist.size(); i++) {
 					if(Slist.get(i).getSchedule_group().equals("개인"))
 					{
@@ -101,17 +102,14 @@ public class UserController {
 					{
 						Slist.get(i).setColor("#f26363");
 					}
-				}
+				}//
+				
+				System.out.println("Slist->" + Slist);
 				session.setAttribute("Slist", Slist);
 		
-				/*
-				 * 여기까지 schedule
-				*/
-				
 				return "1";
 			}
 		}
-		
 		return "0";
 	}
 	

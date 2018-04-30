@@ -15,6 +15,7 @@ import com.a7.everyware.push.vo.PushVO;
 import com.a7.everyware.schedule.dao.ScheduleDAO;
 import com.a7.everyware.schedule.vo.ScheduleVO;
 import com.a7.everyware.user.dao.UserDAO;
+import com.a7.everyware.user.vo.UserVO;
 
 @Controller
 public class ScheduleController {
@@ -70,9 +71,15 @@ public class ScheduleController {
 			PushVO push = new PushVO();
 			push.setPush_type("일정");
 			push.setPush_title("부서일정이 등록되었습니다.");
-			push.setUser_id(schedule_vo.getUser_id());
+			
+			ArrayList<UserVO> vo = userDAO.selectUserDept(schedule_vo.getSchedule_group());
+
+			// 임시
 			push.setDept_name(schedule_vo.getSchedule_group());
-			pushDAO.addPush(push);
+			for (int i = 0; i < vo.size(); i++) {
+				push.setUser_id(vo.get(i).getUser_id());
+				pushDAO.addPush(push);
+			}
 			
 			session.setAttribute("pushList", pushDAO.selectPush(userDAO.findUser(user_id)));
 		}

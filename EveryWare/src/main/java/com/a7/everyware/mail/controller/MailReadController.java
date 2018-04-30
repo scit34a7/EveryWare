@@ -181,16 +181,13 @@ public class MailReadController {
 
 	@ResponseBody
 	@RequestMapping(value = "download", method = RequestMethod.GET)
-	public String downlaodAttached(String message_number, int part_number, HttpServletResponse res){
+	public String downloadAttached(String message_number, int part_number, HttpServletResponse res, HttpSession session){
 		
 		//int part_number = Integer.parseInt(part_number);
 		
-		System.out.println("get in the download stream");
-		System.out.println(message_number);
-		System.out.println(part_number);
-		
 		//TODO: session 값으로 가져오기 ;
-		String repository = "sena";
+		String userId = (String)session.getAttribute("userId");
+		String repository = mdao.getRepositoryFormMailInfo(userId);
 		
 		//parameter setting
 		HashMap<String, String> map = new HashMap<String, String>();

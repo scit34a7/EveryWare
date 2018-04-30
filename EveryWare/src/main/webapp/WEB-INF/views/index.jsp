@@ -34,6 +34,7 @@
 <link rel="stylesheet" href="resources/assets/vendor/slick/slick.css">
 <link rel="stylesheet" href="resources/assets/vendor/slick/slick-theme.css">
 
+
 <!-- 공지사항 -->
 <link rel="stylesheet"
 	href="resources/assets/vendor/datatables/css-main/jquery.dataTables.min.css">
@@ -417,6 +418,9 @@ ul.inbox-list-message{
 							</c:if>
 						</a>
 							<ul class="dropdown-menu notifications">
+									
+									<c:if test="${pushList!= null }">
+									<li>알림이 있습니다.</li>
 									<c:forEach var="push" items="${pushList}">
 										<li><a href='javascript:void(0)' onclick="isPush(${push.push_id})" class="notification-item"> 
 										
@@ -427,13 +431,14 @@ ul.inbox-list-message{
 											<c:if test="${push.push_type eq '결재'}">
 												<i class="fa fa-book custom-bg-green2"></i>
 											</c:if>
-										
+											
 												<p>
 													<span class="text">${push.push_title}</span> <span
 														class="timestamp">${push.push_time}</span>
 												</p>
 										</a></li>
 									</c:forEach>
+									</c:if>
 							</ul></li>
 
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -602,21 +607,24 @@ ul.inbox-list-message{
 									<div class="col-md-2" style = "text-align:center;">
 											<c:choose>
 											<c:when test="${attendCheck == true}">
-											<form action="support/attendCheck" method="POST"
-												id="attendInForm">
-												<button type="submit" class="btn btn-primary" id="attendIn">
-													<i class="ti-alarm-clock award-icon" style = "font-size:15px;"></i>출근
-												</button>
-											</form>
+												<form action="support/attendCheck" method="POST"
+													id="attendInForm">
+													<button type="submit" class="btn btn-primary" id="attendIn">
+														<i class="ti-alarm-clock award-icon" style = "font-size:15px;"></i>출근
+													</button>
+												</form>
 											</c:when>
-									
+										
 											<c:otherwise>
+												<c:if test="${attendCheck2 == true }">
 												<form action="support/attendOut" method="POST"
 												id="attendOutForm">
 												<button type="submit" class="btn btn-danger" id="attendOut">
 													<i class="ti-location-arrow award-icon" style = "font-size:15px;"></i>퇴근
 												</button>
 												</form>
+												</c:if>
+												<c:if test="${attendCheck2 == false }"><b>퇴근<br>완료</b></c:if>
 											</c:otherwise>
 											</c:choose>
 									</div>	
@@ -698,10 +706,10 @@ ul.inbox-list-message{
 									
 											<thead>
 												<tr>
-													<th>결재번호</th>
+													
 													<th>제목</th>
 													<!-- <th>내용</th> -->
-													<th>등록날짜</th>
+												
 													<th>마감날짜</th>
 													<th>첨부파일</th>
 													<th>진행률</th>
@@ -714,14 +722,14 @@ ul.inbox-list-message{
 												<c:if test="${approvalList_now != null}">
 													<c:forEach var="eApp" items="${approvalList_now}">
 														<tr>
-															<td>${eApp.eApproval_id}		</td>
+														
 															<td>
-																<a href="readApproval?eApproval_id=${eApp.eApproval_id}&isApproval=true">
+																<a href="approval/readApproval?eApproval_id=${eApp.eApproval_id}&isApproval=true">
 																	${eApp.eApproval_title}
 																</a>
 															</td>
 															<%-- <td>${eApp.eApproval_content}	</td> --%>
-															<td>${eApp.eApproval_sDate}		</td>
+														
 															<td>${eApp.eApproval_fDate}		</td>
 															<td>
 															<c:choose>
@@ -751,7 +759,7 @@ ul.inbox-list-message{
 														<tr>
 															<td>${eApp.eApproval_id}		</td>
 															<td>
-																<a href="readApproval?eApproval_id=${eApp.eApproval_id}&ban=true">
+																<a href="approval/readApproval?eApproval_id=${eApp.eApproval_id}&ban=true">
 																	${eApp.eApproval_title}
 																</a>
 															</td>
@@ -781,7 +789,6 @@ ul.inbox-list-message{
 										</table>
 										</div>
 							</div>
-					
 					</div>
 						
 							
@@ -805,7 +812,7 @@ ul.inbox-list-message{
 								<div class="col-md-4 right sortable-item">
 										<div class="content-menu-right">
 											<div class="content-menu-header clearfix">
-												<h2 class="heading">부서 공지</h2>
+												<a href ="./board/boardList?boardFolder_id=2"><h2 class="heading">부서 공지</h2></a>
 											</div>
 											<div id="list-message-scrollable">
 												<ul class="inbox-list-message">
@@ -888,7 +895,7 @@ ul.inbox-list-message{
 	<footer>
 		<div class="container-fluid">
 			<p class="copyright">
-				&copy; 2018 <a href="https://www.themeineed.com" target="_blank">EveryWare</a>.
+				&copy; 2018 <a href="index" target="_blank">EveryWare(Inc)</a>.
 				All Rights Reserved.
 			</p>
 		</div>
@@ -963,6 +970,7 @@ ul.inbox-list-message{
 		});
 	</script>
 
+	
 	<!-- END DEMO PANEL -->
 	<script>
 		$(function() {
@@ -1019,7 +1027,7 @@ ul.inbox-list-message{
 				"tableTools":
 				{
 					"sSwfPath": "resources/assets/vendor/datatables-tabletools/swf/copy_csv_xls_pdf.swf"
-				}
+				}//
 			});
 			// datatable with scrolling
 			$('#datatable-basic-scrolling').dataTable(
@@ -1039,5 +1047,6 @@ ul.inbox-list-message{
 		});
 		</script>
 
+		
 </body>
 </html>

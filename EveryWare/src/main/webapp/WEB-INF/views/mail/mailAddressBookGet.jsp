@@ -65,7 +65,6 @@
 			var mailto = $('#mailto'+addrnum).html();
 			var mailreference = $('#mailreference'+addrnum).html();
 			
-			alert(mailto+':'+mailreference);
 			
 			//받는 사람에 세팅하기 
 			/* opener.document.getElementById('blankForSending').value = mailtoModified;
