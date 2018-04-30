@@ -105,9 +105,11 @@
 											events: ${RRlist},
 											select : function(startDate,
 													endDate, event, view,
-													resource, split) {
+													resource) {
 												/* alert('selected ' + startDate.format() + ' to ' + endDate.format() + 'resource id' + resource.id ); */
-
+												var curDate = new Date();
+												var curTime = curDate.getFullYear() + "-" + (curDate.getMonth() + 1) + "-" + curDate.getDate() + "T" + curDate.getHours() + ":" + curDate.getMinutes() + ":" + curDate.getSeconds();
+					
 												var schedule_sdate = document.getElementById('R_reservation_sdate');
 												schedule_sdate.value = startDate.format();
 												var schedule_fdate = document.getElementById('R_reservation_fdate');
@@ -115,11 +117,31 @@
 												var resource_id = document.getElementById('resource_id');
 												resource_id.value = resource.id;
 											
-												var curDate = new Date();
-												var curTime = curDate.getFullYear() + "-" + (curDate.getMonth() + 1) + "-" + curDate.getDate() + " " + curDate.getHours() + ":" + curDate.getMinutes();
-												
 												var regDate = document.getElementById('regDate');
 												regDate.value = curTime;
+												
+												$("#search").click(function(){
+													
+													var startDateCheck = startDate.format();
+													var endDateCheck = curTime;
+													
+													var startDateArr1 = startDateCheck.split('-');
+													var startDateArr2 = startDateArr1[2].split('T');
+													var startDateArr3 = startDateArr2[1].split(':');
+													
+													var endDateArr1 = endDateCheck.split('-');
+													var endDateArr2 = endDateArr1[2].split('T');
+													var endDateArr3 = endDateArr2[1].split(':');
+													
+													var startDateCompare = new Date(startDateArr1[0], parseInt(startDateArr1[1])-1, startDateArr2[0], startDateArr3[0], startDateArr3[1], startDateArr3[2]);
+											        var endDateCompare = new Date(endDateArr1[0], parseInt(endDateArr1[1])-1, endDateArr2[0], endDateArr3[0], endDateArr3[1], endDateArr3[2]);												      
+									       	
+											        if(startDateCompare.getTime() < endDateCompare.getTime()) {            
+											            alert(curTime + " 보다 이전 날짜의 일정은 등록할 수 없습니다.");                        
+											            location.reload();
+											            return false;
+											        }
+												});
 												
 												$("#dialog-addMessage").dialog({
 													width : "600px"
@@ -445,7 +467,7 @@
 								</tr>
 								<tr>
 									<td colspan="4" align="center"><input type="submit"
-										value="등록하기" align="center"></td>
+										value="등록하기" align="center" id="search"></td>
 								</tr>
 							</table>
 						</form>

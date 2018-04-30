@@ -102,11 +102,24 @@ public class UserController {
 					{
 						Slist.get(i).setColor("#f26363");
 					}
-				}//
-				
-				System.out.println("Slist->" + Slist);
+					else if(Slist.get(i).getSchedule_group().equals("법무"))
+					{
+						Slist.get(i).setColor("#884ff2");
+					}
+					else if(Slist.get(i).getSchedule_group().equals("영업"))
+					{
+						Slist.get(i).setColor("#d9ea5b");
+					}
+					else if(Slist.get(i).getSchedule_group().equals("운영"))
+					{
+						Slist.get(i).setColor("#edb657");
+					}
+				}
 				session.setAttribute("Slist", Slist);
 		
+				/*
+				 * 여기까지 schedule
+				*/
 				return "1";
 			}
 		}

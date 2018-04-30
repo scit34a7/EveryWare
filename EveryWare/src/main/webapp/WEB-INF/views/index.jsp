@@ -83,14 +83,14 @@
 								.fullCalendar(
 										{
 											schedulerLicenseKey : 'GPL-My-Project-Is-Open-Source',
-											selectable : true,
-											navLinks : true,
+											/* selectable : true,
+											navLinks : true, */
 											header : {
 												left : "prev, next",
 												center : "title",
 												right : "agendaWeek, month"
 											},
-											
+											/* 
 											monthNames : [ '1월', '2월', '3월',
 													'4월', '5월', '6월', '7월',
 													'8월', '9월', '10월', '11월',
@@ -104,7 +104,7 @@
 											dayNamesShort : [ '일', '월', '화',
 													'수', '목', '금', '토' ],
 											dayNamesMin : [ '일', '월', '화', '수',
-													'목', '금', '토' ],
+													'목', '금', '토' ], */
 											lang : "ko",
 											contentHeight : 455,
 											/* editable : true, */
@@ -126,6 +126,7 @@
 											],
 											 events: ${Slist}
 											, 
+											/* 
 											select : function(startDate,
 													endDate, event, view,
 													resource, split) {
@@ -149,7 +150,7 @@
 												$("#dialog-readMessage").dialog({
 													width : "600px"
 												});
-											},
+											}, */
 											loading : function(bool) {
 												jQuery("#loading").toggle(bool);
 											}

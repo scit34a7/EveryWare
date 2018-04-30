@@ -103,13 +103,60 @@
 											,
 											select : function(startDate,
 													endDate, event, view,
-													resource, split) {
-												/* alert('selected ' + startDate.format() + ' to ' + endDate.format() + 'resource id' + resource.id ); */
-
+													resource) {
+												var curDate = new Date();
+												var curTimeMonth = curDate.getFullYear() + "-" + (curDate.getMonth() + 1) + "-" + curDate.getDate();
+												var curTimeWeek = curDate.getFullYear() + "-" + (curDate.getMonth() + 1) + "-" + curDate.getDate() + "T" + curDate.getHours() + ":" + curDate.getMinutes() + ":" + curDate.getSeconds();
+												/* alert('selected ' + startDate.format() + ' to ' + endDate.format() + 'sysdate' + curTime); */
+												
 												var schedule_sdate = document.getElementById('schedule_sdate');
 												schedule_sdate.value = startDate.format();
 												var schedule_fdate = document.getElementById('schedule_fdate');
 												schedule_fdate.value = endDate.format();
+														
+												if(view.name == 'month')
+												{
+													$("#search").click(function(){
+														var startDateCheck = startDate.format();
+														var endDateCheckMonth = curTimeMonth;
+														var endDateCheckWeek = curTimeWeek;	
+														
+														var startDateArr = startDateCheck.split('-');						        
+												        var endDateArr = endDateCheckMonth.split('-');
+												                 
+												        var startDateCompare = new Date(startDateArr[0], parseInt(startDateArr[1])-1, startDateArr[2]);
+												        var endDateCompare = new Date(endDateArr[0], parseInt(endDateArr[1])-1, endDateArr[2]);
+												         
+												        if(startDateCompare.getTime() < endDateCompare.getTime()) {            
+												            alert(curTimeMonth + " 보다 이전 날짜의 일정은 등록할 수 없습니다.");                        										        	
+												            location.reload();
+												            return false;
+												        }	
+													});
+												}
+												else
+												{
+													$("#search").click(function(){
+														/* - : T 자르자 */
+														var startDateArr1 = startDateCheck.split('-');
+														var startDateArr2 = startDateArr1[2].split('T');
+														var startDateArr3 = startDateArr2[1].split(':');
+														
+														var endDateArr1 = endDateCheckWeek.split('-');
+														var endDateArr2 = endDateArr1[2].split('T');
+														var endDateArr3 = endDateArr2[1].split(':');
+													
+												        var startDateCompare = new Date(startDateArr1[0], parseInt(startDateArr1[1])-1, startDateArr2[0], startDateArr3[0], startDateArr3[1], startDateArr3[2]);
+												        var endDateCompare = new Date(endDateArr1[0], parseInt(endDateArr1[1])-1, endDateArr2[0], endDateArr3[0], endDateArr3[1], endDateArr3[2]);												      
+												       
+												        if(startDateCompare.getTime() < endDateCompare.getTime()) {            
+												            alert(curTimeWeek + " 보다 이전 날짜의 일정은 등록할 수 없습니다.");                        
+												            location.reload();
+												            return false;
+												        }
+													});
+												}
+			
 												$("#dialog-addMessage").dialog({
 													width : "600px"
 												});
@@ -425,12 +472,12 @@
 								<tr>
 									<td>일정 명 :&nbsp&nbsp</td>
 									
-									<td><input type="text" id="" name="schedule_name" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
+									<td><input type="text" id="" name="schedule_name" required="required" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
 								
 									<td>
 										<input type="radio" name="schedule_group" value="개인" checked="checked">개인 일정<br>
 										<input type="radio" name="schedule_group" value="${userDepartment}">부서 일정<br>
-										<input type="radio" name="schedule_group" value="2">프로젝트 일정<br>
+										<!-- <input type="radio" name="schedule_group" value="2">프로젝트 일정<br> -->
 									</td>
 									<td style="widows: 10%">
 										<label class="switch-input"> 
@@ -463,7 +510,7 @@
 								</tr>
 								<tr>
 									<td colspan="7" align="center"><input type="submit"
-										value="등록하기" align="center"></td>
+										value="등록하기" align="center" id="search"></td>
 								</tr>
 							</table>
 						</form>

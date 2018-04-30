@@ -47,11 +47,11 @@ public class ResourceController {
 			} else if (RRlist.get(i).getColor().equals("재무")) {
 				RRlist.get(i).setColor("#f26363");
 			} else if (RRlist.get(i).getColor().equals("법무")) {
-
+				RRlist.get(i).setColor("#884ff2");
 			} else if (RRlist.get(i).getColor().equals("영업")) {
-
+				RRlist.get(i).setColor("#d9ea5b");
 			} else if (RRlist.get(i).getColor().equals("운영")) {
-
+				RRlist.get(i).setColor("#edb657");
 			}
 		}
 		
