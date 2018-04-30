@@ -113,11 +113,10 @@
 				<!-- 뒤에 숙자가 크기 조절 -->
 				<div class="panel">
 					<div class="panel-heading">
-						<h3 class="panel-title">메일 주소록 저장</h3>
+						<h3 class="panel-title">메일 주소록</h3>
 					</div>
 					<div class="panel-body">
 						<ul class="inbox-list-message">
-
 							<c:forEach var="a" items="${addrBook}">
 								<li class="unread">
 									<table>
