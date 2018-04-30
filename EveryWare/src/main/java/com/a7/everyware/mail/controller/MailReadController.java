@@ -185,10 +185,6 @@ public class MailReadController {
 		
 		//int part_number = Integer.parseInt(part_number);
 		
-		System.out.println("get in the download stream");
-		System.out.println(message_number);
-		System.out.println(part_number);
-		
 		//TODO: session 값으로 가져오기 ;
 		String userId = (String)session.getAttribute("userId");
 		String repository = mdao.getRepositoryFormMailInfo(userId);

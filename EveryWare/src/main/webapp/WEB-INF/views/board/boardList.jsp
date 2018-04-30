@@ -70,43 +70,26 @@
 								class="ti-bell"></i> <span class="badge bg-danger">5</span>
 						</a>
 							<ul class="dropdown-menu notifications">
-								<li>알림이 있습니다.</li>
-								<li><a href="#" class="notification-item"> <i
-										class="fa fa-hdd-o custom-bg-red"></i>
-										<p>
-											<span class="text">(예)14프로젝트 회의에 초대되었습니다.</span> <span
-												class="timestamp">(예)11 minutes ago</span>
-										</p>
-								</a></li>
-								<li><a href="#" class="notification-item"> <i
-										class="fa fa-tasks custom-bg-yellow"></i>
-										<p>
-											<span class="text">[양식]알림이 있습니다.회의/결제</span> <span
-												class="timestamp">[양식]현재 - 보낸시간</span>
-										</p>
-								</a></li>
-								<li><a href="#" class="notification-item"> <i
-										class="fa fa-book custom-bg-green2"></i>
-										<p>
-											<span class="text">[양식]알림이 있습니다.회의/결제</span> <span
-												class="timestamp">[양식]현재 - 보낸시간</span>
-										</p>
-								</a></li>
-								<li><a href="#" class="notification-item"> <i
-										class="fa fa-bullhorn custom-bg-purple"></i>
-										<p>
-											<span class="text">[양식]알림이 있습니다.회의/결제</span> <span
-												class="timestamp">[양식]현재 - 보낸시간</span>
-										</p>
-								</a></li>
-								<li><a href="#" class="notification-item"> <i
-										class="fa fa-check custom-bg-green"></i>
-										<p>
-											<span class="text">[양식]알림이 있습니다.회의/결제</span> <span
-												class="timestamp">[양식]단위는 일수/ 시간수/ 분수</span>
-										</p>
-								</a></li>
-								<li><a href="#" class="more">전체 알람 보러 가기</a></li>
+								<c:if test="${pushList!= null }">
+									<li>알림이 있습니다.</li>
+									<c:forEach var="push" items="${pushList}">
+										<li><a href='javascript:void(0)' onclick="isPush(${push.push_id})" class="notification-item"> 
+										
+											<c:if test="${push.push_type eq '일정'}">
+												<i class="fa fa-bullhorn custom-bg-purple"></i>
+											</c:if>
+											
+											<c:if test="${push.push_type eq '결재'}">
+												<i class="fa fa-book custom-bg-green2"></i>
+											</c:if>
+											
+												<p>
+													<span class="text">${push.push_title}</span> <span
+														class="timestamp">${push.push_time}</span>
+												</p>
+										</a></li>
+									</c:forEach>
+									</c:if>
 							</ul></li>
 						
 						<li class="dropdown"><a href="#" class="dropdown-toggle"

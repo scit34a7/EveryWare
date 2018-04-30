@@ -418,6 +418,9 @@ ul.inbox-list-message{
 							</c:if>
 						</a>
 							<ul class="dropdown-menu notifications">
+									
+									<c:if test="${pushList!= null }">
+									<li>알림이 있습니다.</li>
 									<c:forEach var="push" items="${pushList}">
 										<li><a href='javascript:void(0)' onclick="isPush(${push.push_id})" class="notification-item"> 
 										
@@ -428,13 +431,14 @@ ul.inbox-list-message{
 											<c:if test="${push.push_type eq '결재'}">
 												<i class="fa fa-book custom-bg-green2"></i>
 											</c:if>
-										
+											
 												<p>
 													<span class="text">${push.push_title}</span> <span
 														class="timestamp">${push.push_time}</span>
 												</p>
 										</a></li>
 									</c:forEach>
+									</c:if>
 							</ul></li>
 
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -702,10 +706,10 @@ ul.inbox-list-message{
 									
 											<thead>
 												<tr>
-													<th>결재번호</th>
+													
 													<th>제목</th>
 													<!-- <th>내용</th> -->
-													<th>등록날짜</th>
+												
 													<th>마감날짜</th>
 													<th>첨부파일</th>
 													<th>진행률</th>
@@ -718,14 +722,14 @@ ul.inbox-list-message{
 												<c:if test="${approvalList_now != null}">
 													<c:forEach var="eApp" items="${approvalList_now}">
 														<tr>
-															<td>${eApp.eApproval_id}		</td>
+														
 															<td>
-																<a href="readApproval?eApproval_id=${eApp.eApproval_id}&isApproval=true">
+																<a href="approval/readApproval?eApproval_id=${eApp.eApproval_id}&isApproval=true">
 																	${eApp.eApproval_title}
 																</a>
 															</td>
 															<%-- <td>${eApp.eApproval_content}	</td> --%>
-															<td>${eApp.eApproval_sDate}		</td>
+														
 															<td>${eApp.eApproval_fDate}		</td>
 															<td>
 															<c:choose>
@@ -755,7 +759,7 @@ ul.inbox-list-message{
 														<tr>
 															<td>${eApp.eApproval_id}		</td>
 															<td>
-																<a href="readApproval?eApproval_id=${eApp.eApproval_id}&ban=true">
+																<a href="approval/readApproval?eApproval_id=${eApp.eApproval_id}&ban=true">
 																	${eApp.eApproval_title}
 																</a>
 															</td>
