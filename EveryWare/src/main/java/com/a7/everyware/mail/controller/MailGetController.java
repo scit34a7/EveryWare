@@ -284,11 +284,6 @@ public class MailGetController {
 		System.out.println("삭제 ajax로부터 컨트롤러로 넘어옴:3");
 		System.out.println(deleteArray.toString());
 
-		// [["Mail1524102363841-1"]]
-		// [["Mail1524102363841-1", "Mail1524102335608-0"]]
-		// [["Mail1524102376048-2", "Mail1524102363841-1",
-		// "Mail1524102335608-0", "Mail1524032644594-0", "Mail1523880863396-8"]]
-
 		int deleteCount = deleteArray.size();
 
 		int deleteHandle = 0;
@@ -347,7 +342,11 @@ public class MailGetController {
 					a = mdao.deletePermanent(message_name);
 
 					// getBack
-				} else {
+				} else if( sort.equals("temp")){
+					a = mdao.deletePermanent(message_name);
+				}
+				
+				else {
 					a = mdao.getBack(message_name);
 				}
 

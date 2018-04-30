@@ -105,7 +105,6 @@
 		and 
 			message_importance is not null
 			
-			
 		order by 
 			last_updated desc
 	</select>
@@ -120,6 +119,8 @@
 			sender = #{userName}
 		and
 			repository_name = 'temp'
+		and
+			message_deleted is null	
 		order by 
 			last_updated desc
 	</select>
