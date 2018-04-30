@@ -62,7 +62,11 @@
 						
 						<li class="dropdown"><a href="#"
 							class="dropdown-toggle icon-menu" data-toggle="dropdown"> <i
-								class="ti-bell"></i> <span class="badge bg-danger">5</span>
+								class="ti-bell"></i> 
+								
+							<c:if test="${empty pushList == false}">
+								<span class="badge bg-danger">NEW</span>
+							</c:if>
 						</a>
 							<ul class="dropdown-menu notifications">
 								<c:if test="${pushList!= null }">
