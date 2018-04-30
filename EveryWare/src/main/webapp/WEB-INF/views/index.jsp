@@ -133,7 +133,7 @@
 											select : function(startDate,
 													endDate, event, view,
 													resource, split) {
-												/* alert('selected ' + startDate.format() + ' to ' + endDate.format() + 'resource id' + resource.id ); */
+												alert('selected ' + startDate.format() + ' to ' + endDate.format() + 'resource id' + resource.id ); 
 
 												var schedule_sdate = document.getElementById('schedule_sdate');
 												schedule_sdate.value = startDate.format();
