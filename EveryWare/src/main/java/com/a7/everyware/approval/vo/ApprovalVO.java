@@ -15,6 +15,7 @@ public class ApprovalVO {
 	String eApproval_saved;		//첨부파일 저장된 파일명
 	String eApproval_original;	//첨부파일 원본 파일명
 	String eApproval_status;	//테이브에는 없고 VO에만 있는 항목, 반려or거절이 들어간다.
+	int eApproval_fileSize;		//첨붚파일 사이즈
 	
 	public ApprovalVO() {
 		super();
@@ -22,7 +23,7 @@ public class ApprovalVO {
 
 	public ApprovalVO(int eApproval_id, String user_id, String eApproval_title, byte[] eApproval_content,
 			String eApproval_sDate, String eApproval_fDate, int eApprovalLine_id, String eApproval_saved,
-			String eApproval_original, String eApproval_status) {
+			String eApproval_original, String eApproval_status, int eApproval_fileSize) {
 		super();
 		this.eApproval_id = eApproval_id;
 		this.user_id = user_id;
@@ -34,6 +35,7 @@ public class ApprovalVO {
 		this.eApproval_saved = eApproval_saved;
 		this.eApproval_original = eApproval_original;
 		this.eApproval_status = eApproval_status;
+		this.eApproval_fileSize = eApproval_fileSize;
 	}
 
 	public int geteApproval_id() {
@@ -123,8 +125,16 @@ public class ApprovalVO {
 	public void seteApproval_content2(String eApproval_content2) {
 		this.eApproval_content2 = eApproval_content2;
 	}
-
 	
+	
+	public int geteApproval_fileSize() {
+		return eApproval_fileSize;
+	}
+
+	public void seteApproval_fileSize(int eApproval_fileSize) {
+		this.eApproval_fileSize = eApproval_fileSize;
+	}
+
 	/**
 	 * eApproval_content를 eApproval_content2 변환해서 setting까지
 	 */
@@ -138,7 +148,7 @@ public class ApprovalVO {
 				+ eApproval_title + ", eApproval_content2=" + eApproval_content2 + ", eApproval_sDate="
 				+ eApproval_sDate + ", eApproval_fDate=" + eApproval_fDate + ", eApprovalLine_id=" + eApprovalLine_id
 				+ ", eApproval_saved=" + eApproval_saved + ", eApproval_original=" + eApproval_original
-				+ ", eApproval_status=" + eApproval_status + "]";
+				+ ", eApproval_status=" + eApproval_status + ", eApproval_fileSize=" + eApproval_fileSize + "]";
 	}
 
 	

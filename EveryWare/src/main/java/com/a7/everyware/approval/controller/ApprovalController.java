@@ -180,6 +180,10 @@ public class ApprovalController {
 		approval.setUser_id(user_id);
 		logger.debug("아이디 : {}", user_id);
 		
+		
+		//파일 사이즈 셋팅
+		approval.seteApproval_fileSize( (int) ( upload.getSize() / 1024 ) );
+		
 		//eApproval_content byte[]로 변환
 		approval.seteApproval_content(eApproval_content_string.getBytes());
 		
@@ -201,7 +205,7 @@ public class ApprovalController {
 		
 		//첫 번째 결재자에게 푸쉬 보내기
 		ApprovalLineVO line = approvalDAO.findApprovalLineById2(approval.geteApprovalLine_id());
-		UserVO person1 = approvalDAO.findUserById2(line.geteApprovalLine_person1());
+		//UserVO person1 = approvalDAO.findUserById2(line.geteApprovalLine_person1());
 		
 		PushVO push = new PushVO();
 		
@@ -858,6 +862,71 @@ public class ApprovalController {
 		String status = approvalDAO.findStatusById(approval.getUser_id());
 		approvalLine.setUser_id(status);
 		
+		
+		//첨부파일의 확장자 알아내 모델에 저장(jsp에서 아이콘 보여주기위해서)
+		if(approval.geteApproval_original() != null){
+			String original = approval.geteApproval_original();
+			
+			
+			
+			// "."을 기준으로 자른 String 기준 배열중 제일 마지막이 확장자
+			String[] stringArray = original.split("\\.");		//특수문자는 앞에 \\ 붙여줘야한다 ex> ^^ 는 \\^\\^
+			logger.debug("spilt!!!!!!!!!! : {}", stringArray.length);
+
+			
+			switch(stringArray[stringArray.length - 1].toLowerCase()){
+			
+			case "doc": case "docx":
+				//워드파일
+				model.addAttribute("attachedType", "fa fa-file-word-o");
+				break;
+			
+			case "ppt": case "pptx":
+				//파워포인트
+				model.addAttribute("attachedType", "fa fa-file-powerpoint-o");
+				break;
+				
+			case "xls": case "xlsx":
+				///엑셀
+				model.addAttribute("attachedType", "fa fa-file-excel-o");
+				break;
+				
+			case "zip": case "rar": case "7z": case "egg": case "alz":
+				//압축파일
+				model.addAttribute("attachedType", "fa fa-file-zip-o");
+				break;
+				
+			case "pdf":
+				//pdf
+				model.addAttribute("attachedType", "fa fa-file-pdf-o");
+				
+				break;
+				
+			case "png": case "jpg": case "jpeg": case "gif": case "bmp":
+				//그림
+				model.addAttribute("attachedType", "fa fa-file-image-o");
+				break;
+				
+			case "wav": case "mp3": case "wma":
+				//소리
+				model.addAttribute("attachedType", "fa fa-file-sound-o");
+				break;
+				
+			case "mp4": case "avi": case "mpg": case "mpeg": case "wmv": case "flv": case "mkv":
+				//동영상
+				model.addAttribute("attachedType", "fa fa-file-movie-o");
+				break;
+				
+			case "java": case "html": case "jsp": case "xml":
+				//코드
+				model.addAttribute("attachedType", "fa fa-file-code-o");
+				break;
+			
+				
+			}
+		}
+		
+		
 		//진행도
 		//진행도를 체크하기위해 히스토리 가져오기
 		ArrayList<ApprovalHistoryVO> approvalHistoryList = approvalDAO.findApprovalHistory(eApproval_id);
@@ -885,7 +954,7 @@ public class ApprovalController {
 		approval.byteToString();
 		
 		
-		
+		logger.debug("가져온 전자문서 객체 : {}", approval);
 		model.addAttribute("approval", approval);			//읽고자하는 전자결재 객체
 		model.addAttribute("isApproval", isApproval);		//전자결재를 현재 승인 할 수 있는지의 여부
 		model.addAttribute("approvalLine", approvalLine);	//결재라인 

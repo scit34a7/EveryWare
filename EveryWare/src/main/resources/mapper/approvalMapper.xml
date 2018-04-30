@@ -16,6 +16,7 @@
 		<result property = "eApprovalLine_id" javaType = "int" column = "eApprovalLine_id" jdbcType = "NUMERIC"/>
 		<result property = "eApproval_saved" javaType = "java.lang.String" column = "eApproval_saved" jdbcType = "VARCHAR"/>
 		<result property = "eApproval_original" javaType = "java.lang.String" column = "eApproval_original" jdbcType = "VARCHAR"/>
+		<result property = "eApproval_fileSize" javaType = "int" column = "eApproval_fileSize" jdbcType = "NUMERIC"/>
 	</resultMap>
 
 
@@ -215,6 +216,7 @@
 				<if test="eApproval_saved != null">
 					,eApproval_saved
 					,eApproval_original
+					,eApproval_fileSize
 				</if>
 				)
 			values
@@ -229,6 +231,7 @@
 				<if test="eApproval_saved != null">
 					,#{eApproval_saved}
 					,#{eApproval_original}
+					,#{eApproval_fileSize}
 				</if>
 				)
 	</insert>
@@ -246,6 +249,7 @@
 			,eApprovalLine_id
 			,eApproval_saved
 			,eApproval_original
+			,eApproval_fileSize
 		from 
 		    electronicApproval_tb p
 		where
@@ -277,6 +281,7 @@
 			,eApprovalLine_id
 			,eApproval_saved
 			,eApproval_original
+			,eApproval_fileSize
 		from
 			 electronicApproval_tb 
 		where
@@ -314,6 +319,7 @@
 			,eApprovalLine_id
 			,eApproval_saved
 			,eApproval_original
+			,eApproval_fileSize
 		from
 			electronicApproval_tb
 		where
