@@ -19,6 +19,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.a7.everyware.support.dao.SupportDAO;
@@ -58,6 +59,24 @@ public class SupportController {
 	
 		return "support/supportMain";
 	}
+	
+	
+	//출근체크
+	@ResponseBody
+	@RequestMapping (value="attendCheck2", method=RequestMethod.POST)
+	public void attendCheck2(AttendVO attendVO) {
+		
+		logger.debug("SupportController attendCheck para {}", attendVO);
+		
+		
+		supportDAO.attendCheck(attendVO);
+		
+		
+		
+	}
+	
+	
+	
 	
 	
 	//출근체크

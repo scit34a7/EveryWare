@@ -35,6 +35,9 @@
 <link rel="stylesheet" href="resources/assets/vendor/slick/slick-theme.css">
 
 
+<!-- alert -->
+<link rel="stylesheet" href="resources/assets/vendor/sweetalert2/sweetalert2.css">
+
 <!-- 공지사항 -->
 <link rel="stylesheet"
 	href="resources/assets/vendor/datatables/css-main/jquery.dataTables.min.css">
@@ -608,22 +611,21 @@ ul.inbox-list-message{
 									<div class="col-md-2" style = "text-align:center;">
 											<c:choose>
 											<c:when test="${attendCheck == true}">
-												<form action="support/attendCheck" method="POST"
-													id="attendInForm">
-													<button type="submit" class="btn btn-primary" id="attendIn">
-														<i class="ti-alarm-clock award-icon" style = "font-size:15px;"></i>출근
-													</button>
-												</form>
+												
+												<button class="btn btn-primary" id="attendIn">
+													<i class="ti-alarm-clock award-icon" style = "font-size:15px;"></i>출근
+												</button>
+												
 											</c:when>
 										
 											<c:otherwise>
 												<c:if test="${attendCheck2 == true }">
-												<form action="support/attendOut" method="POST"
-												id="attendOutForm">
-												<button type="submit" class="btn btn-danger" id="attendOut">
+												
+											
+												<button class="btn btn-danger" id="attendOut">
 													<i class="ti-location-arrow award-icon" style = "font-size:15px;"></i>퇴근
 												</button>
-												</form>
+												
 												</c:if>
 												<c:if test="${attendCheck2 == false }"><b>퇴근<br>완료</b></c:if>
 											</c:otherwise>
@@ -945,6 +947,10 @@ ul.inbox-list-message{
 	<script src="resources/assets/vendor/justgage-toorshia/justgage.js"></script>
 	<script src="resources/assets/scripts/klorofilpro-common.js"></script>
 
+
+	<!-- alert -->
+	<script src="resources/assets/vendor/sweetalert2/sweetalert2.js"></script>
+	
 	<!-- 공지사항 -->
 	<script
 		src="resources/assets/vendor/datatables-colreorder/dataTables.colReorder.js"></script>
@@ -1045,6 +1051,111 @@ ul.inbox-list-message{
 			});
 			
 			
+		});
+		</script>
+		
+		
+		<script>
+	
+		
+		
+		$(function()
+		{
+			//출근
+			$('#attendIn').on('click', function()
+				{
+				
+					
+				
+					swal(
+					{
+						title: '출근하시겠습니까?',
+						type: 'info',
+						allowOutsideClick: false,
+						showCancelButton: true,
+						confirmButtonColor: '#F9354C',
+						cancelButtonColor: '#41B314',
+						confirmButtonText: '네',
+						cancelButtonText: '아니오'
+					}).then(function()
+					{
+						 $.ajax({
+					            url: 'support/attendCheck2'
+					               ,type: 'POST'
+					               ,data: {user_id: ${userId}, attend_check: '출근'}
+					               ,dataType: 'text'
+					               ,success: function(){
+					                  location.href='support/attendList';
+					               }      
+					               ,error: function(e){   
+					                  alert(JSON.stringify(e));
+					               }      
+					         
+					         });
+						
+						
+						
+					}, function(dismiss)
+					{
+						if (dismiss === 'cancel')
+						{
+							swal(
+								'출근이 취소되었습니다.'
+							).catch(swal.noop);
+						}
+					});
+				});
+			//출근 끝
+	
+			
+			//퇴근
+			$('#attendOut').on('click', function()
+				{
+				
+					
+				
+					swal(
+					{
+						title: '퇴근하시겠습니까?',
+						type: 'warning',
+						allowOutsideClick: false,
+						showCancelButton: true,
+						confirmButtonColor: '#F9354C',
+						cancelButtonColor: '#41B314',
+						confirmButtonText: '네',
+						cancelButtonText: '아니오'
+					}).then(function()
+					{
+						 $.ajax({
+					            url: 'support/attendCheck2'
+					               ,type: 'POST'
+					               ,data: {user_id: ${userId}, attend_check: '퇴근'}
+					               ,dataType: 'text'
+					               ,success: function(){
+					                  location.href='support/attendList';
+					               }      
+					               ,error: function(e){   
+					                  alert(JSON.stringify(e));
+					               }      
+					         
+					         });
+						
+						
+						
+					}, function(dismiss)
+					{
+						if (dismiss === 'cancel')
+						{
+							swal(
+								'퇴근이 취소되었습니다.'
+							).catch(swal.noop);
+						}
+					});
+				});
+			//퇴근 끝
+			
+			
+						
 		});
 		</script>
 
