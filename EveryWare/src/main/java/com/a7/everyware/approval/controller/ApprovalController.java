@@ -643,21 +643,21 @@ public class ApprovalController {
 							
 							if(history.getUser_id().equals(line.geteApprovalLine_person1()) && history.geteHistory_content().equals("승인")){
 								//내가 승인 한경우
-								logger.debug("1111111111111111111111111111111111111111111111");
+								logger.debug("{} 번 결재를 c");
 								approvalList_past.add(app);
 	
 							}else if(history.getUser_id().equals(line.geteApprovalLine_person1()) && history.geteHistory_content().equals("반려")){
 								//내가 반려 한경우
-								logger.debug("222222222222222222222222222222222222222222222222222222222222222222");
+								
 								approvalList_future.add(app);
 								
 							}else if(history.getUser_id().equals(line.geteApprovalLine_person1()) && history.geteHistory_content().equals("거절")){
 								//내가 거절 한경우
-								logger.debug("333333333333333333333333333333333333333333333333333333333333333333");
+								
 								approvalList_past.add(app);
 								
 							}else{
-								logger.debug("444444444444444444444444444444444444444444444444444444444");
+								
 								approvalList_now.add(app);
 							}
 							

@@ -47,7 +47,11 @@
 		
 	</head>
 	<body>
-		<!-- NAVBAR -->
+		<!-- WRAPPER -->
+		<div id="wrapper">
+		
+		
+			<!-- NAVBAR -->
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
 				<a href="../index"> <img src="../resources/assets/img/logo-white.png"
@@ -117,7 +121,6 @@
 		<!-- END NAVBAR -->
 		
 		
-		
 			<!-- LEFT SIDEBAR -->
 			<div id="sidebar-nav" class="sidebar">
 				<nav>
@@ -134,11 +137,10 @@
 							<div id="subLayouts" class="collapse">
 								<ul class="submenu">
 									<li><a href="../mail/getMail?sort=all">받은메일함 
-									
 									<c:if test="${mailRead>0}">
-										 <span class="label label-success">NEW</span>
+								 		<span class="label label-success">NEW</span>
 									</c:if>
-										</a></li>
+									</a></li>
 									<li><a href="../mail/getMail?sort=send">보낸메일함</a></li>
 									<li><a href="../mail/sendMail">편지쓰기</a></li>
 									<li><a href="../mail/getMail?sort=important">중요편지함</a></li>
@@ -192,8 +194,8 @@
 					</a>
 						<div id="approval" class="collapse in"><!-- collapse : 서브메뉴 닫혀있음 collapse in : 서브메뉴 열려있음 -->
 							<ul class="submenu">
-								<li><a href="../approval/myApproval" class="active">내 결재</a></li>
-								<li><a href="../approval/writeApproval">결재 작성</a></li>
+								<li><a href="../approval/myApproval">내 결재</a></li>
+								<li><a href="../approval/writeApproval" class="active">결재 작성</a></li>
 								<li><a href="../approval/approvalFormat">결재 양식 작성</a></li>
 							</ul>
 
@@ -228,9 +230,9 @@
 								class="icon-submenu ti-angle-left"></i></a>
 							<div id="board" class="collapse">
 								<ul class="submenu">
-									<li><a href="board/boardList?boardFolder_id=1">공지사항</a></li>
-									<li><a href="board/boardList?boardFolder_id=2">부서게시판</a></li>
-									<li><a href="board/boardList?boardFolder_id=3">커뮤니티</a></li>
+									<li><a href="../board/boardList?boardFolder_id=1">공지사항</a></li>
+									<li><a href="../board/boardList?boardFolder_id=2">부서게시판</a></li>
+									<li><a href="../board/boardList?boardFolder_id=3">커뮤니티</a></li>
 								</ul>
 							</div></li>	
 								
@@ -243,6 +245,7 @@
 			</div>
 			<!-- END LEFT SIDEBAR -->
 		
+			
 			<!-- MAIN -->
 			<div class="main">
 				<!-- MAIN CONTENT -->
@@ -424,6 +427,8 @@
 				
 			</div>
 			<!-- END MAIN -->
+			
+			
 			<div class="clearfix"></div>
 			<footer>
 				<div class="container-fluid">
