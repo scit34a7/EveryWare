@@ -9,5 +9,6 @@ interface ScheduleMapper {
 	int Schedule_add(ScheduleVO schedule_vo);
 	ArrayList<ScheduleVO> Read_Schedule(HashMap hm);
 	int Schedule_Delete(String schedule_num);
+	ScheduleVO get_Schedule(String schedule_num);
 
 }

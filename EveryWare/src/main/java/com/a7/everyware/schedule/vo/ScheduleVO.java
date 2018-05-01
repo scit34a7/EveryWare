@@ -9,6 +9,8 @@ public class ScheduleVO {
 	private String schedule_fdate;
 	private String schedule_group;	/*개인인지 부서 프로젝트*/	
 	private String project_id;
+	private String schedule_memo;
+	private String schedule_regdate;
 	private String color;
 	
 	public ScheduleVO()
@@ -17,7 +19,8 @@ public class ScheduleVO {
 	}
 
 	public ScheduleVO(String schedule_num, String schedule_name, String user_id, String user_name,
-			String schedule_sdate, String schedule_fdate, String schedule_group, String project_id, String color) {
+			String schedule_sdate, String schedule_fdate, String schedule_group, String project_id,
+			String schedule_memo, String schedule_regdate, String color) {
 		super();
 		this.schedule_num = schedule_num;
 		this.schedule_name = schedule_name;
@@ -27,10 +30,26 @@ public class ScheduleVO {
 		this.schedule_fdate = schedule_fdate;
 		this.schedule_group = schedule_group;
 		this.project_id = project_id;
+		this.schedule_memo = schedule_memo;
+		this.schedule_regdate = schedule_regdate;
 		this.color = color;
 	}
+	
+	public String getSchedule_memo() {
+		return schedule_memo;
+	}
 
+	public void setSchedule_memo(String schedule_memo) {
+		this.schedule_memo = schedule_memo;
+	}
 
+	public String getSchedule_regdate() {
+		return schedule_regdate;
+	}
+
+	public void setSchedule_regdate(String schedule_regdate) {
+		this.schedule_regdate = schedule_regdate;
+	}
 
 	public String getColor() {
 		return schedule_group;

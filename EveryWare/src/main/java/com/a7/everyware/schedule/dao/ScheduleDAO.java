@@ -56,5 +56,10 @@ public class ScheduleDAO {
 		return result;
 	}
 	
-	
+	public ScheduleVO get_Schedule(String schedule_num)
+	{
+		ScheduleMapper mapper = sqlsession.getMapper(ScheduleMapper.class);
+		ScheduleVO result = mapper.get_Schedule(schedule_num);
+		return result;
+	}
 }

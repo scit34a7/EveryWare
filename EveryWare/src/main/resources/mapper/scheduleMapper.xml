@@ -8,7 +8,7 @@
 	<insert id="Schedule_add" parameterType="ScheduleVO"> 
 		insert into schedule_tb
 		values
-		(schedule_num_seq.nextval, #{schedule_name},#{user_id},#{user_name},#{schedule_group},#{schedule_sdate},#{schedule_fdate},#{project_id})
+		(schedule_num_seq.nextval, #{schedule_name},#{user_id},#{user_name},#{schedule_group},#{schedule_sdate},#{schedule_fdate},#{project_id},#{schedule_memo},#{schedule_regdate} )
 	</insert>
 	
 	<select id="Read_Schedule" parameterType="Map" resultType="ScheduleVO">
@@ -22,5 +22,11 @@
 		where 
 		schedule_num = #{schedule_num}
 	</delete>
+	
+	<select id="get_Schedule" parameterType="String" resultType="ScheduleVO">
+		select * from schedule_tb
+		where
+		schedule_num = #{schedule_num}
+	</select>
 	
 </mapper>

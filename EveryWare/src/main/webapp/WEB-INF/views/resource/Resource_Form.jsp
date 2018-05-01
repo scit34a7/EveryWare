@@ -108,7 +108,7 @@
 													resource) {
 												/* alert('selected ' + startDate.format() + ' to ' + endDate.format() + 'resource id' + resource.id ); */
 												var curDate = new Date();
-												var curTime = curDate.getFullYear() + "-" + (curDate.getMonth() + 1) + "-" + curDate.getDate() + "T" + curDate.getHours() + ":" + curDate.getMinutes() + ":" + curDate.getSeconds();
+												var curTime = curDate.getFullYear() + "-" + (curDate.getMonth() + 1) + "-" + curDate.getDate() + " " + curDate.getHours() + ":" + curDate.getMinutes();
 					
 												var schedule_sdate = document.getElementById('R_reservation_sdate');
 												schedule_sdate.value = startDate.format();
@@ -445,8 +445,8 @@
 					<div id="dialog-addMessage" title="예약 하기" style="display: none;">
 						<form action="Resource_add" method="post">
 							<input type="hidden" id="resource_id" name="resource_id">
-						
-							<table>
+							<input type="hidden" id="regDate" name="r_reservation_regDate">
+							<table border="1">
 								<tr>
 									<td>사원 명</td>
 									<td><input type="text" name="r_reservation_userName" value="${userName}" readonly>
@@ -464,10 +464,8 @@
 										name="R_reservation_fdate" readonly></td>
 								</tr>
 								<tr>
-									<td>등록 날짜</td>
-									<td><input type="text" id="regDate" name="r_reservation_regDate" readonly="readonly"></td>
 									<td>메 모</td>
-									<td><input type="text" id="memo" name="r_reservation_memo" required="required"></td>
+									<td colspan="5"><textarea rows="1" cols="1" id="memo" name="r_reservation_memo" style="position:relative; border-style:none; height:32px; width: 420px"></textarea></td>
 								</tr>
 								<tr>
 									<td colspan="4" align="center"><input type="submit"
