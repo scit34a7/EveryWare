@@ -38,10 +38,11 @@
 		<div id="wrapper">
 		
 		
-			<!-- NAVBAR -->
+		<!-- NAVBAR -->
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
-				<a href="../index"> <img src="../resources/assets/img/logo-white.png"
+				<a href="../index"> <img
+					src="../resources/assets/img/logo-white.png"
 					alt="Klorofil Pro Logo" class="img-responsive logo">
 				</a>
 			</div>
@@ -52,15 +53,12 @@
 					</button>
 				</div>
 				<form class="navbar-form navbar-left search-form">
-					<input type="text" value="" class="form-control"
-						placeholder="직원검색">
-					<button type="button" class="btn btn-default">
-						<i class="fa fa-search"></i>
+					
 					</button>
 				</form>
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
-						
+
 						<li class="dropdown"><a href="#"
 							class="dropdown-toggle icon-menu" data-toggle="dropdown"> <i
 								class="ti-bell"></i> 
@@ -91,9 +89,9 @@
 									</c:forEach>
 									</c:if>
 							</ul></li>
-						
+
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">  <span>${sessionScope.userName }</span>
+							data-toggle="dropdown"> <span>${sessionScope.userName}</span>
 						</a>
 							<ul class="dropdown-menu logged-user-menu">
 								<li><a href="<c:url value ='/user/userInfo'/>" ><i class="ti-user"></i> <span>개인정보</span></a></li>
@@ -209,29 +207,11 @@
 						data-parent="#sidebar-nav-menu" class="collapsed"><i
 							class="ti-pie-chart"></i> <span class="title">게시판</span> <i
 							class="icon-submenu ti-angle-left"></i></a>
-						<div id="board" class="collapse in">
+						<div id="board" class="collapse">
 							<ul class="submenu">
-								<c:choose>
-			
-									<c:when test="${boardFolder_id==1}">
-										<li><a href="../board/boardList?boardFolder_id=1" class = "active">공지사항</a></li>
-										<li><a href="../board/boardList?boardFolder_id=2">부서게시판</a></li>
-										<li><a href="../board/boardList?boardFolder_id=3">커뮤니티</a></li>
-									</c:when>
-							
-									<c:when test="${boardFolder_id==2}">
-										<li><a href="../board/boardList?boardFolder_id=1">공지사항</a></li>
-										<li><a href="../board/boardList?boardFolder_id=2" class = "active">부서게시판</a></li>
-										<li><a href="../board/boardList?boardFolder_id=3">커뮤니티</a></li>
-									</c:when>
-							
-									<c:when test="${boardFolder_id==3}">
-										<li><a href="../board/boardList?boardFolder_id=1">공지사항</a></li>
-										<li><a href="../board/boardList?boardFolder_id=2">부서게시판</a></li>
-										<li><a href="../board/boardList?boardFolder_id=3" class = "active">커뮤니티</a></li>
-									</c:when>
-									
-								</c:choose>
+								<li><a href="../board/boardList?boardFolder_id=1">공지사항</a></li>
+								<li><a href="../board/boardList?boardFolder_id=2">부서게시판</a></li>
+								<li><a href="../board/boardList?boardFolder_id=3">커뮤니티</a></li>
 							</ul>
 						</div></li>
 

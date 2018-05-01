@@ -428,16 +428,16 @@
 								class="title">게시판</span></a></li> -->
 								
 								<li class="panel"><a href="#board" data-toggle="collapse"
-							data-parent="#sidebar-nav-menu" class="collapsed"><i
-								class="ti-pie-chart"></i> <span class="title">게시판</span> <i
-								class="icon-submenu ti-angle-left"></i></a>
-							<div id="board" class="collapse">
-								<ul class="submenu">
-									<li><a href="../board/boardList?boardFolder_id=1">공지사항</a></li>
-									<li><a href="../board/boardList?boardFolder_id=2">부서게시판</a></li>
-									<li><a href="../board/boardList?boardFolder_id=3">커뮤니티</a></li>
-								</ul>
-							</div></li>	
+						data-parent="#sidebar-nav-menu" class="collapsed"><i
+							class="ti-pie-chart"></i> <span class="title">게시판</span> <i
+							class="icon-submenu ti-angle-left"></i></a>
+						<div id="board" class="collapse">
+							<ul class="submenu">
+								<li><a href="../board/boardList?boardFolder_id=1">공지사항</a></li>
+								<li><a href="../board/boardList?boardFolder_id=2">부서게시판</a></li>
+								<li><a href="../board/boardList?boardFolder_id=3">커뮤니티</a></li>
+							</ul>
+						</div></li>
 								
 					</ul>
 					<button type="button" class="btn-toggle-minified"

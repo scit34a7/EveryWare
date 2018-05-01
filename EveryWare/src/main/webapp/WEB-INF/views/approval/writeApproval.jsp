@@ -54,7 +54,8 @@
 			<!-- NAVBAR -->
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
-				<a href="../index"> <img src="../resources/assets/img/logo-white.png"
+				<a href="../index"> <img
+					src="../resources/assets/img/logo-white.png"
 					alt="Klorofil Pro Logo" class="img-responsive logo">
 				</a>
 			</div>
@@ -65,15 +66,12 @@
 					</button>
 				</div>
 				<form class="navbar-form navbar-left search-form">
-					<input type="text" value="" class="form-control"
-						placeholder="직원검색">
-					<button type="button" class="btn btn-default">
-						<i class="fa fa-search"></i>
+					
 					</button>
 				</form>
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
-						
+
 						<li class="dropdown"><a href="#"
 							class="dropdown-toggle icon-menu" data-toggle="dropdown"> <i
 								class="ti-bell"></i> 
@@ -104,9 +102,9 @@
 									</c:forEach>
 									</c:if>
 							</ul></li>
-						
+
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">  <span>${sessionScope.userName }</span>
+							data-toggle="dropdown"> <span>${sessionScope.userName}</span>
 						</a>
 							<ul class="dropdown-menu logged-user-menu">
 								<li><a href="<c:url value ='/user/userInfo'/>" ><i class="ti-user"></i> <span>개인정보</span></a></li>
@@ -225,16 +223,16 @@
 								class="title">게시판</span></a></li> -->
 								
 								<li class="panel"><a href="#board" data-toggle="collapse"
-							data-parent="#sidebar-nav-menu" class="collapsed"><i
-								class="ti-pie-chart"></i> <span class="title">게시판</span> <i
-								class="icon-submenu ti-angle-left"></i></a>
-							<div id="board" class="collapse">
-								<ul class="submenu">
-									<li><a href="../board/boardList?boardFolder_id=1">공지사항</a></li>
-									<li><a href="../board/boardList?boardFolder_id=2">부서게시판</a></li>
-									<li><a href="../board/boardList?boardFolder_id=3">커뮤니티</a></li>
-								</ul>
-							</div></li>	
+						data-parent="#sidebar-nav-menu" class="collapsed"><i
+							class="ti-pie-chart"></i> <span class="title">게시판</span> <i
+							class="icon-submenu ti-angle-left"></i></a>
+						<div id="board" class="collapse">
+							<ul class="submenu">
+								<li><a href="../board/boardList?boardFolder_id=1">공지사항</a></li>
+								<li><a href="../board/boardList?boardFolder_id=2">부서게시판</a></li>
+								<li><a href="../board/boardList?boardFolder_id=3">커뮤니티</a></li>
+							</ul>
+						</div></li>	
 								
 					</ul>
 					<button type="button" class="btn-toggle-minified"
