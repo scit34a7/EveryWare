@@ -190,7 +190,7 @@
 														var schedule_memo = document.getElementById('schedule_memo');
 														schedule_memo.value = result.schedule_memo;
 														
-														alert(${userId} + '비교' + ${resultid} +'비교');
+														/* alert(${userId} + '비교' + ${resultid} +'비교'); */
 														$("#dialog-readMessage").dialog({
 															width : "550px"
 														});

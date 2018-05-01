@@ -64,8 +64,6 @@ public class ScheduleController {
 	@RequestMapping(value = "/Schedule_add", method = RequestMethod.POST)
 	public String Schedule_add(ScheduleVO schedule_vo, HttpSession session) {
 
-		System.out.println(schedule_vo.getSchedule_regdate());
-		System.out.println(schedule_vo.getSchedule_memo());
 		int result = 0;
 		result = scheduledao.Schedule_add(schedule_vo);
 		if (result == 0) {

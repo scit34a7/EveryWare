@@ -30,13 +30,13 @@ public class ResourceController {
 	// 들어가기
 	@RequestMapping(value = "/resource_Resource_Form", method = RequestMethod.GET)
 	public String resource_ConferenceRoom01(HttpSession session, String resource_id) {
-		System.out.println("받아온값" + resource_id);
+		
 		ArrayList<ResourceVO> MRlist = new ArrayList<ResourceVO>();
-		// String resource_type = "회의실001";
+
 		MRlist = resourcedao.readMeetingRoom(resource_id);
 		session.setAttribute("resource_id", resource_id);
 		session.setAttribute("MRlist", MRlist);
-		System.out.println("mr->" + MRlist);
+		
 		
 		ArrayList<R_reservationVO> RRlist = new ArrayList<R_reservationVO>();
 		RRlist = resourcedao.getMeetingRoom(resource_id);
@@ -77,7 +77,7 @@ public class ResourceController {
 	//  삭제
 	@RequestMapping(value = "/Resource_delete", method = RequestMethod.POST)
 	public String Resource_delete(String R_reservation_id, HttpSession session) {
-		System.out.println(R_reservation_id);
+		
 		int result = 0;
 		result = resourcedao.Resource_delete(R_reservation_id);
 		if (result == 0) {
