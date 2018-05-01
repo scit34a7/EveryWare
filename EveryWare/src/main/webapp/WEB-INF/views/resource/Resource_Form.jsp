@@ -108,7 +108,7 @@
 													resource) {
 												/* alert('selected ' + startDate.format() + ' to ' + endDate.format() + 'resource id' + resource.id ); */
 												var curDate = new Date();
-												var curTime = curDate.getFullYear() + "-" + (curDate.getMonth() + 1) + "-" + curDate.getDate() + " " + curDate.getHours() + ":" + curDate.getMinutes();
+												var curTime = curDate.getFullYear() + "-" + (curDate.getMonth() + 1) + "-" + curDate.getDate() + " " + curDate.getHours() + ":" + curDate.getMinutes() + ":" + curDate.getSeconds();
 					
 												var schedule_sdate = document.getElementById('R_reservation_sdate');
 												schedule_sdate.value = startDate.format();
@@ -125,17 +125,19 @@
 													var startDateCheck = startDate.format();
 													var endDateCheck = curTime;
 													
+													
+													
 													var startDateArr1 = startDateCheck.split('-');
 													var startDateArr2 = startDateArr1[2].split('T');
 													var startDateArr3 = startDateArr2[1].split(':');
 													
 													var endDateArr1 = endDateCheck.split('-');
-													var endDateArr2 = endDateArr1[2].split('T');
+													var endDateArr2 = endDateArr1[2].split(' ');
 													var endDateArr3 = endDateArr2[1].split(':');
 													
 													var startDateCompare = new Date(startDateArr1[0], parseInt(startDateArr1[1])-1, startDateArr2[0], startDateArr3[0], startDateArr3[1], startDateArr3[2]);
 											        var endDateCompare = new Date(endDateArr1[0], parseInt(endDateArr1[1])-1, endDateArr2[0], endDateArr3[0], endDateArr3[1], endDateArr3[2]);												      
-									       	
+											       
 											        if(startDateCompare.getTime() < endDateCompare.getTime()) {            
 											            alert(curTime + " 보다 이전 날짜의 일정은 등록할 수 없습니다.");                        
 											            location.reload();
@@ -486,10 +488,10 @@
 										name="R_reservation_fdate" readonly></td>
 								</tr>
 								<tr>
-									<td>메 모</td>
-									<td colspan="5"><textarea rows="1" cols="1" id="memo"
+									<td>상세 설명</td>
+									<td colspan="5"><textarea id="memo"
 											name="r_reservation_memo"
-											style="position: relative; border-style: none; height: 32px; width: 420px"></textarea></td>
+											style="position: relative; border-style: none; height: 32px; width: 420px" placeholder="공란도 등록 가능합니다."></textarea></td>
 								</tr>
 								<tr>
 									<td colspan="4" align="center"><input type="submit"
