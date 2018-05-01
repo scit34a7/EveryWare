@@ -373,10 +373,7 @@
 			});
 		});
 		</script>
-		<div id="demo-panel">
-			<a href="#" onclick="toggleDemoPanel(event);"><i class="fa fa-cog fa-spin"></i></a>
-			<iframe src="../resources/demo-panel/index.html"></iframe>
-		</div>
+		
 		<!-- END DEMO PANEL -->
 		<script>
 		$(function()

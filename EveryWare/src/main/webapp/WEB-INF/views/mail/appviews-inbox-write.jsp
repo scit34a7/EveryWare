@@ -745,8 +745,7 @@
 
 			return false;
 		}
-		
-		
+			
 		//임시저장 
 		function insertTemp() {
 

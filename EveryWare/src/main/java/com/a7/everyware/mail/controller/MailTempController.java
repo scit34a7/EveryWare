@@ -56,7 +56,7 @@ public class MailTempController {
 		System.out.println("임시저장 컨트롤러에 들어옴 ");
 		
 		//message_name : temp로 가져온다. 
-		String temp_Mesage_Name = "temp"+mdao.getNextTempVal();
+		//String temp_Mesage_Name = "temp"+mdao.getNextTempVal();
 		
 		//TODO: from & importance check;
 		String from = mdao.getRepositoryFormMailInfo((String)sessionUser.getAttribute("userId"))+"@everywareit.com";
@@ -91,7 +91,7 @@ public class MailTempController {
 		}
 				
 		//String host = "localhost";
-		String host = "203.233.199.200";
+		String host = "203.233.199.201";
 		Properties properties = System.getProperties();
 		// Setup mail server
 		properties.setProperty("mail.smtp.host", host);

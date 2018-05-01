@@ -134,7 +134,9 @@
 		where 
 			sender = #{sender} 
 		and 
-			repository_name = #{repository} 
+			repository_name = #{repository}
+		and
+			message_deleted is null	
 		order by 
 			last_updated desc	
 	</select>	
