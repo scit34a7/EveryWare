@@ -307,6 +307,8 @@ public class ApprovalController {
 					break;
 				}
 				
+				String str = "";
+				
 				for(ApprovalHistoryVO history : approvalHistoryList){
 					
 					if(!user_id.equals(history.getUser_id()) && history.geteHistory_content().equals("반려")){
@@ -320,25 +322,35 @@ public class ApprovalController {
 					
 					if(history.getUser_id().equals(line.geteApprovalLine_person1()) && history.geteHistory_content().equals("승인")){
 						//내가 승인 한경우
-						logger.debug("order:1 person1 승인!");
-						approvalList_past.add(app);
+						str = "승인";
+						//approvalList_past.add(app);
 						break;
 					}else if(history.getUser_id().equals(line.geteApprovalLine_person1()) && history.geteHistory_content().equals("반려")){
 						//내가 반려 한경우
-						approvalList_future.add(app);
+						str = "반려";
+						//approvalList_future.add(app);
 						break;
 					}else if(history.getUser_id().equals(line.geteApprovalLine_person1()) && history.geteHistory_content().equals("거절")){
-						//내가 반려 한경우
-						approvalList_past.add(app);
+						//내가 거절 한경우
+						str = "거절";
+						//approvalList_past.add(app);
 						break;
 					}else{
-						logger.debug("2222222222222222222222222222222222");
-						approvalList_now.add(app);
+						
+						//approvalList_now.add(app);
 					}
+			
 					
-					
-					
-					
+				}
+				
+				if(str.equals("승인")){
+					approvalList_past.add(app);
+				}else if(str.equals("반려")){
+					approvalList_future.add(app);
+				}else if(str.equals("거절")){
+					approvalList_past.add(app);
+				}else{
+					approvalList_now.add(app);
 				}
 			
 				
@@ -639,6 +651,8 @@ public class ApprovalController {
 						for(ApprovalHistoryVO history : approvalHistoryList){
 							
 							
+							
+							
 							logger.debug("history : {}", history);
 							
 							if(history.getUser_id().equals(line.geteApprovalLine_person1()) && history.geteHistory_content().equals("승인")){
@@ -674,6 +688,8 @@ public class ApprovalController {
 					//두번째 결재자(나)의 승인 형태
 					String isApproval2_2 = "";
 					
+					
+					
 					for(ApprovalHistoryVO history : approvalHistoryList){
 						if(history.getUser_id().equals(line.geteApprovalLine_person1()) && history.geteHistory_content().equals("승인")){
 							//첫번째 결재자 승인
@@ -683,6 +699,9 @@ public class ApprovalController {
 					}
 					
 					for(ApprovalHistoryVO history : approvalHistoryList){
+						
+						
+						
 						if(history.getUser_id().equals(line.geteApprovalLine_person2()) && history.geteHistory_content().equals("승인")){
 							//내가 승인
 							isApproval2_2 = "승인";
@@ -741,6 +760,9 @@ public class ApprovalController {
 					}
 					
 					for(ApprovalHistoryVO history : approvalHistoryList){
+						
+						
+						
 						if(history.getUser_id().equals(line.geteApprovalLine_person3()) && history.geteHistory_content().equals("승인")){
 							//세번째(나) 결재자 승인
 							isApproval3_3 = "승인";
