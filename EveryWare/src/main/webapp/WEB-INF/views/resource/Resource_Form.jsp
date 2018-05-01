@@ -148,15 +148,42 @@
 												});
 											},
 											eventClick: function(calEvent, jsEvent, view) {
-												
-												
 												var R_reservation_id = document.getElementById('R_reservation_id');
 												R_reservation_id.value = calEvent.id;
-
-			
-												$("#dialog-readMessage").dialog({
-													width : "600px"
-												});
+												
+												$.ajax({  
+													  url: 'get_R_reservation',  
+													  data: {R_reservation_id: calEvent.id}, 
+													  success: function(result)
+													  {
+														console.log(result);
+														
+														var userName = '${userName}';
+														if(userName == result.r_reservation_userName){
+															
+															var r_reservation_regDate = document.getElementById('r_reservation_regDateD');
+															r_reservation_regDate.value = result.r_reservation_regDate;
+															var r_reservation_memo = document.getElementById('r_reservation_memoD');
+															r_reservation_memo.value = result.r_reservation_memo;
+															
+															$("#dialog-readMessageD").dialog({
+																width : "550px"
+															});
+														}
+														else{
+															var r_reservation_userName = document.getElementById('r_reservation_userName');
+															r_reservation_userName.value = result.r_reservation_userName;
+															var r_reservation_regDate = document.getElementById('r_reservation_regDate');
+															r_reservation_regDate.value = result.r_reservation_regDate;
+															var r_reservation_memo = document.getElementById('r_reservation_memo');
+															r_reservation_memo.value = result.r_reservation_memo;
+															
+															$("#dialog-readMessage").dialog({
+																width : "550px"	
+															});
+														}
+													  }
+												}); 
 											},
 											loading : function(bool) {
 												jQuery("#loading").toggle(bool);
@@ -238,51 +265,48 @@
 						<i class="ti-arrow-circle-left"></i>
 					</button>
 				</div>
-				<form class="navbar-form navbar-left search-form">
-					
-				</form>
+				<form class="navbar-form navbar-left search-form"></form>
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
-						
+
 						<li class="dropdown"><a href="#"
 							class="dropdown-toggle icon-menu" data-toggle="dropdown"> <i
-								class="ti-bell"></i> 
-								
-							<c:if test="${empty pushList == false}">
-								<span class="badge bg-danger">NEW</span>
-							</c:if>
+								class="ti-bell"></i> <c:if test="${empty pushList == false}">
+									<span class="badge bg-danger">NEW</span>
+								</c:if>
 						</a>
 							<ul class="dropdown-menu notifications">
 								<c:if test="${pushList!= null }">
 									<li>알림이 있습니다.</li>
 									<c:forEach var="push" items="${pushList}">
-										<li><a href='javascript:void(0)' onclick="isPush(${push.push_id})" class="notification-item"> 
-										
-											<c:if test="${push.push_type eq '일정'}">
-												<i class="fa fa-bullhorn custom-bg-purple"></i>
-											</c:if>
-											
-											<c:if test="${push.push_type eq '결재'}">
-												<i class="fa fa-book custom-bg-green2"></i>
-											</c:if>
-											
+										<li><a href='javascript:void(0)'
+											onclick="isPush(${push.push_id})" class="notification-item">
+
+												<c:if test="${push.push_type eq '일정'}">
+													<i class="fa fa-bullhorn custom-bg-purple"></i>
+												</c:if> <c:if test="${push.push_type eq '결재'}">
+													<i class="fa fa-book custom-bg-green2"></i>
+												</c:if>
+
 												<p>
 													<span class="text">${push.push_title}</span> <span
 														class="timestamp">${push.push_time}</span>
 												</p>
 										</a></li>
 									</c:forEach>
-									</c:if>
+								</c:if>
 							</ul></li>
-						
+
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">  <span>${sessionScope.userName}</span>
+							data-toggle="dropdown"> <span>${sessionScope.userName}</span>
 						</a>
 							<ul class="dropdown-menu logged-user-menu">
-								<li><a href="<c:url value ='/user/userInfo'/>" ><i class="ti-user"></i> <span>개인정보</span></a></li>
-								<li><a href="<c:url value ='/mail/getMail?sort=all'/>" ><i class="ti-email"></i> <span>Mail</span></a></li>
-								<li><a href="<c:url value ='/user/logout'/>" ><i class="ti-power-off"></i>
-										<span>로그아웃</span></a></li>
+								<li><a href="<c:url value ='/user/userInfo'/>"><i
+										class="ti-user"></i> <span>개인정보</span></a></li>
+								<li><a href="<c:url value ='/mail/getMail?sort=all'/>"><i
+										class="ti-email"></i> <span>Mail</span></a></li>
+								<li><a href="<c:url value ='/user/logout'/>"><i
+										class="ti-power-off"></i> <span>로그아웃</span></a></li>
 							</ul></li>
 					</ul>
 				</div>
@@ -304,11 +328,11 @@
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="subLayouts" class="collapse">
 							<ul class="submenu">
-								<li><a href="./mail/getMail?sort=all">받은메일함 
-								<c:if test="${mailRead>0}">
-								 <span class="label label-success">NEW</span>
-								</c:if>
-								
+								<li><a href="./mail/getMail?sort=all">받은메일함 <c:if
+											test="${mailRead>0}">
+											<span class="label label-success">NEW</span>
+										</c:if>
+
 								</a></li>
 								<li><a href="./mail/getMail?sort=send">보낸메일함</a></li>
 								<li><a href="./mail/sendMail">편지쓰기</a></li>
@@ -347,25 +371,23 @@
 								<li><a href="support/boardList">업무보고</a></li>
 							</ul>
 						</div></li>
-						
-						<!-- collapse : 서브메뉴 닫혀있음 collapse in : 서브메뉴 열려있음 -->
-						
-					<li class="panel">
-						<a href="#approval" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed">
-							<i class="ti-widget"></i>
-							<span class="title">전자결재</span> 
-							<i class="icon-submenu ti-angle-left"></i>
-						</a>
+
+					<!-- collapse : 서브메뉴 닫혀있음 collapse in : 서브메뉴 열려있음 -->
+
+					<li class="panel"><a href="#approval" data-toggle="collapse"
+						data-parent="#sidebar-nav-menu" class="collapsed"> <i
+							class="ti-widget"></i> <span class="title">전자결재</span> <i
+							class="icon-submenu ti-angle-left"></i>
+					</a>
 						<div id="approval" class="collapse">
 							<ul class="submenu">
 								<li><a href="approval/myApproval">내 결재</a></li>
 								<li><a href="approval/writeApproval">결재 작성</a></li>
 								<li><a href="approval/approvalFormat">결재 양식 작성</a></li>
 							</ul>
-								
-						</div>
-					</li>
-			<li class="panel"><a href="#" data-toggle="collapse"
+
+						</div></li>
+					<li class="panel"><a href="#" data-toggle="collapse"
 						data-target="#submenuDemo" data-parent="#sidebar-nav-menu"
 						class="collapsed"><i class="ti-menu"></i> <span class="title">화상회의
 						</span><i class="icon-submenu ti-angle-left"></i></a>
@@ -374,8 +396,7 @@
 								<li><a href="meet/meetingList">회의실</a></li>
 								<li><a href="meet/minutes">회외록</a></li>
 							</ul>
-						</div>
-					</li>
+						</div></li>
 
 					<li class="panel"><a href="#subPages" data-toggle="collapse"
 						data-parent="#sidebar-nav-menu" class="active"><i
@@ -383,12 +404,12 @@
 							class="icon-submenu ti-angle-left"></i></a>
 						<div id="subPages" class="collapse in">
 							<ul class="submenu">
-								<li><a href="resource" class ="active">자원 예약 관리</a></li>
+								<li><a href="resource" class="active">자원 예약 관리</a></li>
 							</ul>
 						</div></li>
-				
-							
-							<li class="panel"><a href="#board" data-toggle="collapse"
+
+
+					<li class="panel"><a href="#board" data-toggle="collapse"
 						data-parent="#sidebar-nav-menu" class="collapsed"><i
 							class="ti-pie-chart"></i> <span class="title">게시판</span> <i
 							class="icon-submenu ti-angle-left"></i></a>
@@ -398,8 +419,8 @@
 								<li><a href="board/boardList?boardFolder_id=2">부서게시판</a></li>
 								<li><a href="board/boardList?boardFolder_id=3">커뮤니티</a></li>
 							</ul>
-						</div></li>	
-							
+						</div></li>
+
 				</ul>
 				<button type="button" class="btn-toggle-minified"
 					title="Toggle Minified Menu">
@@ -411,19 +432,20 @@
 		<!-- MAIN -->
 		<div class="main">
 			<!-- MAIN CONTENT -->
-		<div class="main-content">
+			<div class="main-content">
 				<div class="content-heading clearfix">
 					<div class="heading-left">
-							<h1 class="page-title">자원예약관리</h1>
+						<h1 class="page-title">자원예약관리</h1>
 						<p class="page-subtitle">
-							<strong>회사자원(회의실,노트북,업무용 차량 등)에 대한 예약 및 관리 </strong>가 가능합니다. 
+							<strong>회사자원(회의실,노트북,업무용 차량 등)에 대한 예약 및 관리 </strong>가 가능합니다.
 						</p>
 					</div>
 					<ul class="breadcrumb">
-						<input type="button" class="btn btn-primary btn-toastr" value="뒤로가기" onClick="history.back();">
+						<input type="button" class="btn btn-primary btn-toastr"
+							value="뒤로가기" onClick="history.back();">
 					</ul>
 				</div>
-						
+
 				<div class="col-md-9">
 					<div class="panel">
 						<div class="panel-body no-padding">
@@ -431,7 +453,7 @@
 						</div>
 					</div>
 				</div>
-				
+
 				<div class="col-md-3">
 					<div class="panel">
 						<div class="panel-body no-padding">
@@ -446,11 +468,11 @@
 						<form action="Resource_add" method="post">
 							<input type="hidden" id="resource_id" name="resource_id">
 							<input type="hidden" id="regDate" name="r_reservation_regDate">
-							<table border="1">
+							<table>
 								<tr>
 									<td>사원 명</td>
-									<td><input type="text" name="r_reservation_userName" value="${userName}" readonly>
-									</td>
+									<td><input type="text" name="r_reservation_userName"
+										value="${userName}" readonly></td>
 									<td>부서 명</td>
 									<td><input type="text" value="${userDepartment}"
 										name="R_reservation_type" readonly></td>
@@ -465,7 +487,9 @@
 								</tr>
 								<tr>
 									<td>메 모</td>
-									<td colspan="5"><textarea rows="1" cols="1" id="memo" name="r_reservation_memo" style="position:relative; border-style:none; height:32px; width: 420px"></textarea></td>
+									<td colspan="5"><textarea rows="1" cols="1" id="memo"
+											name="r_reservation_memo"
+											style="position: relative; border-style: none; height: 32px; width: 420px"></textarea></td>
 								</tr>
 								<tr>
 									<td colspan="4" align="center"><input type="submit"
@@ -475,41 +499,67 @@
 						</form>
 					</div>
 				</div>
-					<div id="dialog-readMessage" title="상세보기" style="display: none;">
+				<div id="dialog-readMessage" title="상세보기" style="display: none;">
+						<table>
+							<tr>
+								<td>등록자</td>
+								<td>등록 날짜</td>
+								<td>상세 설명</td>
+							</tr>
+							<tr>
+								<td><input type="text" id="r_reservation_userName" readonly="readonly" style="border: none; border-right: 0px; border-top: 0px; boder-left: 0px; boder-bottom: 0px;"></td>
+								<td><input type="text" id="r_reservation_regDate" readonly="readonly" style="border: none; border-right: 0px; border-top: 0px; boder-left: 0px; boder-bottom: 0px;"></td>
+								<td><input type="text" id="r_reservation_memo" readonly="readonly" style="border: none; border-right: 0px; border-top: 0px; boder-left: 0px; boder-bottom: 0px;"></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+				<div id="dialog-readMessageD" title="일정 상세보기" style="display: none;">
+					<table>
 						<form action="Resource_delete" method="post">
 							<input type="hidden" name="R_reservation_id" id="R_reservation_id">
-							<table border="1">
+							<table>
 								<tr>
-									<td colspan="7" align="center"><input type="submit"
-										value="삭제하기" align="center"></td>
+									
+									<td>등록 날짜</td>
+									<td>상세 설명</td>
+									<td rowspan="2" align="center" colspan="3"><input type="submit"
+								value="삭제하기"></td>
+								</tr>
+								<tr>
+									
+									<td><input type="text" id="r_reservation_regDateD" readonly="readonly" style="border: none; border-right: 0px; border-top: 0px; boder-left: 0px; boder-bottom: 0px;"></td>
+									<td><input type="text" id="r_reservation_memoD" readonly="readonly" style="border: none; border-right: 0px; border-top: 0px; boder-left: 0px; boder-bottom: 0px;"></td>
 								</tr>
 							</table>
 						</form>
-					</div>
-			</div>
-				<!-- END MAIN CONTENT -->
-				<!-- RIGHT SIDEBAR -->
-				
-				<!-- END RIGHT SIDEBAR -->
-			</div>
-			<!-- END MAIN -->
-			<div class="clearfix"></div>
-			<footer>
-				<div class="container-fluid">
-					<p class="copyright">
-						&copy; 2018 <a href="index" target="_blank">EveryWare</a>. All Rights Reserved.
-					</p>
+					</table>
 				</div>
-			</footer>
+			</div>
+			<!-- END MAIN CONTENT -->
+			<!-- RIGHT SIDEBAR -->
+
+			<!-- END RIGHT SIDEBAR -->
 		</div>
-		<!-- END WRAPPER -->
-		<!-- Javascript -->
-		<script src="resources/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-		<script src="resources/assets/vendor/pace/pace.min.js"></script>
-		<script src="resources/assets/scripts/klorofilpro-common.js"></script>
-		<!-- DEMO PANEL -->
-		<!-- for demo purpose only, you should remove it on your project directory -->
-		<script type="text/javascript">
+		<!-- END MAIN -->
+		<div class="clearfix"></div>
+		<footer>
+			<div class="container-fluid">
+				<p class="copyright">
+					&copy; 2018 <a href="index" target="_blank">EveryWare</a>. All
+					Rights Reserved.
+				</p>
+			</div>
+		</footer>
+	</div>
+	<!-- END WRAPPER -->
+	<!-- Javascript -->
+	<script src="resources/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="resources/assets/vendor/pace/pace.min.js"></script>
+	<script src="resources/assets/scripts/klorofilpro-common.js"></script>
+	<!-- DEMO PANEL -->
+	<!-- for demo purpose only, you should remove it on your project directory -->
+	<script type="text/javascript">
 		var toggleDemoPanel = function(e) {
 			e.preventDefault();
 			var panel = document.getElementById('demo-panel');
@@ -525,7 +575,7 @@
 			});
 		});
 	</script>
-		
-		<!-- END DEMO PANEL -->
+
+	<!-- END DEMO PANEL -->
 </body>
 </html>

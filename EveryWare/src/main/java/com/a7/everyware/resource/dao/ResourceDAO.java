@@ -14,11 +14,11 @@ public class ResourceDAO {
 	@Autowired
 	SqlSession sqlsession;
 	
-	public ArrayList<ResourceVO> readMeetingRoom(String resource_id){
+	public ArrayList<ResourceVO> read_Resource(String resource_id){
 		ArrayList<ResourceVO> result = new ArrayList<ResourceVO>();
 		try{
 			ResourceMapper mapper = sqlsession.getMapper(ResourceMapper.class);
-			result = mapper.readMeetingRoom(resource_id);
+			result = mapper.read_Resource(resource_id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -27,11 +27,11 @@ public class ResourceDAO {
 	}
 	
 	
-	public ArrayList<R_reservationVO> getMeetingRoom(String resource_id){
+	public ArrayList<R_reservationVO> get_Resource(String resource_id){
 		ArrayList<R_reservationVO> result = new ArrayList<R_reservationVO>();
 		try{
 			ResourceMapper mapper = sqlsession.getMapper(ResourceMapper.class);
-			result = mapper.getMeetingRoom(resource_id);
+			result = mapper.get_Resource(resource_id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -54,7 +54,7 @@ public class ResourceDAO {
 	
 	public int Resource_delete(String R_reservation_id)
 	{
-		System.out.println("dao" +R_reservation_id);
+		
 		int result = 0;
 		try{
 			ResourceMapper mapper = sqlsession.getMapper(ResourceMapper.class);
@@ -66,4 +66,10 @@ public class ResourceDAO {
 		return result;
 	}
 	
+	public R_reservationVO get_R_reservation(String R_reservation_id)
+	{
+		ResourceMapper mapper = sqlsession.getMapper(ResourceMapper.class);
+		R_reservationVO result = mapper.get_R_reservation(R_reservation_id);
+		return result;
+	}
 }

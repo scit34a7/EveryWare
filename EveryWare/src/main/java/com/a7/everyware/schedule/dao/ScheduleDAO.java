@@ -29,8 +29,7 @@ public class ScheduleDAO {
 	}	
 	
 	public ArrayList<ScheduleVO> Read_Schedule(HashMap hm){
-		
-		System.out.println("DAO" + hm);
+	
 		ArrayList<ScheduleVO> result = new ArrayList<ScheduleVO>();
 		try{
 			ScheduleMapper mapper = sqlsession.getMapper(ScheduleMapper.class);

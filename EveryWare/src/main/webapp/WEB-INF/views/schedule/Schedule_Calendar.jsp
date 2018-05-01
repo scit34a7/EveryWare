@@ -172,7 +172,7 @@
 												var curDate = new Date();
 												var curTime = curDate.getFullYear() + "-" + (curDate.getMonth() + 1) + "-" + curDate.getDate() + " " + curDate.getHours() + ":" + curDate.getMinutes();
 												
-												var schedule_num = document.getElementById('schedule_num');
+												var schedule_num = document.getElementById('schedule_numD');
 												schedule_num.value = calEvent.id;
 												
 												$.ajax({  
@@ -181,19 +181,32 @@
 													  success: function(result)
 													  {
 														console.log(result);
-														var user_name = document.getElementById('user_name');
-														user_name.value = result.user_name;
-														var schedule_regdate = document.getElementById('schedule_regdate');
-														schedule_regdate.value = result.schedule_regdate;
-														var schedule_memo = document.getElementById('schedule_memo');
-														schedule_memo.value = result.schedule_memo;
-														var schedule_memo = document.getElementById('schedule_memo');
-														schedule_memo.value = result.schedule_memo;
 														
-														/* alert(${userId} + '비교' + ${resultid} +'비교'); */
-														$("#dialog-readMessage").dialog({
-															width : "550px"
-														});
+														var userId = ${userId};
+														
+														if(userId == result.user_id){
+															
+															var schedule_regdate = document.getElementById('schedule_regdateD');
+															schedule_regdate.value = result.schedule_regdate;
+															var schedule_memo = document.getElementById('schedule_memoD');
+															schedule_memo.value = result.schedule_memo;
+															
+															$("#dialog-readMessageD").dialog({
+																width : "550px"
+															});
+														}
+														else{
+															var user_name = document.getElementById('user_name');
+															user_name.value = result.user_name;
+															var schedule_regdate = document.getElementById('schedule_regdate');
+															schedule_regdate.value = result.schedule_regdate;
+															var schedule_memo = document.getElementById('schedule_memo');
+															schedule_memo.value = result.schedule_memo;
+															
+															$("#dialog-readMessage").dialog({
+																width : "550px"	
+															});
+														}
 													}
 												});  	
 											},
@@ -248,9 +261,9 @@
 									loading : function(bool) {
 										jQuery("#loading").toggle(bool);
 									}
-								});
-					});
+								});		
 
+					});
 	function scheduleChoice(num, id, distinct, color, text) {
 		if (jQuery(".swingBar").eq(num).is(":checked")) {
 			jQuery("#calendar").fullCalendar("addEventSource", {
@@ -499,19 +512,14 @@
 
 								<td><input type="text" id="" name="schedule_name"
 									required="required"
-									style="border: none; border-right: 0px; border-top: 0px; boder-left: 0px; boder-bottom: 0px;"></td>
+									></td>
 
 								<td><input type="radio" name="schedule_group" value="개인"
 									checked="checked">개인 일정<br> <input type="radio"
 									name="schedule_group" value="${userDepartment}">부서 일정<br>
 									<!-- <input type="radio" name="schedule_group" value="2">프로젝트 일정<br> -->
 								</td>
-								<td style="widows: 10%"><label class="switch-input">
-										<input type="checkbox" name="switch-checkbox"
-										id="switch-checkbox" onchange="change_check"> <i
-										data-swon-text="YES" data-swoff-text="NO"></i>
-										<p style="color: black;">중요</p>
-								</label></td>
+								
 							</tr>
 							<tr>
 								<td>사원 명 :&nbsp&nbsp</td>
@@ -541,8 +549,8 @@
 									style="border: none; border-right: 0px; border-top: 0px; boder-left: 0px; boder-bottom: 0px;"></td>
 							</tr>
 							<tr>
-								<td>메모</td>
-								<td colspan="6"><input type="text" name="schedule_memo"></td>
+								<td>상세 설명</td>
+								<td colspan="6"><input type="text" name="schedule_memo" placeholder="공란도 등록 가능합니다."></td>
 							</tr>
 							<tr>
 								<td colspan="7" align="center"><input type="submit"
@@ -553,32 +561,50 @@
 				</div>
 				<div id="dialog-readMessage" title="일정 상세보기" style="display: none;">
 					<table>
-						<form action="Schedule_delete" method="post">
 							<input type="hidden" name="schedule_num" id="schedule_num">
+						<tr>
+							<th>등록자 </th>
+							<th>등록 날짜  </th>
+							<th>상세 설명  </th>
+						</tr>
 						<tr>
 							<td align="center"><input type="text" readonly="readonly"
 								id="user_name"
 								style="border: none; border-right: 0px; border-top: 0px; boder-left: 0px; boder-bottom: 0px; , text-align: center;"></td>
+							
 							<td><input type="text" readonly="readonly"
 								id="schedule_regdate"
 								style="border: none; border-right: 0px; border-top: 0px; boder-left: 0px; boder-bottom: 0px;"></td>
-
-							<td colspan="2"><input type="text" readonly="readonly"
+							
+							<td ><input type="text" readonly="readonly"
 								id="schedule_memo"
 								style="border: none; border-right: 0px; border-top: 0px; boder-left: 0px; boder-bottom: 0px;"></td>
 						</tr>
+					</table>
+				</div>
+				<div id="dialog-readMessageD" title="일정 상세보기" style="display: none;">
+					<table>
+						<form action="Schedule_delete" method="post">
+							<input type="hidden" name="schedule_num" id="schedule_numD">
 						<tr>
-								<td align="center" colspan="3"><input type="submit" value="삭제하기"
-									></td>
-							</tr>
-						<c:if test="${userId eq result_id}">
-							<tr>
-								<td><p>아이디 체크</p></td>
-							</tr>
-						</c:if>
+							
+							<th>등록 날짜  </th>
+							<th>상세 설명  </th>
+							<td rowspan="2" align="center" colspan="3"><input type="submit"
+								value="삭제하기"></td>
+						</tr>
+						<tr>
+							
+							<td><input type="text" readonly="readonly"
+								id="schedule_regdateD"
+								style="border: none; border-right: 0px; border-top: 0px; boder-left: 0px; boder-bottom: 0px;"></td>
+
+							<td><input type="text" readonly="readonly"
+								id="schedule_memoD"
+								style="border: none; border-right: 0px; border-top: 0px; boder-left: 0px; boder-bottom: 0px;"></td>
+						</tr>
 						</form>
 					</table>
-
 				</div>
 			</div>
 			<!-- END MAIN CONTENT -->

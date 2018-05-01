@@ -94,24 +94,17 @@ public class UserController {
 				Slist = scheduledao.Read_Schedule(hm);
 					
 				for (int i = 0; i < Slist.size(); i++) {
-					if(Slist.get(i).getSchedule_group().equals("개인"))
-					{
+					if (Slist.get(i).getSchedule_group().equals("개인")) {
+						Slist.get(i).setColor("#50fcb7");
+					} else if (Slist.get(i).getSchedule_group().equals("총무")) {
 						Slist.get(i).setColor("#62bbf1");
-					}
-					else if(Slist.get(i).getSchedule_group().equals("총무"))
-					{
+					} else if (Slist.get(i).getSchedule_group().equals("재무")) {
 						Slist.get(i).setColor("#f26363");
-					}
-					else if(Slist.get(i).getSchedule_group().equals("법무"))
-					{
+					} else if (Slist.get(i).getSchedule_group().equals("법무")) {
 						Slist.get(i).setColor("#884ff2");
-					}
-					else if(Slist.get(i).getSchedule_group().equals("영업"))
-					{
+					} else if (Slist.get(i).getSchedule_group().equals("영업")) {
 						Slist.get(i).setColor("#d9ea5b");
-					}
-					else if(Slist.get(i).getSchedule_group().equals("운영"))
-					{
+					} else if (Slist.get(i).getSchedule_group().equals("운영")) {
 						Slist.get(i).setColor("#edb657");
 					}
 				}

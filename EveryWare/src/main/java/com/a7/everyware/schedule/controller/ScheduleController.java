@@ -45,8 +45,10 @@ public class ScheduleController {
 
 		for (int i = 0; i < Slist.size(); i++) {
 			if (Slist.get(i).getSchedule_group().equals("개인")) {
-				Slist.get(i).setColor("#62bbf1");
+				Slist.get(i).setColor("#50fcb7");
 			} else if (Slist.get(i).getSchedule_group().equals("총무")) {
+				Slist.get(i).setColor("#62bbf1");
+			} else if (Slist.get(i).getSchedule_group().equals("재무")) {
 				Slist.get(i).setColor("#f26363");
 			} else if (Slist.get(i).getSchedule_group().equals("법무")) {
 				Slist.get(i).setColor("#884ff2");
@@ -92,7 +94,6 @@ public class ScheduleController {
 
 	@RequestMapping(value = "/Schedule_delete", method = RequestMethod.POST)
 	public String Schedule_delete(String schedule_num) {
-		
 		int result = 0;
 		result = scheduledao.Schedule_Delete(schedule_num);
 		if (result == 0) {
@@ -102,11 +103,9 @@ public class ScheduleController {
 
 	@ResponseBody
 	@RequestMapping(value = "/get_Schedule", method = RequestMethod.GET)
-	public ScheduleVO Get_Schedule(String schedule_num, Model model) {
+	public ScheduleVO get_Schedule(String schedule_num) {
 		ScheduleVO result = new ScheduleVO();
 		result = scheduledao.get_Schedule(schedule_num);
-		//model.addAttribute("result_id", result.getProject_id());
-		
 		return result;
 	}
 

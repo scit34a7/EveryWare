@@ -5,7 +5,7 @@
 
 <!-- 회원정보 처리 SQL -->
 <mapper namespace="com.a7.everyware.resource.dao.ResourceMapper">
-	<select id="readMeetingRoom" parameterType="String" resultType="ResourceVO">
+	<select id="read_Resource" parameterType="String" resultType="ResourceVO">
 		select * from Resource_tb
 		where resource_id = #{resource_id}
 	</select>
@@ -22,9 +22,13 @@
 		where R_reservation_id = #{R_reservation_id}
 	</delete>
 	
-	<select id="getMeetingRoom" parameterType="String" resultType="ReservationVO">
+	<select id="get_Resource" parameterType="String" resultType="ReservationVO">
 		select* from R_reservation_tb
 		where resource_id = #{resource_id}
 	</select>
 	
+	<select id="get_R_reservation" parameterType="String" resultType="ReservationVO">
+		select * from R_reservation_tb
+		where R_reservation_id = #{R_reservation_id}
+	</select>
 </mapper>
